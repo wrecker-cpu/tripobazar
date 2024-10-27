@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Inspiration&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-radio {
+  appearance: none;
+  width: 20px; /* Increased size */
+  height: 20px; /* Increased size */
+  border: 2px solid #03b58b; /* Green border */
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative; /* Set relative position */
+}
+
+/* Inner circle to create space between background and border */
+.custom-radio:before {
+  content: "";
+  position: absolute;
+  top: 2px; /* Adjust to create space */
+  left: 2px; /* Adjust to create space */
+  width: 12px; /* Inner circle size */
+  height: 12px; /* Inner circle size */
+  border-radius: 50%;
+  background-color: transparent; /* Transparent by default */
+  border: 2px solid transparent; /* Transparent border */
+  transition: background-color 0.2s ease;
+}
+
+/* Styling for the checked state */
+.custom-radio:checked:before {
+  background-color: #03b58b; /* Green fill when selected */
+  border: 2px solid #03b58b; /* Green border when selected */
+}
+
+.select-with-arrow {
+  background-image: url("./assets/arrow.svg");
+  background-repeat: no-repeat;
+  background-size: 12px 12px; /* Adjust the size of the arrow */
+  background-position: calc(100%) center; /* Move the arrow to the left */
+  padding-right: 1rem; 
+  appearance: none; /* Hide the default arrow */
+  font-size: 0.8rem; /* Font size for the text */
+}

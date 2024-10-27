@@ -7,6 +7,7 @@ import HamburgerSvg from "../../../svgs/HamburgerSvg";
 import CompanyLogo from "../../../svgs/CompanyLogo";
 import { IoCloseOutline } from "react-icons/io5";
 import SideHamBurgerMenu from "./SideHamBurgerMenu";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -46,9 +47,12 @@ const Navbar = () => {
     <div className="relative">
       <nav className="bg-white flex items-center justify-between p-4 shadow-md relative">
         <div className="hidden md:flex items-center gap-8 xlg:gap-10">
-          <button className="border-[.1rem] rounded-lg text-[#03B58B] border-[#012831] font-poppins text-[.8rem] font-medium px-2 py-2">
+          <Link
+            to={"/login"}
+            className="border-[.1rem] rounded-lg text-[#03B58B] border-[#012831] font-poppins text-[.8rem] font-medium px-2 py-2"
+          >
             Login/Sign Up
-          </button>
+          </Link>
           <div className="relative">
             <button onClick={toggleDestinations} className=" ">
               <select className=" bg-white outline-none cursor-pointer  select-with-arrow appearance-none">

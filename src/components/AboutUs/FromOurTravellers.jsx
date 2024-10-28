@@ -1,0 +1,54 @@
+import React from "react";
+import { FaStar } from "react-icons/fa";
+
+export default function FromOurTravellers() {
+    const reviews = [
+        {
+          text: "I couldn’t recommend Trippobazaar more highly - we had the most amazing holiday. Every detail had been thought about and they were on hand to answer any questions straight away. Very personal service.",
+          name: "Rahul",
+        },
+        {
+          text: "An unforgettable experience! Trippobazaar provided everything we needed to enjoy our trip with ease and comfort. Excellent customer support and attention to detail.",
+          name: "Sneha",
+        },
+        {
+          text: "Absolutely thrilled with the service! They helped us plan the perfect trip, and it was smooth from start to finish. Definitely booking again.",
+          name: "Amit",
+        },
+      ];
+  return (
+    <section className="w-[60%] mb-5 h-[527px]   mx-auto mt-8 p-4 bg-transparent ">
+      <h3 className="text-[#03B58B] text-center text-2xl font-semibold mb-4">
+        From Our Travellers
+      </h3>
+
+      {/* Reviews Carousel */}
+      <div className="flex justify-center">
+        <div className="flex justify-start overflow-x-auto ">
+          {reviews.map((review, index) => (
+            <div
+              key={index}
+              className={`w-[300px] flex-shrink-0 h-auto border-2 text-start p-9 flex flex-col justify-between ${
+                index === 0 ? "border-x-0" : ""
+              } ${index === reviews.length - 1 ? "border-x-0" : ""}`}
+            >
+              <div>
+                <div className="flex items-center justify-center mb-2">
+                  {[...Array(5)].map((_, i) => (
+                    <FaStar key={i} className="text-blue-500" />
+                  ))}
+                </div>
+                <p className="text-gray-700 text-center text-[.7rem] font-normal mb-4">
+                  {review.text}
+                </p>
+              </div>
+              <p className="text-gray-900 text-center font-normal mt-auto">
+                - {review.name}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

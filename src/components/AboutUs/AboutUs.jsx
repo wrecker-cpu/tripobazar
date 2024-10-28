@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import dalLek from "../../assets/bg-img.jpg";
 import discoverOne from "../../assets/Discover-1.svg";
-
 import FilterSvg from "../../../svgs/FilterSvg/index";
 import DatePicker from "react-datepicker";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import ExploreSvg from "../../../svgs/ExploreSvg";
 import CoursalSection from "./CoursalSection";
 import FromOurTravellers from "./FromOurTravellers";

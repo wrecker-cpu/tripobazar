@@ -132,13 +132,9 @@ export default function AboutUs() {
         Simplify your journey choices effortlessly with our convenient <br></br>{" "}
         and easy-to-choose travel packages.
       </p>
-      {/* section-2  */}
       <PopularPackages />
-      {/* section-3  */}
       <CoursalSection />
-      {/* section-4  */}
       <YourCustomAdventure />
-      {/* section-5   */}
       <FromOurTravellers />
     </div>
   );

@@ -44,7 +44,7 @@ const Navbar = () => {
     };
   }, [hideMenu]);
   return (
-    <div className="relative">
+    <div className="relative max-w-[1920px] mx-auto">
       <nav className="bg-white flex items-center justify-between p-4 shadow-md relative">
         <div className="hidden md:flex items-center gap-8 xlg:gap-10">
           <Link

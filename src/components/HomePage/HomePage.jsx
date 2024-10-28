@@ -8,7 +8,7 @@ import CoursalSection from "./CoursalSection";
 import FromOurTravellers from "./FromOurTravellers";
 import PopularPackages from "./PopularPackages";
 import YourCustomAdventure from "./YourCustomAdventure";
-export default function AboutUs() {
+export default function HomePage() {
   const [guests, setGuests] = useState(1);
   const incrementGuests = () => setGuests(guests + 1);
   const decrementGuests = () => setGuests(guests > 1 ? guests - 1 : 1);

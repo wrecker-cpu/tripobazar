@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import dalLek from "../../assets/bg-img.jpg";
+import dalLek from "../../../public/Home/bg-home.jpg";
 import discoverOne from "../../assets/Discover-1.svg";
 import FilterSvg from "../../../svgs/FilterSvg/index";
 import DatePicker from "react-datepicker";
@@ -24,8 +24,8 @@ export default function HomePage() {
           </div>
 
           {/* H1 Heading */}
-          <div className="flex absolute bottom-auto top-40 md:top-auto left-1/2 -translate-x-1/2 -translate-y-1/2 md:-translate-x-0 md:-translate-y-0 md:bottom-32 md:left-10 justify-start items-center h-auto  ">
-            <h1 className="text-white font-poppins text-4xl sm:text-[65px] emd:text-[80px] font-extrabold leading-none">
+          <div className="flex absolute bottom-auto  top-20 right-0 md:top-auto sm:left-1/2 -translate-x-1/2 -translate-y-1/2 md:-translate-x-0 md:-translate-y-0 md:bottom-24 md:left-7 justify-start items-center h-auto  ">
+            <h1 className="text-white font-poppins text-3xl sm:text-5xl md:text-[5rem] lg:text-[5.2rem] font-extrabold leading-none">
               DISCOVER NEW <br></br>HORIZONS
             </h1>
           </div>

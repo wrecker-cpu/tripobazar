@@ -76,24 +76,32 @@ const Navbar = () => {
         </div>
 
         {/* Center - Logo (always centered) */}
-        <div className="flex-grow flex justify-start md:justify-end emd:justify-center">
-          <img
-            src={Logo}
-            alt="Logo"
-            className="h-11 pr-0 md:pr-10 emd:pr-0 cursor-pointer"
-            onClick={toggleMenu}
-          />
-        </div>
+        <Link to={"/"}>
+          {" "}
+          <div className="flex-grow flex justify-start md:justify-end emd:justify-center">
+            <img
+              src={Logo}
+              alt="Logo"
+              className="h-11 pr-0 md:pr-10 emd:pr-0 cursor-pointer"
+            />
+          </div>
+        </Link>
 
         {/* Right Side - Nav Links and Search Bar (visible on medium and larger screens) */}
-        <div className="hidden emd:flex items-center space-x-5 xlg:space-x-9">
-          <a href="#" className="font-poppins text-[.8rem] font-normal">
-            ABOUT US
-          </a>
-          <a href="#" className="font-poppins text-[.8rem] font-normal">
+        <div className="hidden emd:flex items-center justify-center space-x-5 xlg:space-x-9">
+          <Link to={"/about"}>
+            <a
+              href="#"
+              className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "
+            >
+              ABOUT US
+             
+            </a>
+          </Link>
+          <a href="#" className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 ">
             TRAVEL TIPS
           </a>
-          <a href="#" className="font-poppins text-[.8rem] font-normal">
+          <a href="#" className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 ">
             OFFERS
           </a>
 

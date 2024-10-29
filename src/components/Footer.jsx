@@ -1,4 +1,4 @@
-import React from "react";
+
 import CompanyLogo from "../../svgs/CompanyLogo";
 import { IoLogoInstagram } from "react-icons/io";
 import { CiTwitter } from "react-icons/ci";
@@ -37,21 +37,22 @@ function Footer() {
   ];
 
   return (
-    <footer className="text-center max-w-[1720px] mx-auto text-black pb-6 bg-white">
-      <div className="mx-auto flex flex-col md:flex-row md:justify-between items-center ">
+    <footer className="text-center mt-12 p-12 max-w-[1720px] mx-auto text-black pb-6 bg-white">
+      <div className="mx-auto gap-y-0 flex flex-col md:flex-row md:justify-between items-center ">
         {/* Logo Section */}
-        <div className="md:mb-0 mb-10">
-          <CompanyLogo />
-        </div>
+        <div className="md:mb-0 md:static relative left-0 top-0 ">
+  <CompanyLogo className="w-2 h-2 sm:w-7 sm:h-7 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain" />
+</div>
+
         {/* Links Section */}
-        <ul className="flex flex-wrap md:grid  md:grid-cols-2 gap-x-12 gap-4 justify-center mb-10 text-sm text-center md:text-start  md:mb-0">
+        <ul className="flex text-[.6rem] flex-wrap md:grid text-left md:grid-cols-2 gap-x-4 gap-y-2 md:gap-x-12 gap-4 justify-center mb-4 md:text-sm  md:text-start  md:mb-0">
           {data.map((item, idx) => (
             <li key={idx}>{item}</li>
           ))}
         </ul>
 
         {/* Contact and Subscribe Section */}
-        <div className="flex flex-col w-full max-w-sm md:w-[25%] gap-2 text-sm text-center md:text-start">
+        <div className="flex flex-col w-full max-w-sm md:w-[25%] gap-0 md:gap-2 text-sm text-center md:text-start">
           {/* Contact Information */}
           <div className="mb-8">
             <h4 className="text-[#03B58B] mb-3 font-semibold">Contact Us</h4>

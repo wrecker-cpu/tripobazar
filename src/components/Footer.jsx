@@ -37,7 +37,7 @@ function Footer() {
   ];
 
   return (
-    <footer className="text-center max-w-[1720px] mx-auto text-black pb-6 bg-white">
+    <footer className="text-center w-[95%] max-w-[1720px] mx-auto text-black pb-6 bg-white">
       <div className="mx-auto flex flex-col md:flex-row md:justify-between items-center ">
         {/* Logo Section */}
         <div className="md:mb-0 mb-10">

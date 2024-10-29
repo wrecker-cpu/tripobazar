@@ -2,20 +2,20 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 
 export default function FromOurTravellers() {
-    const reviews = [
-        {
-          text: "I couldn’t recommend Trippobazaar more highly - we had the most amazing holiday. Every detail had been thought about and they were on hand to answer any questions straight away. Very personal service.",
-          name: "Rahul",
-        },
-        {
-          text: "An unforgettable experience! Trippobazaar provided everything we needed to enjoy our trip with ease and comfort. Excellent customer support and attention to detail.",
-          name: "Sneha",
-        },
-        {
-          text: "Absolutely thrilled with the service! They helped us plan the perfect trip, and it was smooth from start to finish. Definitely booking again.",
-          name: "Amit",
-        },
-      ];
+  const reviews = [
+    {
+      text: "I couldn’t recommend Trippobazaar more highly - we had the most amazing holiday. Every detail had been thought about and they were on hand to answer any questions straight away. Very personal service.",
+      name: "Rahul",
+    },
+    {
+      text: "An unforgettable experience! Trippobazaar provided everything we needed to enjoy our trip with ease and comfort. Excellent customer support and attention to detail.",
+      name: "Sneha",
+    },
+    {
+      text: "Absolutely thrilled with the service! They helped us plan the perfect trip, and it was smooth from start to finish. Definitely booking again.",
+      name: "Amit",
+    },
+  ];
   return (
     <section className="w-[60%] mb-5 h-[527px]   mx-auto mt-8 p-4 bg-transparent ">
       <h3 className="text-[#03B58B] text-center text-2xl font-semibold mb-4">
@@ -24,7 +24,7 @@ export default function FromOurTravellers() {
 
       {/* Reviews Carousel */}
       <div className="flex justify-center">
-        <div className="flex justify-start overflow-x-auto ">
+        <div className="flex justify-start scrollbar-hide overflow-x-auto ">
           {reviews.map((review, index) => (
             <div
               key={index}

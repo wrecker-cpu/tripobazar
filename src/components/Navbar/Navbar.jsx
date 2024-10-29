@@ -13,6 +13,8 @@ const Navbar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [userData, setUserData] = useState(null); // State to store user data
+
   const toggleSearch = () => {
     setIsSearchVisible((prev) => !prev);
   };
@@ -43,16 +45,34 @@ const Navbar = () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
     };
   }, [hideMenu]);
+
+  useEffect(() => {
+    // Get user data from localStorage
+    const data = localStorage.getItem("userInfo");
+    if (data) {
+      setUserData(JSON.parse(data)); // Parse the JSON string into an object
+    }
+  }, []);
+
   return (
     <div className="relative max-w-[1920px] mx-auto">
       <nav className="bg-white flex items-center justify-between p-4 shadow-md relative">
         <div className="hidden md:flex items-center gap-8 xlg:gap-10">
-          <Link
-            to={"/login"}
-            className="border-[.1rem] rounded-lg text-[#03B58B] border-[#012831] font-poppins text-[.8rem] font-medium px-2 py-2"
-          >
-            Login/Sign Up
-          </Link>
+          {userData === null ? (
+            <Link
+              to={"/login"}
+              className="border-[.1rem] rounded-lg text-[#03B58B] border-[#012831] font-poppins text-[.8rem] font-medium px-2 py-2"
+            >
+              Login/Sign Up
+            </Link>
+          ) : (
+            <Link
+              to={"/"}
+              className="border-[.1rem] rounded-lg tracking-wider text-[#03B58B] border-[#012831] font-poppins text-[.8rem] font-medium px-8 py-2"
+            >
+              Menu
+            </Link>
+          )}
           <div className="relative">
             <button onClick={toggleDestinations} className=" ">
               <select className=" bg-white outline-none cursor-pointer  select-with-arrow appearance-none">

@@ -108,13 +108,11 @@ const Navbar = () => {
 
         {/* Right Side - Nav Links and Search Bar (visible on medium and larger screens) */}
         <div className="hidden emd:flex items-center justify-center space-x-5 xlg:space-x-9">
-          <Link to={"/about"}>
-            <a
-              href="#"
-              className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "
-            >
-              ABOUT US
-            </a>
+          <Link
+            className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "
+            to={"/about"}
+          >
+            ABOUT US
           </Link>
           <a
             href="#"

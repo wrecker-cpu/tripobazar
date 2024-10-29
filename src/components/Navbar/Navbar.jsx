@@ -9,11 +9,16 @@ import { IoCloseOutline } from "react-icons/io5";
 import SideHamBurgerMenu from "./SideHamBurgerMenu";
 import { Link } from "react-router-dom";
 
+import { IoIosArrowDown } from "react-icons/io";
+
 const Navbar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null); // State to store user data
+  const [isDestinationsOpen, setIsDestinationsOpen] = useState(false);
+
+  const NavbarData = ["Destinations", "My trips", "Whats new"];
 
   const toggleSearch = () => {
     setIsSearchVisible((prev) => !prev);
@@ -73,26 +78,20 @@ const Navbar = () => {
               Menu
             </Link>
           )}
-          <div className="relative">
-            <button onClick={toggleDestinations} className=" ">
-              <select className=" bg-white outline-none cursor-pointer  select-with-arrow appearance-none">
-                <option className="bg-white">DESTINATIONS</option>
-              </select>
-            </button>
-            {/* Destinations Dropdown */}
-            {isDropdownOpen && (
-              <div className="absolute bg-white  shadow-lg w-[80vw] h-[80vh] z-10">
-                <h2 className="p-4 text-lg font-semibold">Destinations</h2>
-                <p className="p-4">List of popular destinations...</p>
-              </div>
-            )}
+          <div className="flex flex-row justify-between gap-6">
+            {NavbarData.map((item, idx) => {
+              return (
+                <button
+                  onClick={toggleDestinations}
+                  key={idx}
+                  className="flex text-sm uppercase justify-center items-center "
+                >
+                  {item}
+                  <IoIosArrowDown className="w-5 pl-1 text-med-green h-5" />
+                </button>
+              );
+            })}
           </div>
-          <select className="outline-none cursor-pointer select-with-arrow appearance-none">
-            <option>WHAT’S NEW</option>
-          </select>
-          <select className="outline-none cursor-pointer select-with-arrow appearance-none">
-            <option>MY TRIPS</option>
-          </select>
         </div>
 
         {/* Center - Logo (always centered) */}

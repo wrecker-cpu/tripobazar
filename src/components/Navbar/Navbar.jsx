@@ -114,13 +114,18 @@ const Navbar = () => {
               className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "
             >
               ABOUT US
-             
             </a>
           </Link>
-          <a href="#" className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 ">
+          <a
+            href="#"
+            className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "
+          >
             TRAVEL TIPS
           </a>
-          <a href="#" className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 ">
+          <a
+            href="#"
+            className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "
+          >
             OFFERS
           </a>
 

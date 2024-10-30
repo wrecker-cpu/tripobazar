@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import dalLek from "../../Home/bg-home.jpg";
-import discoverOne from "../../assets/Discover-1.svg";
+import dalLek from "/bg-home.jpg?url";
+import discoverOne from "../../assets/home/Discover-1.svg";
 import FilterSvg from "../../../svgs/FilterSvg/index";
 import DatePicker from "react-datepicker";
 import ExploreSvg from "../../../svgs/ExploreSvg";

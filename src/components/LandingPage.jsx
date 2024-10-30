@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-
-import HomePage from "./HomePage/HomePage";
+import React from "react";
+import HomePage from "../components/HomePage/HomePage";
 
 export default function LandingPage() {
   return (
-    <div className="max-w-[1920px] font-poppins mx-auto bg-[#F8F8F8] ">
+    <div className="max-w-[1920px] mx-auto">
       <HomePage />
     </div>
   );

@@ -1,16 +1,12 @@
 import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 export default function GoogleButton() {
-
-  const naviagte=useNavigate();
-
   const googleRespone = async (authResult) => {
     try {
       const response = await axios.get(
-        `http://tripobazar-backend.vercel.app/api/google/auth/google?code=${authResult["code"]}`
+        `http://localhost:4000/auth/google?code=${authResult["code"]}`
       );
 
       if (response.data && response.data.data.user) {
@@ -21,7 +17,6 @@ export default function GoogleButton() {
           token: response.data.token,
         };
         localStorage.setItem("userInfo", JSON.stringify(userInfo));
-        naviagte("/");
         console.log("User Data:", response.data);
       } else if (response.data && response.data.message) {
         console.warn("Message from backend:", response.data.message);

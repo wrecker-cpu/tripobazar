@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import dubai from "../../assets/dubai.svg";
-import newyork from "../../assets/newyorkk.jpg";
+import dubai from "../../assets/home/dubai.png";
+import newyork from "../../assets/home/newyorkk.jpg";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 export default function PopularPackages() {

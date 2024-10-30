@@ -2,10 +2,9 @@
 
 import Logo from "../../assets/Logo.svg";
 import { useEffect, useState } from "react";
-import { FaSearch, FaBars, FaTimes } from "react-icons/fa"; // Importing icons
+import { FaSearch } from "react-icons/fa"; // Importing icons
 import HamburgerSvg from "../../../svgs/HamburgerSvg";
-import CompanyLogo from "../../../svgs/CompanyLogo";
-import { IoCloseOutline } from "react-icons/io5";
+
 import SideHamBurgerMenu from "./SideHamBurgerMenu";
 import { Link } from "react-router-dom";
 
@@ -13,10 +12,9 @@ import { IoIosArrowDown } from "react-icons/io";
 
 const Navbar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null); // State to store user data
-  const [isDestinationsOpen, setIsDestinationsOpen] = useState(false);
 
   const NavbarData = ["Destinations", "My trips", "Whats new"];
 
@@ -110,7 +108,7 @@ const Navbar = () => {
         <div className="hidden emd:flex items-center justify-center space-x-5 xlg:space-x-9">
           <Link
             className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "
-            to={"/about"}
+            to={"/aboutus"}
           >
             ABOUT US
           </Link>

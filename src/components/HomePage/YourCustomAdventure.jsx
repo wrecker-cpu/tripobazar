@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import adventureImage from "../../assets/travel-adventure.jpg";
+import adventureImage from "../../assets/home/travel-adventure.jpg";
 
 export default function YourCustomAdventure() {
   const [currentIndex, setCurrentIndex] = useState(0);

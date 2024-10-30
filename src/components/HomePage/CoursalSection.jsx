@@ -1,20 +1,21 @@
 import React from "react";
-import mysuru from "../../assets/mysuru.svg";
-import rajasthan from "../../assets/rajasthan.svg";
-import thailand from "../../assets/thailand.svg";
-import borabora from "../../assets/borabora.svg";
+import YellowCircularDisc from "../../../svgs/Home/YellowCircularDisc/index";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import elephant from "/Elephant.png?url";
+import ocean from "/Ocean.png?url";
+import couples from "/Couples.png?url";
+import explorer from "/Explorer.png?url";
 
 export default function CoursalSection() {
   const destinations = [
-    { image: mysuru, name: "MySuru" },
-    { image: thailand, name: "Thailand" },
-    { image: borabora, name: "borabora" },
-    { image: rajasthan, name: "Rajasthan" },
-    { image: mysuru, name: "MySuru" },
-    { image: thailand, name: "Thailand" },
-    { image: borabora, name: "borabora" },
-    { image: rajasthan, name: "Rajasthan" },
+    { image: elephant, name: "MySuru" },
+    { image: ocean, name: "Thailand" },
+    { image: couples, name: "Borabora" },
+    { image: explorer, name: "Rajasthan" },
+    { image: elephant, name: "MySuru" },
+    { image: ocean, name: "Thailand" },
+    { image: couples, name: "Borabora" },
+    { image: explorer, name: "Rajasthan" },
   ];
   return (
     <section className="w-full  h-auto relative">
@@ -45,14 +46,19 @@ export default function CoursalSection() {
               key={index}
               className="w-[411px] h-[662px] rounded-lg overflow-hidden shadow-md bg-opacity-50 backdrop-filter backdrop-blur-sm flex-shrink-0 border-white"
             >
-              <img
-                src={destination.image}
-                alt={destination.name}
-                className="w-full h-full object-cover opacity-90"
-              />
-              <p className="text-center text-white bg-[#012831] bg-opacity-80 py-2">
-                {destination.name}
-              </p>
+              <div className="w-auto h-auto relative">
+                <img
+                  className="w-full h-full object-cover"
+                  src={destination.image}
+                  alt="wth"
+                />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                  <YellowCircularDisc />
+                  <div className="absolute inset-0 flex items-center justify-center text-6xl leading-10 text-white">
+                    <p>{destination.name}</p>
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
         </div>

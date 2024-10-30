@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Whoweare() {
   return (
-    <section className="w-full h-80 mb-7 sm:h-96 md:h-96 lg:h-auto bg-[#F8F8F8] flex flex-col md:flex-row px-4 md:px-8">
+    <section className="w-full h-auto mb-7  bg-[#F8F8F8] flex flex-col md:flex-row px-4 md:px-8">
       {/* First Div */}
       <div className="flex-1 flex flex-col justify-center items-start mb-6 md:mb-0 md:pr-6">
         <h1 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold">
@@ -23,7 +23,7 @@ export default function Whoweare() {
           extraordinary with Trippo Bazaar – where every destination becomes a
           personalized masterpiece.
         </p>
-        <div className="mt-4 flex flex-wrap space-x-0 sm:space-x-4 space-y-2 sm:space-y-0">
+        <div className="mt-4 flex flex-wrap gap-4">
           <button className="bg-[#03B58B] text-white hover:text-[#03B58B] hover:bg-white px-4 py-2 rounded shadow">
             Explore Plans
           </button>

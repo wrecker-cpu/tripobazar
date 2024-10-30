@@ -17,11 +17,13 @@ function App() {
 
   // Conditionally hide Footer on specific routes
   const hideFooterOnRoutes = ["/signup", "/createprofile", "/login"];
+  const shouldShowNavbar = !hideFooterOnRoutes.includes(location.pathname);
   const shouldShowFooter = !hideFooterOnRoutes.includes(location.pathname);
 
   return (
     <div className="bg-[#F8F8F8] ">
-      <Navbar /> {/* Always show Navbar */}
+      {shouldShowNavbar && <Navbar />}
+      {/* Always show Navbar */}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />

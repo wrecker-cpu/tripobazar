@@ -2,6 +2,7 @@ import React from "react";
 import LeftArrowSvg from "../../../svgs/LeftArrowSvg";
 import CompanyLogo from "../../../svgs/CompanyLogo";
 import InputFieldsLogin from "./InputFieldsLogin";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   return (
@@ -10,9 +11,9 @@ export default function LoginPage() {
 
       <div className="absolute top-1/2 left-1/2 right-auto md:left-auto -translate-x-1/2 -translate-y-1/2 md:-translate-x-0 w-full h-screen md:-translate-y-0 md:top-0 md:right-0 md:w-2/3 lg:w-1/2 md:h-screen overflow-hidden flex flex-col">
         <div className="backdrop-blur-md flex-grow overflow-y-scroll scrollbar-hide p-3">
-          <div className=" absolute top-10 left-10 cursor-pointer">
+          <Link to={"/"} className=" absolute top-10 left-10 cursor-pointer">
             <LeftArrowSvg />
-          </div>
+          </Link>
 
           <div className="flex w-full mt-36  justify-center items-center">
             <div className="max-w-[400px] md:max-w-sm w-full flex flex-col items-center">

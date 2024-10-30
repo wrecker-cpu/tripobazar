@@ -38,7 +38,7 @@ function Footer() {
 
   return (
     <footer className="text-center max-w-[1720px] mx-auto text-black pb-6 bg-white">
-      <div className="mx-auto flex flex-col md:flex-row md:justify-between items-center ">
+      <div className="mx-auto w-[90%] py-10 flex flex-col md:flex-row md:justify-between items-center ">
         {/* Logo Section */}
         <div className="md:mb-0 md:static relative left-0 top-0 ">
   <CompanyLogo className="w-2 h-2 sm:w-7 sm:h-7 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain" />

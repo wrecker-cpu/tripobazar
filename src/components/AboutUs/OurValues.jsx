@@ -1,13 +1,33 @@
 import React from "react";
 import bgimage from "../../assets/aboutus/OurValues.jpg";
 import ExcelenceSvg from "../../../svgs/ExcelenceSvg";
+import discoverOne from "../../assets/home/Discover-1.svg";
 import EmpowermentSvg from "../../../svgs/EmpowermentSvg";
 import TransparencySvg from "../../../svgs/TransparancySvg";
+import ExploreSvg from "../../../svgs/ExploreSvg";
 function OurValues() {
+  const OURVALUESDATA = [
+    {
+      icon: <ExcelenceSvg />,
+      title: "Excellence",
+      desc: "Elevate your travel experience with our unwavering dedication to excellence, where meticulous attention to detail meets professional service.",
+    },
+    {
+      icon: <EmpowermentSvg />,
+      title: "Empowerment",
+      desc: "Unleash the power of choice with Trippo Bazaar, where personalized travel experiences put you in control of every adventure.",
+    },
+    {
+      icon: <TransparencySvg />,
+      title: "Transparency",
+      desc: "Navigate your journey with confidence – Our commitment to transparency ensures clear and honest communication, building trust at every step.",
+    },
+  ];
+
   return (
     <>
       <section
-        className="relative w-full mt-9 sm:mt-14 md:mt-11 h-56 md:h-96 sm:h-80 bg-top bg-cover bg-no-repeat"
+        className="relative w-full h-80 md:h-[650px] bg-top bg-cover bg-no-repeat"
         style={{ backgroundImage: `url(${bgimage})` }}
       >
         <div className="absolute inset-0 h-full w-full " />
@@ -17,47 +37,35 @@ function OurValues() {
             190+ COUNTRIES.
           </h1>
         </div>
+        <div className="absolute md:flex hidden top-20 left-2/3">
+          <img src={discoverOne} alt="Logo" className="h-5  mr-2" />
+        </div>
+        <div className="absolute bottom-32 -right-28 xlg:right-28 transform -translate-x-1/2 hidden md:flex justify-center items-center">
+          <ExploreSvg />
+        </div>
       </section>
-      <div className="w-full  flex h-[50vh] border bg-white md:pt-10 md:p-8 p-5">
-        <div className="md:p-6 mr-3 md:mr-0 text-center flex flex-col justify-center items-center  h-80% w-1/3">
-          <ExcelenceSvg />
-          <p className="font-bold mb-0 text-[.6rem] md:text-lg mt-4">
-            Excellence
-          </p>{" "}
-          <br></br>
-          <p className="md:text-sm text-[.4rem] font-normal text-left">
-            Elevate your travel experience with our unwavering dedication to
-            excellence, where meticulous attention to detail meets professional
-            service.
-          </p>
-        </div>
-
-        <div className="md:p-6 pt-4 sm:pt-1 text-center flex flex-col justify-center items-center  h-80% w-1/3">
-          <EmpowermentSvg />
-          <p className="font-bold mb-0 text-[.6rem] md:text-lg mt-4">
-            Empowerment
-          </p>{" "}
-          <br></br>
-          <p className="md:text-sm text-[.4rem] font-normal text-left">
-            Unleash the power of choice with Trippo Bazaar, where personalized
-            travel experiences put you in control of every adventure.
-          </p>{" "}
-          <br></br>
-        </div>
-
-        <div className="md:p-6  pt-6 sm:pt-2 md:pt-10 text-center flex flex-col justify-center items-center h-80% w-1/3">
-          <TransparencySvg />
-          <p className="font-bold mb-0 text-[.6rem] md:text-lg mt-4">
-            Transparency
-          </p>{" "}
-          <br></br>
-          <p className="md:text-sm text-[.4rem] font-normal text-left">
-            Navigate your journey with confidence – Our commitment to
-            transparency ensures clear and honest communication, building trust
-            at every step.
-          </p>{" "}
-          <br></br>
-        </div>
+      <div className="w-full grid grid-cols-1 place-items-center sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-10 mmd:gap-28 px-4 sm:px-10 md:px-28 h-auto py-8 sm:py-16 md:py-28 bg-white">
+        {OURVALUESDATA.map((item, idx) => {
+          return (
+            <div
+              key={idx}
+              className={`sm:max-w-[503px] ${
+                idx === OURVALUESDATA.length - 1
+                  ? "sm:col-span-2"
+                  : "sm:col-span-1"
+              } md:col-span-1 text-center pb-10 sm:pb-0 flex flex-col justify-center items-center h-auto md:h-[400px] w-full`}
+            >
+              {item.icon}
+              <p className="font-bold mb-0 text-lg sm:text-sm md:text-lg mt-4">
+                {item.title}
+              </p>
+              <br />
+              <p className="text-base sm:text-xs md:text-sm font-normal text-center">
+                {item.desc}
+              </p>
+            </div>
+          );
+        })}
       </div>
     </>
   );

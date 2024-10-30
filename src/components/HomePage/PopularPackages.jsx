@@ -37,7 +37,7 @@ export default function PopularPackages() {
     carouselItems[currentIndex];
 
   return (
-    <section className=" relative text-center max-w-[1720px] mx-auto">
+    <section className=" relative text-center w-[90%] max-w-[1720px] mx-auto">
       <div className="relative w-auto h-auto mx-auto flex items-center">
         {/* Main Image Container */}
         <div className="w-full md:w-[76%] h-[805px] overflow-hidden rounded-lg">

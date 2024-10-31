@@ -17,7 +17,6 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null); // State to store user data
   const downRef = useRef(null);
-  const location = useLocation();
 
   const NavbarData = [
     {
@@ -46,8 +45,6 @@ const Navbar = () => {
       description: [{ name: "Fixed Plants" }],
     },
   ];
-
-  const showShadow = location.pathname === "/";
 
   const toggleSearch = () => {
     setIsSearchVisible((prev) => !prev);
@@ -104,11 +101,9 @@ const Navbar = () => {
   }, [downRef]);
 
   return (
-    <div className="relative max-w-[1920px] border-b bg-white mx-auto">
+    <div className="relative  max-w-[1920px] border-b bg-white mx-auto">
       <nav
-        className={`bg-white flex items-center justify-between py-4 ${
-          showShadow ? "shadow-md" : ""
-        } relative w-[90%] mx-auto`}
+        className={`bg-white flex items-center justify-between py-4  relative w-[90%] mx-auto`}
       >
         <div className="hidden md:flex items-center gap-8 xlg:gap-10">
           {userData === null ? (

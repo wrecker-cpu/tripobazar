@@ -5,7 +5,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import "./App.css";
-import LandingPage from "./components/LandingPage";
+
 import LoginPage from "./components/LoginPage/LoginPage";
 import SignUpPage from "./components/SignUpPage/SignUpPage";
 import CreateProfile from "./components/SignUpPage/CreateProfile";
@@ -14,6 +14,9 @@ import Footer from "./components/Footer";
 import AboutUs from "./components/AboutUs/AboutUs";
 import ProtectedRoute from "../utils/ProtectedRoute";
 import ContactUs from "./components/ContactUs/ContactUs";
+import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
+import HomePage from "./components/HomePage/HomePage";
+import SearchDestinationPage from "./components/SearchDestination/SearchDestinationPage";
 function App() {
   const location = useLocation(); // Get the current route
 
@@ -27,13 +30,15 @@ function App() {
       {shouldShowNavbar && <Navbar />}
       {/* Always show Navbar */}
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/createprofile" element={<CreateProfile />} />
           <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/aboutus/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/searchpage" element={<SearchDestinationPage />} />
         </Route>
       </Routes>
       {/* Conditionally show the Footer based on the current route */}

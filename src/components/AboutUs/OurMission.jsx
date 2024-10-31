@@ -1,9 +1,9 @@
 import React from "react";
 import image from "../../assets/aboutus/advenPic.jpg";
 
-function OurMission() {
+function OurMission({OurMissionRef}) {
   return (
-    <div className="bg-white">
+    <div ref={OurMissionRef} className="bg-white">
       <section className=" w-[90%] mx-auto h-auto flex items-center justify-between  flex-col-reverse md:flex-row">
         {/* Left div with heading and paragraph */}
         <div

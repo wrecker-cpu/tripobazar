@@ -15,6 +15,7 @@ export default {
       },
       backgroundImage: {
         "login-image": "url('/loginpageimage.png')",
+        "search-image": "url('/searchPage.png')",
       },
       fontFamily: {
         poppins: "Poppins, sans-serif",

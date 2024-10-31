@@ -5,7 +5,7 @@ import discoverOne from "../../assets/home/Discover-1.svg";
 import EmpowermentSvg from "../../../svgs/EmpowermentSvg";
 import TransparencySvg from "../../../svgs/TransparancySvg";
 import ExploreSvg from "../../../svgs/ExploreSvg";
-function OurValues() {
+function OurValues({ OurValuesRef }) {
   const OURVALUESDATA = [
     {
       icon: <ExcelenceSvg />,
@@ -25,7 +25,7 @@ function OurValues() {
   ];
 
   return (
-    <>
+    <div ref={OurValuesRef}>
       <section
         className="relative w-full h-80 md:h-[650px] bg-top bg-cover bg-no-repeat"
         style={{ backgroundImage: `url(${bgimage})` }}
@@ -69,7 +69,7 @@ function OurValues() {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

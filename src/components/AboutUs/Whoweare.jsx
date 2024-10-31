@@ -3,9 +3,9 @@ import image2 from "../../assets/aboutus/image2over.jpg";
 
 import React from "react";
 
-export default function Whoweare() {
+export default function Whoweare({WhoWeAreRef}) {
   return (
-    <section className="w-[90%] mx-auto h-auto mb-7  bg-[#F8F8F8] flex flex-col md:flex-row ">
+    <section ref={WhoWeAreRef} className="w-[90%] mx-auto h-auto mb-7  bg-[#F8F8F8] flex flex-col md:flex-row ">
       {/* First Div */}
       <div className="flex-1 flex flex-col justify-center items-start mb-6 md:mb-0 md:pr-6">
         <h1 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold">

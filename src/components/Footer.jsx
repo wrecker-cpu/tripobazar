@@ -6,7 +6,7 @@ function Footer() {
   const data = [
     { name: "About Us", link: "/aboutus" },
     { name: "Careers", link: "/careers" },
-    { name: "Privacy Policy", link: "/privacy-policy" },
+    { name: "Privacy Policy", link: "/aboutus/privacy-policy" },
     { name: "FAQs", link: "/faqs" },
     { name: "Get a Call Back", link: "/get-a-call-back" },
     { name: "Contact Us", link: "/contactus" },

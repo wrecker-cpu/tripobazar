@@ -76,7 +76,6 @@
   background-color: #03b58b; /* Set background color for the checked state */
 }
 
-
 .custom-checkbox:checked:after {
   content: "✓"; /* Check mark symbol */
   position: absolute;
@@ -97,3 +96,4 @@
     min-height: 20px; /* Prevent shrinking */
   }
 }
+

@@ -2,9 +2,9 @@ import React from "react";
 import image1 from "../../assets/aboutus/career1.png";
 import image2 from "../../assets/aboutus/career2.png";
 
-function Careers() {
+function Careers({ CareersRef }) {
   return (
-    <div className="bg-white shadow-xl">
+    <div ref={CareersRef} className="bg-white shadow-xl">
       <div className="w-[90%] mx-auto ">
         <section className="w-full h-auto md:min-h-[600px] mb-7   flex flex-col md:flex-row ">
           {/* First Div */}

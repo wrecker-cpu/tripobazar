@@ -43,7 +43,7 @@ export default function InputFieldsLogin() {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/user/login",
+        "tripobazar-backend.vercel.app/api/users/login",
         userData
       );
       console.log("Login successful:", response.data);

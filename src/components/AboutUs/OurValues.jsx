@@ -44,28 +44,30 @@ function OurValues() {
           <ExploreSvg />
         </div>
       </section>
-      <div className="w-full grid grid-cols-1 place-items-center sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-10 mmd:gap-28 px-4 sm:px-10 md:px-28 h-auto py-8 sm:py-16 md:py-28 bg-white">
-        {OURVALUESDATA.map((item, idx) => {
-          return (
-            <div
-              key={idx}
-              className={`sm:max-w-[503px] ${
-                idx === OURVALUESDATA.length - 1
-                  ? "sm:col-span-2"
-                  : "sm:col-span-1"
-              } md:col-span-1 text-center pb-10 sm:pb-0 flex flex-col justify-center items-center h-auto md:h-[400px] w-full`}
-            >
-              {item.icon}
-              <p className="font-bold mb-0 text-lg sm:text-sm md:text-lg mt-4">
-                {item.title}
-              </p>
-              <br />
-              <p className="text-base sm:text-xs md:text-sm font-normal text-center">
-                {item.desc}
-              </p>
-            </div>
-          );
-        })}
+      <div className="bg-white">
+        <div className="w-[90%] mx-auto grid grid-cols-1 place-items-center sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-10 mmd:gap-28 px-4 sm:px-10 md:px-28 h-auto py-8 sm:py-16 md:py-28 ">
+          {OURVALUESDATA.map((item, idx) => {
+            return (
+              <div
+                key={idx}
+                className={`sm:max-w-[503px] ${
+                  idx === OURVALUESDATA.length - 1
+                    ? "sm:col-span-2"
+                    : "sm:col-span-1"
+                } md:col-span-1 text-center pb-10 sm:pb-0 flex flex-col justify-center items-center h-auto md:h-[400px] w-full`}
+              >
+                {item.icon}
+                <p className="font-bold mb-0 text-lg sm:text-sm md:text-lg mt-4">
+                  {item.title}
+                </p>
+                <br />
+                <p className="text-base sm:text-xs md:text-sm font-normal text-center">
+                  {item.desc}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </>
   );

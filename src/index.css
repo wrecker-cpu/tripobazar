@@ -40,7 +40,60 @@
   background-repeat: no-repeat;
   background-size: 12px 12px; /* Adjust the size of the arrow */
   background-position: calc(100%) center; /* Move the arrow to the left */
-  padding-right: 1rem; 
+  padding-right: 1rem;
   appearance: none; /* Hide the default arrow */
   font-size: 0.8rem; /* Font size for the text */
+}
+
+.custom-checkbox {
+  appearance: none; /* Remove default styling */
+  width: 20px; /* Increased size */
+  height: 20px; /* Increased size */
+  border: 2px solid #03b58b; /* Green border */
+  border-radius: 4px; /* Square corners for checkbox */
+  cursor: pointer;
+  position: relative; /* Set relative position */
+  outline: none; /* Remove outline */
+  margin-right: 8px; /* Space between checkbox and label */
+  min-width: 20px; /* Prevent shrinking */
+  min-height: 20px;
+}
+
+/* Inner square for the checkbox */
+.custom-checkbox:before {
+  content: "";
+  position: absolute;
+  top: 2px; /* Adjust to create space */
+  left: 2px; /* Adjust to create space */
+  width: 16px; /* Inner square size */
+  height: 16px; /* Inner square size */
+  background-color: transparent; /* Transparent by default */
+  transition: background-color 0.2s ease;
+}
+
+/* Optional: style for the checked state */
+.custom-checkbox:checked {
+  background-color: #03b58b; /* Set background color for the checked state */
+}
+
+
+.custom-checkbox:checked:after {
+  content: "✓"; /* Check mark symbol */
+  position: absolute;
+  top: 50%; /* Adjust positioning */
+  left: 50%; /* Adjust positioning */
+  transform: translate(-50%, -50%); /* Center the check mark */
+  font-size: 16px; /* Size of the check mark */
+  color: rgba(255, 255, 255, 0.8); /* Off-white color for the check mark */
+  line-height: 20px; /* Center the check mark vertically */
+}
+
+/* Responsive adjustments */
+@media (max-width: 460px) {
+  .custom-checkbox {
+    width: 20px; /* Keep size consistent */
+    height: 20px; /* Keep size consistent */
+    min-width: 20px; /* Prevent shrinking */
+    min-height: 20px; /* Prevent shrinking */
+  }
 }

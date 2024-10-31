@@ -16,7 +16,7 @@ export default function AboutUs() {
       <OurValues />
       <OurMission />
       <Careers />
-      <StayConnected/>
+      <StayConnected />
     </div>
   );
 }

@@ -1,53 +1,36 @@
-
+import { Link } from "react-router-dom";
 import CompanyLogo from "../../svgs/CompanyLogo";
-import { IoLogoInstagram } from "react-icons/io";
-import { CiTwitter } from "react-icons/ci";
-import { SlSocialFacebook } from "react-icons/sl";
-import { AiOutlineYoutube } from "react-icons/ai";
+import { socialMediaData } from "../../utils/SocialMediaData";
 
 function Footer() {
   const data = [
-    "About Us",
-    "Careers",
-    "Privacy Policy",
-    "FAQs",
-    "Get a Call back",
-    "Contact Us",
-    "Search Destinations",
-    "Booking Conditions",
-    "My Reservations",
-    "Explore Packages",
-    "Safety Measures",
-    "Health Concerns",
+    { name: "About Us", link: "/aboutus" },
+    { name: "Careers", link: "/careers" },
+    { name: "Privacy Policy", link: "/privacy-policy" },
+    { name: "FAQs", link: "/faqs" },
+    { name: "Get a Call Back", link: "/get-a-call-back" },
+    { name: "Contact Us", link: "/contactus" },
+    { name: "Search Destinations", link: "/search-destinations" },
+    { name: "Booking Conditions", link: "/booking-conditions" },
+    { name: "My Reservations", link: "/my-reservations" },
+    { name: "Explore Packages", link: "/explore-packages" },
+    { name: "Safety Measures", link: "/safety-measures" },
+    { name: "Health Concerns", link: "/health-concerns" },
   ];
-
-  const socialMediaData = [
-    {
-      icon: <IoLogoInstagram className="w-6 h-6" />,
-    },
-    {
-      icon: <CiTwitter className="w-6 h-6" />,
-    },
-    {
-      icon: <SlSocialFacebook className="w-6 h-6 p-[2px]" />,
-    },
-    {
-      icon: <AiOutlineYoutube className="w-6 h-6" />,
-    },
-  ];
+  
 
   return (
-    <footer className="text-center max-w-[1720px] mx-auto text-black pb-6 bg-white">
+    <footer className="text-center max-w-[1920px] mx-auto text-black pb-6 bg-white">
       <div className="mx-auto w-[90%] py-10 flex flex-col md:flex-row md:justify-between items-center ">
         {/* Logo Section */}
-        <div className="md:mb-0 md:static relative left-0 top-0 ">
-  <CompanyLogo className="w-2 h-2 sm:w-7 sm:h-7 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain" />
-</div>
+        <div className="md:mb-0 md:static relative mb-8 left-0 top-0 ">
+          <CompanyLogo className="w-2 h-2 sm:w-7 sm:h-7 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain" />
+        </div>
 
         {/* Links Section */}
-        <ul className="flex text-[.6rem] flex-wrap md:grid text-left md:grid-cols-2 gap-x-4 gap-y-2 md:gap-x-12 gap-4 justify-center mb-4 md:text-sm  md:text-start  md:mb-0">
+        <ul className="flex text-[.6rem] flex-wrap md:grid text-left md:grid-cols-2  md:gap-y-2 md:gap-x-12 gap-4 justify-center mb-8 md:text-sm  md:text-start  md:mb-0">
           {data.map((item, idx) => (
-            <li key={idx}>{item}</li>
+            <Link to={item.link} key={idx} className="text-gray-700 cursor-pointer hover:text-black">{item.name}</Link>
           ))}
         </ul>
 
@@ -86,7 +69,7 @@ function Footer() {
             {socialMediaData.map((item, index) => (
               <div
                 key={index}
-                className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full border p-1 border-gray-300"
+                className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full border p-[6px] border-black"
               >
                 {item.icon}
               </div>

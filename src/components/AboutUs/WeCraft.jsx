@@ -6,7 +6,7 @@ import BreadCrumbsLink from "../../../utils/BreadCrumbsLink";
 function WeCraft() {
   return (
     <div className="bg-white">
-      <div className="w-[98%] mx-auto  py-2">
+      <div className="w-[90%] mx-auto  py-2">
         <BreadCrumbsLink />
       </div>
       <section

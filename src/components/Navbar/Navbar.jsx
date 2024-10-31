@@ -9,6 +9,7 @@ import SideHamBurgerMenu from "./SideHamBurgerMenu";
 import { Link, useLocation } from "react-router-dom";
 
 import { IoIosArrowDown } from "react-icons/io";
+import MenuSvg from "../../../svgs/MenuSvg";
 
 const Navbar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -103,11 +104,11 @@ const Navbar = () => {
   }, [downRef]);
 
   return (
-    <div className="relative max-w-[1920px] mx-auto">
+    <div className="relative max-w-[1920px] border-b bg-white mx-auto">
       <nav
-        className={`bg-white flex items-center justify-between p-4 ${
-          showShadow ? "shadow-md" : "border-b"
-        } relative`}
+        className={`bg-white flex items-center justify-between py-4 ${
+          showShadow ? "shadow-md" : ""
+        } relative w-[90%] mx-auto`}
       >
         <div className="hidden md:flex items-center gap-8 xlg:gap-10">
           {userData === null ? (
@@ -120,8 +121,9 @@ const Navbar = () => {
           ) : (
             <Link
               to={"/"}
-              className="border-[.1rem] rounded-lg tracking-wider text-[#03B58B] border-[#012831] font-poppins text-[.8rem] font-medium px-8 py-2"
+              className="border-[.1rem] flex justify-center items-center gap-2 rounded-lg tracking-wider text-[#03B58B] border-[#012831] font-poppins text-[.8rem] font-medium px-8 py-2"
             >
+              <MenuSvg />
               Menu
             </Link>
           )}

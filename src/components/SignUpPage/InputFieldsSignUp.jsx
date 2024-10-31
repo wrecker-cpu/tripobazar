@@ -44,7 +44,7 @@ export default function InputFieldsSignUp() {
     };
 
     try {
-      const response = await axios.post("http://localhost:4000/user", userData);
+      const response = await axios.post("http://tripobazar-backend.vercel.app/api/users", userData);
       console.log("Create successful:", response.data);
       const userInfo = {
         userId: response.data.data.user._id,

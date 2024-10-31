@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Whoweare() {
   return (
-    <section className="w-full h-auto mb-7  bg-[#F8F8F8] flex flex-col md:flex-row px-4 md:px-8">
+    <section className="w-[90%] mx-auto h-auto mb-7  bg-[#F8F8F8] flex flex-col md:flex-row ">
       {/* First Div */}
       <div className="flex-1 flex flex-col justify-center items-start mb-6 md:mb-0 md:pr-6">
         <h1 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold">

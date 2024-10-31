@@ -17,7 +17,7 @@ export default function FromOurTravellers() {
     },
   ];
   return (
-    <section className="w-[60%] mb-5 h-[527px]   mx-auto mt-8 p-4 bg-transparent ">
+    <section className="w-full md:w-[60%] mb-5 h-[527px]   mx-auto mt-8 p-4 bg-transparent ">
       <h3 className="text-[#03B58B] text-center text-2xl font-semibold mb-4">
         From Our Travellers
       </h3>

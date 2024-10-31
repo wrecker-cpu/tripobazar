@@ -10,7 +10,7 @@ export default function GoogleButton() {
   const googleRespone = async (authResult) => {
     try {
       const response = await axios.get(
-        `http://tripobazar-backend.vercel.app/api/google/auth/google?code=${authResult["code"]}`
+        `https://tripobazar-backend.vercel.app/api/google/auth/google?code=${authResult["code"]}`
       );
 
       if (response.data && response.data.data.user) {

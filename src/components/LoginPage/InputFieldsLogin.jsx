@@ -2,32 +2,31 @@ import React, { useEffect, useState } from "react";
 import PasswordSvg from "../../../svgs/PasswordSvg";
 import IndianFlag from "../../../svgs/IndianFlag/index";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserSvg from "../../../svgs/UserSvg";
 import GoogleWrapper from "../../../utils/GoogleWrapper";
 
 export default function InputFieldsLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [options, setOptions] = useState("mobilenumber");
+  const navigate = useNavigate();
   const [details, setDetails] = useState({
     MobileNumber: "",
-    email: "",
-    password: "",
+    Email: "", // Capitalize "Email" to match backend expectations
+    Password: "", // Capitalize "Password" to match backend expectations
   });
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
-
   const handleClick = (name) => {
     setOptions(name);
     if (name === "mobilenumber") {
-      setDetails((prev) => ({ ...prev, email: "" }));
+      setDetails((prev) => ({ ...prev, Email: "" })); // Reset Email when using mobile number
     } else {
-      setDetails((prev) => ({ ...prev, MobileNumber: "" }));
+      setDetails((prev) => ({ ...prev, MobileNumber: "" })); // Reset MobileNumber when using email
     }
   };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDetails((prev) => ({ ...prev, [name]: value }));
@@ -35,15 +34,22 @@ export default function InputFieldsLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = {
-      Email: details.email,
-      MobileNumber: details.MobileNumber,
-      Password: details.password,
-    };
 
+    const userData =
+      options === "mobilenumber"
+        ? {
+            MobileNumber: details.MobileNumber,
+            Password: details.Password,
+          }
+        : {
+            Email: details.Email,
+            Password: details.Password,
+          };
+
+    console.log("Attempting login with data:", userData);
     try {
       const response = await axios.post(
-        "tripobazar-backend.vercel.app/api/users/login",
+        "https://tripobazar-backend.vercel.app/api/users/login",
         userData
       );
       console.log("Login successful:", response.data);
@@ -55,6 +61,7 @@ export default function InputFieldsLogin() {
         token: response.data.token,
       };
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      navigate("/");
     } catch (error) {
       console.error("Error logging in:", error);
       if (error.response) {
@@ -121,7 +128,7 @@ export default function InputFieldsLogin() {
               </div>
               <input
                 type="email"
-                name="email"
+                name="Email"
                 placeholder="Email"
                 value={details.email}
                 onChange={handleChange}
@@ -136,9 +143,9 @@ export default function InputFieldsLogin() {
             </div>
             <input
               type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="password"
-              value={details.password}
+              name="Password"
+              placeholder="Password"
+              value={details.Password}
               onChange={handleChange}
               autoComplete="current-password"
               className="py-3 pl-14 pr-16 bg-inherit outline-2 outline-med-green text-lg font-medium w-full text-[#717A7C]"

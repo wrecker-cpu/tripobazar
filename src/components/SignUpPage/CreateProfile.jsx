@@ -45,7 +45,7 @@ export default function CreateProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();    
     try {
-      const response = await axios.put(`http://localhost:4000/user/${id}`, formData);
+      const response = await axios.put(`https://tripobazar-backend.vercel.app/api/users/${id}`, formData);
       console.log("Response from backend:", response.data);
       if(response.data){
         navigate("/")

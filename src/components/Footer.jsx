@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom";
 import CompanyLogo from "../../svgs/CompanyLogo";
 import { socialMediaData } from "../../utils/SocialMediaData";
+import TransitionLink from "../../utils/TransitionLink";
 
 function Footer() {
   const data = [
     { name: "About Us", link: "/aboutus" },
-    { name: "Careers", link: "/careers" },
+    { name: "Careers", link: "/aboutus/careers" },
     { name: "Privacy Policy", link: "/aboutus/privacy-policy" },
     { name: "FAQs", link: "/faqs" },
     { name: "Get a Call Back", link: "/get-a-call-back" },
     { name: "Contact Us", link: "/contactus" },
-    { name: "Search Destinations", link: "/search-destinations" },
+    { name: "Search Destinations", link: "/searchpage" },
     { name: "Booking Conditions", link: "/booking-conditions" },
     { name: "My Reservations", link: "/my-reservations" },
     { name: "Explore Packages", link: "/explore-packages" },
     { name: "Safety Measures", link: "/safety-measures" },
     { name: "Health Concerns", link: "/health-concerns" },
   ];
-  
 
   return (
     <footer className="text-center max-w-[1920px] mx-auto text-black pb-6 bg-white">
@@ -30,7 +30,13 @@ function Footer() {
         {/* Links Section */}
         <ul className="flex text-[.6rem] flex-wrap md:grid text-left md:grid-cols-2  md:gap-y-2 md:gap-x-12 gap-4 justify-center mb-8 md:text-sm  md:text-start  md:mb-0">
           {data.map((item, idx) => (
-            <Link to={item.link} key={idx} className="text-gray-700 cursor-pointer hover:text-black">{item.name}</Link>
+            <TransitionLink
+              to={item.link}
+              key={idx}
+              className="text-gray-700 cursor-pointer hover:text-black"
+            >
+              {item.name}
+            </TransitionLink>
           ))}
         </ul>
 

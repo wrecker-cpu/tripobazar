@@ -19,9 +19,12 @@ export default function DiscoverNewHorizon() {
         </div>
 
         {/* H1 Heading */}
-        <div className="flex absolute bottom-auto  top-20 right-0 md:top-auto sm:left-1/2 -translate-x-1/2 -translate-y-1/2 md:-translate-x-0 md:-translate-y-0 md:bottom-24 md:left-7 justify-start items-center h-auto  ">
-          <h1 className="text-white font-poppins text-3xl sm:text-5xl md:text-[5rem] lg:text-[5.2rem] font-extrabold leading-none">
-            DISCOVER NEW <br></br>HORIZONS
+        <div className="absolute top-1/2 right-auto left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:top-96 mmd:top-64 md:right-0 md:translate-x-0 md:translate-y-0 md:bottom-24  md:left-7 flex justify-start items-center h-auto">
+          <h1
+            className="text-white font-poppins font-extrabold leading-none 
+    md:text-[5rem] lg:text-[5.2rem] text-3xl em:text-5xl sm:text-[50px]"
+          >
+            DISCOVER NEW <br className="hidden md:block" /> HORIZONS
           </h1>
         </div>
 

@@ -97,3 +97,17 @@
   }
 }
 
+body {
+  transition-property: opacity, background-color, transform, filter,scale;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.5s;
+}
+
+
+.page-transition {
+  opacity: 0;
+  background-color: white;
+  transform: translateY(30px);
+  scale: (0.05); 
+  filter: blur(12px); 
+}

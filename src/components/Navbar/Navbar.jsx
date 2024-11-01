@@ -11,6 +11,8 @@ import { Link, useLocation } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import MenuSvg from "../../../svgs/MenuSvg";
 
+import TransitionLink from "../../../utils/TransitionLink";
+
 const Navbar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
@@ -166,7 +168,7 @@ const Navbar = () => {
         </div>
 
         {/* Center - Logo (always centered) */}
-        <Link to={"/"}>
+        <TransitionLink to={"/"}>
           {" "}
           <div className="flex-grow flex justify-start md:justify-end emd:justify-center">
             <img
@@ -175,16 +177,16 @@ const Navbar = () => {
               className="h-11 pr-0 md:pr-10 emd:pr-0 cursor-pointer"
             />
           </div>
-        </Link>
+        </TransitionLink>
 
         {/* Right Side - Nav Links and Search Bar (visible on medium and larger screens) */}
         <div className="hidden emd:flex items-center justify-center space-x-5 xlg:space-x-9">
-          <Link
+          <TransitionLink
             className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "
             to={"/aboutus"}
           >
             ABOUT US
-          </Link>
+          </TransitionLink>
           <a
             href="#"
             className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "

@@ -1,6 +1,7 @@
 import React from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { Link, useLocation } from "react-router-dom";
+import TransitionLink from "./TransitionLink";
 
 export default function BreadCrumbsLink() {
   const location = useLocation();
@@ -8,7 +9,7 @@ export default function BreadCrumbsLink() {
   return (
     <div className="py-2">
       <p className="text-med-green text-base flex items-center ">
-        <Link to={"/"}>Home</Link>
+        <TransitionLink to={"/"}>Home</TransitionLink>
         {pathSegments.map((segment, index) => {
           const path = `/${pathSegments.slice(0, index + 1).join("/")}`;
           const isLastSegment = index === pathSegments.length - 1;
@@ -21,12 +22,18 @@ export default function BreadCrumbsLink() {
                 <span className="cursor-pointer">
                   {segment
                     .replace(/-/g, " ")
-                    .replace(/^./, (str) => str.toUpperCase())}
+                    .replace(/^\w/, (c) => c.toUpperCase())}{" "}
+                  {/* Capitalizes the first letter */}
                 </span>
               ) : (
-                <Link to={path} className="hover:underline capitalize">
-                  {segment.replace(/-/g, " ")}
-                </Link>
+                <TransitionLink
+                  to={path}
+                  className="hover:underline capitalize"
+                >
+                  {segment
+                    .replace(/-/g, " ")
+                    .replace(/^\w/, (c) => c.toUpperCase())}
+                </TransitionLink>
               )}
             </React.Fragment>
           );

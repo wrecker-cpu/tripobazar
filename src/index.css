@@ -49,7 +49,7 @@
   appearance: none; /* Remove default styling */
   width: 20px; /* Increased size */
   height: 20px; /* Increased size */
-  border: 2px solid #03b58b; /* Green border */
+  border: 1px solid black; /* Green border */
   border-radius: 4px; /* Square corners for checkbox */
   cursor: pointer;
   position: relative; /* Set relative position */
@@ -73,7 +73,8 @@
 
 /* Optional: style for the checked state */
 .custom-checkbox:checked {
-  background-color: #03b58b; /* Set background color for the checked state */
+  background-color: #03b58b;
+  border: 0; /* Set background color for the checked state */
 }
 
 .custom-checkbox:checked:after {
@@ -98,16 +99,127 @@
 }
 
 body {
-  transition-property: opacity, background-color, transform, filter,scale;
+  transition-property: opacity, background-color, transform, filter, scale;
   transition-timing-function: ease-in-out;
   transition-duration: 0.5s;
 }
-
 
 .page-transition {
   opacity: 0;
   background-color: white;
   transform: translateY(30px);
-  scale: (0.05); 
-  filter: blur(12px); 
+  scale: (0.05);
+  filter: blur(12px);
+}
+
+.custom-range {
+  -webkit-appearance: none; /* Remove default styling */
+  width: 100%; /* Set width */
+  height: 8px; /* Track height */
+  background: #ddd; /* Default track color */
+  border-radius: 5px; /* Round the track corners */
+  outline: none; /* Remove outline */
+}
+
+/* Custom thumb styling */
+.custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Remove default styling */
+  appearance: none; /* Remove default styling */
+  width: 20px; /* Thumb width */
+  height: 20px; /* Thumb height */
+  background: #27BFEA; /* Thumb color */
+  border-radius: 50%; /* Round the thumb */
+  cursor: pointer; /* Change cursor on hover */
+  margin-top: -6px; /* Adjust this value to center the thumb */
+}
+
+.custom-range::-moz-range-thumb {
+  width: 20px; /* Thumb width */
+  height: 20px; /* Thumb height */
+  background: #27BFEA; /* Thumb color */
+  border-radius: 50%; /* Round the thumb */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.custom-range::-ms-thumb {
+  width: 20px; /* Thumb width */
+  height: 20px; /* Thumb height */
+  background: #27BFEA; /* Thumb color */
+  border-radius: 50%; /* Round the thumb */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.custom-range::-webkit-slider-runnable-track {
+  height: 8px; /* Track height */
+  border-radius: 5px; /* Round the track corners */
+}
+
+.custom-range::-moz-range-track {
+  height: 8px; /* Track height */
+  border-radius: 5px; /* Round the track corners */
+}
+
+.custom-range::-ms-track {
+  height: 8px; /* Track height */
+  border: none; /* Remove border */
+  color: transparent; /* Hide the default track */
+  background: #ddd; /* Default track color */
+}
+
+
+
+
+
+.custom-range-two {
+  -webkit-appearance: none; /* Remove default styling */
+  width: 100%; /* Set width */
+  height: 8px; /* Track height */
+  background: #ddd; /* Default track color */
+  border-radius: 5px; /* Round the track corners */
+  outline: none; /* Remove outline */
+}
+
+/* Custom thumb styling */
+.custom-range-two::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Remove default styling */
+  appearance: none; /* Remove default styling */
+  width: 20px; /* Thumb width */
+  height: 20px; /* Thumb height */
+  background: #03B58B; /* Thumb color */
+  border-radius: 50%; /* Round the thumb */
+  cursor: pointer; /* Change cursor on hover */
+  margin-top: -6px; /* Adjust this value to center the thumb */
+}
+
+.custom-range-two::-moz-range-thumb {
+  width: 20px; /* Thumb width */
+  height: 20px; /* Thumb height */
+  background: #03B58B; /* Thumb color */
+  border-radius: 50%; /* Round the thumb */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.custom-range-two::-ms-thumb {
+  width: 20px; /* Thumb width */
+  height: 20px; /* Thumb height */
+  background: #03B58B; /* Thumb color */
+  border-radius: 50%; /* Round the thumb */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.custom-range-two::-webkit-slider-runnable-track {
+  height: 8px; /* Track height */
+  border-radius: 5px; /* Round the track corners */
+}
+
+.custom-range-two::-moz-range-track {
+  height: 8px; /* Track height */
+  border-radius: 5px; /* Round the track corners */
+}
+
+.custom-range-two::-ms-track {
+  height: 8px; /* Track height */
+  border: none; /* Remove border */
+  color: transparent; /* Hide the default track */
+  background: #ddd; /* Default track color */
 }

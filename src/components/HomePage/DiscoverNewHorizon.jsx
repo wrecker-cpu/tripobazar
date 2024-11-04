@@ -4,13 +4,16 @@ import discoverOne from "../../assets/home/Discover-1.svg";
 import FilterSvg from "../../../svgs/FilterSvg/index";
 import DatePicker from "react-datepicker";
 import ExploreSvg from "../../../svgs/ExploreSvg";
+import FilterBox from "../FilterBox/FilterBox";
 
 export default function DiscoverNewHorizon() {
   const [guests, setGuests] = useState(1);
+  const [showModal, setShowModal] = useState(false);
   const incrementGuests = () => setGuests(guests + 1);
   const decrementGuests = () => setGuests(guests > 1 ? guests - 1 : 1);
+  const toggleModal = () => setShowModal(!showModal);
   return (
-    <section>
+    <section className="relative">
       <div className="w-full h-full md:h-[600px] sticky z-10 top-0  md:relative">
         <img className="w-full h-full object-cover" src={dalLek} alt="wth" />
         {/* Top Left Logo and Paragraph */}
@@ -61,7 +64,7 @@ export default function DiscoverNewHorizon() {
             />
           </div>
           <div className="md:w-auto w-full flex justify-end">
-            <div>
+            <div onClick={toggleModal}>
               <FilterSvg />
             </div>
           </div>
@@ -121,6 +124,7 @@ export default function DiscoverNewHorizon() {
           </button>
         </div>
       </div>
+      {showModal && <FilterBox onClose={toggleModal} />}
     </section>
   );
 }

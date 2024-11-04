@@ -1,20 +1,21 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
+import TransitionLink from "../../../utils/TransitionLink";
 
 export default function SideHamBurgerMenu({ toggleMenu, isMenuOpen }) {
   const data = [
-    "Destinations",
-    "What's new",
-    "My trips",
-    "About Us",
-    "Travel Tips",
-    "Visas",
-    "Profile",
-    "My Bookings",
-    "Privacy Policy",
-    "Careers",
-    "FAQs",
+    { name: "Destinations", link: "/" },
+    { name: "What's new", link: "/" },
+    { name: "My trips", link: "/" },
+    { name: "About Us", link: "/aboutus" },
+    { name: "Travel Tips", link: "/" },
+    { name: "Visas", link: "/" },
+    { name: "Profile", link: "/" },
+    { name: "My Bookings", link: "/" },
+    { name: "Privacy Policy", link: "/aboutus/privacy-policy" },
+    { name: "Careers", link: "/aboutus/careers" },
+    { name: "FAQs", link: "/" },
   ];
 
   return (
@@ -41,14 +42,15 @@ export default function SideHamBurgerMenu({ toggleMenu, isMenuOpen }) {
         </div>
 
         {/* Scrollable Options List */}
-        <div className="flex-grow overflow-y-auto py-4">
+        <div className="flex flex-col overflow-y-auto py-4">
           {data.map((item, idx) => (
-            <button
-              className="text-start py-4 border-b uppercase border-med-green w-full"
+            <TransitionLink
+              to={item.link}
+              className="text-start  py-4 border-b uppercase border-med-green w-full"
               key={idx}
             >
-              {item}
-            </button>
+              {item.name}
+            </TransitionLink>
           ))}
         </div>
 

@@ -1,12 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import LeftArrowSvg from "../../../svgs/LeftArrowSvg";
 import CompanyLogo from "../../../svgs/CompanyLogo";
 import InputFieldsLogin from "./InputFieldsLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Spinner from "../../../utils/Spinner";
+import axios from "axios";
 
 export default function LoginPage() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [options, setOptions] = useState("mobilenumber");
+  const [loader, setLoader] = useState(false);
+  const navigate = useNavigate();
+  const [details, setDetails] = useState({
+    MobileNumber: "",
+    Email: "",
+    Password: "",
+  });
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+
+  const handleClick = (name) => {
+    setOptions(name);
+    setDetails((prev) => ({
+      ...prev,
+      MobileNumber: name === "mobilenumber" ? prev.MobileNumber : "",
+      Email: name === "Email" ? prev.Email : "",
+    }));
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDetails((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+    const userData =
+      options === "mobilenumber"
+        ? { MobileNumber: details.MobileNumber, Password: details.Password }
+        : { Email: details.Email, Password: details.Password };
+
+    try {
+      const response = await axios.post(
+        "https://tripobazar-backend.vercel.app/api/users/login",
+        userData
+      );
+      setLoader(false);
+      const userInfo = {
+        userId: response.data.data.user._id,
+        email: response.data.data.user.Email,
+        MobileNumber: response.data.data.user.MobileNumber,
+        token: response.data.token,
+      };
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      navigate("/");
+    } catch (error) {
+      setLoader(false);
+      console.error("Error logging in:", error);
+    }
+  };
   return (
-    <div className="w-full  font-poppins flex justify-center bg-login-image relative items-center bg-cover bg-center min-h-screen">
+    <div className="w-full max-w-[1980px] mx-auto h-auto font-poppins flex justify-center bg-login-image relative items-center bg-cover bg-center min-h-screen">
       <div className="absolute top-1/2  left-1/2 right-auto  md:top-0 h-auto md:min-h-screen md:right-0 md:left-auto  -translate-x-1/2 -translate-y-1/2 md:-translate-x-0 w-auto md:-translate-y-0 bg-white opacity-50 md:w-2/3 lg:w-1/2 p-3"></div>
 
       <div className="absolute top-1/2 left-1/2 right-auto md:left-auto -translate-x-1/2 -translate-y-1/2 md:-translate-x-0 w-full h-screen md:-translate-y-0 md:top-0 md:right-0 md:w-2/3 lg:w-1/2 md:h-screen overflow-hidden flex flex-col">
@@ -21,11 +78,25 @@ export default function LoginPage() {
               <h1 className="text-[35px] lsm:text-6xl font-semibold leading-[86px] mb-6">
                 Welcome Back
               </h1>
-              <InputFieldsLogin />
+              <InputFieldsLogin
+                showPassword={showPassword}
+                togglePasswordVisibility={togglePasswordVisibility}
+                options={options}
+                handleClick={handleClick}
+                details={details}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                loader={loader}
+              />
             </div>
           </div>
         </div>
       </div>
+      {loader && (
+        <div className="fixed bg-black opacity-50 w-full h-[119vh] top-0 left-0">
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 }

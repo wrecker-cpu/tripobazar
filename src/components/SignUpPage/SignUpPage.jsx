@@ -1,10 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import LeftArrowSvg from "../../../svgs/LeftArrowSvg";
 import CompanyLogo from "../../../svgs/CompanyLogo";
 import InputFieldsSignUp from "./InputFieldsSignUp";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Spinner from "../../../utils/Spinner";
 
 export default function SignUpPage() {
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [options, setOptions] = useState("mobilenumber");
+  const [loader, setLoader] = useState(false);
+  const navigate = useNavigate();
+  const [details, setDetails] = useState({
+    MobileNumber: "",
+    email: "",
+    password: "",
+  });
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+
+  const handleClick = (name) => {
+    setOptions(name);
+    if (name === "mobilenumber") {
+      setDetails((prev) => ({ ...prev, email: "" }));
+    } else {
+      setDetails((prev) => ({ ...prev, MobileNumber: "" }));
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDetails((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+    const userData = {
+      Email: details.email,
+      MobileNumber: details.MobileNumber,
+      Password: details.password,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://tripobazar-backend.vercel.app/api/users",
+        userData
+      );
+      console.log("Create successful:", response.data);
+      const userInfo = {
+        userId: response.data.data.user._id,
+        email: response.data.data.user.Email,
+        MobileNumber: response.data.data.user.MobileNumber,
+        token: response.data.token,
+      };
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      setLoader(false);
+      navigate("/createprofile");
+    } catch (error) {
+      console.error("Error:", error);
+      setLoader(false);
+    }
+  };
+
+
+
   return (
     <div className="max-w-[1980px] mx-auto h-auto">
       <div className="w-full font-poppins flex justify-center bg-login-image relative items-center bg-cover bg-center min-h-screen">
@@ -22,12 +85,26 @@ export default function SignUpPage() {
                 <h1 className="text-[28px] esm:text-[35px] em:text-6xl whitespace-nowrap font-semibold leading-[86px] mb-6">
                   Create Your Account
                 </h1>
-                <InputFieldsSignUp />
+                <InputFieldsSignUp
+                  showPassword={showPassword}
+                  options={options}
+                  loader={loader}
+                  details={details}
+                  togglePasswordVisibility={togglePasswordVisibility}
+                  handleClick={handleClick}
+                  handleChange={handleChange}
+                  handleSubmit={handleSubmit}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
+      {loader && (
+        <div className="fixed bg-black opacity-50 w-full h-screen top-0 left-0">
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 }

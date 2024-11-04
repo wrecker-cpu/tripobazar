@@ -1,79 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import PasswordSvg from "../../../svgs/PasswordSvg";
 import IndianFlag from "../../../svgs/IndianFlag/index";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import UserSvg from "../../../svgs/UserSvg";
 import GoogleWrapper from "../../../utils/GoogleWrapper";
 
-export default function InputFieldsLogin() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [options, setOptions] = useState("mobilenumber");
-  const navigate = useNavigate();
-  const [details, setDetails] = useState({
-    MobileNumber: "",
-    Email: "", // Capitalize "Email" to match backend expectations
-    Password: "", // Capitalize "Password" to match backend expectations
-  });
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevState) => !prevState);
-  };
-  const handleClick = (name) => {
-    setOptions(name);
-    if (name === "mobilenumber") {
-      setDetails((prev) => ({ ...prev, Email: "" })); // Reset Email when using mobile number
-    } else {
-      setDetails((prev) => ({ ...prev, MobileNumber: "" })); // Reset MobileNumber when using email
-    }
-  };
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setDetails((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const userData =
-      options === "mobilenumber"
-        ? {
-            MobileNumber: details.MobileNumber,
-            Password: details.Password,
-          }
-        : {
-            Email: details.Email,
-            Password: details.Password,
-          };
-
-    console.log("Attempting login with data:", userData);
-    try {
-      const response = await axios.post(
-        "https://tripobazar-backend.vercel.app/api/users/login",
-        userData
-      );
-      console.log("Login successful:", response.data);
-
-      const userInfo = {
-        userId: response.data.data.user._id,
-        email: response.data.data.user.Email,
-        MobileNumber: response.data.data.user.MobileNumber,
-        token: response.data.token,
-      };
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
-      navigate("/");
-    } catch (error) {
-      console.error("Error logging in:", error);
-      if (error.response) {
-        console.error("Error Response Data:", error.response.data);
-      } else if (error.request) {
-        console.error("Error Request:", error.request);
-      } else {
-        console.error("Error Message:", error.message);
-      }
-    }
-  };
-
+export default function InputFieldsLogin({
+  showPassword,
+  togglePasswordVisibility,
+  options,
+  handleClick,
+  details,
+  handleChange,
+  handleSubmit,
+}) {
+ 
   useEffect(() => {
     console.log(options);
     console.log(details);
@@ -130,7 +71,7 @@ export default function InputFieldsLogin() {
                 type="email"
                 name="Email"
                 placeholder="Email"
-                value={details.email}
+                value={details.Email}
                 onChange={handleChange}
                 autoComplete="email"
                 className="outline-2 p-3 pl-14 outline-med-green bg-inherit text-lg font-medium w-full text-[#717A7C]"
@@ -185,6 +126,7 @@ export default function InputFieldsLogin() {
           </Link>
         </p>
       </div>
+      
     </div>
   );
 }

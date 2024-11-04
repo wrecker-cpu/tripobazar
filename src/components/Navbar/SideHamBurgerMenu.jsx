@@ -1,9 +1,13 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
-import TransitionLink from "../../../utils/TransitionLink";
+import { Link, useLocation } from "react-router-dom";
 
-export default function SideHamBurgerMenu({ toggleMenu, isMenuOpen }) {
+export default function SideHamBurgerMenu({
+  toggleMenu,
+  isMenuOpen,
+  hideMenu,
+}) {
   const data = [
     { name: "Destinations", link: "/" },
     { name: "What's new", link: "/" },
@@ -17,6 +21,26 @@ export default function SideHamBurgerMenu({ toggleMenu, isMenuOpen }) {
     { name: "Careers", link: "/aboutus/careers" },
     { name: "FAQs", link: "/" },
   ];
+
+  const location = useLocation();
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  const handleLinkClick = async (link) => {
+    const body = document.querySelector("body");
+    if (location.pathname !== link) {
+      if (body) {
+        body.classList.add("page-transition");
+        await sleep(350);
+        window.scrollTo(0, 0);
+        hideMenu();
+        await sleep(350);
+        body.classList.remove("page-transition");
+      }
+    }
+  };
 
   return (
     <div
@@ -44,13 +68,14 @@ export default function SideHamBurgerMenu({ toggleMenu, isMenuOpen }) {
         {/* Scrollable Options List */}
         <div className="flex flex-col overflow-y-auto py-4">
           {data.map((item, idx) => (
-            <TransitionLink
+            <Link
               to={item.link}
               className="text-start  py-4 border-b uppercase border-med-green w-full"
+              onClick={() => handleLinkClick(item.link)}
               key={idx}
             >
               {item.name}
-            </TransitionLink>
+            </Link>
           ))}
         </div>
 

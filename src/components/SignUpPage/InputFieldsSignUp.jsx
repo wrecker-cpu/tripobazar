@@ -1,70 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import PasswordSvg from "../../../svgs/PasswordSvg";
 import IndianFlag from "../../../svgs/IndianFlag";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import UserSvg from "../../../svgs/UserSvg";
 import GoogleWrapper from "../../../utils/GoogleWrapper";
 
-export default function InputFieldsSignUp() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [options, setOptions] = useState("mobilenumber");
-  const navigate = useNavigate();
-  const [details, setDetails] = useState({
-    MobileNumber: "",
-    email: "",
-    password: "",
-  });
+export default function InputFieldsSignUp({
+  showPassword,
+  options,
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevState) => !prevState);
-  };
-
-  const handleClick = (name) => {
-    setOptions(name);
-    if (name === "mobilenumber") {
-      setDetails((prev) => ({ ...prev, email: "" }));
-    } else {
-      setDetails((prev) => ({ ...prev, MobileNumber: "" }));
-    }
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setDetails((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const userData = {
-      Email: details.email,
-      MobileNumber: details.MobileNumber,
-      Password: details.password,
-    };
-
-    try {
-      const response = await axios.post("https://tripobazar-backend.vercel.app/api/users", userData);
-      console.log("Create successful:", response.data);
-      const userInfo = {
-        userId: response.data.data.user._id,
-        email: response.data.data.user.Email,
-        MobileNumber: response.data.data.user.MobileNumber,
-        token: response.data.token,
-      };
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
-      navigate("/createprofile");
-    } catch (error) {
-      if (error.response) {
-        console.error("Error Response Data:", error.response.data);
-      } else if (error.request) {
-        console.error("Error Request:", error.request);
-      } else {
-        console.error("Error Message:", error.message);
-      }
-    }
-  };
-
+  details,
+  togglePasswordVisibility,
+  handleClick,
+  handleChange,
+  handleSubmit,
+}) {
   useEffect(() => {
     console.log(options);
     console.log(details);

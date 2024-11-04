@@ -6,7 +6,7 @@ import { FaSearch } from "react-icons/fa"; // Importing icons
 import HamburgerSvg from "../../../svgs/HamburgerSvg";
 
 import SideHamBurgerMenu from "./SideHamBurgerMenu";
-import { Link, useLocation } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 import { IoIosArrowDown } from "react-icons/io";
 import MenuSvg from "../../../svgs/MenuSvg";
@@ -17,7 +17,7 @@ const Navbar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [userData, setUserData] = useState(null); // State to store user data
+  const [userData, setUserData] = useState(null); 
   const downRef = useRef(null);
 
   const NavbarData = [
@@ -81,10 +81,9 @@ const Navbar = () => {
   }, [hideMenu]);
 
   useEffect(() => {
-    // Get user data from localStorage
     const data = localStorage.getItem("userInfo");
     if (data) {
-      setUserData(JSON.parse(data)); // Parse the JSON string into an object
+      setUserData(JSON.parse(data)); 
     }
   }, []);
 
@@ -231,7 +230,7 @@ const Navbar = () => {
         </button>
       </nav>
 
-      <SideHamBurgerMenu toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
+      <SideHamBurgerMenu hideMenu ={hideMenu} toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
     </div>
   );
 };

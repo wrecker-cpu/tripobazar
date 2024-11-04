@@ -127,7 +127,7 @@ body {
   appearance: none; /* Remove default styling */
   width: 20px; /* Thumb width */
   height: 20px; /* Thumb height */
-  background: #27BFEA; /* Thumb color */
+  background: #27bfea; /* Thumb color */
   border-radius: 50%; /* Round the thumb */
   cursor: pointer; /* Change cursor on hover */
   margin-top: -6px; /* Adjust this value to center the thumb */
@@ -136,7 +136,7 @@ body {
 .custom-range::-moz-range-thumb {
   width: 20px; /* Thumb width */
   height: 20px; /* Thumb height */
-  background: #27BFEA; /* Thumb color */
+  background: #27bfea; /* Thumb color */
   border-radius: 50%; /* Round the thumb */
   cursor: pointer; /* Change cursor on hover */
 }
@@ -144,7 +144,7 @@ body {
 .custom-range::-ms-thumb {
   width: 20px; /* Thumb width */
   height: 20px; /* Thumb height */
-  background: #27BFEA; /* Thumb color */
+  background: #27bfea; /* Thumb color */
   border-radius: 50%; /* Round the thumb */
   cursor: pointer; /* Change cursor on hover */
 }
@@ -166,10 +166,6 @@ body {
   background: #ddd; /* Default track color */
 }
 
-
-
-
-
 .custom-range-two {
   -webkit-appearance: none; /* Remove default styling */
   width: 100%; /* Set width */
@@ -185,7 +181,7 @@ body {
   appearance: none; /* Remove default styling */
   width: 20px; /* Thumb width */
   height: 20px; /* Thumb height */
-  background: #03B58B; /* Thumb color */
+  background: #03b58b; /* Thumb color */
   border-radius: 50%; /* Round the thumb */
   cursor: pointer; /* Change cursor on hover */
   margin-top: -6px; /* Adjust this value to center the thumb */
@@ -194,7 +190,7 @@ body {
 .custom-range-two::-moz-range-thumb {
   width: 20px; /* Thumb width */
   height: 20px; /* Thumb height */
-  background: #03B58B; /* Thumb color */
+  background: #03b58b; /* Thumb color */
   border-radius: 50%; /* Round the thumb */
   cursor: pointer; /* Change cursor on hover */
 }
@@ -202,7 +198,7 @@ body {
 .custom-range-two::-ms-thumb {
   width: 20px; /* Thumb width */
   height: 20px; /* Thumb height */
-  background: #03B58B; /* Thumb color */
+  background: #03b58b; /* Thumb color */
   border-radius: 50%; /* Round the thumb */
   cursor: pointer; /* Change cursor on hover */
 }
@@ -222,4 +218,61 @@ body {
   border: none; /* Remove border */
   color: transparent; /* Hide the default track */
   background: #ddd; /* Default track color */
+}
+
+.spinner {
+  width: 44.8px;
+  height: 44.8px;
+  animation: spinner-y0fdc1 2s infinite ease;
+  transform-style: preserve-3d;
+}
+
+.spinner > div {
+  background-color: rgba(127, 255, 206, 0.2);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  border: 2.2px solid #03b58b;
+}
+
+.spinner div:nth-of-type(1) {
+  transform: translateZ(-22.4px) rotateY(180deg);
+}
+
+.spinner div:nth-of-type(2) {
+  transform: rotateY(-270deg) translateX(50%);
+  transform-origin: top right;
+}
+
+.spinner div:nth-of-type(3) {
+  transform: rotateY(270deg) translateX(-50%);
+  transform-origin: center left;
+}
+
+.spinner div:nth-of-type(4) {
+  transform: rotateX(90deg) translateY(-50%);
+  transform-origin: top center;
+}
+
+.spinner div:nth-of-type(5) {
+  transform: rotateX(-90deg) translateY(50%);
+  transform-origin: bottom center;
+}
+
+.spinner div:nth-of-type(6) {
+  transform: translateZ(22.4px);
+}
+
+@keyframes spinner-y0fdc1 {
+  0% {
+    transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
+  }
+
+  50% {
+    transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
+  }
+
+  100% {
+    transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+  }
 }

@@ -6,23 +6,24 @@ import CalenderSvg from "../../../svgs/CalenderSvg";
 import DatePicker from "react-datepicker"; // Import DatePicker
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function CreateProfile() {
   const [formData, setFormData] = useState({
     FullName: "",
     Email: "",
-    DateOfBirth: null,
+    DateOfBirth: null, // Initialize with null
   });
   const [id, setid] = useState("");
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     if (userInfo) {
-      setFormData({
+      setFormData((prev) => ({
+        ...prev,
         Email: userInfo.email || "",
-      });
+      }));
       setid(userInfo.userId);
     }
   }, []);
@@ -38,17 +39,20 @@ export default function CreateProfile() {
   const handleDateChange = (date) => {
     setFormData((prevData) => ({
       ...prevData,
-      DateOfBirth: date, 
+      DateOfBirth: date,
     }));
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();    
+    e.preventDefault();
     try {
-      const response = await axios.put(`https://tripobazar-backend.vercel.app/api/users/${id}`, formData);
+      const response = await axios.put(
+        `https://tripobazar-backend.vercel.app/api/users/${id}`,
+        formData
+      );
       console.log("Response from backend:", response.data);
-      if(response.data){
-        navigate("/")
+      if (response.data) {
+        navigate("/");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -59,9 +63,9 @@ export default function CreateProfile() {
     <div className="max-w-[1980px] mx-auto h-auto">
       <div className="w-full font-poppins flex justify-center relative items-center bg-cover bg-center min-h-screen">
         <div className="relative w-full h-auto flex-grow overflow-y-scroll scrollbar-hide p-3">
-          <div className="absolute top-10 left-10 cursor-pointer">
+          <Link to="/signup" className="absolute top-10 left-10 cursor-pointer">
             <LeftArrowSvg />
-          </div>
+          </Link>
 
           <div className="flex w-full mt-14 justify-center items-center">
             <div className="max-w-md w-full flex flex-col items-center">
@@ -93,19 +97,22 @@ export default function CreateProfile() {
                   className="outline-2 p-3 w-full border mb-6 border-[#717A7C] rounded-lg outline-med-green bg-inherit text-lg font-medium text-[#717A7C]"
                 />
 
-                <div className="w-full border mb-6 relative border-[#717A7C] rounded-lg">
-                  <div className="absolute top-1/2 right-3 -translate-x-1/2 -translate-y-1/2">
-                    <CalenderSvg />
+                {formData.DateOfBirth !== undefined && (
+                  <div className="w-full border mb-6 relative border-[#717A7C] rounded-lg">
+                    <div className="absolute top-1/2 right-3 -translate-x-1/2 -translate-y-1/2">
+                      <CalenderSvg />
+                    </div>
+                    <DatePicker
+                      selected={formData.DateOfBirth || null} // Ensure DatePicker always receives a defined value or null
+                      onChange={handleDateChange}
+                      placeholderText="E.g 2004-03-02"
+                      className="outline-2 p-3 w-full outline-med-green bg-inherit text-lg font-medium text-[#717A7C] cursor-pointer"
+                      dateFormat="yyyy-MM-dd"
+                      required
+                    />
                   </div>
-                  <DatePicker
-                    selected={formData.DateOfBirth} 
-                    onChange={handleDateChange} 
-                    placeholderText="E.g 2004-03-02"
-                    className="outline-2 p-3 w-full outline-med-green bg-inherit text-lg font-medium text-[#717A7C] cursor-pointer"
-                    dateFormat="yyyy-MM-dd" 
-                    required
-                  />
-                </div>
+                )}
+
                 <button
                   type="submit"
                   className="w-full mb-8 text-lg font-medium bg-med-green text-white p-3 rounded-xl"

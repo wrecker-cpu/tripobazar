@@ -18,6 +18,7 @@ import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 import HomePage from "./components/HomePage/HomePage";
 import SearchDestinationPage from "./components/SearchDestination/SearchDestinationPage";
 import CareersPage from "./components/Careers/CareersPage";
+import DestinationPage from "./components/Destinations/DestinationPage";
 function App() {
   const location = useLocation(); // Get the current route
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/searchpage" element={<SearchDestinationPage />} />
           <Route path="/aboutus/careers" element={<CareersPage />} />
+          <Route path="/destination" element={<DestinationPage />} />
         </Route>
       </Routes>
       {/* Conditionally show the Footer based on the current route */}

@@ -9,7 +9,7 @@ function Footer() {
     { name: "Careers", link: "/aboutus/careers" },
     { name: "Privacy Policy", link: "/aboutus/privacy-policy" },
     { name: "FAQs", link: "/faqs" },
-    { name: "Get a Call Back", link: "/get-a-call-back" },
+    { name: "Destination", link: "/destination" },
     { name: "Contact Us", link: "/contactus" },
     { name: "Search Destinations", link: "/searchpage" },
     { name: "Booking Conditions", link: "/booking-conditions" },

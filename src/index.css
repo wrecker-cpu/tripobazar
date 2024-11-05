@@ -36,7 +36,6 @@
 }
 
 .select-with-arrow {
-  background-image: url("./assets/arrow.svg");
   background-repeat: no-repeat;
   background-size: 12px 12px; /* Adjust the size of the arrow */
   background-position: calc(100%) center; /* Move the arrow to the left */

@@ -64,7 +64,7 @@ export default function DiscoverNewHorizon() {
             />
           </div>
           <div className="md:w-auto w-full flex justify-end">
-            <div onClick={toggleModal}>
+            <div className="cursor-pointer" onClick={toggleModal}>
               <FilterSvg />
             </div>
           </div>
@@ -124,7 +124,7 @@ export default function DiscoverNewHorizon() {
           </button>
         </div>
       </div>
-      {showModal && <FilterBox onClose={toggleModal} />}
+      <FilterBox showModal={showModal} onClose={toggleModal} />
     </section>
   );
 }

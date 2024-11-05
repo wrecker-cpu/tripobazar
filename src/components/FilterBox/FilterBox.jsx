@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
 
-export default function FilterBox({ onClose }) {
+export default function FilterBox({ onClose, style, showModal }) {
   const [formValues, setFormValues] = useState({
     range: "5",
     checkboxes: {
@@ -30,6 +30,7 @@ export default function FilterBox({ onClose }) {
       sports: false,
     },
   });
+  const [isVisible, setIsVisible] = useState(showModal);
 
   const checkboxOptions = [
     { name: "budget1", label: "Less than ₹50,000" },
@@ -159,19 +160,36 @@ export default function FilterBox({ onClose }) {
     });
   };
 
-
+  useEffect(() => {
+    if (showModal) {
+      setIsVisible(true);
+    } else {
+      const timeout = setTimeout(() => setIsVisible(false), 300);
+      return () => clearTimeout(timeout);
+    }
+  }, [showModal]);
 
   return (
-    <div className="fixed  font-poppins inset-0 z-20 flex items-center justify-center bg-black bg-opacity-50">
+    <div
+      style={{
+        opacity: showModal ? 1 : 0,
+        visibility: isVisible ? "visible" : "hidden",
+        transition: "opacity 300ms ease-in-out",
+      }}
+      className="fixed font-poppins inset-0 z-20 flex items-center justify-center bg-black backdrop-blur-sm bg-opacity-50"
+    >
       <div
-        style={{ maxWidth: "50rem" }}
-        className="bg-[#f8f8f8] rounded-lg  shadow-lg "
+        style={style}
+        className="bg-[#f8f8f8] rounded-lg w-full max-w-[52rem] shadow-lg "
       >
         <form onSubmit={handleSubmit}>
           <div className=" py-3 md:py-5 md:p-5">
             <div className="flex justify-between mb-8 px-4 items-center">
               <h2 className="text-xl uppercase font-bold ">Filters</h2>
-              <IoCloseOutline onClick={onClose} className="w-5 h-5" />
+              <IoCloseOutline
+                onClick={onClose}
+                className="w-5 h-5 cursor-pointer"
+              />
             </div>
             <div className="flex overflow-y-auto max-h-[70vh] md:max-h-[70vh] flex-col md:flex-row pb-2 justify-between">
               <div className="flex-1 px-4 mr-2">

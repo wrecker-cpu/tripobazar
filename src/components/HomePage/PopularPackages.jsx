@@ -48,7 +48,7 @@ export default function PopularPackages() {
       <section className=" relative text-center w-[90%] max-w-[1720px] mx-auto">
         <div className="relative w-auto h-auto mx-auto flex items-center">
           {/* Main Image Container */}
-          <div className="w-full md:w-[76%] h-[805px] overflow-hidden rounded-lg">
+          <div className="w-full h-[700px] overflow-hidden rounded-lg">
             <img
               src={image}
               alt={location}
@@ -57,10 +57,10 @@ export default function PopularPackages() {
           </div>
 
           {/* Overlay Container */}
-          <div className="absolute bottom-auto right-auto md:top-auto md:left-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:-translate-x-0 md:-translate-y-0 md:-bottom-6 md:right-0 w-[90%] mx-auto vem:mx-0 vem:w-[500px] lg:w-[42.8%] h-[624px] md:h-[700px] bg-white p-4  rounded-lg">
+          <div className="absolute bottom-auto right-auto md:top-auto md:left-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:-translate-x-0 md:-translate-y-0 md:bottom-0 md:right-0 w-[90%] mx-auto vem:mx-0 vem:w-[500px] lg:w-[42.8%] h-[624px] md:h-[700px] bg-white p-4 rounded-lg md:rounded-r-lg">
             {/* Green Small Div */}
             <div className="absolute top-0 left-0 ">
-              <p className="text-[.7rem] bg-[#00B58A] rounded-br-lg rounded-tl-lg  h-10 flex items-center justify-center w-44  font-semibold text-white ">
+              <p className="text-[.7rem] bg-[#00B58A] rounded-br-lg rounded-tl-lg md:rounded-tl-none  h-10 flex items-center justify-center w-44  font-semibold text-white ">
                 seasonal offer{" "}
               </p>
             </div>
@@ -73,16 +73,16 @@ export default function PopularPackages() {
                   ,{country}
                 </span>
               </h3>
-              <div className="flex flex-row justify-center gap-4 mb-4 md:mb-10 max-w-lg mx-auto">
-                <p className="text-gray-600 text-sm md:text-lg rounded-lg bg-[#f8f8f8] font-medium p-4 ">
+              <div className="flex flex-row justify-center gap-4 mb-2 ew:mb-4 md:mb-10 max-w-lg mx-auto">
+                <p className="text-gray-600 text-sm md:text-lg whitespace-nowrap rounded-lg bg-[#f8f8f8] font-medium p-4 ">
                   8 Days 7 Nights
                 </p>
-                <p className="text-gray-600 text-sm md:text-lg rounded-lg bg-[#f8f8f8] font-medium p-4 ">
+                <p className="text-gray-600 text-sm md:text-lg whitespace-nowrap rounded-lg bg-[#f8f8f8] font-medium p-4 ">
                   2 Guests
                 </p>
               </div>
 
-              <h2 className="  bg-[white] text-5xl font-bold text-[#00B58A] inline-block px-2 py-1 rounded-md">
+              <h2 className="  bg-[white] text-3xl ew:text-5xl font-bold text-[#00B58A] inline-block px-2 py-1 rounded-md">
                 {price}
               </h2>
               <p className="mt-2 font-semibold">What’s included?</p>
@@ -96,8 +96,8 @@ export default function PopularPackages() {
             </div>
 
             {/* Additional Info Section */}
-            <div className="absolute rounded-b-lg bottom-0 left-0 w-full  mt-4  border-t border-gray-200 bg-[#EDF7F9]">
-              <p className="mt-8 text-sm md:text-base xlg:text-lg tracking-wide">
+            <div className="absolute rounded-b-lg md:rounded-br-lg md:rounded-b-none bottom-0 left-0 w-full  mt-4  border-t border-gray-200 bg-[#EDF7F9]">
+              <p className="mt-8 px-2 text-sm md:text-base xlg:text-lg tracking-wide">
                 Our travel plans include all facilities as per your custom
                 requirements.
               </p>

@@ -4,7 +4,7 @@ export default function SubNavsDestination() {
   const sections = ["All", "India", "SaudiArabia", "Europe", "Vietnam"];
 
   return (
-    <nav className="bg-white sticky top-0 z-10 shadow-inner mb-8">
+    <nav className="bg-white sticky top-0 z-30 shadow-inner">
       <div className="max-w-7xl mx-auto px-4 py-4">
         <p className="pb-2 italic underline font-medium em:hidden block">
           Sub Menus

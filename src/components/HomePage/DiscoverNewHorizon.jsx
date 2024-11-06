@@ -17,12 +17,12 @@ export default function DiscoverNewHorizon() {
       <div className="w-full h-full md:h-[600px] sticky z-10 top-0  md:relative">
         <img className="w-full h-full object-cover" src={dalLek} alt="wth" />
         {/* Top Left Logo and Paragraph */}
-        <div className="absolute bottom-80 left-10 hidden md:flex items-center">
+        <div className="absolute bottom-80 md:left-10 lg:left-[4.2rem] hidden md:flex items-center">
           <img src={discoverOne} alt="Logo" className="h-5  mr-2" />
         </div>
 
         {/* H1 Heading */}
-        <div className="absolute top-1/2 right-auto left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:top-96 mmd:top-64 md:right-0 md:translate-x-0 md:translate-y-0 md:bottom-24  md:left-7 flex justify-start items-center h-auto">
+        <div className="absolute top-1/2 right-auto left-1/2 transform -translate-x-1/2 -translate-y-1/2  md:top-64 md:right-0 md:translate-x-0 md:translate-y-0 md:bottom-24  md:left-[2.5rem] lg:left-[4.2rem] flex justify-start items-center h-auto">
           <h1
             className="text-white font-poppins font-extrabold leading-none 
     md:text-[5rem] lg:text-[5.2rem] text-3xl em:text-5xl sm:text-[50px]"
@@ -37,12 +37,12 @@ export default function DiscoverNewHorizon() {
         </div>
 
         {/* Small Centered Image with Text */}
-        <div className="absolute bottom-32 -right-28 xlg:right-28 transform -translate-x-1/2 hidden md:flex justify-center items-center">
+        <div className="absolute bottom-52 mmd:bottom-32 -right-28 xlg:-right-20 transform -translate-x-1/2 hidden md:flex justify-center items-center">
           <ExploreSvg />
         </div>
       </div>
 
-      <div className="w-full max-w-[1720px]    h-auto p-4 md:p-16 bg-[#f8f8f8] shadow-lg rounded-lg mx-auto mt-[-2rem] relative z-10">
+      <div className="w-[90%] max-w-[1720px]   h-auto p-4 md:p-16 bg-[#f8f8f8] shadow-lg rounded-lg mx-auto mt-[-2rem] md:mt-[-6rem] relative z-10">
         {/* Starting Location and Destination Inputs */}
         <div className="flex flex-col md:flex-row items-center jusitfy-between gap-4">
           <div className="flex items-center border bg-[#f8f8f8] rounded-md py-3 px-2 w-full">
@@ -108,7 +108,7 @@ export default function DiscoverNewHorizon() {
               >
                 -
               </button>
-              <p className="font-medium text-[#717A7C] text-lg">2 guests</p>
+              <p className="font-medium text-[#717A7C] text-lg">{guests} guests</p>
               <button
                 onClick={incrementGuests}
                 className="bg-med-green w-7 h-7 flex items-center justify-center text-white rounded-full"

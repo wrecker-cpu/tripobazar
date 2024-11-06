@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
 
@@ -92,7 +92,7 @@ export default function FilterBox({ onClose, style, showModal }) {
         case "range":
           return {
             ...prevValues,
-            [name]: value,
+            range: value,
           };
         case "sort":
           return {
@@ -114,15 +114,16 @@ export default function FilterBox({ onClose, style, showModal }) {
       }
     });
   };
-  const getSliderBackground = () => {
-    const percentage = ((formValues.range - 0) / (10 - 0)) * 100; // Adjust for your range min/max
-    return `linear-gradient(to right, #27BFEA ${percentage}%, #ddd ${percentage}%)`;
-  };
-
-  const getReviewBackground = () => {
-    const percentage = ((formValues.reviews - 0) / (5 - 0)) * 100; // Adjust for your range min/max
+  const sliderBackground = useMemo(() => {
+    const sliderValue = formValues.range;
+    const percentage = ((sliderValue - 0) / (10 - 0)) * 100;
+    return `linear-gradient(90deg, #59cfd8 ${percentage}%, #ccc ${percentage}%)`;
+  }, [formValues.range]);
+  const getReviewBackground = useMemo(() => {
+    const ReviewValue = formValues.reviews;
+    const percentage = ((ReviewValue - 0) / (5 - 0)) * 100; // Adjust for your range min/max
     return `linear-gradient(to right, #03B58B ${percentage}%, #ddd ${percentage}%)`;
-  };
+  }, [formValues.reviews]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -202,7 +203,7 @@ export default function FilterBox({ onClose, style, showModal }) {
                     defaultValue="5"
                     onChange={(e) => handleChange(e, "range")}
                     className="custom-range"
-                    style={{ background: getSliderBackground() }} // Inline style for dynamic background
+                    style={{ background: sliderBackground }} // Inline style for dynamic background
                   />
                   <p className="text-gray-500">{formValues.range} days</p>
                 </div>
@@ -238,7 +239,7 @@ export default function FilterBox({ onClose, style, showModal }) {
                     value={formValues.reviews}
                     onChange={(e) => handleChange(e, "reviews")}
                     className="custom-range-two"
-                    style={{ background: getReviewBackground() }} // Inline style for dynamic background
+                    style={{ background: getReviewBackground }} // Inline style for dynamic background
                   />
                   <div className="flex items-center gap-1">
                     <p className="m-0 text-lg">{formValues.reviews} </p>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import adventureImage from "../../assets/home/travel-adventure.jpg";
+import adventureImage from "../../assets/home/trekking.jpg";
 
 export default function YourCustomAdventure() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -77,6 +77,7 @@ export default function YourCustomAdventure() {
             src={adventureImage}
             alt="Adventure"
             className="w-full h-full object-cover  md:rounded-bl-[30%]"
+            
           />
         </div>
       </div>

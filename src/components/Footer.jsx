@@ -21,19 +21,19 @@ function Footer() {
 
   return (
     <footer className="text-center max-w-[1920px] mx-auto text-black pb-6 bg-white">
-      <div className="mx-auto w-[90%] py-10 flex flex-col md:flex-row md:justify-between items-center ">
+      <div className="mx-auto w-[90%] py-10 flex flex-col md:flex-row md:justify-between items-center md:items-start ">
         {/* Logo Section */}
         <div className="md:mb-0 md:static relative mb-8 left-0 top-0 ">
           <CompanyLogo className="w-2 h-2 sm:w-7 sm:h-7 md:w-24 md:h-24 lg:w-28 lg:h-28 object-contain" />
         </div>
 
         {/* Links Section */}
-        <ul className="flex text-[.6rem] flex-wrap md:grid text-left md:grid-cols-2  md:gap-y-2 md:gap-x-12 gap-4 justify-center mb-8 md:text-sm  md:text-start  md:mb-0">
+        <ul className="flex text-[.8rem] flex-wrap md:grid text-left md:grid-cols-2  md:gap-y-2 md:gap-x-12 gap-4 justify-center mb-8 md:text-base  md:text-start  md:mb-0">
           {data.map((item, idx) => (
             <TransitionLink
               to={item.link}
               key={idx}
-              className="text-gray-700 cursor-pointer hover:text-black"
+              className="text-gray-700 cursor-pointer hover:text-black py-1"
             >
               {item.name}
             </TransitionLink>

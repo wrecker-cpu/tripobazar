@@ -6,7 +6,7 @@ import { FaSearch } from "react-icons/fa"; // Importing icons
 import HamburgerSvg from "../../../svgs/HamburgerSvg";
 
 import SideHamBurgerMenu from "./SideHamBurgerMenu";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { IoIosArrowDown } from "react-icons/io";
 import MenuSvg from "../../../svgs/MenuSvg";
@@ -17,27 +17,48 @@ const Navbar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [userData, setUserData] = useState(null); 
+  const [userData, setUserData] = useState(null);
   const downRef = useRef(null);
 
+  const Destination = {
+    description: [
+      {
+        region: "India",
+        destinations: [
+          { name: "Kerala" },
+          { name: "Leh" },
+          { name: "Himachal" },
+          { name: "Rajasthan" },
+          { name: "Uttarakhand" },
+          { name: "Sikkim" },
+          { name: "North Kerala" },
+          { name: "Dholavira" },
+        ],
+      },
+      {
+        region: "Asia",
+        destinations: [{ name: "Vietnam" }],
+      },
+      {
+        region: "Australia",
+        destinations: [{ name: "Australia" }],
+      },
+      {
+        region: "Africa",
+        destinations: [{ name: "Egypt" }],
+      },
+      {
+        region: "Europe",
+        destinations: [{ name: "Georgia" }],
+      },
+      {
+        region: "Middle East",
+        destinations: [{ name: "Saudi Arabia" }],
+      },
+    ],
+  };
+
   const NavbarData = [
-    {
-      title: "Destinations",
-      description: [
-        { name: "Kerela" },
-        { name: "Leh" },
-        { name: "Himmachal" },
-        { name: "Rajasthan" },
-        { name: "Uttarakand" },
-        { name: "Sikkim" },
-        { name: "North Kerela" },
-        { name: "Vietnam" },
-        { name: "Australia" },
-        { name: "Eygpt" },
-        { name: "Georgia" },
-        { name: "Saudi Arabia" },
-      ],
-    },
     {
       title: "My trips",
       description: [{ name: "New packages" }, { name: "Latest Offer" }],
@@ -83,7 +104,7 @@ const Navbar = () => {
   useEffect(() => {
     const data = localStorage.getItem("userInfo");
     if (data) {
-      setUserData(JSON.parse(data)); 
+      setUserData(JSON.parse(data));
     }
   }, []);
 
@@ -124,6 +145,49 @@ const Navbar = () => {
             </Link>
           )}
           <div className="flex flex-row justify-between gap-6">
+            <div className="relative">
+              <button className="flex text-sm uppercase justify-center items-center">
+                <TransitionLink to="/destination"> Destinations</TransitionLink>
+                <IoIosArrowDown
+                  onClick={() => toggleDestinations(-1)}
+                  className="w-5 pl-1 text-med-green h-5"
+                />
+              </button>
+              <div
+                ref={downRef}
+                style={{
+                  visibility: `${
+                    openDropdownIndex === -1 ? "visible" : "hidden"
+                  }`,
+                }}
+                className={`absolute z-20 w-max transition-opacity ease-in-out duration-300 left-0 mt-2 bg-white shadow-md border rounded-md ${
+                  openDropdownIndex === -1
+                    ? "opacity-100"
+                    : "opacity-0 pointer-events-none"
+                }`}
+              >
+                <div className="flex flex-row flex-wrap gap-4 p-2">
+                  {Destination.description.map((region, idx) => (
+                    <div key={idx} className="flex flex-col">
+                      <h3 className="text-sm font-semibold text-med-green uppercase mb-1 border-b-2 border-med-green">
+                        {region.region}
+                      </h3>
+                      <ul className="whitespace-nowrap">
+                        {region.destinations.map((destination, destIdx) => (
+                          <li
+                            key={destIdx}
+                            className="py-1 text-sm cursor-pointer border-b-2 border-transparent hover:border-med-green transition-all duration-200"
+                          >
+                            {destination.name}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             {NavbarData.map((item, idx) => {
               return (
                 <div key={idx} className="relative">
@@ -230,7 +294,11 @@ const Navbar = () => {
         </button>
       </nav>
 
-      <SideHamBurgerMenu hideMenu ={hideMenu} toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
+      <SideHamBurgerMenu
+        hideMenu={hideMenu}
+        toggleMenu={toggleMenu}
+        isMenuOpen={isMenuOpen}
+      />
     </div>
   );
 };

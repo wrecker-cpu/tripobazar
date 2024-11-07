@@ -26,7 +26,7 @@ const Navbar = () => {
         region: "India",
         destinations: [
           { name: "Kerala" },
-          { name: "Leh" },
+          { name: "Leh-Ladakh" },
           { name: "Himachal" },
           { name: "Rajasthan" },
           { name: "Uttarakhand" },

@@ -10,7 +10,7 @@ import Users from './Users';
 import DestinationDetails from './DestinationDetails';
 function AdminPannel() {
   return (
-    <div className="flex h-96 bg-[#F8F8F8]">
+    <div className="flex h-auto bg-[#F8F8F8]">
     <SideNav />
     <div className="flex-1 ml-64 p-6"> {/* Ensures content is not hidden behind the side nav */}
       <Routes>

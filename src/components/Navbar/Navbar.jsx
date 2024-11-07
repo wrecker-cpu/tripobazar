@@ -231,7 +231,7 @@ const Navbar = () => {
         </div>
 
         {/* Center - Logo (always centered) */}
-        <TransitionLink to={"/"}>
+        <TransitionLink to={"/Adminpannel"}>
           {" "}
           <div className="flex-grow flex justify-start md:justify-end emd:justify-center">
             <img

@@ -14,7 +14,7 @@ export default function DiscoverNewHorizon() {
   const toggleModal = () => setShowModal(!showModal);
   return (
     <section className="relative">
-      <div className="w-full h-full md:h-[600px] sticky z-10 top-0  md:relative">
+      <div className="w-full h-[40vh] sm:h-full md:h-[600px] sticky z-10 top-0  md:relative">
         <img className="w-full h-full object-cover" src={dalLek} alt="wth" />
         {/* Top Left Logo and Paragraph */}
         <div className="absolute bottom-80 md:left-10 lg:left-[4.2rem] hidden md:flex items-center">

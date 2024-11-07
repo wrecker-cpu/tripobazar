@@ -250,12 +250,12 @@ const Navbar = () => {
           >
             ABOUT US
           </TransitionLink>
-          <a
+        <TransitionLink to={"/traveltips"} > <a
             href="#"
             className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "
           >
             TRAVEL TIPS
-          </a>
+          </a></TransitionLink> 
           <a
             href="#"
             className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "

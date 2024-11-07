@@ -4,7 +4,8 @@ import CompanyLogo from "../../../svgs/CompanyLogo";
 import InputFieldsSignUp from "./InputFieldsSignUp";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Spinner from "../../../utils/Spinner";
+
+import Loader from "../Loader";
 
 export default function SignUpPage() {
 
@@ -101,8 +102,8 @@ export default function SignUpPage() {
         </div>
       </div>
       {loader && (
-        <div className="fixed bg-black opacity-50 w-full h-screen top-0 left-0">
-          <Spinner />
+        <div className="fixed bg-transparent backdrop-blur-sm opacity-100 w-full h-screen top-0 left-0">
+          {/* <Spinner /> */}<Loader/>
         </div>
       )}
     </div>

@@ -5,7 +5,7 @@ import InputFieldsLogin from "./InputFieldsLogin";
 import { Link, useNavigate } from "react-router-dom";
 import Spinner from "../../../utils/Spinner";
 import axios from "axios";
-
+import Loader from "../Loader";
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [options, setOptions] = useState("mobilenumber");
@@ -93,9 +93,9 @@ export default function LoginPage() {
         </div>
       </div>
       {loader && (
-        <div className="fixed bg-black opacity-50 w-full h-[119vh] top-0 left-0">
-          <Spinner />
-        </div>
+        <div className="fixed bg-transparent backdrop-blur-sm opacity-100 w-full h-screen top-0 left-0">
+        {/* <Spinner /> */}<Loader/>
+      </div>
       )}
     </div>
   );

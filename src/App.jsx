@@ -23,6 +23,7 @@ import TravelTips from "./components/Travel-Tips/TravelTips";
 import AdminPannel from "./components/AdminPannel/AdminPannel";
 import Users from "./components/AdminPannel/Users";
 import DestinationDetails from "./components/AdminPannel/DestinationDetails";
+import ViewAllDestination from "./components/ViewAllDestinations/ViewAllDestination";
 function App() {
   const location = useLocation(); // Get the current route
 
@@ -49,7 +50,7 @@ function App() {
           <Route path="/destination" element={<DestinationPage />} />
           <Route path="/traveltips" element={<TravelTips />} />
           <Route path="/Adminpannel/*" element={<AdminPannel/>} />
-    
+          <Route path="/viewalldestination" element={<ViewAllDestination/>} />
         </Route>
       </Routes>
       {/* Conditionally show the Footer based on the current route */}

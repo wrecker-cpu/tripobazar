@@ -9,7 +9,7 @@ function TravelTipsTitle() {
     </div>
     <section className="">
   
-      <div className="h-[100%] ">
+      <div className="h-[90%] ">
         <img
           src={image}
           alt="wth"

@@ -20,9 +20,7 @@ import SearchDestinationPage from "./components/SearchDestination/SearchDestinat
 import CareersPage from "./components/Careers/CareersPage";
 import DestinationPage from "./components/Destinations/DestinationPage";
 import TravelTips from "./components/Travel-Tips/TravelTips";
-import AdminPannel from "./components/AdminPannel/AdminPannel";
-import Users from "./components/AdminPannel/Users";
-import DestinationDetails from "./components/AdminPannel/DestinationDetails";
+import AdminPanel from "./components/AdminPanel/AdminPanel";
 function App() {
   const location = useLocation(); // Get the current route
 
@@ -48,8 +46,7 @@ function App() {
           <Route path="/aboutus/careers" element={<CareersPage />} />
           <Route path="/destination" element={<DestinationPage />} />
           <Route path="/traveltips" element={<TravelTips />} />
-          <Route path="/Adminpannel/*" element={<AdminPannel/>} />
-    
+          <Route path="/adminpanel" element={<AdminPanel />} />
         </Route>
       </Routes>
       {/* Conditionally show the Footer based on the current route */}

@@ -123,7 +123,7 @@ const Navbar = () => {
   }, [downRef]);
 
   return (
-    <div className="relative  max-w-[1920px] border-b bg-white mx-auto">
+    <div className="relative z-20  max-w-[1920px] border-b bg-white mx-auto">
       <nav
         className={`bg-white flex items-center justify-between py-4  relative w-[90%] mx-auto`}
       >
@@ -231,7 +231,7 @@ const Navbar = () => {
         </div>
 
         {/* Center - Logo (always centered) */}
-        <TransitionLink to={"/Adminpannel"}>
+        <TransitionLink to={"/"}>
           {" "}
           <div className="flex-grow flex justify-start md:justify-end emd:justify-center">
             <img

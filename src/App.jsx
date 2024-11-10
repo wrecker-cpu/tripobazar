@@ -20,9 +20,7 @@ import SearchDestinationPage from "./components/SearchDestination/SearchDestinat
 import CareersPage from "./components/Careers/CareersPage";
 import DestinationPage from "./components/Destinations/DestinationPage";
 import TravelTips from "./components/Travel-Tips/TravelTips";
-
 import AdminPanel from "./components/AdminPanel/AdminPanel";
-
 import ViewAllDestination from "./components/ViewAllDestinations/ViewAllDestination";
 
 function App() {

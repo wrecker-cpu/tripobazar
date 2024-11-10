@@ -1,20 +1,20 @@
-import React from 'react'
-import { useState } from 'react';
+import React from "react";
+import { useState } from "react";
 import FilterSvg from "../../../svgs/FilterSvg/index";
-import DatePicker from 'react-datepicker';
-import image from '../../assets/africa-bg.jpg'
-function SrchDestinationCountry() {
-    const [guests, setGuests] = useState(1);
-    const incrementGuests = () => setGuests(guests + 1);
-    const decrementGuests = () => setGuests(guests > 1 ? guests - 1 : 1);
-    return (
-        <div style={{ backgroundImage: `url(${image})` }} className=" rounded-b-3xl font-poppins relative max-w-[1920px] mx-auto flex justify-center  bg-cover  bg-center min-h-screen">
-     
-        <div className="flex flex-col py-20 w-[90%] mx-auto justify-center items-center">
-          <div className="relative z-20">
-            <h2 className="text-xl esm:text-2xl tracking-[6rem] text-white ew:text-3xl sm:text-6xl mb-20 text-center font-bold">
-           AFRICA
-            
+import DatePicker from "react-datepicker";
+import image from "../../assets/africa-bg.jpg";
+function SrchDestinationCountry({data}) {
+  const [guests, setGuests] = useState(1);
+  const incrementGuests = () => setGuests(guests + 1);
+  const decrementGuests = () => setGuests(guests > 1 ? guests - 1 : 1);
+  return (
+    <div className=" rounded-b-3xl font-poppins">
+      <div className="w-full h-full relative">
+        <img src={image} className="w-full h-full object-contain" />
+        <div className="flex absolute z-0 -bottom-[420px] left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col py-20 w-[90%] mx-auto justify-center items-center">
+          <div >
+            <h2 className="text-xl uppercase esm:text-2xl tracking-[6rem] text-white ew:text-3xl sm:text-[80px] leading-[120px] mb-6 text-center font-bold">
+              {data.CountryName}
             </h2>
           </div>
           <div className="max-w-[1720px] w-full h-auto p-4 md:p-16 bg-white shadow-lg rounded-lg relative z-20">
@@ -27,9 +27,9 @@ function SrchDestinationCountry() {
                   className="w-full bg-transparent focus:outline-none"
                 />
               </div>
-  
+
               <p className="text-gray-500 font-medium">To</p>
-  
+
               <div className="flex items-center bg-white border rounded-md py-3 px-2  w-full">
                 {/* <img src={destinationIcon} alt="Destination" className="h-5 w-5 mr-2" /> */}
                 <input
@@ -44,7 +44,7 @@ function SrchDestinationCountry() {
                 </div>
               </div>
             </div>
-  
+
             {/* Date Inputs */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4 items-end">
               {/* Start Date */}
@@ -59,7 +59,7 @@ function SrchDestinationCountry() {
                   />
                 </div>
               </div>
-  
+
               {/* End Date */}
               <div className="flex flex-col">
                 <p className="text-gray-500 font-medium mb-1">End Date</p>
@@ -72,7 +72,7 @@ function SrchDestinationCountry() {
                   />
                 </div>
               </div>
-  
+
               {/* Guests Selector */}
               <div className="flex flex-col">
                 <p className="text-gray-500 mb-1 font-medium">Guests</p>
@@ -92,17 +92,17 @@ function SrchDestinationCountry() {
                   </button>
                 </div>
               </div>
-  
+
               {/* Search Button */}
               <button className="flex w-full text-center text-lg h-11 items-center justify-center font-medium px-4 py-2 bg-[#03B58B] text-white rounded-md">
                 <p>Search Packages</p>
               </button>
             </div>
           </div>
-          
         </div>
       </div>
-    );
+    </div>
+  );
 }
 
-export default SrchDestinationCountry
+export default SrchDestinationCountry;

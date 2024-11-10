@@ -14,7 +14,7 @@ function SrchDestinationCountry({data}) {
         <div className="flex absolute z-0 -bottom-[420px] left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col py-20 w-[90%] mx-auto justify-center items-center">
           <div >
             <h2 className="text-xl uppercase esm:text-2xl tracking-[6rem] text-white ew:text-3xl sm:text-[80px] leading-[120px] mb-6 text-center font-bold">
-              {data.CountryName}
+              {data?.CountryName}
             </h2>
           </div>
           <div className="max-w-[1720px] w-full h-auto p-4 md:p-16 bg-white shadow-lg rounded-lg relative z-20">

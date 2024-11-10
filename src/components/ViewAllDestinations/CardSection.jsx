@@ -2,16 +2,12 @@ import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
 
 import Spinner from "../../../utils/Spinner";
-const CardSection = ({ data, loading }) => {
+const CardSection = ({ data }) => {
   const [liked, setLiked] = useState(Array(8).fill(false)); // Initial state for heart toggle
 
   const toggleHeart = (index) => {
     setLiked(liked.map((item, i) => (i === index ? !item : item)));
   };
-
-  if (loading === true) {
-    return <Spinner />;
-  }
 
   return (
     <section className="relative  bg-cover bg-opacity-0 px-5 p-11">
@@ -23,14 +19,16 @@ const CardSection = ({ data, loading }) => {
           return (
             <div
               key={index}
-              className="relative border rounded-lg overflow-hidden shadow-lg"
+              className="relative border hover:cursor-pointer group rounded-lg overflow-hidden shadow-lg"
             >
               {/* Image */}
-              <img
-                src={card.StatePhotoUrl}
-                alt="Image Description"
-                className="w-full h-48 object-cover"
-              />
+              <div className="w-full h-48 overflow-hidden">
+                <img
+                  src={card.StatePhotoUrl}
+                  alt="Image Description"
+                  className="w-full h-full group-hover:scale-105 duration-300 ease-in-out transition-transform object-cover"
+                />
+              </div>
 
               {/* Top left tag */}
               <p className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded">
@@ -50,7 +48,9 @@ const CardSection = ({ data, loading }) => {
               {/* Bottom div */}
               <div className="bg-white w-full px-3 py-2 flex justify-between items-center">
                 <p>{card.StateName}</p>
-                <span className="text-lg">&#8594;</span>
+                <span className="text-lg group-hover:translate-x-1 transition-transform ease-in-out duration-300">
+                  &#8594;
+                </span>
               </div>
             </div>
           );

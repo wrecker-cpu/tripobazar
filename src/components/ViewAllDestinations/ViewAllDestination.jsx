@@ -1,10 +1,10 @@
 import React from "react";
 import SrchDestinationCountry from "../SerchDestinationCountry/SrchDestinationCountry";
-import SearchDestinationPage from "../SearchDestination/SearchDestinationPage";
 import SubNavofViewall from "./SubNavofViewall";
 import CardSection from "./CardSection";
 import Discover from "./Discover";
 import useFetch from "../../../hooks/useFetch";
+import Spinner from "../../../utils/Spinner";
 
 function ViewAllDestination() {
   const { data, loading } = useFetch(
@@ -13,10 +13,17 @@ function ViewAllDestination() {
 
   return (
     <div className="max-w-[1920px] mx-auto">
-      <SrchDestinationCountry data={data}/>
-      <SubNavofViewall />
-      <CardSection data={data} loading={loading}/>
-      <Discover />
+      {loading === true ? (
+        <Spinner />
+      ) : (
+        <>
+          {" "}
+          <SrchDestinationCountry data={data} />
+          <SubNavofViewall />
+          <CardSection data={data} />
+          <Discover />
+        </>
+      )}
     </div>
   );
 }

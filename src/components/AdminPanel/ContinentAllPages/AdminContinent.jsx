@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useFetch from "../../../../hooks/useFetch";
 import ContinentModal from "./ContinentModal";
 
-function Continent() {
+function AdminContinent() {
   const baseUrl = "https://tripobazar-backend.vercel.app/api/continent";
   const {
     data: continentData,
@@ -328,4 +328,4 @@ function Continent() {
   );
 }
 
-export default Continent;
+export default AdminContinent;

@@ -6,7 +6,7 @@ import Users from "./Users";
 import { jwtDecode } from "jwt-decode";
 import Spinner from "../../../utils/Spinner";
 import useFetch from "../../../hooks/useFetch";
-import Continent from "./ContinentAllPages/Continent";
+import Continent from "./ContinentAllPages/AdminContinent";
 
 function AdminPanel() {
   const navigate = useNavigate();

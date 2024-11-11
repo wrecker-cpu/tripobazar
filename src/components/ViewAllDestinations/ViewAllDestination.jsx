@@ -5,7 +5,7 @@ import CardSection from "./CardSection";
 import Discover from "./Discover";
 import useFetch from "../../../hooks/useFetch";
 import Spinner from "../../../utils/Spinner";
-
+import Loader from '../../../src/components/Loader';
 function ViewAllDestination() {
   const { data, loading } = useFetch(
     "https://tripobazar-backend.vercel.app/api/country/672cc485ace2a7c97a8fb3a0"
@@ -14,7 +14,7 @@ function ViewAllDestination() {
   return (
     <div className="max-w-[1920px] mx-auto">
       {loading === true ? (
-        <Spinner />
+        <Loader/>
       ) : (
         <>
           {" "}

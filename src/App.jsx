@@ -58,7 +58,7 @@ function App() {
   );
 }
 
-// Wrap App component with Router to ensure `useLocation` works properly
+
 function AppWithRouter() {
   return (
     <Router>

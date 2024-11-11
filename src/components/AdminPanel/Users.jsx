@@ -45,7 +45,7 @@ const Users = ({ data }) => {
     <div className="mr-1 p-6">
       <div className="mb-6">
         <p className="text-green-600 font-poppins font-bold">
-          Total Users: {users.length}
+          Total Users: {users?.length}
         </p>
       </div>
 
@@ -63,7 +63,7 @@ const Users = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, idx) => {
+            {users?.map((user, idx) => {
               return (
                 <tr key={user._id} className="border-b border-gray-200">
                   {editingUserId === user._id ? (

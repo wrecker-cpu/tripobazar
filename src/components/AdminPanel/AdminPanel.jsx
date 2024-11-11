@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import SideNav from "./SideNav";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Users from "./Users";
-import DestinationDetails from "./DestinationDetails";
 import { jwtDecode } from "jwt-decode";
 import Spinner from "../../../utils/Spinner";
 import useFetch from "../../../hooks/useFetch";
+import Continent from "./ContinentAllPages/Continent";
 
 function AdminPanel() {
   const navigate = useNavigate();
@@ -47,7 +47,12 @@ function AdminPanel() {
     <div className="flex h-auto bg-[#F8F8F8]">
       <SideNav handleClick={handleClick} />
       <div className="flex-1  p-6">
-        {selection === "users" ? <Users data={data} /> : <DestinationDetails />}
+        <Routes>
+          <Route path="users" element={<Users data={data} />} />
+          <Route path="continent" element={<Continent />} />
+
+          {/* Add more routes as needed */}
+        </Routes>
       </div>
     </div>
   );

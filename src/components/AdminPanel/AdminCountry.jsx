@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
-import useApiData from "../../../../hooks/useApiData";
-import Spinner from "../../../../utils/Spinner";
-import ImageModal from "../../../../utils/ImageModal";
+import React, { useState } from "react";
+import useApiData from "../../../hooks/useApiData";
+import Spinner from "../../../utils/Spinner";
+import ImageModal from "../../../utils/ImageModal";
 import { useNavigate } from "react-router-dom";
-import useFetch from "../../../../hooks/useFetch";
-import ContinentModal from "./ContinentModal";
+import useFetch from "../../../hooks/useFetch";
 
-function AdminContinent() {
-  const baseUrl = "https://tripobazar-backend.vercel.app/api/continent";
+import LocationModal from "./LocationModal";
+
+function AdminCountry() {
+  const baseUrl = "https://tripobazar-backend.vercel.app/api/country";
   const {
-    data: continentData,
+    data: countryData,
     loading,
     error,
     deleteById,
@@ -17,23 +18,23 @@ function AdminContinent() {
     addNew,
   } = useApiData(baseUrl);
 
-  const { data: countryList } = useFetch(
-    "https://tripobazar-backend.vercel.app/api/country" // Adjust the endpoint for fetching continents
+  const { data: stateList } = useFetch(
+    "https://tripobazar-backend.vercel.app/api/state" // Adjust the endpoint for fetching continents
   );
 
-  const [newContinent, setNewContinent] = useState({
-    ContinentName: "",
-    ContinentPhotoUrl: "",
-    Countries: [],
+  const [newCountry, setNewCountry] = useState({
+    CountryName: "",
+    CountryPhotoUrl: "",
+    States: [],
   });
   const [editingUserId, setEditingUserId] = useState(null);
   const [editedDetails, setEditedDetails] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [showContinentModal, setShowContinentModal] = useState(false);
+  const [showCountryModal, setShowCountryModal] = useState(false);
   const navigate = useNavigate();
 
-  const deleteContinent = (id) => {
+  const deleteCountry = (id) => {
     deleteById(id);
   };
 
@@ -42,7 +43,7 @@ function AdminContinent() {
     setEditedDetails({ ...user });
   };
 
-  const saveContinent = async () => {
+  const saveCountry = async () => {
     try {
       await updateById(editingUserId, editedDetails); // Update data via hook
     } catch (error) {
@@ -51,15 +52,15 @@ function AdminContinent() {
     setEditingUserId(null);
   };
 
-  const addContinent = async () => {
+  const addCountry = async () => {
     try {
-      await addNew(newContinent); // Call the addNew function from hook
-      setNewContinent({
-        ContinentName: "",
-        ContinentPhotoUrl: "",
-        Countries: [],
+      await addNew(newCountry); // Call the addNew function from hook
+      setNewCountry({
+        CountryName: "",
+        CountryPhotoUrl: "",
+        States: [],
       });
-      setShowContinentModal(false);
+      setShowCountryModal(false);
     } catch (error) {
       console.log(error);
     }
@@ -72,38 +73,46 @@ function AdminContinent() {
 
   const closeModal = () => {
     setShowModal(false); // Close the modal
+    
   };
 
-  const openContinentModal = () => {
-    setShowContinentModal(true);
+  const openCountryModal = () => {
+    setShowCountryModal(true);
   };
 
-  const closeContinentModal = () => {
-    setShowContinentModal(false);
+  const closeCountryModal = () => {
+    setShowCountryModal(false);
+    setNewCountry({
+      CountryName: "",
+      CountryPhotoUrl: "",
+      States: [],
+    })
   };
 
   const handleContinentClick = (continentId, continentName) => {
     navigate(`/adminpanel/destination/${continentName}/${continentId}`); // Redirect to the continent-country page
   };
 
-  const handleCountryChange = (e) => {
-    const selectedCountryId = e.target.value;
+  const handleStateChange = (e) => {
+    const selectedStateId = e.target.value;
 
-    if (selectedCountryId) {
-      const selectedCountry = countryList.find(
-        (country) => country._id === selectedCountryId
+    if (selectedStateId) {
+      const selectedStates = stateList.find(
+        (state) => state._id === selectedStateId
       );
 
-      if (selectedCountry) {
-        setNewContinent((prevContinent) => ({
-          ...prevContinent,
-          Countries: prevContinent.Countries
-            ? [...prevContinent.Countries, selectedCountry]
-            : [selectedCountry], // Add selected country to Countries array
+      if (selectedStates) {
+        setNewCountry((prevCountry) => ({
+          ...prevCountry,
+          States: prevCountry.States
+            ? [...prevCountry.States, selectedStates]
+            : [selectedStates], // Add selected country to Countries array
         }));
       }
     }
   };
+
+  console.log(countryData);
 
   if (loading === true) {
     return <Spinner />;
@@ -113,32 +122,31 @@ function AdminContinent() {
     <div className="mr-1 p-6">
       <div className="mb-6">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-med-green font-bold text-xl">
-            Add New Continent
-          </h3>
+          <h3 className="text-med-green font-bold text-xl">Add New Country</h3>
           <button
-            onClick={openContinentModal}
+            onClick={openCountryModal}
             className="bg-med-green text-white rounded-lg px-6 py-2 hover:bg-green-600 transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-green-300"
           >
-            Add Continent
+            Add Country
           </button>
         </div>
 
-        {showContinentModal && (
-          <ContinentModal
-            handleCountryChange={handleCountryChange}
-            addContinent={addContinent}
-            setNewContinent={setNewContinent}
-            newContinent={newContinent}
-            countryList={countryList}
-            closeModal={closeContinentModal}
+        {showCountryModal && (
+          <LocationModal
+            type="country"
+            handleSelectionChange={handleStateChange}
+            addLocation={addCountry}
+            list={stateList}
+            newLocation={newCountry}
+            setNewLocation={setNewCountry}
+            closeModal={closeCountryModal}
           />
         )}
       </div>
 
       <div className="mb-6 flex justify-between">
         <p className="text-med-green font-bold">
-          Total data: {continentData?.length}
+          Total data: {countryData?.length}
         </p>
         <p className="text-med-green font-bold">Destination</p>
       </div>
@@ -149,19 +157,17 @@ function AdminContinent() {
             <tr>
               <th className="border border-gray-200 p-2 text-left">Sr.</th>
               <th className="border border-gray-200 p-2 text-left">
-                ContinentName
+                CountryName
               </th>
               <th className="border border-gray-200 p-2 text-left">
-                ContinentPhoto
+                CountryPhoto
               </th>
-              <th className="border border-gray-200 p-2 text-left">
-                Countries
-              </th>
+              <th className="border border-gray-200 p-2 text-left">States</th>
               <th className="border border-gray-200 p-2 text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {continentData?.map((item, idx) => (
+            {countryData?.map((item, idx) => (
               <tr key={item._id || idx} className="border-b border-gray-200">
                 {editingUserId === item._id ? (
                   <>
@@ -169,11 +175,11 @@ function AdminContinent() {
                     <td className="border border-gray-200 p-2">
                       <input
                         type="text"
-                        value={editedDetails.ContinentName || ""}
+                        value={editedDetails.CountryName || ""}
                         onChange={(e) =>
                           setEditedDetails({
                             ...editedDetails,
-                            ContinentName: e.target.value,
+                            CountryName: e.target.value,
                           })
                         }
                         className="w-full border p-2 rounded"
@@ -182,43 +188,42 @@ function AdminContinent() {
                     <td className="border border-gray-200 p-2">
                       <input
                         type="text"
-                        value={editedDetails.ContinentPhotoUrl || ""}
+                        value={editedDetails.CountryPhotoUrl || ""}
                         onChange={(e) =>
                           setEditedDetails({
                             ...editedDetails,
-                            ContinentPhotoUrl: e.target.value,
+                            CountryPhotoUrl: e.target.value,
                           })
                         }
                         className="w-full border p-2 rounded"
                       />
                     </td>
                     <td className="border border-gray-200 p-2">
-                      {/* Loop through the Countries array and create an editable tag for each country */}
-                      {editedDetails.Countries &&
-                      editedDetails.Countries.length > 0 ? (
-                        editedDetails.Countries.map((country, index) => {
-                          console.log(country);
+                      {editedDetails.States &&
+                      editedDetails.States.length > 0 ? (
+                        editedDetails.States.map((state, index) => {
+                          console.log(state);
                           return (
                             <div
                               key={index}
                               className="inline-flex items-center mb-2 mr-2"
                             >
                               <span
-                                key={country._id}
+                                key={state._id}
                                 className="inline-block relative bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm mr-2 mb-2"
                               >
-                                {country.CountryName}
+                                {state.StateName}
 
                                 <button
                                   className="text-red-500 absolute -top-1 -right-1 bg-red-300 rounded-full w-4 h-4 flex justify-center items-center"
                                   onClick={() => {
-                                    const updatedCountries =
-                                      editedDetails.Countries.filter(
+                                    const updatedStates =
+                                      editedDetails.States.filter(
                                         (_, i) => i !== index
                                       );
                                     setEditedDetails({
                                       ...editedDetails,
-                                      Countries: updatedCountries,
+                                      States: updatedStates,
                                     });
                                   }}
                                 >
@@ -229,19 +234,18 @@ function AdminContinent() {
                           );
                         })
                       ) : (
-                        <span>No countries</span>
+                        <span>No States</span>
                       )}
 
-                      {/* Add new country input */}
                       <div className="mt-2">
                         <select
-                          onChange={handleCountryChange}
+                          onChange={handleStateChange}
                           className="border px-2 py-1 rounded-full bg-gray-100 text-sm"
                         >
-                          <option value="">Select Country</option>
-                          {countryList?.map((country) => (
-                            <option key={country._id} value={country._id}>
-                              {country.CountryName}
+                          <option value="">Select State</option>
+                          {stateList?.map((state) => (
+                            <option key={state._id} value={state._id}>
+                              {state.StateName}
                             </option>
                           ))}
                         </select>
@@ -251,7 +255,7 @@ function AdminContinent() {
                     <td className="border border-gray-200 p-2">
                       <button
                         className="text-green-400 px-3 py-1 rounded mr-2"
-                        onClick={saveContinent}
+                        onClick={saveCountry}
                       >
                         Save
                       </button>
@@ -268,32 +272,32 @@ function AdminContinent() {
                     <td className="border border-gray-200 p-2">{idx + 1}</td>
                     <td
                       onClick={() => {
-                        handleContinentClick(item._id, item?.ContinentName);
+                        handleContinentClick(item._id, item?.CountryName);
                       }}
                       className="border border-gray-200 p-2"
                     >
-                      {item?.ContinentName}
+                      {item?.CountryName}
                     </td>
                     <td className="border border-gray-200 p-2">
                       <img
-                        src={item?.ContinentPhotoUrl}
+                        src={item?.CountryPhotoUrl}
                         alt="continentImage"
-                        onClick={() => openModal(item?.ContinentPhotoUrl)}
+                        onClick={() => openModal(item?.CountryPhotoUrl)}
                         className="w-40 h-20 cursor-pointer"
                       />
                     </td>
                     <td className="border border-gray-200 p-2">
-                      {item?.Countries.length > 0 ? (
-                        item.Countries.map((country) => (
+                      {item?.States.length > 0 ? (
+                        item.States.map((state) => (
                           <span
-                            key={country._id}
+                            key={state._id}
                             className="inline-block bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm mr-2 mb-2"
                           >
-                            {country.CountryName}
+                            {state.StateName}
                           </span>
                         ))
                       ) : (
-                        <span>No countries</span>
+                        <span>No states</span>
                       )}
                     </td>
                     <td className="border border-gray-200 p-2">
@@ -305,7 +309,7 @@ function AdminContinent() {
                       </button>
                       <button
                         className="text-red-400 px-3 py-1 rounded"
-                        onClick={() => deleteContinent(item._id)}
+                        onClick={() => deleteCountry(item._id)}
                       >
                         Delete
                       </button>
@@ -328,4 +332,4 @@ function AdminContinent() {
   );
 }
 
-export default AdminContinent;
+export default AdminCountry;

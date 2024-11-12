@@ -6,7 +6,9 @@ import Users from "./Users";
 import { jwtDecode } from "jwt-decode";
 import Spinner from "../../../utils/Spinner";
 import useFetch from "../../../hooks/useFetch";
-import Continent from "./ContinentAllPages/AdminContinent";
+import Continent from "./AdminContinent";
+import AdminContinent from "./AdminContinent";
+import AdminCountry from "./AdminCountry";
 
 function AdminPanel() {
   const navigate = useNavigate();
@@ -49,7 +51,8 @@ function AdminPanel() {
       <div className="flex-1  p-6">
         <Routes>
           <Route path="users" element={<Users data={data} />} />
-          <Route path="continent" element={<Continent />} />
+          <Route path="continent" element={<AdminContinent />} />
+          <Route path="country" element={<AdminCountry />} />
 
           {/* Add more routes as needed */}
         </Routes>

@@ -22,12 +22,12 @@ export default function DiscoverNewHorizon() {
         </div>
 
         {/* H1 Heading */}
-        <div className="absolute top-1/2 right-auto left-1/2 transform -translate-x-1/2 -translate-y-1/2  md:top-64 md:right-0 md:translate-x-0 md:translate-y-0 md:bottom-24  md:left-[2.5rem] lg:left-[4.2rem] flex justify-start items-center h-auto">
+        <div className="absolute top-[42%] sm:right-auto left-32 sm:left-1/2 transform -translate-x-1/2 -translate-y-1/2  md:top-64 md:right-0 md:translate-x-0 md:translate-y-0 md:bottom-24  md:left-[2.5rem] lg:left-[4.2rem] flex justify-start items-center h-auto">
           <h1
-            className="text-white font-poppins font-extrabold leading-none 
-    md:text-[5rem] lg:text-[5.2rem] text-3xl em:text-5xl sm:text-[50px]"
+            className="text-white  font-poppins font-extrabold  
+    md:text-[5rem] lg:text-[5.2rem] text-3xl em:text-5xl sm:text-[50px] leading-10 sm:leading-none"
           >
-            DISCOVER NEW <br className="hidden md:block" /> HORIZONS
+            DISCOVER NEW <br className="" /> HORIZONS
           </h1>
         </div>
 
@@ -37,7 +37,7 @@ export default function DiscoverNewHorizon() {
         </div>
 
         {/* Small Centered Image with Text */}
-        <div className="absolute bottom-52 mmd:bottom-32 -right-28 xlg:-right-20 transform -translate-x-1/2 hidden md:flex justify-center items-center">
+        <div className="absolute bottom-0 md:bottom-32 -right-28 xlg:-right-20 transform -translate-x-1/2 flex justify-center items-center">
           <ExploreSvg />
         </div>
       </div>

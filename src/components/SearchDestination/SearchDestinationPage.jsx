@@ -8,7 +8,7 @@ export default function SearchDestinationPage() {
   const incrementGuests = () => setGuests(guests + 1);
   const decrementGuests = () => setGuests(guests > 1 ? guests - 1 : 1);
   return (
-    <div className="bg-search-image font-poppins relative max-w-[1920px] mx-auto flex justify-center  bg-cover bg-center min-h-screen">
+    <div className="bg-search-image font-poppins relative max-w-[1920px] mx-auto flex justify-center  bg-cover bg-center h-[90%]">
       <div className="w-full h-full bg-gray-50 opacity-40 absolute inset-0"></div>
       <div className="flex flex-col py-20 w-[90%] mx-auto justify-center items-center">
         <div className="relative z-20">

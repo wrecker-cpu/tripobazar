@@ -4,7 +4,6 @@ import SubNavofViewall from "./SubNavofViewall";
 import CardSection from "./CardSection";
 import Discover from "./Discover";
 import useFetch from "../../../hooks/useFetch";
-import Spinner from "../../../utils/Spinner";
 import Loader from '../../../src/components/Loader';
 function ViewAllDestination() {
   const { data, loading } = useFetch(

@@ -73,7 +73,6 @@ function AdminCountry() {
 
   const closeModal = () => {
     setShowModal(false); // Close the modal
-    
   };
 
   const openCountryModal = () => {
@@ -86,7 +85,7 @@ function AdminCountry() {
       CountryName: "",
       CountryPhotoUrl: "",
       States: [],
-    })
+    });
   };
 
   const handleContinentClick = (continentId, continentName) => {
@@ -97,22 +96,31 @@ function AdminCountry() {
     const selectedStateId = e.target.value;
 
     if (selectedStateId) {
-      const selectedStates = stateList.find(
+      const selectedState = stateList.find(
         (state) => state._id === selectedStateId
       );
 
-      if (selectedStates) {
-        setNewCountry((prevCountry) => ({
-          ...prevCountry,
-          States: prevCountry.States
-            ? [...prevCountry.States, selectedStates]
-            : [selectedStates], // Add selected country to Countries array
-        }));
+      if (selectedState) {
+        if (editingUserId) {
+          // If editing an existing country, update editedDetails.States
+          setEditedDetails((prevDetails) => ({
+            ...prevDetails,
+            States: prevDetails.States
+              ? [...prevDetails.States, selectedState]
+              : [selectedState],
+          }));
+        } else {
+          // If adding a new country, update newCountry.States
+          setNewCountry((prevCountry) => ({
+            ...prevCountry,
+            States: prevCountry.States
+              ? [...prevCountry.States, selectedState]
+              : [selectedState],
+          }));
+        }
       }
     }
   };
-
-  console.log(countryData);
 
   if (loading === true) {
     return <Spinner />;
@@ -202,7 +210,6 @@ function AdminCountry() {
                       {editedDetails.States &&
                       editedDetails.States.length > 0 ? (
                         editedDetails.States.map((state, index) => {
-                          console.log(state);
                           return (
                             <div
                               key={index}

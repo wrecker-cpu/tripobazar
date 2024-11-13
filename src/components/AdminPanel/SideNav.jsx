@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 const SideNav = ({ handleClick }) => {
-  const options = ["users", "continent","country"];
+  const options = ["users", "continent","country","state"];
 
   return (
     <div className="w-auto pr-3 bg-green-50 h-auto m-0 border-r-4 border-white font-poppins font-medium ">

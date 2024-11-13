@@ -51,6 +51,7 @@ const useApiData = (baseUrl) => {
       setData((prevData) =>
         prevData.map((item) => (item._id === id ? response.data.data : item))
       );
+      fetchData();
     } catch (err) {
       setError(err.message);
     }

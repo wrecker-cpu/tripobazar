@@ -137,7 +137,7 @@ const Navbar = () => {
             </Link>
           ) : (
             <Link
-              to={"/"}
+              to={"/adminpanel"}
               className="border-[.1rem] flex justify-center items-center gap-2 rounded-lg tracking-wider text-[#03B58B] border-[#012831] font-poppins text-[.8rem] font-medium px-8 py-2"
             >
               <MenuSvg />
@@ -250,12 +250,13 @@ const Navbar = () => {
           >
             ABOUT US
           </TransitionLink>
-        <TransitionLink to={"/traveltips"} 
+          <TransitionLink
+            to={"/traveltips"}
             href="#"
             className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "
           >
             TRAVEL TIPS
-          </TransitionLink> 
+          </TransitionLink>
           <a
             href="#"
             className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "

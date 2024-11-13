@@ -85,36 +85,40 @@ export default function LocationModal({
         />
 
         {/* Multi-select dropdown */}
-        <div className="relative inline-block w-full mb-4">
-          <select
-            multiple
-            onChange={handleSelectionChange}
-            className="appearance-none w-full bg-gray-100 border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:border-med-green"
-          >
-            {list?.map((item) => (
-              <option key={item._id} value={item._id}>
-                {item[currentConfig.displayKey]}
-              </option>
-            ))}
-          </select>
-        </div>
+        {type !== "state" && list && (
+          <div className="relative inline-block w-full mb-4">
+            <select
+              multiple
+              onChange={handleSelectionChange}
+              className="appearance-none w-full bg-gray-100 border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:border-med-green"
+            >
+              {list?.map((item) => (
+                <option key={item._id} value={item._id}>
+                  {item[currentConfig.displayKey]}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
-        <div className="mt-2 flex flex-wrap gap-2 w-full">
-          {newLocation[currentConfig.listLabel]?.map((name, index) => {
-            const selectedItem = list?.find((item) => item._id === name._id);
+        {type !== "state" && list && (
+          <div className="mt-2 flex flex-wrap gap-2 w-full">
+            {newLocation[currentConfig.listLabel]?.map((name, index) => {
+              const selectedItem = list?.find((item) => item._id === name._id);
 
-            return (
-              selectedItem && (
-                <span
-                  key={index}
-                  className="inline-block bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm"
-                >
-                  {selectedItem[currentConfig.displayKey]}
-                </span>
-              )
-            );
-          })}
-        </div>
+              return (
+                selectedItem && (
+                  <span
+                    key={index}
+                    className="inline-block bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm"
+                  >
+                    {selectedItem[currentConfig.displayKey]}
+                  </span>
+                )
+              );
+            })}
+          </div>
+        )}
 
         <div className="mt-4 flex justify-end gap-4">
           <button

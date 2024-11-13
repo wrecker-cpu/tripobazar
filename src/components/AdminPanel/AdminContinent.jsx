@@ -18,7 +18,7 @@ function AdminContinent() {
   } = useApiData(baseUrl);
 
   const { data: countryList } = useFetch(
-    "https://tripobazar-backend.vercel.app/api/country" 
+    "https://tripobazar-backend.vercel.app/api/country"
   );
 
   const [newContinent, setNewContinent] = useState({
@@ -100,12 +100,22 @@ function AdminContinent() {
       );
 
       if (selectedCountry) {
-        setNewContinent((prevContinent) => ({
-          ...prevContinent,
-          Countries: prevContinent.Countries
-            ? [...prevContinent.Countries, selectedCountry]
-            : [selectedCountry], // Add selected country to Countries array
-        }));
+        if (editingUserId) {
+          setEditedDetails((prevDetails) => ({
+            ...prevDetails,
+            Countries: prevDetails.Countries
+              ? [...prevDetails.Countries, selectedCountry]
+              : [selectedCountry],
+          }));
+        } else {
+          // If adding a new continent, update newContinent.Countries
+          setNewContinent((prevContinent) => ({
+            ...prevContinent,
+            Countries: prevContinent.Countries
+              ? [...prevContinent.Countries, selectedCountry]
+              : [selectedCountry],
+          }));
+        }
       }
     }
   };
@@ -203,7 +213,6 @@ function AdminContinent() {
                       {editedDetails.Countries &&
                       editedDetails.Countries.length > 0 ? (
                         editedDetails.Countries.map((country, index) => {
-                          console.log(country);
                           return (
                             <div
                               key={index}

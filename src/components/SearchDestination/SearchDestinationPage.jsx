@@ -11,7 +11,7 @@ export default function SearchDestinationPage() {
     <div className="bg-search-image font-poppins relative max-w-[1920px] mx-auto flex justify-center  bg-cover bg-center h-[90%]">
       <div className="w-full h-full bg-gray-50 opacity-40 absolute inset-0"></div>
       <div className="flex flex-col py-20 w-[90%] mx-auto justify-center items-center">
-        <div className="relative z-20">
+        <div className="relative z-10">
           <p className="text-xl esm:text-2xl ew:text-3xl sm:text-6xl mb-20 text-center font-bold">
             Discover a new destination,<br></br>
             <span className="text-med-green">
@@ -19,7 +19,7 @@ export default function SearchDestinationPage() {
             </span>
           </p>
         </div>
-        <div className="max-w-[1720px] w-full h-auto p-4 md:p-16 bg-white shadow-lg rounded-lg relative z-20">
+        <div className="max-w-[1720px] w-full h-auto p-4 md:p-16 bg-white shadow-lg rounded-lg relative z-10">
           {/* Starting Location and Destination Inputs */}
           <div className="flex flex-col md:flex-row items-center jusitfy-between gap-4">
             <div className="flex items-center border bg-white rounded-md py-3 px-2 w-full">

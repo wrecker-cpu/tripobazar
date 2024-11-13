@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 
 import LocationModal from "./LocationModal";
+import Loader from "../Loader";
 
 function AdminCountry() {
   const baseUrl = "https://tripobazar-backend.vercel.app/api/country";
@@ -123,7 +124,7 @@ function AdminCountry() {
   };
 
   if (loading === true) {
-    return <Spinner />;
+    return <Loader/>;
   }
 
   return (

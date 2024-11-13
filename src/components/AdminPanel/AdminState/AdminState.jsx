@@ -4,6 +4,7 @@ import Spinner from "../../../../utils/Spinner";
 import useApiData from "../../../../hooks/useApiData";
 import ImageModal from "../../../../utils/ImageModal";
 import ViewAndAddAllState from "./EditAndViewAllState";
+import Loader from "../../Loader";
 
 export default function AdminState() {
   const [selectedId, setSelectedId] = useState();
@@ -69,7 +70,7 @@ export default function AdminState() {
   console.log(packageData);
 
   if (loading) {
-    return <Spinner />;
+    return <Loader/>;
   }
 
   return (

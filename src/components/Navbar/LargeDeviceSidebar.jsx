@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { socialMediaData } from "../../../utils/SocialMediaData";
 import AdminPanel from "../AdminPanel/AdminPanel";
 import TransitionLink from "../../../utils/TransitionLink";
+import CompanyLogo from "../../../svgs/CompanyLogo";
 const LargeDeviceSidebar = ({ isSidebarOpen, closeSidebar }) => {
     const [activeItem, setActiveItem] = useState(null);
     const handleItemClick = (index) => {
@@ -12,10 +13,10 @@ const LargeDeviceSidebar = ({ isSidebarOpen, closeSidebar }) => {
         { title: "Admin Pannel",link: "/adminpanel/*", subItems: [] },
         { title: "My Profile",link: "", subItems: ["Sub-item 1", "Sub-item 2", "Sub-item 3"] },
         { title: "My Bookings",link: "", subItems: ["Modify Bookings", "Cancel Bookings", "New Bookings"] },
-        { title: "Our Policy",link: "", subItems: ["Sub-item X", "Sub-item Y", "Sub-item Z"] },
-        { title: "Careers",link: "", subItems: ["Sub-item 1", "Sub-item 2", "Sub-item 3"] },
+        { title: "Our Policy",link: "/aboutus/privacy-policy", subItems: ["Sub-item X", "Sub-item Y", "Sub-item Z"] },
+        { title: "Careers",link: "/aboutus/careers", subItems: ["Sub-item 1", "Sub-item 2", "Sub-item 3"] },
         { title: "FAQs",link: "", subItems: ["Sub-item A", "Sub-item B", "Sub-item C"] },
-        { title: "Contact Us",link: "", subItems: ["Sub-item X", "Sub-item Y", "Sub-item Z"] },
+        { title: "Contact Us",link: "/contactus", subItems: ["Sub-item X", "Sub-item Y", "Sub-item Z"] },
       ];
   return (
   <div
@@ -31,8 +32,8 @@ const LargeDeviceSidebar = ({ isSidebarOpen, closeSidebar }) => {
       </button>
      
           {/* First Part: Large logo */}
-        <div className="w-1/4 flex justify-center items-center ">
-        <TransitionLink to={"/"}><img src="src/assets/Logo.svg"   onClick={closeSidebar} alt="Logo" className="h-32" /></TransitionLink> 
+        <div onClick={closeSidebar} className="w-1/4    flex justify-center items-center ">
+        <TransitionLink to={"/"}> <CompanyLogo  alt="Logo" className="h-32 hover:h-36"/> </TransitionLink> 
           </div> 
 
       {/* Second Part: List of items */}
@@ -43,9 +44,9 @@ const LargeDeviceSidebar = ({ isSidebarOpen, closeSidebar }) => {
                   className="list-none pb-6 text-[#00283166] font-semibold text-2xl  cursor-pointer hover:text-green-500"
                   onClick={closeSidebar}
                 >
-                   <Link to={item.link}  className="block">
+                   <TransitionLink to={item.link}  className="block">
           {item.title}
-        </Link>
+        </TransitionLink>
                 </li>
                 {activeItem === index && (
                   <ul className="absolute top-0 left-[70%] text-start cursor-pointer space-y-3  p-0  rounded">

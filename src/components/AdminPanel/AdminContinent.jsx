@@ -5,6 +5,7 @@ import ImageModal from "../../../utils/ImageModal";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 import LocationModal from "./LocationModal";
+import Loader from "../Loader";
 
 function AdminContinent() {
   const baseUrl = "https://tripobazar-backend.vercel.app/api/continent";
@@ -121,7 +122,7 @@ function AdminContinent() {
   };
 
   if (loading === true) {
-    return <Spinner />;
+    return <Loader/>;
   }
 
   return (

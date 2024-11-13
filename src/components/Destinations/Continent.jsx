@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "../Loader"
 import { useState, useRef } from "react";
 import {
   FaHeart,
@@ -43,7 +44,7 @@ function Continent() {
   };
 
   if (loading === true) {
-    return <Spinner />;
+    return <Loader/>;
   }
 
   return (

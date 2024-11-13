@@ -9,6 +9,7 @@ import useFetch from "../../../hooks/useFetch";
 import AdminContinent from "./AdminContinent";
 import AdminCountry from "./AdminCountry";
 import AdminState from "./AdminState/AdminState";
+import Loader from "../Loader";
 
 function AdminPanel() {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ function AdminPanel() {
   );
 
   if (!isAdmin || loading === true) {
-    return <Spinner />;
+    return <Loader/>;
   }
 
   return (

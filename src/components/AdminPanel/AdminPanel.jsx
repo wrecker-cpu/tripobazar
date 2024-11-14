@@ -9,6 +9,7 @@ import useFetch from "../../../hooks/useFetch";
 import AdminContinent from "./AdminContinent";
 import AdminCountry from "./AdminCountry";
 import AdminState from "./AdminState/AdminState";
+import AdminPackage from "./AdminPackage/AdminPackage";
 
 function AdminPanel() {
   const navigate = useNavigate();
@@ -54,6 +55,7 @@ function AdminPanel() {
           <Route path="continent" element={<AdminContinent />} />
           <Route path="country" element={<AdminCountry />} />
           <Route path="state" element={<AdminState />} />
+          <Route path="package" element={<AdminPackage />} />
 
           {/* Add more routes as needed */}
         </Routes>

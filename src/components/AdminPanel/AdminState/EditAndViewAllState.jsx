@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LocationModal from "../LocationModal";
 import Spinner from "../../../../utils/Spinner";
+import Loader from "../../Loader";
 
 export default function ViewAndAddAllState({
   addNew,
@@ -40,7 +41,7 @@ export default function ViewAndAddAllState({
   };
 
   if (loading === true) {
-    return <Spinner />;
+    return <Loader/>;
   }
 
   return (

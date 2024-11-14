@@ -4,12 +4,14 @@ import SideNav from "./SideNav";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Users from "./Users";
 import { jwtDecode } from "jwt-decode";
-import Spinner from "../../../utils/Spinner";
+
 import useFetch from "../../../hooks/useFetch";
 import AdminContinent from "./AdminContinent";
 import AdminCountry from "./AdminCountry";
 import AdminState from "./AdminState/AdminState";
 import AdminPackage from "./AdminPackage/AdminPackage";
+import Loader from "../Loader";
+
 
 function AdminPanel() {
   const navigate = useNavigate();
@@ -43,7 +45,7 @@ function AdminPanel() {
   );
 
   if (!isAdmin || loading === true) {
-    return <Spinner />;
+    return <Loader/>;
   }
 
   return (

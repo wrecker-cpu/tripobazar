@@ -76,7 +76,7 @@ export default function SideHamBurgerMenu({
               />
             </Link>
             <button className="border-[.1rem] rounded-lg text-[#03B58B] border-[#012831] font-poppins text-[1rem] font-medium px-4 py-2">
-              Login/Sign Up
+              LogOut
             </button>
             <button className="text-xl" onClick={toggleMenu}>
               <IoCloseOutline className="w-8 h-8 text-gray-500" />

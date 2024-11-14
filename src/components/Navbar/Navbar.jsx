@@ -4,7 +4,7 @@ import Logo from "../../assets/Logo.svg";
 import { useEffect, useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa"; // Importing icons
 import HamburgerSvg from "../../../svgs/HamburgerSvg";
-
+import LargeDeviceSidebar from "./LargeDeviceSidebar";
 import SideHamBurgerMenu from "./SideHamBurgerMenu";
 import { Link } from "react-router-dom";
 
@@ -17,6 +17,7 @@ const Navbar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // New state for large device sidebar
   const [userData, setUserData] = useState(null);
   const downRef = useRef(null);
 
@@ -83,6 +84,12 @@ const Navbar = () => {
   const hideMenu = () => {
     setIsMenuOpen(false);
   };
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 999px)");
@@ -137,11 +144,17 @@ const Navbar = () => {
             </Link>
           ) : (
             <Link
-              to={"/adminpanel"}
-              className="border-[.1rem] flex justify-center items-center gap-2 rounded-lg tracking-wider text-[#03B58B] border-[#012831] font-poppins text-[.8rem] font-medium px-8 py-2"
+             
+              className=""
             >
-              <MenuSvg />
-              Menu
+               <button
+            onClick={toggleSidebar}
+            className="border-[.1rem] flex justify-center items-center gap-2 rounded-lg tracking-wider text-[#03B58B] border-[#012831] font-poppins text-[.8rem] font-medium px-8 py-2"
+          >
+            <MenuSvg />
+            Menu
+          </button>
+             
             </Link>
           )}
           <div className="flex flex-row justify-between gap-6">
@@ -299,6 +312,11 @@ const Navbar = () => {
         hideMenu={hideMenu}
         toggleMenu={toggleMenu}
         isMenuOpen={isMenuOpen}
+      />
+      {/* Sidebar for large devices */}
+      <LargeDeviceSidebar
+        isSidebarOpen={isSidebarOpen}
+        closeSidebar={closeSidebar}
       />
     </div>
   );

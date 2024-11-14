@@ -22,14 +22,16 @@ export default function SideHamBurgerMenu({
     { name: "FAQs", link: "/" },
   ];
 
+  const [userData, setUserData] = useState(null);
+
   const location = useLocation();
 
   useEffect(() => {
     // Prevent body scroll when the menu is open
     if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
   }, [isMenuOpen]);
 
@@ -49,6 +51,19 @@ export default function SideHamBurgerMenu({
         body.classList.remove("page-transition");
       }
     }
+  };
+
+  useEffect(() => {
+    const data = localStorage.getItem("userInfo");
+    if (data) {
+      setUserData(JSON.parse(data));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.clear(); // Clears all data from localStorage
+    setUserData(null);
+    toggleMenu(); // Closes the menu
   };
 
   return (
@@ -75,9 +90,20 @@ export default function SideHamBurgerMenu({
                 onClick={toggleMenu}
               />
             </Link>
-            <button className="border-[.1rem] rounded-lg text-[#03B58B] border-[#012831] font-poppins text-[1rem] font-medium px-4 py-2">
-              LogOut
-            </button>
+            {userData ? (
+              <button
+                onClick={handleLogout}
+                className="border-[.1rem] rounded-lg text-[#03B58B] border-[#012831] font-poppins text-[1rem] font-medium px-4 py-2"
+              >
+                LogOut
+              </button>
+            ) : (
+              <Link to="/login">
+                <button className="border-[.1rem] rounded-lg text-[#03B58B] border-[#012831] font-poppins text-[1rem] font-medium px-4 py-2">
+                  Login
+                </button>
+              </Link>
+            )}
             <button className="text-xl" onClick={toggleMenu}>
               <IoCloseOutline className="w-8 h-8 text-gray-500" />
             </button>
@@ -105,9 +131,10 @@ export default function SideHamBurgerMenu({
               </button>
             </Link>
             <Link to={"/contactus"}>
-            <button className="bg-[#03B58B] text-white px-4 h-9 rounded-md">
-              Contact Us
-            </button></Link>
+              <button className="bg-[#03B58B] text-white px-4 h-9 rounded-md">
+                Contact Us
+              </button>
+            </Link>
           </div>
         </div>
       </div>

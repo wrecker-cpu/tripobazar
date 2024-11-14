@@ -3,12 +3,16 @@ import { useState } from "react";
 import FilterSvg from "../../../svgs/FilterSvg/index";
 import DatePicker from "react-datepicker";
 import image from "../../assets/africa-bg.jpg";
+import BreadCrumbsLink from "../../../utils/BreadCrumbsLink";
 function SrchDestinationCountry({data}) {
   const [guests, setGuests] = useState(1);
   const incrementGuests = () => setGuests(guests + 1);
   const decrementGuests = () => setGuests(guests > 1 ? guests - 1 : 1);
   return (
     <div className=" rounded-b-3xl font-poppins">
+        <div className="w-[90%] mx-auto  py-2">
+          <BreadCrumbsLink/>
+        </div>
       <div className="w-full h-full relative">
         <img src={image} className="w-full h-full object-contain" />
         <div className="flex absolute z-0 -bottom-[420px] left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col py-20 w-[90%] mx-auto justify-center items-center">

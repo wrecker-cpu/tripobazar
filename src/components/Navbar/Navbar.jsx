@@ -279,12 +279,12 @@ const Navbar = () => {
 
           {/* Search Icon */}
           <div className="relative">
-            <button
-              onClick={toggleSearch}
+           <Link to={"/searchpage"} ><button
+        
               className="text-sm border-[1px] border-[#012831] rounded-full p-2"
             >
               <FaSearch />
-            </button>
+            </button></Link>
             {isSearchVisible && (
               <input
                 type="text"

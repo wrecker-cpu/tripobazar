@@ -177,7 +177,7 @@ export default function FilterBox({ onClose, style, showModal }) {
         visibility: isVisible ? "visible" : "hidden",
         transition: "opacity 300ms ease-in-out",
       }}
-      className="fixed font-poppins inset-0 z-20 flex items-center justify-center bg-black backdrop-blur-sm bg-opacity-50"
+      className="fixed pt-6 p-4 font-poppins inset-0 z-20 flex items-center justify-center bg-black backdrop-blur-sm bg-opacity-50"
     >
       <div
         style={style}

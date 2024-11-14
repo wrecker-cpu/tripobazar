@@ -2,11 +2,14 @@ import React, { useState } from "react";
 
 import FilterSvg from "../../../svgs/FilterSvg/index";
 import DatePicker from "react-datepicker";
+import FilterBox from "../FilterBox/FilterBox";
 
 export default function SearchDestinationPage() {
   const [guests, setGuests] = useState(1);
   const incrementGuests = () => setGuests(guests + 1);
   const decrementGuests = () => setGuests(guests > 1 ? guests - 1 : 1);
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => setShowModal(!showModal);
   return (
     <div className="bg-search-image font-poppins relative max-w-[1920px] mx-auto flex justify-center  bg-cover bg-center h-[90%]">
       <div className="w-full h-full bg-gray-50 opacity-40 absolute inset-0"></div>
@@ -41,7 +44,7 @@ export default function SearchDestinationPage() {
               />
             </div>
             <div className="md:w-auto w-full flex justify-end">
-              <div>
+              <div  onClick={toggleModal}>
                 <FilterSvg />
               </div>
             </div>
@@ -102,6 +105,7 @@ export default function SearchDestinationPage() {
           </div>
         </div>
       </div>
+      <FilterBox showModal={showModal} onClose={toggleModal} />
     </div>
   );
 }

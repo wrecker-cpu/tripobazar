@@ -50,8 +50,8 @@ function App() {
           <Route path="/destination" element={<DestinationPage />} />
           <Route path="/traveltips" element={<TravelTips />} />
           <Route path="/adminpanel/*" element={<AdminPanel />} />
-          <Route path="/viewalldestination" element={<ViewAllDestination />} />
-          <Route path="/countrydestination" element={<CountryDestination />} />
+          <Route path="/destination/:country" element={<ViewAllDestination />} />
+          <Route path="/destination/:country/:state" element={<CountryDestination />} />
         </Route>
       </Routes>
       {/* Conditionally show the Footer based on the current route */}

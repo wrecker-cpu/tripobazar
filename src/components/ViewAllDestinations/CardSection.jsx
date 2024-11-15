@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
-
-import Spinner from "../../../utils/Spinner";
+import { useNavigate, useParams } from "react-router-dom";
 const CardSection = ({ data }) => {
+
+  const { country } = useParams(); 
+
   const [liked, setLiked] = useState(Array(8).fill(false)); // Initial state for heart toggle
 
   const toggleHeart = (index) => {
     setLiked(liked.map((item, i) => (i === index ? !item : item)));
   };
+  const navigate=useNavigate();
 
   return (
     <section className="relative  bg-cover bg-opacity-0 px-5 p-11">
@@ -19,6 +22,7 @@ const CardSection = ({ data }) => {
           return (
             <div
               key={index}
+              onClick={()=>{navigate(`/destination/${country}/${card.StateName}`)}}
               className="relative border hover:cursor-pointer group rounded-lg overflow-hidden shadow-lg"
             >
               {/* Image */}

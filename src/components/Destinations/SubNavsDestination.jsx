@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function SubNavsDestination() {
-  const sections = ["All", "India", "SaudiArabia", "Europe", "Vietnam"];
+  const sections = ["All", "Asia", "Saudi Arabia", "Europe", "Vietnam"];
 
   return (
     <nav className="bg-white sticky top-0 z-[19] shadow-inner">
@@ -13,7 +13,7 @@ export default function SubNavsDestination() {
           {sections.map((item, idx) => (
             <button
               key={idx}
-              className={`text-gray-500 em:py-0 py-2  em:border-b-0 ${
+              className={`text-gray-500 uppercase em:py-0 py-2  em:border-b-0 ${
                 idx === sections.length - 1 ? "border-b-0" : "border-b"
               }  em:w-auto  w-full hover:text-med-green`}
             >

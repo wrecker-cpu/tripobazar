@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Destination } from "./DestinationAccordionData";
 
 import MultiDesitinationDropdown from "./MultiDesitinationDropdown";
-import MultilevelDropdown from "./MultiLevelDropdown";
+import MultilevelDropDown from "./MultiLevelDropDown";
 
 export default function SideHamBurgerMenu({
   toggleMenu,
@@ -120,7 +120,7 @@ export default function SideHamBurgerMenu({
               setIsMenuOpen={setIsMenuOpen}
               Destination={Destination}
             />
-            <MultilevelDropdown/>
+            <MultilevelDropDown />
 
             {data.map((item, idx) => (
               <Link

@@ -17,6 +17,7 @@ function Continent() {
   const { data, loading } = useFetch(
     "https://tripobazar-backend.vercel.app/api/continent"
   );
+  console.log(data);
 
   const toggleHeart = (index) => {
     setLiked(liked.map((item, i) => (i === index ? !item : item)));

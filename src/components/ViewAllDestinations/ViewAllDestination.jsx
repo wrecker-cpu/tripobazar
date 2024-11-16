@@ -18,7 +18,7 @@ function ViewAllDestination() {
   }
 
   return (
-    <div className="max-w-[1920px] mx-auto">
+    <div className="max-w-[1920px]  mx-auto">
       <SrchDestinationCountry data={data} />
       <SubNavofViewall />
       <CardSection data={data} />

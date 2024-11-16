@@ -14,7 +14,7 @@ export default function DiscoverNewHorizon() {
   const toggleModal = () => setShowModal(!showModal);
   return (
     <section className="relative">
-      <div className="w-full h-[80vh] sm:h-full md:h-[600px] sticky z-10 top-0  md:relative">
+      <div className="w-full h-[50vh] sm:h-full md:h-[600px] sticky z-10 top-0  md:relative">
         <img className="w-full h-full object-cover" src={dalLek} alt="wth" />
         {/* Top Left Logo and Paragraph */}
         <div className="absolute bottom-80 md:left-10 lg:left-[4.2rem] hidden md:flex items-center">
@@ -22,10 +22,10 @@ export default function DiscoverNewHorizon() {
         </div>
 
         {/* H1 Heading */}
-        <div className="absolute top-[42%] sm:right-auto left-32 sm:left-1/2 transform -translate-x-1/2 -translate-y-1/2  md:top-64 md:right-0 md:translate-x-0 md:translate-y-0 md:bottom-24  md:left-[2.5rem] lg:left-[4.2rem] flex justify-start items-center h-auto">
+        <div className="absolute top-[40%] sm:right-[0] left-[34%] sm:left-[34%] transform -translate-x-1/2 -translate-y-1/2  md:top-64 md:right-0 md:translate-x-0 md:translate-y-0 md:bottom-24  md:left-[2.5rem] lg:left-[4.2rem] flex justify-start items-center h-auto">
           <h1
             className="text-white  font-poppins font-extrabold  
-    md:text-[5rem] lg:text-[5.2rem] text-3xl em:text-5xl sm:text-[50px] leading-10 sm:leading-none"
+    md:text-[4.3rem] lg:text-[5.2rem] text-[2rem] em:text-3xl sm:text-[3rem] leading-10 sm:leading-none"
           >
             DISCOVER NEW <br className="" /> HORIZONS
           </h1>
@@ -37,9 +37,10 @@ export default function DiscoverNewHorizon() {
         </div>
 
         {/* Small Centered Image with Text */}
-        <div className="absolute bottom-0 md:bottom-32 -right-28 xlg:-right-20 transform -translate-x-1/2 flex justify-center items-center">
-          <ExploreSvg />
-        </div>
+        <div className="absolute bottom-9 sm:bottom-16 md:bottom-32 right-[-3rem] sm:-right-14 md:-right-9 transform -translate-x-1/2 flex justify-center items-center w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-52 lg:h-52">
+  <ExploreSvg />
+</div>
+
       </div>
 
       <div className="w-[90%] max-w-[1720px]   h-auto p-4 md:p-16 bg-[#f8f8f8] shadow-lg rounded-lg mx-auto mt-[-2rem] md:mt-[-6rem] relative z-10">

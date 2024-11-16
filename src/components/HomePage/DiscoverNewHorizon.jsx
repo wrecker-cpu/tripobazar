@@ -5,10 +5,18 @@ import FilterSvg from "../../../svgs/FilterSvg/index";
 import DatePicker from "react-datepicker";
 import ExploreSvg from "../../../svgs/ExploreSvg";
 import FilterBox from "../FilterBox/FilterBox";
+import { FlatDestinations } from "../Navbar/DestinationAccordionData";
 
 export default function DiscoverNewHorizon() {
   const [guests, setGuests] = useState(1);
   const [showModal, setShowModal] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Filter destinations based on input
+  const filteredDestinations = FlatDestinations.filter((destination) =>
+    destination.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   const incrementGuests = () => setGuests(guests + 1);
   const decrementGuests = () => setGuests(guests > 1 ? guests - 1 : 1);
   const toggleModal = () => setShowModal(!showModal);
@@ -49,6 +57,7 @@ export default function DiscoverNewHorizon() {
           <div className="flex items-center border bg-[#f8f8f8] rounded-md py-3 px-2 w-full">
             <input
               type="text"
+              defaultValue={"Ahmedabad"}
               placeholder="Where are you starting from?"
               className="w-full bg-transparent focus:outline-none"
             />
@@ -56,13 +65,44 @@ export default function DiscoverNewHorizon() {
 
           <p className="text-gray-500 font-medium">To</p>
 
-          <div className="flex items-center bg-[#f8f8f8] border rounded-md py-3 px-2  w-full">
-            {/* <img src={destinationIcon} alt="Destination" className="h-5 w-5 mr-2" /> */}
+          {/* <div className="flex items-center bg-[#f8f8f8] border rounded-md py-3 px-2  w-full">
             <input
               type="text"
               placeholder="Enter Destination"
               className="w-full bg-transparent focus:outline-none"
             />
+          </div> */}
+          <div className="relative w-full">
+            {/* Input field */}
+            <div className="flex items-center bg-[#f8f8f8] border rounded-md py-3 px-2 w-full">
+              <input
+                type="text"
+                placeholder="Enter Destination"
+                className="w-full bg-transparent focus:outline-none"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)} // Update search term
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setTimeout(() => setIsFocused(false), 200)} // Slight delay to allow clicking on list items
+              />
+            </div>
+
+            {/* Destination list */}
+            {isFocused && filteredDestinations.length > 0 && (
+              <ul className="mt-4 absolute bg-[#f8f8f8] rounded-md p-4 w-full">
+                {filteredDestinations.map((destination, index) => (
+                  <li
+                    onClick={() => {
+                      setSearchQuery(destination.name);
+                      setIsFocused(false);
+                    }}
+                    key={index}
+                    className="py-2 border-b"
+                  >
+                    <strong>{destination.name}</strong> - {destination.region}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
           <div className="md:w-auto w-full flex justify-end">
             <div className="cursor-pointer" onClick={toggleModal}>
@@ -79,7 +119,7 @@ export default function DiscoverNewHorizon() {
             <div className="flex items-center bg-gray-100 rounded-md p-2 h-12">
               <DatePicker
                 placeholderText="E.g 2004-03-02"
-                className="outline-2 p-2 w-full outline-med-green bg-inherit text-lg font-medium text-[#717A7C] cursor-pointer"
+                className="outline-none p-2 w-full  bg-inherit text-lg font-medium text-[#717A7C] cursor-pointer"
                 dateFormat="yyyy-MM-dd"
                 required
               />
@@ -92,7 +132,7 @@ export default function DiscoverNewHorizon() {
             <div className="flex items-center bg-gray-100 rounded-md p-2 h-12">
               <DatePicker
                 placeholderText="E.g 2004-03-02"
-                className="outline-2 p-2 w-full outline-med-green bg-inherit text-lg font-medium text-[#717A7C] cursor-pointer"
+                className="outline-none p-2 w-full  bg-inherit text-lg font-medium text-[#717A7C] cursor-pointer"
                 dateFormat="yyyy-MM-dd"
                 required
               />
@@ -109,7 +149,9 @@ export default function DiscoverNewHorizon() {
               >
                 -
               </button>
-              <p className="font-medium text-[#717A7C] text-lg">{guests} guests</p>
+              <p className="font-medium text-[#717A7C] text-lg">
+                {guests} guests
+              </p>
               <button
                 onClick={incrementGuests}
                 className="bg-med-green w-7 h-7 flex items-center justify-center text-white rounded-full"

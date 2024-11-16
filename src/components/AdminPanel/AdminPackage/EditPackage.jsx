@@ -34,7 +34,6 @@ export default function EditPackage({
     }
   );
 
-  const isLoading = !hotelData || hotelData.length === 0;
   const [newLocation, setNewLocation] = useState("");
   const [selectedHotelIdForDetails, setSelectedHotelIdForDetails] =
     useState("");
@@ -46,6 +45,8 @@ export default function EditPackage({
   const { data: hotelData, loading } = useFetch(
     `https://tripobazar-backend.vercel.app/api/hotel`
   );
+
+  const isLoading = !hotelData || hotelData.length === 0;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -316,7 +317,7 @@ export default function EditPackage({
         {/* Day Description*/}
         <section className="mb-8">
           <h2 className="text-2xl font-bold mb-4">Day Description</h2>
-          {data.dayDescription.map((day, dayIndex) => (
+          {data?.dayDescription?.map((day, dayIndex) => (
             <div key={dayIndex} className="mb-6">
               <input
                 type="text"
@@ -351,7 +352,7 @@ export default function EditPackage({
               />
               {/* Photo Inputs */}
               <div className="grid grid-cols-2 gap-4 mb-4">
-                {day.photos.map((photo, photoIndex) => (
+                {day?.photos?.map((photo, photoIndex) => (
                   <div key={photoIndex} className="flex items-center">
                     <input
                       type="text"
@@ -422,7 +423,7 @@ export default function EditPackage({
         <section className="mb-8">
           <h2 className="text-2xl font-bold mb-4">What's Included</h2>
           <ul className=" flex items-center gap-3">
-            {data.whatsIncluded.map((item, index) => (
+            {data?.whatsIncluded?.map((item, index) => (
               <li
                 key={index}
                 className="bg-blue-200 relative text-blue-800 px-3 py-1 rounded-lg"

@@ -25,59 +25,62 @@ export default function AdminPackage() {
   if (loading === true) {
     return <Spinner />;
   }
-  console.log(selectedId)
+  console.log(selectedId);
 
   return (
     <>
       {!selectedId ? (
-      <div>
-        {/* Button to show AddPackage form */}
-        <button
-          onClick={() => setIsAddingPackage(!isAddingPackage)}
-          className="bg-green-600 h-10 py-3 text-center flex items-center hover:scale-95 transition-transform ease-in-out duration-300 text-white font-medium rounded-full px-4 mb-4"
-        >
-          {isAddingPackage ? "Cancel" : "Add Package"}
-        </button>
+        <div>
+          {/* Button to show AddPackage form */}
+          <button
+            onClick={() => setIsAddingPackage(!isAddingPackage)}
+            className="bg-green-600 h-10 py-3 text-center flex items-center hover:scale-95 transition-transform ease-in-out duration-300 text-white font-medium rounded-full px-4 mb-4"
+          >
+            {isAddingPackage ? "Cancel" : "Add Package"}
+          </button>
 
-        {/* Show AddPackage form when isAddingPackage is true */}
-        {isAddingPackage ? (
-          <AddPackage setIsAddingPackage={setIsAddingPackage} addNew={addNew} />
-        ) : (
-          <div>
-            {allStateData?.map((item, idx) => (
-              <div key={idx}>
-                <ul className="flex flex-col">
-                  <li className="relative flex items-center justify-between mb-3 text-med-green rounded-lg overflow-hidden transition-colors ease-in-out duration-300 bg-white p-4">
-                    <span
-                      onClick={() => setSelectedId(item._id)}
-                      className="text-left cursor-pointer text-xl font-semibold"
-                    >
-                      {item?.title}
-                    </span>
-                    <div className="flex items-center gap-4">
-                      <img
-                        src={item?.MainPhotos[0]}
-                        onClick={() => openModal(item?.MainPhotos[0])}
-                        alt={`state icon`}
-                        className="w-10 h-5 cursor-pointer object-cover rounded ml-4"
-                      />
-                      <button
-                        onDoubleClick={() => {
-                          deleteById(item._id);
-                        }}
-                        className="text-red-600"
+          {/* Show AddPackage form when isAddingPackage is true */}
+          {isAddingPackage ? (
+            <AddPackage
+              setIsAddingPackage={setIsAddingPackage}
+              addNew={addNew}
+            />
+          ) : (
+            <div>
+              {allStateData?.map((item, idx) => (
+                <div key={idx}>
+                  <ul className="flex flex-col">
+                    <li className="relative flex items-center justify-between mb-3 text-med-green rounded-lg overflow-hidden transition-colors ease-in-out duration-300 bg-white p-4">
+                      <span
+                        onClick={() => setSelectedId(item._id)}
+                        className="text-left cursor-pointer text-xl font-semibold"
                       >
-                        Delete
-                      </button>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    ) : (
+                        {item?.title}
+                      </span>
+                      <div className="flex items-center gap-4">
+                        <img
+                          src={item?.MainPhotos[0]}
+                          onClick={() => openModal(item?.MainPhotos[0])}
+                          alt={`state icon`}
+                          className="w-10 h-5 cursor-pointer object-cover rounded ml-4"
+                        />
+                        <button
+                          onDoubleClick={() => {
+                            deleteById(item._id);
+                          }}
+                          className="text-red-600"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ) : (
         <>
           {!editPackage ? (
             <div className="bg-gray-50 text-gray-900">
@@ -86,7 +89,6 @@ export default function AdminPackage() {
                 <section className="mb-8 relative">
                   <div className="flex justify-between items-center">
                     <h1 className="text-4xl font-bold mb-2">{data?.title}</h1>
-                    
                   </div>
                   <p className="text-lg mb-4">{data?.description}</p>
                   <p className="text-xl font-semibold text-green-600">
@@ -94,7 +96,7 @@ export default function AdminPackage() {
                   </p>
 
                   <div className="absolute top-1 right-0 flex flex-col gap-2">
-                  <button
+                    <button
                       onClick={() => {
                         setEditPackage(true);
                       }}
@@ -168,13 +170,13 @@ export default function AdminPackage() {
                       </p>
                       <div className="grid grid-cols-2 gap-4">
                         {day?.photos.map((photo, photoIndex) => (
-                      <img
-                        key={photoIndex}
-                        src={photo}
-                        alt={`Day ${index + 1} photo ${photoIndex + 1}`}
-                        className="rounded-lg shadow-md"
-                      />
-                    ))}
+                          <img
+                            key={photoIndex}
+                            src={photo}
+                            alt={`Day ${index + 1} photo ${photoIndex + 1}`}
+                            className="rounded-lg shadow-md"
+                          />
+                        ))}
                       </div>
                     </div>
                   ))}
@@ -221,7 +223,7 @@ export default function AdminPackage() {
                       <ul className="list-disc list-inside space-y-1">
                         {hotel?.hotelDetails?.map((detail, detailIndex) => (
                           <li key={detailIndex} className="text-gray-700">
-                             {detail.hotelName}
+                            {detail.hotelName}
                           </li>
                         ))}
                       </ul>
@@ -265,7 +267,13 @@ export default function AdminPackage() {
               </div>
             </div>
           ) : (
-            <EditPackage setEditPackage={setEditPackage} setSelectedId={setSelectedId} id={selectedId} updateById={updateById} initialData={data} />
+            <EditPackage
+              setEditPackage={setEditPackage}
+              setSelectedId={setSelectedId}
+              id={selectedId}
+              updateById={updateById}
+              initialData={data}
+            />
           )}
         </>
       )}

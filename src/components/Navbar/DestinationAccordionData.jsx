@@ -36,6 +36,13 @@ export const Destination = {
   ],
 };
 
+export const FlatDestinations = Destination.description.flatMap((region) =>
+  region.destinations.map((destination) => ({
+    region: region.region,
+    name: destination.name,
+  }))
+);
+
 export const NavbarData = [
   {
     title: "My trips",

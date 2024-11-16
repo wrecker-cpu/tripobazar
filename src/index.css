@@ -14,7 +14,7 @@
   cursor: pointer;
   position: relative; /* Set relative position */
 }
-
+*{ box-sizing: border-box;}
 /* Inner circle to create space between background and border */
 .custom-radio:before {
   content: "";

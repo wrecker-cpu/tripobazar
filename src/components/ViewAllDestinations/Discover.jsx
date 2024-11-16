@@ -1,30 +1,28 @@
 import React from "react";
 import image1 from "../../assets/aboutus/image1over.jpg";
 import image2 from "../../assets/aboutus/image2over.jpg";
-function Discover() {
+function Discover({ data }) {
   return (
     <div>
       <section className="w-[90%] mt-5 mx-auto h-auto mb-7  bg-[#F8F8F8] flex flex-col md:flex-row ">
         {/* First Div */}
         <div className="flex-1 flex flex-col justify-center items-start mb-6 md:mb-0 md:pr-6">
           <h1 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold">
-            Discover <span>Africa</span>
+            Discover <span>{data?.CountryName}</span>
           </h1>
 
           <p className="text-black mt-4 text-sm sm:text-base lg:text-lg">
-            Explore the vibrant rhythms of Africa, where ancient cultures blend
-            with modern cities under endless skies. From the vast savannas of
-            the Serengeti to the bustling markets of Marrakech, embark on a
-            journey of discovery through breathtaking landscapes and rich
-            heritage. Experience the warmth of its people, the roar of majestic
-            wildlife, and the kaleidoscope of colors that paint this diverse
-            continent. Africa awaits, ready to enchant and inspire your soul.
+            Embark on an unforgettable journey through <span>{data?.CountryName}</span>, a country where
+            ancient traditions and modern life seamlessly blend. 
+            Explore breathtaking landscapes, bustling cities, and rich cultures
+            that have shaped this diverse land for centuries. Feel the warmth of
+            <span>{data?.CountryName}’s</span> people, whose stories and heritage are passed down through
+            generations.
           </p>
           <div className="mt-4 flex flex-wrap gap-4">
             <button className="bg-[#03B58B] text-white hover:text-[#03B58B] hover:bg-white px-4 py-2 rounded shadow">
-            Customize Plan
+              Customize Plan
             </button>
-      
           </div>
         </div>
 

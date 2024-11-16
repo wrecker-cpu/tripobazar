@@ -22,7 +22,7 @@ function ViewAllDestination() {
       <SrchDestinationCountry data={data} />
       <SubNavofViewall />
       <CardSection data={data} />
-      <Discover />
+      <Discover data={data} />
     </div>
   );
 }

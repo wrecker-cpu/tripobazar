@@ -6,12 +6,13 @@ import { FaSearch } from "react-icons/fa"; // Importing icons
 import HamburgerSvg from "../../../svgs/HamburgerSvg";
 import LargeDeviceSidebar from "./LargeDeviceSidebar";
 import SideHamBurgerMenu from "./SideHamBurgerMenu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { IoIosArrowDown } from "react-icons/io";
 import MenuSvg from "../../../svgs/MenuSvg";
 
 import TransitionLink from "../../../utils/TransitionLink";
+import { Destination, NavbarData } from "./DestinationAccordionData";
 
 const Navbar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -19,63 +20,14 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // New state for large device sidebar
   const [userData, setUserData] = useState(null);
-  const downRef = useRef(null);
+  const downRef = useRef([]);
+  const navigate = useNavigate();
 
-  const Destination = {
-    description: [
-      {
-        region: "India",
-        destinations: [
-          { name: "Kerala" },
-          { name: "Leh-Ladakh" },
-          { name: "Himachal" },
-          { name: "Rajasthan" },
-          { name: "Uttarakhand" },
-          { name: "Sikkim" },
-          { name: "North Kerala" },
-          { name: "Dholavira" },
-        ],
-      },
-      {
-        region: "Asia",
-        destinations: [{ name: "Vietnam" }],
-      },
-      {
-        region: "Australia",
-        destinations: [{ name: "Australia" }],
-      },
-      {
-        region: "Africa",
-        destinations: [{ name: "Egypt" }],
-      },
-      {
-        region: "Europe",
-        destinations: [{ name: "Georgia" }],
-      },
-      {
-        region: "Middle East",
-        destinations: [{ name: "Saudi Arabia" }],
-      },
-    ],
-  };
+ 
 
-  const NavbarData = [
-    {
-      title: "My trips",
-      description: [{ name: "New packages" }, { name: "Latest Offer" }],
-    },
-    {
-      title: "Whats new",
-      description: [{ name: "Fixed Plants" }],
-    },
-  ];
 
-  const toggleSearch = () => {
-    setIsSearchVisible((prev) => !prev);
-  };
-
-  const toggleDestinations = (idx) => {
-    setOpenDropdownIndex((prevIndex) => (prevIndex === idx ? null : idx));
+  const toggleDestinations = (index) => {
+    setOpenDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
   const toggleMenu = () => {
@@ -117,20 +69,28 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (downRef.current && !downRef.current.contains(e.target)) {
+      // Check if the clicked target is outside any dropdown
+      if (
+        downRef.current &&
+        !Object.values(downRef.current).some(
+          (ref) => ref && ref.contains(e.target)
+        )
+      ) {
         setOpenDropdownIndex(null);
       }
     };
 
+    // Add event listener to handle outside clicks
     document.addEventListener("mousedown", handleClickOutside);
 
+    // Cleanup the event listener
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [downRef]);
+  }, []);
 
   return (
-    <div className="relative overflow-hidden max-w-[1920px] mx-auto">
+    <div className="relative  max-w-[1920px] mx-auto">
       <div className="z-20  sticky top-0  border-b bg-white mx-auto">
         <nav
           className={`bg-white flex items-center justify-between py-4  relative w-[90%] mx-auto`}
@@ -156,22 +116,19 @@ const Navbar = () => {
             )}
             <div className="flex flex-row justify-between gap-6">
               <div className="relative">
-                <button className="flex text-sm uppercase justify-center items-center">
+                <button
+                  className="flex text-sm uppercase justify-center items-center"
+                  onClick={() => toggleDestinations(-1)}
+                >
                   <TransitionLink to="/destination">
-                    {" "}
                     Destinations
                   </TransitionLink>
-                  <IoIosArrowDown
-                    onClick={() => toggleDestinations(-1)}
-                    className="w-5 pl-1 text-med-green h-5"
-                  />
+                  <IoIosArrowDown className="w-5 pl-1 text-med-green h-5" />
                 </button>
                 <div
-                  ref={downRef}
+                  ref={(el) => (downRef.current[-1] = el)}
                   style={{
-                    visibility: `${
-                      openDropdownIndex === -1 ? "visible" : "hidden"
-                    }`,
+                    visibility: openDropdownIndex === -1 ? "visible" : "hidden",
                   }}
                   className={`absolute z-20 w-max transition-opacity ease-in-out duration-300 left-0 mt-2 bg-white shadow-md border rounded-md ${
                     openDropdownIndex === -1
@@ -179,7 +136,7 @@ const Navbar = () => {
                       : "opacity-0 pointer-events-none"
                   }`}
                 >
-                  <div className="flex flex-row flex-wrap gap-4 p-2">
+                  <div className="flex flex-row z-30 flex-wrap gap-4 p-2">
                     {Destination.description.map((region, idx) => (
                       <div key={idx} className="flex flex-col">
                         <h3 className="text-sm font-semibold text-med-green uppercase mb-1 border-b-2 border-med-green">
@@ -189,6 +146,12 @@ const Navbar = () => {
                           {region.destinations.map((destination, destIdx) => (
                             <li
                               key={destIdx}
+                              onClick={() => {
+                                setOpenDropdownIndex(null);
+                                navigate(
+                                  `/destination/${region.region}/${destination.name}`
+                                );
+                              }}
                               className="py-1 text-sm cursor-pointer border-b-2 border-transparent hover:border-med-green transition-all duration-200"
                             >
                               {destination.name}
@@ -201,45 +164,41 @@ const Navbar = () => {
                 </div>
               </div>
 
-              {NavbarData.map((item, idx) => {
-                return (
-                  <div key={idx} className="relative">
-                    <button
-                      onClick={() => toggleDestinations(idx)}
-                      className="flex text-sm uppercase justify-center items-center"
-                    >
-                      {item.title}
-                      <IoIosArrowDown className="w-5 pl-1 text-med-green h-5" />
-                    </button>
-                    <div
-                      ref={downRef}
-                      style={{
-                        visibility: `${
-                          openDropdownIndex === idx ? "visible" : "hidden"
-                        }`,
-                      }}
-                      className={`absolute z-20 w-[160px] transition-opacity ease-in-out duration-300 left-0 mt-2 bg-white shadow-md border rounded-md ${
-                        openDropdownIndex === idx
-                          ? "opacity-100"
-                          : "opacity-0 pointer-events-none"
-                      }`}
-                    >
-                      <ul className="p-2 whitespace-nowrap">
-                        {item.description.map((liItems, idx) => {
-                          return (
-                            <li
-                              key={idx}
-                              className="py-1 text-sm cursor-pointer border-b-2 border-transparent hover:border-med-green transition-all duration-200"
-                            >
-                              {liItems.name}
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
+              {NavbarData.map((item, idx) => (
+                <div key={idx} className="relative">
+                  <button
+                    onClick={() => toggleDestinations(idx)}
+                    className="flex text-sm uppercase justify-center items-center"
+                  >
+                    {item.title}
+                    <IoIosArrowDown className="w-5 pl-1 text-med-green h-5" />
+                  </button>
+                  <div
+                    ref={(el) => (downRef.current[idx] = el)}
+                    style={{
+                      visibility:
+                        openDropdownIndex === idx ? "visible" : "hidden",
+                    }}
+                    className={`absolute z-20 w-[160px] transition-opacity ease-in-out duration-300 left-0 mt-2 bg-white shadow-md border rounded-md ${
+                      openDropdownIndex === idx
+                        ? "opacity-100"
+                        : "opacity-0 pointer-events-none"
+                    }`}
+                  >
+                    <ul className="p-2 whitespace-nowrap">
+                      {item.description.map((liItems, liIdx) => (
+                        <li
+                          key={liIdx}
+                          onClick={() => console.log("Clicked")}
+                          className="py-1 text-sm cursor-pointer border-b-2 border-transparent hover:border-med-green transition-all duration-200"
+                        >
+                          {liItems.name}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
           </div>
 
@@ -313,6 +272,7 @@ const Navbar = () => {
         <SideHamBurgerMenu
           hideMenu={hideMenu}
           toggleMenu={toggleMenu}
+          setIsMenuOpen={setIsMenuOpen}
           isMenuOpen={isMenuOpen}
         />
       </div>

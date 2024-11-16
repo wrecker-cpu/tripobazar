@@ -2,15 +2,14 @@ import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 const CardSection = ({ data }) => {
-
-  const { country } = useParams(); 
+  const { country } = useParams();
 
   const [liked, setLiked] = useState(Array(8).fill(false)); // Initial state for heart toggle
 
   const toggleHeart = (index) => {
     setLiked(liked.map((item, i) => (i === index ? !item : item)));
   };
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   return (
     <section className="relative  bg-cover bg-opacity-0 px-5 p-11">
@@ -22,7 +21,9 @@ const CardSection = ({ data }) => {
           return (
             <div
               key={index}
-              onClick={()=>{navigate(`/destination/${country}/${card.StateName}`)}}
+              onClick={() => {
+                navigate(`/destination/${country}/${card.StateName}`);
+              }}
               className="relative border hover:cursor-pointer group rounded-lg overflow-hidden shadow-lg"
             >
               {/* Image */}
@@ -35,8 +36,8 @@ const CardSection = ({ data }) => {
               </div>
 
               {/* Top left tag */}
-              <p className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded">
-                {card.StateName}
+              <p className="absolute top-0 left-0 bg-green-500 text-white px-3 py-2 rounded-br-md">
+                ₹ 73,650 onwards
               </p>
 
               {/* Heart icon */}

@@ -55,7 +55,7 @@ const LargeDeviceSidebar = ({ isSidebarOpen, closeSidebar }) => {
         isSidebarOpen
           ? "translate-x-0 opacity-100 visible"
           : "-translate-x-full opacity-0 invisible"
-      } overflow-y-auto`}
+      } `}
     >
       <div className="flex items-center w-full relative h-[680px]">
         <button

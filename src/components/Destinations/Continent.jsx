@@ -18,14 +18,6 @@ function Continent() {
     "https://tripobazar-backend.vercel.app/api/continent"
   );
 
-  console.log(data);
-
-  const cards = Array(8).fill({
-    imgSrc: "src/assets/africa-bg-2.png",
-    topLeftText: "₹ 78,999 onwards",
-    bottomText: "India",
-  });
-
   const toggleHeart = (index) => {
     setLiked(liked.map((item, i) => (i === index ? !item : item)));
   };
@@ -100,7 +92,9 @@ function Continent() {
                   {item?.Countries?.map((card, index) => (
                     <div
                       key={index}
-                      onClick={() => navigate(`/destination/${card.CountryName}`)}
+                      onClick={() =>
+                        navigate(`/destination/${card.CountryName}`)
+                      }
                       className="relative h-[260px] cursor-pointer sm:h-[300px] md:h-[360px] min-w-[200px] sm:min-w-[250px] md:min-w-[350px] rounded-lg overflow-hidden shadow-lg"
                     >
                       {/* Image */}
@@ -111,8 +105,8 @@ function Continent() {
                       />
 
                       {/* Top left tag */}
-                      <p className="absolute top-0 text-sm sm:text-lg md:text-xl left-0 bg-green-500 text-white px-2 py-1 rounded">
-                        {card.topLeftText}
+                      <p className="absolute top-0  text-base  left-0 bg-green-500 text-white px-3 py-2 rounded-br-md">
+                        ₹ 73,650 onwards
                       </p>
 
                       {/* Heart icon */}

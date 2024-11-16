@@ -2,16 +2,21 @@ import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
+import { Destination } from "./DestinationAccordionData";
+
+import MultiDesitinationDropdown from "./MultiDesitinationDropdown";
+import MultilevelDropdown from "./MultiLevelDropdown";
 
 export default function SideHamBurgerMenu({
   toggleMenu,
   isMenuOpen,
   hideMenu,
+  setIsMenuOpen,
 }) {
   const data = [
-    { name: "Destinations", link: "/destination" },
-    { name: "What's new", link: "/" },
-    { name: "My trips", link: "/" },
+    // { name: "Destinations", link: "/destination" },
+    // { name: "What's new", link: "/" },
+    // { name: "My trips", link: "/" },
     { name: "About Us", link: "/aboutus" },
     { name: "Travel Tips", link: "/traveltips" },
     { name: "Visas", link: "/" },
@@ -111,6 +116,12 @@ export default function SideHamBurgerMenu({
 
           {/* Scrollable Options List */}
           <div className="flex flex-col overflow-y-auto py-4">
+            <MultiDesitinationDropdown
+              setIsMenuOpen={setIsMenuOpen}
+              Destination={Destination}
+            />
+            <MultilevelDropdown/>
+
             {data.map((item, idx) => (
               <Link
                 to={item.link}

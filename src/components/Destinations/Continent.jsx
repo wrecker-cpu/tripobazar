@@ -107,7 +107,7 @@ function Continent() {
 
                       {/* Top left tag */}
                       <p className="absolute top-0  text-base  left-0 bg-green-500 text-white px-3 py-2 rounded-br-md">
-                        ₹ 73,650 onwards
+                        ₹ {card.States[0]?.Packages[0]?.price} onwards
                       </p>
 
                       {/* Heart icon */}

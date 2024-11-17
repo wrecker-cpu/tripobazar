@@ -51,9 +51,9 @@ function Footer() {
 
           {/* Subscribe Section */}
           <div className="mb-2">
-            <h4 className="text-[#03B58B]  font-semibold">
+            <h4 className="text-[#03B58B] mr-1 font-semibold">
               Subscribe
-              <span className="text-gray-700">to get exclusive deals</span>
+              <span className="text-gray-700"> to get exclusive deals</span>
             </h4>
           </div>
 

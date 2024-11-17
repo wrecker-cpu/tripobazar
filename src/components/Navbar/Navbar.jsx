@@ -23,9 +23,6 @@ const Navbar = () => {
   const downRef = useRef([]);
   const navigate = useNavigate();
 
- 
-
-
   const toggleDestinations = (index) => {
     setOpenDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
   };
@@ -116,14 +113,14 @@ const Navbar = () => {
             )}
             <div className="flex flex-row justify-between gap-6">
               <div className="relative">
-                <button
-                  className="flex text-sm uppercase justify-center items-center"
-                  onClick={() => toggleDestinations(-1)}
-                >
+                <button className="flex text-sm uppercase justify-center items-center">
                   <TransitionLink to="/destination">
                     Destinations
                   </TransitionLink>
-                  <IoIosArrowDown className="w-5 pl-1 text-med-green h-5" />
+                  <IoIosArrowDown
+                    onClick={() => toggleDestinations(-1)}
+                    className="w-5 pl-1 text-med-green h-5"
+                  />
                 </button>
                 <div
                   ref={(el) => (downRef.current[-1] = el)}

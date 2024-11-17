@@ -9,12 +9,25 @@ import img3 from "../../assets/CountryDestination/sm-imgthree.svg";
 import img4 from "../../assets/CountryDestination/sm-img-4.svg";
 import img5 from "../../assets/CountryDestination/sm-img-5.svg";
 import img6 from "../../assets/CountryDestination/sm-img-6.svg";
-function CountryPakages({ data }) {
+import { useParams } from "react-router-dom";
+function CountryPakages({ data, error }) {
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
+  const { state } = useParams();
 
   const images = [img1, img2, img3, img4, img5, img6]; // Array of image sources
-
+  if (error) {
+    return (
+      <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100 text-center">
+        <h2 className="text-4xl font-extrabold text-gray-800 mb-4">
+          Packages for {state} will be coming soon
+        </h2>
+        <p className="text-lg text-gray-500">
+          Stay tuned for the latest updates on {state} travel packages!
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="w-full flex gap-4 bg-transparent p-4">
       {/* First Part - Existing Component */}

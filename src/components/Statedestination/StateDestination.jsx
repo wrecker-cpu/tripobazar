@@ -11,20 +11,12 @@ import Loader from "../Loader.jsx";
 function StateDestination() {
   const { state } = useParams();
 
-  const { data, loading } = useFetch(
+  const { data, loading, error } = useFetch(
     `https://tripobazar-backend.vercel.app/api/state/name/${state}`
   );
-  const [stateData, setStateData] = useState(null);
+  // Runs when 'data' changes
 
-  // Effect to update the stateData once useFetch fetches data
-  useEffect(() => {
-    if (data) {
-      setStateData(data); // Initialize stateData with the fetched data
-      console.log("runs");
-    }
-  }, [data]); // Runs when 'data' changes
-
-  if (loading || !stateData) {
+  if (loading) {
     return <Loader />;
   }
 
@@ -35,7 +27,7 @@ function StateDestination() {
       </div>
 
       <SubNavCountry />
-      <CountryPakages data={stateData} />
+      <CountryPakages data={data} error={error} />
       <StealDealPakage />
       <PopulerActivity />
     </div>

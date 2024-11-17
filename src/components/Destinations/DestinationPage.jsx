@@ -1,9 +1,11 @@
 import React from "react";
-
+import { Route, Routes, } from "react-router-dom";
 import DestinationTitle from "./DestinationTitle";
 import SubNavsDestination from "./SubNavsDestination";
-import SearchDestinationPage from "../SearchDestination/SearchDestinationPage";
-import Continent from "./Continent";
+
+import AllContinent from "./AllContinent";
+import OneContinent from "./OneContinent/OneContinent";
+
 
 export default function DestinationPage() {
   return (
@@ -11,8 +13,16 @@ export default function DestinationPage() {
    
       <DestinationTitle />
       <SubNavsDestination />
-      <SearchDestinationPage />
-      <Continent/>
+      <Routes>
+          <Route path="/" element={<AllContinent/>} />
+          <Route path="onecontinent" element={<OneContinent/>} />
+        
+
+          {/* Add more routes as needed */}
+        </Routes>
+      {/* <AllContinent/>
+      <OneContinent/> */}
+      
     </div>
   );
 }

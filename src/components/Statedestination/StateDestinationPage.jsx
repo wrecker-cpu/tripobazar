@@ -8,7 +8,7 @@ import useFetch from "../../../hooks/useFetch.jsx";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader.jsx";
 
-function StateDestination() {
+function StateDestinationPage() {
   const { state } = useParams();
 
   const { data, loading, error } = useFetch(
@@ -34,4 +34,4 @@ function StateDestination() {
   );
 }
 
-export default StateDestination;
+export default StateDestinationPage;

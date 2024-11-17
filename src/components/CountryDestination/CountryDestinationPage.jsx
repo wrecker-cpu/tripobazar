@@ -6,7 +6,7 @@ import CardSection from "./CardSection";
 import Discover from "./Discover";
 import useFetch from "../../../hooks/useFetch";
 import Loader from "../Loader";
-function CountryDestination() {
+function CountryDestinationPage() {
   const { country } = useParams();
 
   const { data, loading, error } = useFetch(
@@ -27,4 +27,4 @@ function CountryDestination() {
   );
 }
 
-export default CountryDestination;
+export default CountryDestinationPage;

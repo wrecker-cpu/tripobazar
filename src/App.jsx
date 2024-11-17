@@ -22,7 +22,7 @@ import DestinationPage from "./components/Destinations/DestinationPage";
 import TravelTips from "./components/Travel-Tips/TravelTips";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import StateDestination from "./components/Statedestination/StateDestination";
-import CountryDestination from "./components/CountryDestination/CountryDestination.jsx";
+import CountryDestination from "./components/CountryDestination/CountryDestination";
 
 function App() {
   const location = useLocation(); // Get the current route

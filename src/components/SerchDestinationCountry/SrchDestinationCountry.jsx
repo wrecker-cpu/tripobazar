@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import image from "../../assets/africa-bg.jpg";
 import BreadCrumbsLink from "../../../utils/BreadCrumbsLink";
 import FilterBox from "../FilterBox/FilterBox";
-function SrchDestinationCountry({data}) {
+function SrchDestinationCountry({country}) {
   const [guests, setGuests] = useState(1);
   const incrementGuests = () => setGuests(guests + 1);
   const decrementGuests = () => setGuests(guests > 1 ? guests - 1 : 1);
@@ -21,7 +21,7 @@ function SrchDestinationCountry({data}) {
         <div className="flex absolute z-0 -bottom-[420px] left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col py-20 w-[90%] mx-auto justify-center items-center">
           <div >
             <h2 className="text-xl  uppercase esm:text-2xl traking-[0] lg:tracking-[6rem] text-white ew:text-[] sm:text-[4rem] leading-[120px] lg:mb-4 text-center font-bold">
-              {data?.CountryName}
+              {country}
             </h2>
           </div>
           <div className="w-[90%] max-w-[1720px]   h-auto p-4 md:p-16 bg-[#f8f8f8] shadow-lg rounded-lg mx-auto top-[43rem] sm:top-[42rem]  md:top-[19rem] lg:top-[5rem] lg:mt-[-2rem] relative ">

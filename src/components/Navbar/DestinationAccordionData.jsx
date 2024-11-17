@@ -15,11 +15,11 @@ export const Destination = {
     },
     {
       region: "Asia",
-      destinations: [{ name: "Vietnam" }],
+      destinations: [{ name: "Vietnam" }, { name: "India" }],
     },
     {
       region: "Australia",
-      destinations: [{ name: "Australia" }],
+      destinations: [{ name: "Sydney" }],
     },
     {
       region: "Africa",

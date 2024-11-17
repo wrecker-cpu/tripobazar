@@ -1,24 +1,35 @@
-import React from 'react'
+import React from "react";
 
-import SrchDestinationCountry from '../../SerchDestinationCountry/SrchDestinationCountry';
-import CrousalSection from './CrousalSection';
-import StealDealPakage from '../../Countrydestination/StealDealPakage';
-import LastPart from './LastPart';
-import PopulerPackages from './PopulerPackages';
+import SrchDestinationCountry from "../../SerchDestinationCountry/SrchDestinationCountry";
+import CrousalSection from "./CrousalSection";
+import StealDealPakage from "../../Statedestination/StealDealPakage";
+import LastPart from "./LastPart";
+import Loader from "../../Loader";
+import { useParams } from "react-router-dom";
 
+function OneContinent({ data, loading }) {
+  // Filter data based on the route parameter
 
-function OneContinent() {
- 
+  const { item } = useParams();
+
+  const filteredData = data?.filter(
+    (continent) => continent.ContinentName.toLowerCase() === item?.toLowerCase()
+  );
+
+  const firstContinent = filteredData?.[0];
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div>
-<SrchDestinationCountry/>
-<CrousalSection/>
-{/* <PopulerPackages/> */}
-<StealDealPakage/>
-<LastPart/>
-        </div>
-  )
+      <SrchDestinationCountry />
+      <CrousalSection selectedDestination={firstContinent} />
+      <StealDealPakage />
+      <LastPart />
+    </div>
+  );
 }
 
-export default OneContinent
+export default OneContinent;

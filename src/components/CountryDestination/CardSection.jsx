@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
-const CardSection = ({ data }) => {
-  const { country } = useParams();
+const CardSection = ({ data, error }) => {
+  const { continent, country } = useParams();
 
   const [liked, setLiked] = useState(Array(8).fill(false)); // Initial state for heart toggle
 
@@ -10,6 +10,20 @@ const CardSection = ({ data }) => {
     setLiked(liked.map((item, i) => (i === index ? !item : item)));
   };
   const navigate = useNavigate();
+
+  if (error) {
+    return (
+      <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100 text-center">
+        <h2 className="text-4xl font-extrabold text-gray-800 mb-4">
+          Packages for {country} will be coming soon
+        </h2>
+        <p className="text-lg text-gray-500">
+          Stay tuned for the latest updates on {country} travel packages!
+        </p>
+      </div>
+    );
+  }
+
 
   return (
     <section className="relative  bg-cover bg-opacity-0 px-5 p-11">
@@ -22,7 +36,9 @@ const CardSection = ({ data }) => {
             <div
               key={index}
               onClick={() => {
-                navigate(`/destination/${country}/${card.StateName}`);
+                navigate(
+                  `/destination/${continent}/${country}/${card.StateName}`
+                );
               }}
               className="relative border hover:cursor-pointer group rounded-lg overflow-hidden shadow-lg"
             >

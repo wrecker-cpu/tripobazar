@@ -145,9 +145,12 @@ const Navbar = () => {
                               key={destIdx}
                               onClick={() => {
                                 setOpenDropdownIndex(null);
-                                navigate(
-                                  `/destination/${region.region}/${destination.name}`
-                                );
+                                let navigatePath =
+                                  region.region === "India"
+                                    ? `/destination/asia/${region.region}/${destination.name}`
+                                    : `/destination/${region.region.toLowerCase()}/${destination.name.toLowerCase()}`;
+
+                                navigate(navigatePath);
                               }}
                               className="py-1 text-sm cursor-pointer border-b-2 border-transparent hover:border-med-green transition-all duration-200"
                             >

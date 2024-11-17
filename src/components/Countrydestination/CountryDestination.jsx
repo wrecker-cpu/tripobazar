@@ -1,43 +1,28 @@
-import React, { useEffect, useState } from "react";
-import BreadCrumbsLink from "../../../utils/BreadCrumbsLink";
-import SubNavCountry from "./SubNavCountry";
-import CountryPakages from "./CountryPakages";
-import StealDealPakage from "./StealDealPakage.jsx";
-import PopulerActivity from "./PopulerActivity.jsx";
-import useFetch from "../../../hooks/useFetch.jsx";
+import React from "react";
 import { useParams } from "react-router-dom";
-import Loader from "../Loader.jsx";
-
+import SrchDestinationCountry from "../SerchDestinationCountry/SrchDestinationCountry";
+import SubNavofViewall from "./SubNavofViewall";
+import CardSection from "./CardSection";
+import Discover from "./Discover";
+import useFetch from "../../../hooks/useFetch";
+import Loader from "../Loader";
 function CountryDestination() {
-  const { state } = useParams();
+  const { country } = useParams();
 
-  const { data, loading } = useFetch(
-    `https://tripobazar-backend.vercel.app/api/state/name/${state}`
+  const { data, loading, error } = useFetch(
+    `https://tripobazar-backend.vercel.app/api/country/name/${country}`
   );
-  const [stateData, setStateData] = useState(null);
 
-  // Effect to update the stateData once useFetch fetches data
-  useEffect(() => {
-    if (data) {
-      setStateData(data); // Initialize stateData with the fetched data
-      console.log("runs");
-    }
-  }, [data]); // Runs when 'data' changes
-
-  if (loading || !stateData) {
+  if (loading) {
     return <Loader />;
   }
 
   return (
-    <div className="w-full h-full">
-      <div className="w-[90%] mx-auto py-2">
-        <BreadCrumbsLink />
-      </div>
-
-      <SubNavCountry />
-      <CountryPakages data={stateData} />
-      <StealDealPakage />
-      <PopulerActivity />
+    <div className="max-w-[1920px]  mx-auto">
+      <SrchDestinationCountry country={country} />
+      <SubNavofViewall />
+      <CardSection data={data} error={error} />
+      <Discover data={data} />
     </div>
   );
 }

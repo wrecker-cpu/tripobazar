@@ -12,7 +12,7 @@ function SrchDestinationCountry({data}) {
   const [showModal, setShowModal] = useState(false); 
   const toggleModal = () => setShowModal(!showModal);
   return (
-    <div className="  rounded-b-3xl  font-poppins">
+    <div className="  rounded-b-3xl   font-poppins">
         <div className="w-[90%] mx-auto   py-2">
           <BreadCrumbsLink/>
         </div>
@@ -24,9 +24,9 @@ function SrchDestinationCountry({data}) {
               {data?.CountryName}
             </h2>
           </div>
-          <div className="w-[90%] max-w-[1720px]   h-auto p-4 md:p-16 bg-[#f8f8f8] shadow-lg rounded-lg mx-auto top-[43rem] sm:top-[42rem]  md:top-[19rem] lg:top-[5rem] lg:mt-[-2rem] relative z-10">
+          <div className="w-[90%] max-w-[1720px]   h-auto p-4 md:p-16 bg-[#f8f8f8] shadow-lg rounded-lg mx-auto top-[43rem] sm:top-[42rem]  md:top-[19rem] lg:top-[5rem] lg:mt-[-2rem] relative ">
         {/* Starting Location and Destination Inputs */}
-        <div className="flex flex-col md:flex-row items-center jusitfy-between gap-4">
+        <div className="flex  flex-col md:flex-row items-center jusitfy-between gap-4">
           <div className="flex items-center border bg-[#f8f8f8] rounded-md py-3 px-2 w-full">
             <input
               type="text"

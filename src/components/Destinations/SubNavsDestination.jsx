@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function SubNavsDestination() {
-  const sections = ["All", "Asia", "Saudi Arabia", "Europe", "Vietnam"];
+  const sections = ["All", "Asia", "AFRICA", "AUSTRALIA", "NORTH AMERICA", "SOUTH AMERICA"];
 
   return (
     <nav className="bg-white sticky top-0 z-[19] shadow-inner">

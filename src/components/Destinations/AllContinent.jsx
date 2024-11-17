@@ -9,7 +9,9 @@ import {
 } from "react-icons/fa";
 import useFetch from "../../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
-function Continent() {
+import SrchDestinationCountry from "../SerchDestinationCountry/SrchDestinationCountry";
+import SearchDestinationPage from "../SearchDestination/SearchDestinationPage";
+function AllContinent() {
   const [liked, setLiked] = useState(Array(8).fill(false)); // Initial state for heart toggle
   const carouselRef = useRef(null); // Reference for the carousel container
   const navigate = useNavigate();
@@ -42,6 +44,8 @@ function Continent() {
   }
 
   return (
+  <>
+  <SearchDestinationPage/>
     <div className="overflow-hidden w-full">
       {data?.map((item, idx) => (
         <section
@@ -131,7 +135,8 @@ function Continent() {
         </section>
       ))}
     </div>
+    </>
   );
 }
 
-export default Continent;
+export default AllContinent;

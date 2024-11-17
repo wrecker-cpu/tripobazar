@@ -2,8 +2,10 @@ import React from "react";
 
 import DestinationTitle from "./DestinationTitle";
 import SubNavsDestination from "./SubNavsDestination";
-import SearchDestinationPage from "../SearchDestination/SearchDestinationPage";
-import Continent from "./Continent";
+
+import AllContinent from "./AllContinent";
+import OneContinent from "./OneContinent/OneContinent";
+
 
 export default function DestinationPage() {
   return (
@@ -11,8 +13,10 @@ export default function DestinationPage() {
    
       <DestinationTitle />
       <SubNavsDestination />
-      <SearchDestinationPage />
-      <Continent/>
+  
+      {/* <AllContinent/> */}
+      <OneContinent/>
+      
     </div>
   );
 }

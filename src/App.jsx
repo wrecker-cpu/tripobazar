@@ -47,11 +47,10 @@ function App() {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/searchpage" element={<SearchDestinationPage />} />
           <Route path="/aboutus/careers" element={<CareersPage />} />
-          <Route path="/destination" element={<DestinationPage />} />
+          <Route path="/destination/*" element={<DestinationPage />} />
           <Route path="/traveltips" element={<TravelTips />} />
           <Route path="/adminpanel/*" element={<AdminPanel />} />
-          <Route path="/destination/:country" element={<ViewAllDestination />} />
-          <Route path="/destination/:country/:state" element={<CountryDestination />} />
+      
         </Route>
       </Routes>
       {/* Conditionally show the Footer based on the current route */}

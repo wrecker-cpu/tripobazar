@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Route, Routes, } from "react-router-dom";
 import DestinationTitle from "./DestinationTitle";
 import SubNavsDestination from "./SubNavsDestination";
 
@@ -13,9 +13,15 @@ export default function DestinationPage() {
    
       <DestinationTitle />
       <SubNavsDestination />
-  
-      {/* <AllContinent/> */}
-      <OneContinent/>
+      <Routes>
+          <Route path="/" element={<AllContinent/>} />
+          <Route path="onecontinent" element={<OneContinent/>} />
+        
+
+          {/* Add more routes as needed */}
+        </Routes>
+      {/* <AllContinent/>
+      <OneContinent/> */}
       
     </div>
   );

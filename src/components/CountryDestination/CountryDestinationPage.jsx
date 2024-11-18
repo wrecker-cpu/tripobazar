@@ -17,7 +17,6 @@ function CountryDestinationPage() {
   if (loading) {
     return <Loader />;
   }
-  console.log("this",data);
 
   return (
     <div className="max-w-[1920px]  mx-auto">

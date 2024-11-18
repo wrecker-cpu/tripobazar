@@ -23,6 +23,7 @@ import TravelTips from "./components/Travel-Tips/TravelTips";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import CountryDestinationPage from "./components/CountryDestination/CountryDestinationPage";
 import StateDestinationPage from "./components/Statedestination/StateDestinationPage";
+import { SearchProvider } from "../context/SearchContext";
 
 function App() {
   const location = useLocation(); // Get the current route
@@ -68,9 +69,11 @@ function App() {
 
 function AppWithRouter() {
   return (
-    <Router>
-      <App />
-    </Router>
+    <SearchProvider>
+      <Router>
+        <App />
+      </Router>
+    </SearchProvider>
   );
 }
 

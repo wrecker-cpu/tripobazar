@@ -18,7 +18,7 @@ function CountryPakages({ data, error, state }) {
 
   if (error) {
     return (
-      <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100 text-center">
+      <div className="w-full h-auto flex flex-col justify-center items-center bg-gray-100 text-center">
         <h2 className="text-4xl font-extrabold text-gray-800 mb-4">
           Packages for {state} will be coming soon
         </h2>

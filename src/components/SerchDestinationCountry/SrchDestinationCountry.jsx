@@ -1,52 +1,145 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import FilterSvg from "../../../svgs/FilterSvg/index";
 import DatePicker from "react-datepicker";
 import image from "../../assets/africa-bg.jpg";
 import BreadCrumbsLink from "../../../utils/BreadCrumbsLink";
 import FilterBox from "../FilterBox/FilterBox";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSearch } from "../../../context/SearchContext";
+import { FlatDestinations } from "../Navbar/DestinationAccordionData";
+
 function SrchDestinationCountry() {
-  const [guests, setGuests] = useState(1);
-  const incrementGuests = () => setGuests(guests + 1);
-  const decrementGuests = () => setGuests(guests > 1 ? guests - 1 : 1);
   const [showModal, setShowModal] = useState(false);
+  const [dropdownVisible, setDropdownVisible] = useState(false); // Initially set to false
   const toggleModal = () => setShowModal(!showModal);
-  const { item,country } = useParams();
-  console.log(item)
+  const navigate = useNavigate();
+  const { searchData, setSearchData } = useSearch();
+  const { item, country, state } = useParams();
+
+  const incrementGuests = () => {
+    setSearchData((prev) => ({
+      ...prev,
+      guests: prev.guests + 1,
+    }));
+  };
+
+  const decrementGuests = () => {
+    setSearchData((prev) => ({
+      ...prev,
+      guests: prev.guests > 1 ? prev.guests - 1 : 1,
+    }));
+  };
+
+  const filteredDestinations = FlatDestinations.filter((destination) =>
+    destination.name
+      .toLowerCase()
+      .includes(searchData.destination.toLowerCase())
+  );
+
+  // Single handleChange function
+  const handleChange = (name, value) => {
+    setSearchData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleDestinationClick = (destination) => {
+    const regionPath = destination.region;
+    const namePath = destination.name;
+
+    const path =
+      regionPath === "India"
+        ? `/destination/asia/India/${namePath}`
+        : `/destination/${regionPath}/${namePath}`;
+
+    navigate(path);
+    setDropdownVisible(false); // Hide dropdown when a destination is selected
+  };
+
+  const handleSearch = () => {
+    const selectedDestination = FlatDestinations.find(
+      (destination) =>
+        destination.name.toLowerCase() === searchData.destination.toLowerCase()
+    );
+
+    if (selectedDestination) {
+      handleDestinationClick(selectedDestination);
+    } else {
+      navigate("/");
+    }
+  };
+
+  // Show the dropdown when the input is focused
+  const handleFocus = () => setDropdownVisible(true);
+
+  // Hide the dropdown when the input loses focus
+  const handleBlur = () => setTimeout(() => setDropdownVisible(false), 200);
+
   return (
-    <div className="  rounded-b-3xl   font-poppins">
-      <div className="w-[90%] mx-auto   py-2">
+    <div className="rounded-b-3xl font-poppins">
+      <div className="w-[90%] mx-auto py-2">
         <BreadCrumbsLink />
       </div>
       <div className="w-full h-full relative">
-        <img src={image} className="w-full  h-full object-contain" />
+        <img src={image} className="w-full h-full object-contain" />
         <div className="flex absolute z-0 -bottom-[420px] left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col py-20 w-[90%] mx-auto justify-center items-center">
           <div>
-            <h2 className="text-xl  uppercase esm:text-2xl traking-[0] lg:tracking-[6rem] text-white ew:text-[] sm:text-[4rem] leading-[120px] lg:mb-4 text-center font-bold">
-              {item || country}
+            <h2 className={`text-xl uppercase esm:text-2xl traking-[0] ${state && "lg:tracking-[2rem]"} lg:tracking-[6rem] text-white ew:text-[] sm:text-[4rem] leading-[120px] lg:mb-4 text-center font-bold`}>
+              {state ? state : item || country}
             </h2>
           </div>
-          <div className="w-[90%] max-w-[1720px]   h-auto p-4 md:p-16 bg-[#f8f8f8] shadow-lg rounded-lg mx-auto top-[43rem] sm:top-[42rem]  md:top-[19rem] lg:top-[5rem] lg:mt-[-2rem] relative ">
+          <div className="w-[90%] max-w-[1720px] h-auto p-4 md:p-16 bg-[#f8f8f8] shadow-lg rounded-lg mx-auto top-[43rem] sm:top-[42rem] md:top-[19rem] lg:top-[5rem] lg:mt-[-2rem] relative ">
             {/* Starting Location and Destination Inputs */}
-            <div className="flex  flex-col md:flex-row items-center jusitfy-between gap-4">
+            <div className="flex flex-col md:flex-row items-center jusitfy-between gap-4">
               <div className="flex items-center border bg-[#f8f8f8] rounded-md py-3 px-2 w-full">
                 <input
                   type="text"
                   placeholder="Where are you starting from?"
+                  value={searchData.startLocation}
+                  onChange={(e) =>
+                    handleChange("startLocation", e.target.value)
+                  }
                   className="w-full bg-transparent focus:outline-none"
                 />
               </div>
 
               <p className="text-gray-500 font-medium">To</p>
 
-              <div className="flex items-center bg-[#f8f8f8] border rounded-md py-3 px-2  w-full">
-                {/* <img src={destinationIcon} alt="Destination" className="h-5 w-5 mr-2" /> */}
-                <input
-                  type="text"
-                  placeholder="Enter Destination"
-                  className="w-full bg-transparent focus:outline-none"
-                />
+              <div className="relative w-full">
+                <div className="flex items-center bg-[#f8f8f8] border rounded-md py-3 px-2 w-full">
+                  <input
+                    type="text"
+                    placeholder="Enter Destination"
+                    className="w-full bg-transparent focus:outline-none"
+                    value={searchData.destination}
+                    onChange={(e) =>
+                      handleChange("destination", e.target.value)
+                    }
+                    onFocus={handleFocus} // Show dropdown on focus
+                    onBlur={handleBlur} // Hide dropdown on blur
+                  />
+                </div>
+                {(searchData.destination || filteredDestinations.length > 0) &&
+                  dropdownVisible && (
+                    <ul className="mt-4 absolute bg-[#f8f8f8] rounded-md p-4 w-full z-20">
+                      {filteredDestinations.map((destination, index) => (
+                        <li
+                          key={index}
+                          onClick={() => {
+                            setSearchData((prev) => ({
+                              ...prev,
+                              destination: destination.name,
+                            }));
+                          }}
+                          className="py-2 border-b cursor-pointer"
+                        >
+                          <strong>{destination.name}</strong> -{" "}
+                          {destination.region}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
               </div>
               <div className="md:w-auto w-full flex justify-end">
                 <div className="cursor-pointer" onClick={toggleModal}>
@@ -63,6 +156,8 @@ function SrchDestinationCountry() {
                 <div className="flex items-center bg-gray-100 rounded-md p-2 h-12">
                   <DatePicker
                     placeholderText="E.g 2004-03-02"
+                    selected={searchData.startDate}
+                    onChange={(date) => handleChange("startDate", date)}
                     className="outline-2 p-2 w-full outline-med-green bg-inherit text-lg font-medium text-[#717A7C] cursor-pointer"
                     dateFormat="yyyy-MM-dd"
                     required
@@ -76,6 +171,8 @@ function SrchDestinationCountry() {
                 <div className="flex items-center bg-gray-100 rounded-md p-2 h-12">
                   <DatePicker
                     placeholderText="E.g 2004-03-02"
+                    selected={searchData.endDate}
+                    onChange={(date) => handleChange("endDate", date)}
                     className="outline-2 p-2 w-full outline-med-green bg-inherit text-lg font-medium text-[#717A7C] cursor-pointer"
                     dateFormat="yyyy-MM-dd"
                     required
@@ -94,7 +191,7 @@ function SrchDestinationCountry() {
                     -
                   </button>
                   <p className="font-medium text-[#717A7C] text-lg">
-                    {guests} guests
+                    {searchData.guests || 1} guests
                   </p>
                   <button
                     onClick={incrementGuests}
@@ -106,7 +203,10 @@ function SrchDestinationCountry() {
               </div>
 
               {/* Search Button */}
-              <button className="flex w-full text-center text-lg h-11 items-center justify-center font-medium px-4 py-2 bg-[#03B58B] text-white rounded-md">
+              <button
+                onClick={handleSearch}
+                className="flex w-full text-center text-lg h-11 items-center justify-center font-medium px-4 py-2 bg-[#03B58B] text-white rounded-md"
+              >
                 <p>Search Packages</p>
               </button>
             </div>

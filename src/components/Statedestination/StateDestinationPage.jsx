@@ -7,6 +7,7 @@ import PopulerActivity from "./PopulerActivity.jsx";
 import useFetch from "../../../hooks/useFetch.jsx";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader.jsx";
+import SrchDestinationCountry from "../SerchDestinationCountry/SrchDestinationCountry.jsx";
 
 function StateDestinationPage() {
   const { state } = useParams();
@@ -14,16 +15,14 @@ function StateDestinationPage() {
   const { data, loading, error } = useFetch(
     `https://tripobazar-backend.vercel.app/api/state/name/${state}`
   );
-  
+
   if (loading) {
     return <Loader />;
   }
 
   return (
     <div className="w-full h-full">
-      <div className="w-[90%] mx-auto py-2">
-        <BreadCrumbsLink />
-      </div>
+      <SrchDestinationCountry />
       <SubNavCountry />
       <CountryPakages data={data} error={error} state={state} />
       <StealDealPakage />

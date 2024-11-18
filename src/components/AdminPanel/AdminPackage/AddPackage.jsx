@@ -18,12 +18,10 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
       childPolicies: "",
       cancelPolicy: "",
     },
-    termsAndConditions: [
-      {
-        inclusions: "",
-        exclusions: "",
-      },
-    ],
+    termsAndConditions: {
+      inclusions: "",
+      exclusions: "",
+    },
   });
 
   const [newLocation, setNewLocation] = useState("");
@@ -143,9 +141,9 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
     try {
       await addNew(data);
       setIsAddingPackage(false);
-    //   setSelectedId(null);
-    //   setEditPackage(false);
-    //   setHotelDetails(null);
+      //   setSelectedId(null);
+      //   setEditPackage(false);
+      //   setHotelDetails(null);
       console.log(data);
       setData({
         title: "",
@@ -473,7 +471,7 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
               value={data.specialInstruction}
               onChange={(e) => {
                 handleChange(e);
-                handleAutoResize(); // Adjust height as user types
+                // handleAutoResize(); // Adjust height as user types
               }}
               ref={(el) => textareasRef.current.push(el)}
               className="text-gray-700 whitespace-pre-line w-full resize-none overflow-hidden"
@@ -491,6 +489,21 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
               className="text-gray-700 whitespace-pre-line w-full"
             />
           </section>
+
+           {/*Things to maintain*/}
+        <section className="mb-8">
+          <h2 className="text-2xl font-bold mb-4">Things to maintain</h2>
+          <textarea
+            name="thingsToMaintain"
+            value={data.thingsToMaintain}
+            onChange={(e) => {
+              handleChange(e);
+              handleAutoResize(); // Adjust height as user types
+            }}
+            ref={(el) => textareasRef.current.push(el)}
+            className="text-gray-700 whitespace-pre-line w-full resize-none overflow-hidden"
+          />
+        </section>
 
           {/* Policies */}
           <section className="mb-8">
@@ -642,6 +655,43 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
               </button>
             </div>
           </section>
+
+           {/* Terms and Conditions */}
+        <section className="mb-8">
+          <h2 className="text-2xl font-bold mb-4">Terms and Conditions</h2>
+          <h3 className="text-lg font-semibold mb-2">Inclusions</h3>
+          <textarea
+            name="inclusions"
+            value={data.termsAndConditions.inclusions}
+            ref={(el) => textareasRef.current.push(el)}
+            onChange={(e) =>
+              setData((prevData) => ({
+                ...prevData,
+                termsAndConditions: {
+                  ...prevData.termsAndConditions,
+                  inclusions: e.target.value,
+                },
+              }))
+            }
+            className="text-gray-700 whitespace-pre-line w-full"
+          />
+          <h3 className="text-lg font-semibold mt-4 mb-2">Exclusions</h3>
+          <textarea
+            name="exclusions"
+            value={data.termsAndConditions.exclusions}
+            ref={(el) => textareasRef.current.push(el)}
+            onChange={(e) =>
+              setData((prevData) => ({
+                ...prevData,
+                termsAndConditions: {
+                  ...prevData.termsAndConditions,
+                  exclusions: e.target.value,
+                },
+              }))
+            }
+            className="text-gray-700 whitespace-pre-line w-full"
+          />
+        </section>
 
           {/* Save or Submit button */}
           <button

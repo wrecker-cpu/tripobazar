@@ -254,13 +254,13 @@ export default function AdminPackage() {
                   <div>
                     <h3 className="text-lg font-semibold mb-2">Inclusions</h3>
                     <p className="text-gray-700 whitespace-pre-line">
-                      {data?.termsAndConditions[0].inclusions}
+                      {data?.termsAndConditions?.inclusions}
                     </p>
                   </div>
                   <div className="mt-4">
                     <h3 className="text-lg font-semibold mb-2">Exclusions</h3>
                     <p className="text-gray-700 whitespace-pre-line">
-                      {data?.termsAndConditions[0].exclusions}
+                      {data?.termsAndConditions?.exclusions}
                     </p>
                   </div>
                 </section>

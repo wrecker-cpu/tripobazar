@@ -148,7 +148,7 @@ const Navbar = () => {
                                 let navigatePath =
                                   region.region === "India"
                                     ? `/destination/asia/${region.region}/${destination.name}`
-                                    : `/destination/${region.region.toLowerCase()}/${destination.name.toLowerCase()}`;
+                                    : `/destination/${region.region}/${destination.name}`;
 
                                 navigate(navigatePath);
                               }}

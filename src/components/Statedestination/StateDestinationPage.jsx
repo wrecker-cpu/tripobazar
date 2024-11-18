@@ -14,8 +14,7 @@ function StateDestinationPage() {
   const { data, loading, error } = useFetch(
     `https://tripobazar-backend.vercel.app/api/state/name/${state}`
   );
-  // Runs when 'data' changes
-
+  
   if (loading) {
     return <Loader />;
   }
@@ -25,9 +24,8 @@ function StateDestinationPage() {
       <div className="w-[90%] mx-auto py-2">
         <BreadCrumbsLink />
       </div>
-
       <SubNavCountry />
-      <CountryPakages data={data} error={error} />
+      <CountryPakages data={data} error={error} state={state} />
       <StealDealPakage />
       <PopulerActivity />
     </div>

@@ -10,6 +10,7 @@ export default function useFetch(url) {
 
   async function getData() {
     setLoading(true);
+    setError(null); 
     try {
       const response = await axios.get(url, {
         headers: {

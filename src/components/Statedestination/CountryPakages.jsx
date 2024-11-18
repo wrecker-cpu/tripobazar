@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import FilterBox from "../FilterBox/FilterBox";
 import FilterSvg from "../../../svgs/FilterSvg";
@@ -9,13 +9,13 @@ import img3 from "../../assets/CountryDestination/sm-imgthree.svg";
 import img4 from "../../assets/CountryDestination/sm-img-4.svg";
 import img5 from "../../assets/CountryDestination/sm-img-5.svg";
 import img6 from "../../assets/CountryDestination/sm-img-6.svg";
-import { useParams } from "react-router-dom";
-function CountryPakages({ data, error }) {
+
+function CountryPakages({ data, error, state }) {
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
-  const { state } = useParams();
 
   const images = [img1, img2, img3, img4, img5, img6]; // Array of image sources
+
   if (error) {
     return (
       <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100 text-center">

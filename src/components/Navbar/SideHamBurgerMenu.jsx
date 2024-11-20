@@ -73,11 +73,6 @@ export default function SideHamBurgerMenu({
 
   return (
     <>
-      {/* Overlay */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-[9998] bg-white bg-opacity-50"></div>
-      )}
-
       {/* Sidebar Menu */}
       <div
         className={`fixed inset-0 max-w-[1980px] mx-auto z-[9999] w-full h-full top-1/2 transition-transform ease-in-out duration-500 left-1/2 ${

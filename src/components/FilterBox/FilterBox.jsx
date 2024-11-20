@@ -1,42 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
+import { useSearch } from "../../../context/SearchContext";
 
 export default function FilterBox({ onClose, style, showModal }) {
-  const [formValues, setFormValues] = useState({
-    range: "5",
-    checkboxes: {
-      budget1: false,
-      budget2: false,
-      budget3: false,
-      budget4: false,
-    },
-    reviews: "4",
-    sortBy: "withoutflight",
-    visaIncluded: false,
-    selectPreferences: {
-      hotelstay: false,
-      meals: false,
-      localtransport: false,
-      sightseeing: false,
-    },
-    themePreferences: {
-      architecture: false,
-      artsandentertainment: false,
-      history: false,
-      inventions: false,
-      religion: false,
-      music: false,
-      sports: false,
-    },
-  });
   const [isVisible, setIsVisible] = useState(showModal);
+  const { filterProp, setFilterProp } = useSearch();
 
   const checkboxOptions = [
-    { name: "budget1", label: "Less than ₹50,000" },
-    { name: "budget2", label: "₹5,00,000 - ₹10,00,000" },
-    { name: "budget3", label: "₹10,00,000 - ₹15,00,000" },
-    { name: "budget4", label: "More than ₹10,00,000" },
+    { name: "lessThan50000", label: "Less than ₹50,000" },
+    { name: "between500000And1000000", label: "₹5,00,000 - ₹10,00,000" },
+    { name: "between1000000And1500000", label: "₹10,00,000 - ₹15,00,000" },
+    { name: "moreThan1500000", label: "More than ₹15,00,000" },
   ];
 
   const checkboxPreferences = [
@@ -63,7 +38,7 @@ export default function FilterBox({ onClose, style, showModal }) {
 
   const handleChange = (event, type) => {
     const { name, value, checked } = event.target;
-    setFormValues((prevValues) => {
+    setFilterProp((prevValues) => {
       switch (type) {
         case "checkbox":
           return {
@@ -115,32 +90,32 @@ export default function FilterBox({ onClose, style, showModal }) {
     });
   };
   const sliderBackground = useMemo(() => {
-    const sliderValue = formValues.range;
+    const sliderValue = filterProp.range;
     const percentage = ((sliderValue - 0) / (10 - 0)) * 100;
     return `linear-gradient(90deg, #59cfd8 ${percentage}%, #ccc ${percentage}%)`;
-  }, [formValues.range]);
+  }, [filterProp.range]);
   const getReviewBackground = useMemo(() => {
-    const ReviewValue = formValues.reviews;
+    const ReviewValue = filterProp.reviews;
     const percentage = ((ReviewValue - 0) / (5 - 0)) * 100; // Adjust for your range min/max
     return `linear-gradient(to right, #03B58B ${percentage}%, #ddd ${percentage}%)`;
-  }, [formValues.reviews]);
+  }, [filterProp.reviews]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Submitting filters:", formValues);
+    setFilterProp((prev) => ({ ...prev, ...filterProp }));
     onClose();
   };
 
   const resetButton = () => {
-    setFormValues({
-      range: 5,
+    setFilterProp({
+      range: "0",
       checkboxes: {
-        budget1: false,
-        budget2: false,
-        budget3: false,
-        budget4: false,
+        lessThan50000: false,
+        between500000And1000000: false,
+        between1000000And1500000: false,
+        moreThan1500000: false,
       },
-      reviews: 4,
+      reviews: "0",
       sortBy: "withoutflight",
       visaIncluded: false,
       selectPreferences: {
@@ -181,7 +156,7 @@ export default function FilterBox({ onClose, style, showModal }) {
     >
       <div
         style={style}
-        className="bg-[#f8f8f8] md:pt-9 md:pb-10 lg::pt-10 lg:pb-10 overflow-hidden rounded-lg w-full max-w-[52rem] shadow-lg "
+        className="bg-[#f8f8f8] md:pt-9  lg:pt-10  overflow-hidden rounded-lg w-full max-w-[52rem] shadow-lg "
       >
         <form onSubmit={handleSubmit}>
           <div className=" py-3 md:py-5 md:p-5">
@@ -200,12 +175,12 @@ export default function FilterBox({ onClose, style, showModal }) {
                     type="range"
                     min="0"
                     max="10"
-                    defaultValue="5"
+                    value={filterProp.range}
                     onChange={(e) => handleChange(e, "range")}
                     className="custom-range"
                     style={{ background: sliderBackground }} // Inline style for dynamic background
                   />
-                  <p className="text-gray-500">{formValues.range} days</p>
+                  <p className="text-gray-500">{filterProp.range} days</p>
                 </div>
                 <div className="mt-6 pb-6 border-b-2">
                   <h3 className="font-medium mb-4">Budget</h3>
@@ -220,7 +195,7 @@ export default function FilterBox({ onClose, style, showModal }) {
                             type="checkbox"
                             className="custom-checkbox"
                             name={option.name}
-                            checked={formValues.checkboxes[option.name]}
+                            checked={filterProp.checkboxes[option.name]}
                             onChange={(e) => handleChange(e, "checkbox")}
                           />
                           {option.label}
@@ -236,13 +211,13 @@ export default function FilterBox({ onClose, style, showModal }) {
                     type="range"
                     min="0"
                     max="5"
-                    value={formValues.reviews}
+                    value={filterProp.reviews}
                     onChange={(e) => handleChange(e, "reviews")}
                     className="custom-range-two"
                     style={{ background: getReviewBackground }} // Inline style for dynamic background
                   />
                   <div className="flex items-center gap-1">
-                    <p className="m-0 text-lg">{formValues.reviews} </p>
+                    <p className="m-0 text-lg">{filterProp.reviews} </p>
                     <FaStar className="text-yellow-300 mb-[2px]" />
                   </div>
                 </div>
@@ -256,7 +231,7 @@ export default function FilterBox({ onClose, style, showModal }) {
                             type="radio"
                             name="sortBy" // Same name for sort radio buttons
                             value={option.value} // Value that corresponds to the sort option
-                            checked={formValues.sortBy === option.value} // Check if this option is selected
+                            checked={filterProp.sortBy === option.value} // Check if this option is selected
                             onChange={(e) => handleChange(e, "sort")} // Handle change event
                             className="custom-radio" // Add any custom styling you want
                           />
@@ -273,7 +248,7 @@ export default function FilterBox({ onClose, style, showModal }) {
                         type="checkbox"
                         className="custom-checkbox"
                         name="visa"
-                        checked={formValues.visaIncluded}
+                        checked={filterProp.visaIncluded}
                         onChange={(e) => handleChange(e, "visa")}
                       />
                       Include packages with visa services
@@ -298,7 +273,7 @@ export default function FilterBox({ onClose, style, showModal }) {
                             type="checkbox"
                             className="custom-checkbox"
                             name={option.name}
-                            checked={formValues.selectPreferences[option.name]}
+                            checked={filterProp.selectPreferences[option.name]}
                             onChange={(e) => handleChange(e, "preferences")}
                           />
                           {option.label}
@@ -320,7 +295,7 @@ export default function FilterBox({ onClose, style, showModal }) {
                             type="checkbox"
                             className="custom-checkbox"
                             name={option.name}
-                            checked={formValues.themePreferences[option.name]}
+                            checked={filterProp.themePreferences[option.name]}
                             onChange={(e) => handleChange(e, "theme")}
                           />
                           {option.label}

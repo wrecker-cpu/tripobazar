@@ -77,18 +77,27 @@ function SrchDestinationCountry() {
   const handleBlur = () => setTimeout(() => setDropdownVisible(false), 200);
 
   return (
-    <div className="rounded-b-3xl font-poppins">
-      <div className="w-[90%] mx-auto py-2">
-        <BreadCrumbsLink />
-      </div>
+    <div className="rounded-b-3xl font-poppins ">
+      {item ? (
+        <></>
+      ) : (
+        <div className="w-[90%] relative z-10 mx-auto py-2">
+          <BreadCrumbsLink />
+        </div>
+      )}
       <div className="w-full h-full relative">
-        <img src={image} className="w-full h-full object-contain" />
-        <div className="flex absolute z-10 -bottom-[420px] left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col py-20 w-[90%] mx-auto justify-center items-center">
-          <div>
-            <h2 className={`text-xl uppercase esm:text-2xl traking-[0] ${state && "lg:tracking-[2rem]"} lg:tracking-[6rem] text-white ew:text-[] sm:text-[4rem] leading-[120px] lg:mb-4 text-center font-bold`}>
+        <img src={image} className="w-full  h-full object-contain" />
+
+        <div className="absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="w-full flex items-center justify-center">
+            <h2
+              className={`text-base uppercase tracking-[30px] md:tracking-[40px] text-white ew:text-xl sm:text-7xl  lg:mb-4 text-center font-bold`}
+            >
               {state ? state : item || country}
             </h2>
           </div>
+        </div>
+        <div className="flex absolute z-10 -bottom-[420px] left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col py-20 w-[90%] mx-auto justify-center items-center">
           <div className="w-[90%] max-w-[1720px] h-auto p-4 md:p-16 bg-[#f8f8f8] shadow-lg rounded-lg mx-auto top-[43rem] sm:top-[42rem] md:top-[19rem] lg:top-[5rem] lg:mt-[-2rem] relative ">
             {/* Starting Location and Destination Inputs */}
             <div className="flex flex-col md:flex-row items-center jusitfy-between gap-4">

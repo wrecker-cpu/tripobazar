@@ -21,10 +21,9 @@ function OneContinent({ data, loading }) {
   if (loading) {
     return <Loader />;
   }
-  console.log(firstContinent);
 
   return (
-    <div>
+    <div className="max-w-[1920px] mx-auto">
       <SrchDestinationCountry />
       <CrousalSection selectedDestination={firstContinent} />
       <StealDealPakage />

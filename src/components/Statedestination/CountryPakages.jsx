@@ -31,12 +31,12 @@ function CountryPakages({ data, error, state }) {
   return (
     <div className="w-full flex gap-4 bg-transparent p-4">
       {/* First Part - Existing Component */}
-      <div className="w-[15%] text-center">
+      <div className="w-[15%] md:block hidden text-center">
         <div
           className="cursor-pointer  sticky md:top-[20%] top-[29%] "
           onClick={toggleModal}
         >
-          <FilterSvg className="" />
+          <FilterSvg  />
         </div>
       </div>
       {/* Second Part - Cards */}

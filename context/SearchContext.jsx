@@ -10,9 +10,36 @@ export const SearchProvider = ({ children }) => {
     startLocation: "",
     destination: "",
   });
+  const [filterProp,setFilterProp]=useState({
+    range: "5",
+    checkboxes: {
+      lessThan50000: false,
+      between500000And1000000: false,
+      between1000000And1500000: false,
+      moreThan1500000: false,
+    },
+    reviews: "4",
+    sortBy: "withoutflight",
+    visaIncluded: false,
+    selectPreferences: {
+      hotelstay: false,
+      meals: false,
+      localtransport: false,
+      sightseeing: false,
+    },
+    themePreferences: {
+      architecture: false,
+      artsandentertainment: false,
+      history: false,
+      inventions: false,
+      religion: false,
+      music: false,
+      sports: false,
+    },
+  })
 
   return (
-    <SearchContext.Provider value={{ searchData, setSearchData }}>
+    <SearchContext.Provider value={{ searchData, setSearchData,filterProp,setFilterProp }}>
       {children}
     </SearchContext.Provider>
   );

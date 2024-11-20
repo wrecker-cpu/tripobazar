@@ -28,6 +28,10 @@ export default function DiscoverNewHorizon() {
     destination.name.toLowerCase().includes(formState.searchQuery.toLowerCase())
   );
 
+  const handleClose=()=>{
+    setFormState({ ...formState, showModal: false });
+  }
+
   // Handle clicking on a destination from the list
   const handleDestinationClick = (destination) => {
     const regionPath = destination.region;
@@ -226,6 +230,7 @@ export default function DiscoverNewHorizon() {
       <FilterBox
         showModal={formState.showModal}
         setShowModal={toggleModal}
+        onClose={handleClose}
         // formState={formState}
         // setFormState={setFormState}
       />

@@ -61,7 +61,7 @@ export default function StealDealPakage() {
   ];
   return (
     <>
-      <h1 className="text-black text-center font-poppins mt-10 text-[30px] md:text-[40px] font-extrabold leading-none">
+      <h1 className="text-black text-center font-poppins mt-10 text-[20px] ew:text-[30px] md:text-[40px] font-extrabold leading-none">
         Steal Deal Packages
       </h1>
       <p className="mb-10 mt-5 md:text-base text-sm text-center">

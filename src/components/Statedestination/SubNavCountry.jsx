@@ -2,16 +2,14 @@ import React from 'react'
 const sections = ["ALL PACKAGES", "SEASONAL OFFERS", "ALL INCLUSIVE", ];
 function SubNavCountry() {
   return (
-    <nav className="bg-white sticky top-0 z-[19] shadow-inner">
+    <nav className="bg-white mt-[45rem] sm:mt-[40rem] md:mt-[26rem] lg:mt-60 sticky top-0 z-[19] shadow-inner">
     <div className="max-w-7xl mx-auto px-4 py-4">
     
-      <ul className="flex flex-row em:flex-row items-start  em:items-center justify-center text-[.7rem] em:text-sm uppercase leading-6 font-normal  em:space-x-8">
+      <ul className="flex flex-row em:flex-row items-start scrollbar-hide px-4 overflow-x-scroll em:items-center justify-start em:justify-center text-[.7rem] em:text-sm uppercase leading-6 font-normal  gap-8">
         {sections.map((item, idx) => (
           <button
             key={idx}
-            className={`text-gray-500 em:py-0 py-2  em:border-b-0 ${
-              idx === sections.length - 1 ? "border-b-0" : "border-b"
-            }  em:w-auto  w-full hover:text-med-green`}
+            className={`text-gray-500 em:py-0  em:w-auto whitespace-nowrap  w-full hover:text-med-green`}
           >
             {item}
           </button>

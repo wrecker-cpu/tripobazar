@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Loader from "../Loader";
 import { useState, useRef } from "react";
 import {
@@ -17,18 +17,19 @@ function AllContinent({ data, loading }) {
   const toggleHeart = (index) => {
     setLiked(liked.map((item, i) => (i === index ? !item : item)));
   };
-
-  // Function to scroll carousel to the left
   const scrollLeft = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -250, behavior: "smooth" });
+      console.log("Before scroll left: ", carouselRef.current.scrollLeft);
+      carouselRef.current.scrollLeft -= 250; // Scroll left by 250px
+      console.log("After scroll left: ", carouselRef.current.scrollLeft);
     }
   };
 
-  // Function to scroll carousel to the right
   const scrollRight = () => {
     if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 250, behavior: "smooth" });
+      console.log("Before scroll right: ", carouselRef.current.scrollLeft);
+      carouselRef.current.scrollLeft += 250; // Scroll right by 250px
+      console.log("After scroll right: ", carouselRef.current.scrollLeft);
     }
   };
 
@@ -55,18 +56,23 @@ function AllContinent({ data, loading }) {
               <div className="absolute inset-0 bg-black opacity-50"></div>
             </div>
 
-            <div className="flex h-[820px]  items-start relative z-10">
+            <div className="flex h-[820px] items-start relative z-10">
+              {/* Dots */}
               <div className="h-full w-[1px] flex flex-col justify-center items-center gap-[85px] bg-white absolute left-5 sm:left-10 md:left-20 z-20">
                 {[...Array(6)].map((_, index) => (
                   <div
                     key={index}
-                    className=" w-5 h-5 flex items-center justify-center border border-white rounded-full"
-                   
+                    className="w-5 h-5 flex items-center justify-center border border-white rounded-full"
                   >
-                    <div className={`${idx===index?"w-[11px] h-[11px] ":"w-[6px] h-[6px]"}   rounded-full bg-white`}></div>
+                    <div
+                      className={`${
+                        idx === index ? "w-[11px] h-[11px]" : "w-[6px] h-[6px]"
+                      } rounded-full bg-white`}
+                    ></div>
                   </div>
                 ))}
               </div>
+
               <div className="relative z-10 pl-8 sm:pl-16 md:pl-40 pt-10 md:pt-16 pb-10 md:pb-20 text-white max-w-full">
                 <h1 className="text-[2.8rem] sm:text-[3.5rem] md:text-[4rem] lg:text-[4.8rem] uppercase font-bold mb-2 sm:mb-3">
                   {item.ContinentName}
@@ -95,17 +101,18 @@ function AllContinent({ data, loading }) {
                 {/* Carousel Section */}
                 <div
                   ref={carouselRef}
-                  className="flex overflow-x-scroll space-x-3 sm:space-x-4 mt-10 sm:mt-16 md:mt-20 scrollbar-hide max-w-full scroll-snap-type-x-mandatory"
+                  className="flex overflow-x-auto space-x-4 mt-10 sm:mt-16 md:mt-20 scrollbar-hide scroll-snap-x-mandatory"
+                  style={{ scrollSnapType: "x mandatory", width: "100%" }}
                 >
                   {item?.Countries?.map((card, index) => (
                     <div
-                      key={index}
+                      key={`${index}-1`} // Unique key for the first instance
                       onClick={() =>
                         navigate(
                           `/destination/${item.ContinentName}/${card.CountryName}`
                         )
                       }
-                      className="relative h-[260px] sm:h-[300px] md:h-[360px] min-w-[200px] sm:min-w-[250px] md:min-w-[350px] rounded-lg overflow-hidden shadow-lg flex-shrink-[-4] scroll-snap-align-start cursor-pointer"
+                      className="relative h-[260px]  w-[350px] rounded-lg overflow-hidden shadow-lg flex-shrink-0 scroll-snap-align-start cursor-pointer"
                     >
                       {/* Image */}
                       <img

@@ -18,8 +18,8 @@ function CountryPakages({ data, error, state }) {
 
   if (error) {
     return (
-      <div className="w-full h-auto flex flex-col justify-center items-center bg-gray-100 text-center">
-        <h2 className="text-4xl font-extrabold text-gray-800 mb-4">
+      <div className="w-full mt-[0] h-auto flex flex-col justify-center items-center bg-gray-100 text-center">
+        <h2 className="text-4xl font-bold text-gray-800 mb-4">
           Packages for {state} will be coming soon
         </h2>
         <p className="text-lg text-gray-500">
@@ -31,7 +31,9 @@ function CountryPakages({ data, error, state }) {
   return (
     <div className="w-full flex gap-4 bg-transparent p-4">
       {/* First Part - Existing Component */}
+
       <div className="w-[15%] md:block hidden text-center">
+
         <div
           className="cursor-pointer  sticky md:top-[20%] top-[29%] "
           onClick={toggleModal}
@@ -40,7 +42,7 @@ function CountryPakages({ data, error, state }) {
         </div>
       </div>
       {/* Second Part - Cards */}
-      <div className="w-full sm:w-[70%]  grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-9">
+      <div className="w-[85%]sm:w-[90%] lg:w-[95%]   grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-1">
         {/* Card template */}
         {data?.Packages?.map((item, index) => (
           <div
@@ -59,10 +61,10 @@ function CountryPakages({ data, error, state }) {
               </p>
             </div>
             {/* Card Content */}
-            <h4 className="text-base sm:text-lg font-semibold mb-1">
+            <h4 className="text-base px-5 sm:text-lg font-semibold mb-1">
               {item?.title}
             </h4>
-            <p className="text-xs sm:text-sm text-[#002831C2] mb-2">
+            <p className="text-xs px-6 sm:text-sm text-[#002831C2] mb-2">
               {item?.description}
             </p>
             <h3 className="text-lg sm:text-xl font-bold mb-2 text-[#00B58A]">
@@ -91,6 +93,7 @@ function CountryPakages({ data, error, state }) {
       </div>
 
       <FilterBox showModal={showModal} onClose={toggleModal} />
+      
     </div>
   );
 }

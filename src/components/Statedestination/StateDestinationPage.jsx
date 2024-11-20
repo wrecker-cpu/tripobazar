@@ -21,7 +21,7 @@ function StateDestinationPage() {
   }
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full p-0 m-0">
       <SrchDestinationCountry />
       <SubNavCountry />
       <CountryPakages data={data} error={error} state={state} />

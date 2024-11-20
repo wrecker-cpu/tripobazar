@@ -2,7 +2,7 @@ import React from 'react'
 const sections = ["ALL PACKAGES", "SEASONAL OFFERS", "ALL INCLUSIVE", ];
 function SubNavCountry() {
   return (
-    <nav className="bg-white sticky top-0 z-[19] shadow-inner">
+    <nav className="bg-white sticky  mt-[42rem]  sm:mt-[41rem] md:mt-[25rem] lg:mt-[14rem] top-0 z-[19] shadow-inner">
     <div className="max-w-7xl mx-auto px-4 py-4">
     
       <ul className="flex flex-row em:flex-row items-start  em:items-center justify-center text-[.7rem] em:text-sm uppercase leading-6 font-normal  em:space-x-8">

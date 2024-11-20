@@ -32,7 +32,7 @@ function CountryPakages({ data, error, state }) {
     <div className="w-full flex gap-4 bg-transparent p-4">
       {/* First Part - Existing Component */}
 
-      <div className="w-[15%] md:block hidden text-center">
+      <div className="w-auto md:block hidden text-center">
 
         <div
           className="cursor-pointer  sticky md:top-[20%] top-[29%] "
@@ -42,7 +42,7 @@ function CountryPakages({ data, error, state }) {
         </div>
       </div>
       {/* Second Part - Cards */}
-      <div className="w-[85%]sm:w-[90%] lg:w-[95%]   grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-1">
+      <div className="w-[85%]sm:w-[90%] lg:w-[95%]   grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {/* Card template */}
         {data?.Packages?.map((item, index) => (
           <div

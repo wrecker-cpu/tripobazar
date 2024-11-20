@@ -43,7 +43,7 @@ function AllContinent({ data, loading }) {
         {data?.map((item, idx) => (
           <section
             key={idx}
-            className="relative h-[25%] md:h-[60%] w-full overflow-hidden max-w-full"
+            className="relative h-auto w-full overflow-hidden max-w-full"
           >
             {/* Background Image with dark overlay */}
             <div className="w-full h-full">
@@ -55,9 +55,19 @@ function AllContinent({ data, loading }) {
               <div className="absolute inset-0 bg-black opacity-50"></div>
             </div>
 
-            <div className="flex  items-start relative z-10">
-              <div className="h-full w-[1px] bg-white absolute left-5 sm:left-10 md:left-20 z-20"></div>
-              <div className="relative z-10 pl-8 sm:pl-16 md:pl-28 pt-10 md:pt-16 pb-10 md:pb-20 text-white max-w-full">
+            <div className="flex h-[820px]  items-start relative z-10">
+              <div className="h-full w-[1px] flex flex-col justify-center items-center gap-[85px] bg-white absolute left-5 sm:left-10 md:left-20 z-20">
+                {[...Array(6)].map((_, index) => (
+                  <div
+                    key={index}
+                    className=" w-5 h-5 flex items-center justify-center border border-white rounded-full"
+                   
+                  >
+                    <div className={`${idx===index?"w-[11px] h-[11px] ":"w-[6px] h-[6px]"}   rounded-full bg-white`}></div>
+                  </div>
+                ))}
+              </div>
+              <div className="relative z-10 pl-8 sm:pl-16 md:pl-40 pt-10 md:pt-16 pb-10 md:pb-20 text-white max-w-full">
                 <h1 className="text-[2.8rem] sm:text-[3.5rem] md:text-[4rem] lg:text-[4.8rem] uppercase font-bold mb-2 sm:mb-3">
                   {item.ContinentName}
                 </h1>
@@ -91,7 +101,9 @@ function AllContinent({ data, loading }) {
                     <div
                       key={index}
                       onClick={() =>
-                        navigate(`/destination/${item.ContinentName}/${card.CountryName}`)
+                        navigate(
+                          `/destination/${item.ContinentName}/${card.CountryName}`
+                        )
                       }
                       className="relative h-[260px] sm:h-[300px] md:h-[360px] min-w-[200px] sm:min-w-[250px] md:min-w-[350px] rounded-lg overflow-hidden shadow-lg flex-shrink-[-4] scroll-snap-align-start cursor-pointer"
                     >

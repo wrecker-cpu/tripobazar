@@ -58,6 +58,9 @@ export default function AdminPackage() {
                         {item?.title}
                       </span>
                       <div className="flex items-center gap-4">
+                        <p className="text-xs text-gray-500">
+                          {item?.description}
+                        </p>
                         <img
                           src={item?.MainPhotos[0]}
                           onClick={() => openModal(item?.MainPhotos[0])}

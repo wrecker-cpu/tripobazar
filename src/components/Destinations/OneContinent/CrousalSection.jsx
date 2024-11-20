@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import Loader from "../../Loader";
 import { useNavigate } from "react-router-dom";
 function CrousalSection({ selectedDestination }) {
 
@@ -19,9 +18,9 @@ function CrousalSection({ selectedDestination }) {
     );
   };
 
-  if (!selectedDestination) {
-    return <Loader />;
-  }
+  // if (!selectedDestination) {
+  //   return <Loader />;
+  // }
 
   if ( !selectedDestination?.Countries?.length) {
     return (
@@ -34,9 +33,10 @@ function CrousalSection({ selectedDestination }) {
       </div>
     );
   }
+  console.log(selectedDestination)
 
   return (
-    <section className="w-full pt-[180%] -z-10 sm:pt-[100%] md:pt-[50%] lg:pt-72 bg-[url('/path/to/your/image.jpg')] bg-cover bg-white/20 bg-opacity-10 p-10 relative">
+    <section className="w-full pt-[180%]  sm:pt-[100%] md:pt-[50%] lg:pt-72 bg-[url('/path/to/your/image.jpg')] bg-cover bg-white/20 bg-opacity-10 p-10 relative">
       <h3 className="text-3xl font-bold">
         It’s time for{" "}
         <span className="text-green-600">

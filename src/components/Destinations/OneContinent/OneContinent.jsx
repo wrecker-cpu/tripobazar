@@ -21,6 +21,7 @@ function OneContinent({ data, loading }) {
   if (loading) {
     return <Loader />;
   }
+  console.log(firstContinent);
 
   return (
     <div>

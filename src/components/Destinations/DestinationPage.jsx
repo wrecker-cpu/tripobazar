@@ -22,7 +22,7 @@ export default function DestinationPage() {
           element={<AllContinent data={data} loading={loading} />}
         />
         <Route
-          path=":item"
+          path="/:item"
           element={<OneContinent data={data} loading={loading} />}
         />
       </Routes>

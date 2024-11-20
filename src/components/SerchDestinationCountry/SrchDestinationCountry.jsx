@@ -83,7 +83,7 @@ function SrchDestinationCountry() {
       </div>
       <div className="w-full h-full relative">
         <img src={image} className="w-full h-full object-contain" />
-        <div className="flex absolute z-0 -bottom-[420px] left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col py-20 w-[90%] mx-auto justify-center items-center">
+        <div className="flex absolute z-10 -bottom-[420px] left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col py-20 w-[90%] mx-auto justify-center items-center">
           <div>
             <h2 className={`text-xl uppercase esm:text-2xl traking-[0] ${state && "lg:tracking-[2rem]"} lg:tracking-[6rem] text-white ew:text-[] sm:text-[4rem] leading-[120px] lg:mb-4 text-center font-bold`}>
               {state ? state : item || country}

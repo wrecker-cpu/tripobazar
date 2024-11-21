@@ -86,7 +86,6 @@ function SrchDestinationCountry() {
         </div>
       )}
       <div className="w-full h-full relative">
-
         <img src={image} className="w-full  h-full object-contain" />
 
         <div className="absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -221,8 +220,8 @@ function SrchDestinationCountry() {
               </button>
             </div>
           </div>
-          <FilterBox showModal={showModal} onClose={toggleModal} />
         </div>
+        <FilterBox showModal={showModal} onClose={toggleModal} />
       </div>
     </div>
   );

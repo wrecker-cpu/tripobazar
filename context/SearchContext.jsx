@@ -10,15 +10,15 @@ export const SearchProvider = ({ children }) => {
     startLocation: "",
     destination: "",
   });
-  const [filterProp,setFilterProp]=useState({
-    range: "5",
+  const [filterProp, setFilterProp] = useState({
+    range: "0",
     checkboxes: {
       lessThan50000: false,
       between500000And1000000: false,
       between1000000And1500000: false,
       moreThan1500000: false,
     },
-    reviews: "4",
+    reviews: "0",
     sortBy: "withoutflight",
     visaIncluded: false,
     selectPreferences: {
@@ -36,10 +36,12 @@ export const SearchProvider = ({ children }) => {
       music: false,
       sports: false,
     },
-  })
+  });
 
   return (
-    <SearchContext.Provider value={{ searchData, setSearchData,filterProp,setFilterProp }}>
+    <SearchContext.Provider
+      value={{ searchData, setSearchData, filterProp, setFilterProp }}
+    >
       {children}
     </SearchContext.Provider>
   );

@@ -22,11 +22,16 @@ const Navbar = () => {
   const [userData, setUserData] = useState(null);
   const downRef = useRef([]);
   const navigate = useNavigate();
-
   const toggleDestinations = (index) => {
+   console.log("this is called")
     setOpenDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
+  useEffect(() => {
+    console.log("Updated openDropdownIndex:", openDropdownIndex);
+  }, [openDropdownIndex]);
+  
+  
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -63,28 +68,23 @@ const Navbar = () => {
       setUserData(JSON.parse(data));
     }
   }, []);
-
-  useEffect(() => {
+useEffect(() => {
     const handleClickOutside = (e) => {
-      // Check if the clicked target is outside any dropdown
       if (
         downRef.current &&
-        !Object.values(downRef.current).some(
-          (ref) => ref && ref.contains(e.target)
-        )
+        !Object.values(downRef.current).some((ref) => ref && ref.contains(e.target))
       ) {
-        setOpenDropdownIndex(null);
+        setOpenDropdownIndex(null); // Close any open dropdown
       }
     };
 
-    // Add event listener to handle outside clicks
     document.addEventListener("mousedown", handleClickOutside);
 
-    // Cleanup the event listener
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
 
   return (
     <div className="relative  max-w-[1920px] mx-auto">
@@ -118,17 +118,17 @@ const Navbar = () => {
                     Destinations
                   </TransitionLink>
                   <IoIosArrowDown
-                    onClick={() => toggleDestinations(-1)}
+                    onClick={() => toggleDestinations("dest")}
                     className="w-5 pl-1 text-med-green h-5"
                   />
                 </button>
                 <div
-                  ref={(el) => (downRef.current[-1] = el)}
+                  ref={(el) => (downRef.current["dest"] = el)}
                   style={{
-                    visibility: openDropdownIndex === -1 ? "visible" : "hidden",
+                    visibility: openDropdownIndex === "dest" ? "visible" : "hidden",
                   }}
                   className={`absolute z-20 w-max transition-opacity ease-in-out duration-300 left-0 mt-2 bg-white shadow-md border rounded-md ${
-                    openDropdownIndex === -1
+                    openDropdownIndex === "dest"
                       ? "opacity-100"
                       : "opacity-0 pointer-events-none"
                   }`}

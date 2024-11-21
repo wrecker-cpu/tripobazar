@@ -13,6 +13,9 @@ export default {
         "5xl": "3.052rem",
         "6xl": "40px",
       },
+      zIndex: {
+        100: '100', // Add a custom high z-index value
+      },
       backgroundImage: {
         "login-image": "url('/loginpageimage.png')",
         "search-image": "url('/searchPage.png')",

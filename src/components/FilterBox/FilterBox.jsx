@@ -147,13 +147,13 @@ export default function FilterBox({ onClose, style, showModal }) {
 
   return (
     <div
-      style={{
-        opacity: showModal ? 1 : 0,
-        visibility: isVisible ? "visible" : "hidden",
-        transition: "opacity 300ms ease-in-out",
-      }}
-      className="fixed w-full sm:pl-[10%] sm:pr-[10%] md:pl-[20%] md:pr-[20%] pt-16 pb-12  p-4 font-poppins inset-0 z-20 flex items-center justify-center bg-transpernt backdrop-blur-sm bg-opacity-50"
-    >
+    style={{
+      opacity: showModal ? 1 : 0,
+      visibility: isVisible ? "visible" : "hidden",
+      transition: "opacity 300ms ease-in-out",
+    }}
+    className="fixed w-full sm:pl-[10%] sm:pr-[10%] md:pl-[20%] md:pr-[20%] pt-16 pb-12 p-4 font-poppins inset-0 z-50 flex items-center justify-center bg-transpernt backdrop-blur-sm bg-opacity-50"
+  >
       <div
         style={style}
         className="bg-[#f8f8f8] md:pt-9  lg:pt-10  overflow-hidden rounded-lg w-full max-w-[52rem] shadow-lg "

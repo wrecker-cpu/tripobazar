@@ -90,7 +90,7 @@ useEffect(() => {
     <div className="relative  max-w-[1920px] mx-auto">
       <div className="z-20  sticky top-0  border-b bg-white mx-auto">
         <nav
-          className={`bg-white flex items-center justify-between py-4  relative w-[90%] mx-auto`}
+          className={`bg-white flex items-center justify-between py-4  relative w-[90%] emd:w-[95%] xlg:w-[90%] mx-auto`}
         >
           <div className="hidden md:flex items-center gap-8 xlg:gap-10">
             {userData === null ? (
@@ -111,7 +111,7 @@ useEffect(() => {
                 </button>
               </Link>
             )}
-            <div className="flex flex-row justify-between gap-6">
+            <div className="flex flex-row whitespace-nowrap justify-between gap-6">
               <div className="relative">
                 <button className="flex text-sm uppercase justify-center items-center">
                   <TransitionLink to="/destination">
@@ -215,7 +215,7 @@ useEffect(() => {
           </TransitionLink>
 
           {/* Right Side - Nav Links and Search Bar (visible on medium and larger screens) */}
-          <div className="hidden emd:flex items-center justify-center space-x-5 xlg:space-x-9">
+          <div className="hidden whitespace-nowrap  emd:flex items-center justify-center space-x-5 xlg:space-x-9">
             <TransitionLink
               className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "
               to={"/aboutus"}

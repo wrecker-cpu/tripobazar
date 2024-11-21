@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import useApiData from "../../../../hooks/useApiData";
-import Spinner from "../../../../utils/Spinner";
+
 import useFetch from "../../../../hooks/useFetch";
 import EditPackage from "./EditPackage";
 import AddPackage from "./AddPackage";
+import Loader from "../../Loader";
 
 export default function AdminPackage() {
   const [selectedId, setSelectedId] = useState();
@@ -13,6 +14,7 @@ export default function AdminPackage() {
   const baseUrl = "https://tripobazar-backend.vercel.app/api/package";
   const {
     data: allStateData,
+    loading: allpackage,
     deleteById,
     updateById,
     addNew,
@@ -22,10 +24,9 @@ export default function AdminPackage() {
     `https://tripobazar-backend.vercel.app/api/package/${selectedId}`
   );
 
-  if (loading === true) {
-    return <Spinner />;
+  if ( allpackage || loading) {
+    return <Loader />;
   }
-  console.log(selectedId);
 
   return (
     <>
@@ -148,13 +149,13 @@ export default function AdminPackage() {
                 {/* Photos */}
                 <section className="mb-8">
                   <h2 className="text-2xl font-bold mb-4">Photos</h2>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-3 gap-4">
                     {data?.MainPhotos?.map((photo, index) => (
                       <img
                         key={index}
                         src={photo}
                         alt={`Tour photo ${index + 1}`}
-                        className="rounded-lg shadow-md"
+                        className="rounded-lg w-[400px] h-[300px] shadow-md"
                       />
                     ))}
                   </div>
@@ -171,13 +172,13 @@ export default function AdminPackage() {
                       <p className="text-gray-700 mb-4 whitespace-pre-line">
                         {day.dayDetails}
                       </p>
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-3 gap-4">
                         {day?.photos.map((photo, photoIndex) => (
                           <img
                             key={photoIndex}
                             src={photo}
                             alt={`Day ${index + 1} photo ${photoIndex + 1}`}
-                            className="rounded-lg shadow-md"
+                            className="rounded-lg w-full h-[300px] shadow-md"
                           />
                         ))}
                       </div>

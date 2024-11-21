@@ -150,11 +150,15 @@ function SrchDestinationCountry() {
                     </ul>
                   )}
               </div>
-              <div className="md:w-auto w-full flex justify-end">
-                <div className="cursor-pointer" onClick={toggleModal}>
-                  <FilterSvg />
+              {state ? (
+                ""
+              ) : (
+                <div className="md:w-auto w-full  flex justify-end">
+                  <div className="cursor-pointer" onClick={toggleModal}>
+                    <FilterSvg />
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Date Inputs */}

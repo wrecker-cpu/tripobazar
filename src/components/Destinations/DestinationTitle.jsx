@@ -4,7 +4,7 @@ import image from "../../assets/destination/map.png";
 
 export default function DestinationTitle() {
   return (
-    <div className="relative z-20">
+    <div className="relative z-10">
       <div className="bg-white">
         <div className="w-[90%] mx-auto  py-2">
           <BreadCrumbsLink />

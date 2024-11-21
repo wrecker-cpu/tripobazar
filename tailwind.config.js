@@ -14,7 +14,12 @@ export default {
         "6xl": "40px",
       },
       zIndex: {
-        100: '100', // Add a custom high z-index value
+        10: "10",
+        20: "20",
+        30: "30",
+        40: "40",
+        50: "50",
+        100: "100", // Add a custom high z-index value
       },
       backgroundImage: {
         "login-image": "url('/loginpageimage.png')",

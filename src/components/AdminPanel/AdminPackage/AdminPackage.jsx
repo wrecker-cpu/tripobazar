@@ -9,6 +9,9 @@ import Loader from "../../Loader";
 export default function AdminPackage() {
   const [selectedId, setSelectedId] = useState();
   const [isAddingPackage, setIsAddingPackage] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+
+  // Filter the data based on user input
 
   const [editPackage, setEditPackage] = useState(false);
   const baseUrl = "https://tripobazar-backend.vercel.app/api/package";
@@ -24,7 +27,11 @@ export default function AdminPackage() {
     `https://tripobazar-backend.vercel.app/api/package/${selectedId}`
   );
 
-  if ( allpackage || loading) {
+  const filteredData = allStateData.filter((item) =>
+    item?.title?.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
+  if (allpackage || loading) {
     return <Loader />;
   }
 
@@ -33,12 +40,24 @@ export default function AdminPackage() {
       {!selectedId ? (
         <div>
           {/* Button to show AddPackage form */}
-          <button
-            onClick={() => setIsAddingPackage(!isAddingPackage)}
-            className="bg-green-600 h-10 py-3 text-center flex items-center hover:scale-95 transition-transform ease-in-out duration-300 text-white font-medium rounded-full px-4 mb-4"
-          >
-            {isAddingPackage ? "Cancel" : "Add Package"}
-          </button>
+          <div className="flex justify-between items-center">
+            <button
+              onClick={() => setIsAddingPackage(!isAddingPackage)}
+              className="bg-green-600 h-10 py-3 text-center flex items-center hover:scale-95 transition-transform ease-in-out duration-300 text-white font-medium rounded-full px-4 mb-4"
+            >
+              {isAddingPackage ? "Cancel" : "Add Package"}
+            </button>
+
+            {!isAddingPackage && (
+              <input
+                type="text"
+                placeholder="Search by Title"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                className="mb-4 p-2 border border-black outline-none rounded w-[85%]"
+              />
+            )}
+          </div>
 
           {/* Show AddPackage form when isAddingPackage is true */}
           {isAddingPackage ? (
@@ -48,7 +67,7 @@ export default function AdminPackage() {
             />
           ) : (
             <div>
-              {allStateData?.map((item, idx) => (
+              {filteredData?.map((item, idx) => (
                 <div key={idx}>
                   <ul className="flex flex-col">
                     <li className="relative flex items-center justify-between mb-3 text-med-green rounded-lg overflow-hidden transition-colors ease-in-out duration-300 bg-white p-4">
@@ -238,15 +257,8 @@ export default function AdminPackage() {
                 {/* Policies */}
                 <section className="mb-8">
                   <h2 className="text-2xl font-bold mb-4">Policies</h2>
-                  <h3 className="text-lg font-semibold mb-2">Child Policy</h3>
                   <p className="text-gray-700 whitespace-pre-line">
-                    {data?.policies.childPolicies}
-                  </p>
-                  <h3 className="text-lg font-semibold mt-4 mb-2">
-                    Cancellation Policy
-                  </h3>
-                  <p className="text-gray-700 whitespace-pre-line">
-                    {data?.policies.cancelPolicy}
+                    {data?.policies}
                   </p>
                 </section>
 

@@ -14,10 +14,7 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
     conditionOfTravel: "",
     thingsToMaintain: "",
     hotels: [],
-    policies: {
-      childPolicies: "",
-      cancelPolicy: "",
-    },
+    policies: "",
     termsAndConditions: {
       inclusions: "",
       exclusions: "",
@@ -381,7 +378,7 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
                   type="button"
                   onClick={() => {
                     const updatedDayDescription = data.dayDescription.filter(
-                      (item) => item._id !== day._id
+                      (_, index) => index !== dayIndex // Remove the item at the specified index
                     );
                     setData((prevData) => ({
                       ...prevData,
@@ -490,56 +487,30 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
             />
           </section>
 
-           {/*Things to maintain*/}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Things to maintain</h2>
-          <textarea
-            name="thingsToMaintain"
-            value={data.thingsToMaintain}
-            onChange={(e) => {
-              handleChange(e);
-              handleAutoResize(); // Adjust height as user types
-            }}
-            ref={(el) => textareasRef.current.push(el)}
-            className="text-gray-700 whitespace-pre-line w-full resize-none overflow-hidden"
-          />
-        </section>
+          {/*Things to maintain*/}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold mb-4">Things to maintain</h2>
+            <textarea
+              name="thingsToMaintain"
+              value={data.thingsToMaintain}
+              onChange={(e) => {
+                handleChange(e);
+                handleAutoResize(); // Adjust height as user types
+              }}
+              ref={(el) => textareasRef.current.push(el)}
+              className="text-gray-700 whitespace-pre-line w-full resize-none overflow-hidden"
+            />
+          </section>
 
           {/* Policies */}
           <section className="mb-8">
             <h2 className="text-2xl font-bold mb-4">Policies</h2>
-            <h3 className="text-lg font-semibold mb-2">Child Policy</h3>
+
             <textarea
-              name="childPolicies"
-              value={data.policies.childPolicies}
+              name="policies"
+              value={data.policies}
               ref={(el) => textareasRef.current.push(el)}
-              onChange={(e) =>
-                setData((prevData) => ({
-                  ...prevData,
-                  policies: {
-                    ...prevData.policies,
-                    childPolicies: e.target.value,
-                  },
-                }))
-              }
-              className="text-gray-700 whitespace-pre-line w-full"
-            />
-            <h3 className="text-lg font-semibold mt-4 mb-2">
-              Cancellation Policy
-            </h3>
-            <textarea
-              name="cancelPolicy"
-              value={data.policies.cancelPolicy}
-              ref={(el) => textareasRef.current.push(el)}
-              onChange={(e) =>
-                setData((prevData) => ({
-                  ...prevData,
-                  policies: {
-                    ...prevData.policies,
-                    cancelPolicy: e.target.value,
-                  },
-                }))
-              }
+              onChange={handleChange}
               className="text-gray-700 whitespace-pre-line w-full"
             />
           </section>
@@ -656,42 +627,42 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
             </div>
           </section>
 
-           {/* Terms and Conditions */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Terms and Conditions</h2>
-          <h3 className="text-lg font-semibold mb-2">Inclusions</h3>
-          <textarea
-            name="inclusions"
-            value={data.termsAndConditions.inclusions}
-            ref={(el) => textareasRef.current.push(el)}
-            onChange={(e) =>
-              setData((prevData) => ({
-                ...prevData,
-                termsAndConditions: {
-                  ...prevData.termsAndConditions,
-                  inclusions: e.target.value,
-                },
-              }))
-            }
-            className="text-gray-700 whitespace-pre-line w-full"
-          />
-          <h3 className="text-lg font-semibold mt-4 mb-2">Exclusions</h3>
-          <textarea
-            name="exclusions"
-            value={data.termsAndConditions.exclusions}
-            ref={(el) => textareasRef.current.push(el)}
-            onChange={(e) =>
-              setData((prevData) => ({
-                ...prevData,
-                termsAndConditions: {
-                  ...prevData.termsAndConditions,
-                  exclusions: e.target.value,
-                },
-              }))
-            }
-            className="text-gray-700 whitespace-pre-line w-full"
-          />
-        </section>
+          {/* Terms and Conditions */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold mb-4">Terms and Conditions</h2>
+            <h3 className="text-lg font-semibold mb-2">Inclusions</h3>
+            <textarea
+              name="inclusions"
+              value={data.termsAndConditions.inclusions}
+              ref={(el) => textareasRef.current.push(el)}
+              onChange={(e) =>
+                setData((prevData) => ({
+                  ...prevData,
+                  termsAndConditions: {
+                    ...prevData.termsAndConditions,
+                    inclusions: e.target.value,
+                  },
+                }))
+              }
+              className="text-gray-700 whitespace-pre-line w-full"
+            />
+            <h3 className="text-lg font-semibold mt-4 mb-2">Exclusions</h3>
+            <textarea
+              name="exclusions"
+              value={data.termsAndConditions.exclusions}
+              ref={(el) => textareasRef.current.push(el)}
+              onChange={(e) =>
+                setData((prevData) => ({
+                  ...prevData,
+                  termsAndConditions: {
+                    ...prevData.termsAndConditions,
+                    exclusions: e.target.value,
+                  },
+                }))
+              }
+              className="text-gray-700 whitespace-pre-line w-full"
+            />
+          </section>
 
           {/* Save or Submit button */}
           <button

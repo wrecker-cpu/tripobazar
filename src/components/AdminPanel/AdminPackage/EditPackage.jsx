@@ -21,10 +21,7 @@ export default function EditPackage({
       conditionOfTravel: "",
       thingsToMaintain: "",
       hotels: [],
-      policies: {
-        childPolicies: "",
-        cancelPolicy: "",
-      },
+      policies: "",
       termsAndConditions: {
         inclusions: "",
         exclusions: "",
@@ -165,10 +162,7 @@ export default function EditPackage({
         conditionOfTravel: "",
         thingsToMaintain: "",
         hotels: [],
-        policies: {
-          childPolicies: "",
-          cancelPolicy: "",
-        },
+        policies: "",
         termsAndConditions: {
           inclusions: "",
           exclusions: "",
@@ -510,38 +504,12 @@ export default function EditPackage({
         {/* Policies */}
         <section className="mb-8">
           <h2 className="text-2xl font-bold mb-4">Policies</h2>
-          <h3 className="text-lg font-semibold mb-2">Child Policy</h3>
+
           <textarea
-            name="childPolicies"
-            value={data.policies.childPolicies}
+            name="policies"
+            value={data.policies}
             ref={(el) => textareasRef.current.push(el)}
-            onChange={(e) =>
-              setData((prevData) => ({
-                ...prevData,
-                policies: {
-                  ...prevData.policies,
-                  childPolicies: e.target.value,
-                },
-              }))
-            }
-            className="text-gray-700 whitespace-pre-line w-full"
-          />
-          <h3 className="text-lg font-semibold mt-4 mb-2">
-            Cancellation Policy
-          </h3>
-          <textarea
-            name="cancelPolicy"
-            value={data.policies.cancelPolicy}
-            ref={(el) => textareasRef.current.push(el)}
-            onChange={(e) =>
-              setData((prevData) => ({
-                ...prevData,
-                policies: {
-                  ...prevData.policies,
-                  cancelPolicy: e.target.value,
-                },
-              }))
-            }
+            onChange={handleChange}
             className="text-gray-700 whitespace-pre-line w-full"
           />
         </section>

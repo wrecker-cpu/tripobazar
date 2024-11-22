@@ -13,7 +13,7 @@ const CardSection = ({ data, error }) => {
 
   if (error) {
     return (
-      <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100 text-center">
+      <div className="w-full h-screen relative -z-10 flex flex-col justify-center items-center bg-gray-100 text-center">
         <h2 className="text-4xl font-extrabold text-gray-800 mb-4">
           Packages for {country} will be coming soon
         </h2>

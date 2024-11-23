@@ -267,18 +267,10 @@ export default function AdminPackage() {
                   <h2 className="text-2xl font-bold mb-4">
                     Terms and Conditions
                   </h2>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">Inclusions</h3>
-                    <p className="text-gray-700 whitespace-pre-line">
-                      {data?.termsAndConditions?.inclusions}
-                    </p>
-                  </div>
-                  <div className="mt-4">
-                    <h3 className="text-lg font-semibold mb-2">Exclusions</h3>
-                    <p className="text-gray-700 whitespace-pre-line">
-                      {data?.termsAndConditions?.exclusions}
-                    </p>
-                  </div>
+
+                  <p className="text-gray-700 whitespace-pre-line">
+                    {data?.termsAndConditions}
+                  </p>
                 </section>
               </div>
             </div>

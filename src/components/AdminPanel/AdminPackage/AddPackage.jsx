@@ -15,10 +15,7 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
     thingsToMaintain: "",
     hotels: [],
     policies: "",
-    termsAndConditions: {
-      inclusions: "",
-      exclusions: "",
-    },
+    termsAndConditions: "",
   });
 
   const [newLocation, setNewLocation] = useState("");
@@ -630,36 +627,12 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
           {/* Terms and Conditions */}
           <section className="mb-8">
             <h2 className="text-2xl font-bold mb-4">Terms and Conditions</h2>
-            <h3 className="text-lg font-semibold mb-2">Inclusions</h3>
+
             <textarea
-              name="inclusions"
-              value={data.termsAndConditions.inclusions}
+              name="termsAndConditions"
+              value={data.termsAndConditions}
               ref={(el) => textareasRef.current.push(el)}
-              onChange={(e) =>
-                setData((prevData) => ({
-                  ...prevData,
-                  termsAndConditions: {
-                    ...prevData.termsAndConditions,
-                    inclusions: e.target.value,
-                  },
-                }))
-              }
-              className="text-gray-700 whitespace-pre-line w-full"
-            />
-            <h3 className="text-lg font-semibold mt-4 mb-2">Exclusions</h3>
-            <textarea
-              name="exclusions"
-              value={data.termsAndConditions.exclusions}
-              ref={(el) => textareasRef.current.push(el)}
-              onChange={(e) =>
-                setData((prevData) => ({
-                  ...prevData,
-                  termsAndConditions: {
-                    ...prevData.termsAndConditions,
-                    exclusions: e.target.value,
-                  },
-                }))
-              }
+              onChange={handleChange}
               className="text-gray-700 whitespace-pre-line w-full"
             />
           </section>

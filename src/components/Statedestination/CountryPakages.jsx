@@ -9,6 +9,7 @@ import img3 from "../../assets/CountryDestination/sm-imgthree.svg";
 import img4 from "../../assets/CountryDestination/sm-img-4.svg";
 import img5 from "../../assets/CountryDestination/sm-img-5.svg";
 import img6 from "../../assets/CountryDestination/sm-img-6.svg";
+import { Link } from "react-router-dom";
 
 function CountryPakages({ data, error, state }) {
   const [showModal, setShowModal] = useState(false);
@@ -85,9 +86,9 @@ function CountryPakages({ data, error, state }) {
               ))}
             </div>
             {/* Book Now Button */}
-            <button className="w-[80%] sm:w-[70%] mb-4 sm:mb-[9%] bg-[#03B58B] text-white py-2 rounded-md hover:bg-green-600">
+        <Link to={"/destination/:continent/:country/:state/:plandetails"}> <button className="w-[80%] sm:w-[70%] mb-4 sm:mb-[9%] bg-[#03B58B] text-white py-2 rounded-md hover:bg-green-600">
               Book Now
-            </button>
+            </button></Link>  
           </div>
         ))}
       </div>

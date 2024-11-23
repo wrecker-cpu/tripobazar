@@ -24,6 +24,7 @@ import AdminPanel from "./components/AdminPanel/AdminPanel";
 import CountryDestinationPage from "./components/CountryDestination/CountryDestinationPage";
 import StateDestinationPage from "./components/Statedestination/StateDestinationPage";
 import { SearchProvider } from "../context/SearchContext";
+import PlanDetails from "./components/PlanDetails/PlanDetails";
 
 function App() {
   const location = useLocation(); // Get the current route
@@ -57,6 +58,10 @@ function App() {
           <Route
             path="/destination/:continent/:country/:state"
             element={<StateDestinationPage />}
+          />
+                <Route
+            path="/destination/:continent/:country/:state/:plandetails"
+            element={<PlanDetails />}
           />
           <Route path="/adminpanel/*" element={<AdminPanel />} />
         </Route>

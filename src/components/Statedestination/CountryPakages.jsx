@@ -86,7 +86,7 @@ function CountryPakages({ data, error, state, country, continent }) {
             </div>
             {/* Book Now Button */}
             <Link
-              to={`/destination/${continent}/${continent}/${state}/${item._id}`}
+              to={`/destination/${continent}/${country}/${state}/${item._id}`}
             >
               {" "}
               <button className="w-[80%] sm:w-[70%] mb-4 sm:mb-[9%] bg-[#03B58B] text-white py-2 rounded-md hover:bg-green-600">

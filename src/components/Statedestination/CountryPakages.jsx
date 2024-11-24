@@ -11,7 +11,7 @@ import img5 from "../../assets/CountryDestination/sm-img-5.svg";
 import img6 from "../../assets/CountryDestination/sm-img-6.svg";
 import { Link } from "react-router-dom";
 
-function CountryPakages({ data, error, state }) {
+function CountryPakages({ data, error, state, country, continent }) {
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
 
@@ -34,12 +34,11 @@ function CountryPakages({ data, error, state }) {
       {/* First Part - Existing Component */}
 
       <div className="w-auto md:block hidden text-center">
-
         <div
           className="cursor-pointer  sticky md:top-[20%] top-[29%] "
           onClick={toggleModal}
         >
-          <FilterSvg  />
+          <FilterSvg />
         </div>
       </div>
       {/* Second Part - Cards */}
@@ -86,15 +85,19 @@ function CountryPakages({ data, error, state }) {
               ))}
             </div>
             {/* Book Now Button */}
-        <Link to={"/destination/:continent/:country/:state/:plandetails"}> <button className="w-[80%] sm:w-[70%] mb-4 sm:mb-[9%] bg-[#03B58B] text-white py-2 rounded-md hover:bg-green-600">
-              Book Now
-            </button></Link>  
+            <Link
+              to={`/destination/${continent}/${continent}/${state}/${item._id}`}
+            >
+              {" "}
+              <button className="w-[80%] sm:w-[70%] mb-4 sm:mb-[9%] bg-[#03B58B] text-white py-2 rounded-md hover:bg-green-600">
+                Book Now
+              </button>
+            </Link>
           </div>
         ))}
       </div>
 
       <FilterBox showModal={showModal} onClose={toggleModal} />
-      
     </div>
   );
 }

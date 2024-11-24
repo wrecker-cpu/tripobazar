@@ -1,60 +1,52 @@
 import React from "react";
 
-const Itinerary = () => {
+const Itinerary = ({ data }) => {
   return (
-    <section className="w-full bg-transparent px-4 py-8">
-      {/* Title Section */}
-      <div className="text-center">
-        <h3 className="text-green-600  text-start font-bold text-lg md:text-2xl mt-2">
-          Here’s Your Itinerary:
-       
-        <span className="text-black font-bold text-lg md:text-2xl mt-2">
-          Trip to Egypt All Inclusive Deal Seasonal Special Offer
-      </span> </h3>
-      </div>
-
-      {/* Subtitle Section */}
-      <p className="text-gray-700 font-semibold text-sm md:text-base text-start mt-4">
-        6 Days 5 Nights: New Delhi, India → Cairo (1N) → Nile River (2N) → Cairo
-        (2N) → New Delhi, India
-      </p>
-
-      {/* Image Section */}
-      <div className="flex flex-col md:flex-row items-center justify-center mt-6 gap-4">
-        {/* Main Large Image */}
-        <div className="w-full md:w-1/2 lg:w-[60%] ">
-          <img
-            src="/src/assets/oneContinent.png"
-            alt="Main Destination"
-            className="rounded-lg shadow-2xl object-cover  w-full h-[250px] md:h-[300px]"
-          />
+    <div className="bg-[#f8f8f8] ">
+      <section className="w-[90%] mx-auto px-4 py-8">
+        {/* Title Section */}
+        <div className="text-center">
+          <h3 className="text-med-green  text-start font-bold text-lg md:text-2xl mt-2">
+            Here’s Your Itinerary:
+            <span className="text-black font-bold text-lg md:text-2xl mt-2">
+              Trip to {data?.title} All Inclusive Deal Seasonal Special Offer
+            </span>{" "}
+          </h3>
         </div>
 
-        {/* Smaller Images */}
-        <div className="grid grid-cols-2 gap-4 w-full md:w-1/2 lg:w-1/3">
-          <img
-            src="/src/assets/oneContinent.png"
-            alt="Image 1"
-            className="rounded-lg shadow-2xl object-cover w-full h-[120px] md:h-[140px]"
-          />
-          <img
-            src="/src/assets/oneContinent.png"
-            alt="Image 2"
-            className="rounded-lg shadow-2xl object-cover w-full h-[120px] md:h-[140px]"
-          />
-          <img
-            src="/src/assets/oneContinent.png"
-            alt="Image 3"
-            className="rounded-lg shadow-2xl object-cover w-full h-[120px] md:h-[140px]"
-          />
-          <img
-            src="/src/assets/oneContinent.png"
-            alt="Image 4"
-            className="rounded-lg shadow-2xl object-cover w-full h-[120px] md:h-[140px]"
-          />
+        {/* Subtitle Section */}
+        <p className="text-gray-700 font-semibold text-sm md:text-base text-start mt-4">
+          {data?.description}
+        </p>
+
+        {/* Image Section */}
+        <div className="flex flex-col md:flex-row items-center justify-between mt-6 gap-4">
+          {/* Main Large Image */}
+          <div className="w-full md:w-1/2 lg:w-[60%] ">
+            <img
+              src={data?.MainPhotos[0]}
+              alt="Main Destination photo 1"
+              className="rounded-lg  object-cover  w-full h-[250px] md:h-[300px]"
+            />
+          </div>
+
+          {/* Smaller Images */}
+          <div className="grid grid-cols-2 gap-4 w-full md:w-1/2 lg:w-5/12">
+            {/**/}
+            {data?.MainPhotos?.slice(1).map((item, idx) => {
+              return (
+                <img
+                  key={idx}
+                  src={item}
+                  alt={`${idx + 1} image`}
+                  className="rounded-lg  object-cover w-full h-[120px] md:h-[140px]"
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 

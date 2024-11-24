@@ -11,7 +11,8 @@ import SrchDestinationCountry from "../SerchDestinationCountry/SrchDestinationCo
 import { useSearch } from "../../../context/SearchContext";
 
 function StateDestinationPage() {
-  const { state } = useParams();
+  const { continent,country,state } = useParams();
+  
   const { filterProp } = useSearch();
 
   const { data, loading, error } = useFetch(
@@ -102,7 +103,7 @@ function StateDestinationPage() {
     <div className="w-full h-full ">
       <SrchDestinationCountry />
       <SubNavCountry />
-      <CountryPakages data={filteredPackages} error={error} state={state} />
+      <CountryPakages data={filteredPackages} error={error} continent={continent} country={country} state={state} />
       <StealDealPakage />
       <PopulerActivity />
     </div>

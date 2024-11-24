@@ -4,7 +4,7 @@ const SearchContext = createContext();
 
 export const SearchProvider = ({ children }) => {
   const [searchData, setSearchData] = useState({
-    guests: null,
+    guests: 1,
     startDate: null,
     endDate: null,
     startLocation: "",

@@ -166,7 +166,7 @@ const handleInputChange = (e) => {
         <div  ref={loginDetailsRef}>
           <h3 className="text-xl font-bold">Login Details</h3>
 
-          <div className="grid  grid-cols-3 text-sm gap-4 mt-4">
+          <div className="grid gride-cols-1  md:grid-cols-3 text-sm gap-4 mt-4">
             <div className="flex items-center">
               <select className="border p-2 rounded-l-md">
                 <option className="hover:bg-green-100">+91</option>
@@ -205,7 +205,7 @@ const handleInputChange = (e) => {
             <h3 className="text-xl font-bold">Saved Travelers</h3>
             <button
               onClick={() => setIsModalOpen(true)}
-              className=" text-[#03B58B] border-black border-[1.3px] hover:bg-[#03B58B] hover:border-none hover:text-white px-4 py-2 rounded-md"
+              className=" text-[#03B58B] border-black border-[1.3px] hover:bg-[#03B58B] hover:border-none hover:text-white px-1 md:px-4 py-2 rounded-md"
             >
               + Add Traveler
             </button>

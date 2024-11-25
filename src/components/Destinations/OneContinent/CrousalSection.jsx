@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import continentimg from "../../../assets/oneContinent.png";
 function CrousalSection({ selectedDestination }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
 
   const handlePrev = () => {
@@ -39,7 +38,7 @@ function CrousalSection({ selectedDestination }) {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="relative w-[90%] flex flex-col items-center md:items-start mx-auto z-10">
+      <div className="relative w-[90%] flex flex-col items-center md:items-start mx-auto z-0">
         <h3 className="text-2xl em:text-4xl vem:text-5xl md:text-7xl font-bold">
           It’s time for{" "}
           <span className="text-med-green">
@@ -56,9 +55,7 @@ function CrousalSection({ selectedDestination }) {
         </button>
 
         <div className="  overflow-hidden  pt-7 w-full ">
-          <div
-            className="flex flex-col md:items-start items-center md:flex-row gap-10 w-full transition-transform duration-500"
-          >
+          <div className="flex flex-col md:items-start items-center md:flex-row gap-10 w-full transition-transform duration-500">
             {selectedDestination?.Countries?.map((item, idx) => (
               <div
                 key={idx}

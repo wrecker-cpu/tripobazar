@@ -56,7 +56,7 @@ function AllContinent({ data, loading }) {
               <div className="absolute inset-0 bg-black opacity-50"></div>
             </div>
 
-            <div className="flex h-[820px] items-start relative z-10">
+            <div className="flex h-[820px] items-start relative z-0">
               {/* Dots */}
               <div className="h-full w-[1px] flex flex-col justify-center items-center gap-[85px] bg-white absolute left-5 sm:left-10 md:left-20 z-20">
                 {[...Array(6)].map((_, index) => (

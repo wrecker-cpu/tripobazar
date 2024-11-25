@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import dubai from "../../assets/home/dubai.png";
 import newyork from "../../assets/home/newyorkk.jpg";
+import vietnam from "../../assets/home/vietnam.jpg";
+import singapore from "../../assets/home/Singapore.jpg";
+import Australia from "../../assets/home/australia.jpg";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 export default function PopularPackages() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,18 +26,44 @@ export default function PopularPackages() {
       country: "UAE",
       price: "₹ 48,999",
       description: "Dubai travel plans starting at just ₹39,999.",
+      destination: "destination/MiddleEast",
     },
 
     {
       image: newyork,
       location: "NEW YORK",
       country: "USA",
-      price: "$ 2,199",
-      description: "Experience New York from $2,199.",
+      price: "₹ 192410",
+      description: "Experience New York from ₹2,199.",
+      destination: "destination/Usa",
+    },
+    {
+      image: vietnam,
+      location: "VIETNAM",
+      country: "ASIA",
+      price: "₹ 43,750",
+      description: "Experience Vietnam from ₹ 43,750.",
+      destination: "destination/asia/Vietnam",
+    },
+    {
+      image: singapore,
+      location: "SINGAPORE",
+      country: "ASIA",
+      price: "₹ 43,750",
+      description: "Experience Singapore from ₹ 43,750.",
+      destination: "destination/asia",
+    },
+    {
+      image: Australia,
+      location: "SYDNEY",
+      country: "AUSTRALIA",
+      price: "₹ 43,750",
+      description: "Experience Australia from ₹ 43,750.",
+      destination: "destination/Australia",
     },
   ];
   const progressWidth = ((currentIndex + 1) / carouselItems.length) * 100;
-  const { image, location, country, price, description } =
+  const { image, location, country, price, description, destination } =
     carouselItems[currentIndex];
 
   return (
@@ -105,7 +135,9 @@ export default function PopularPackages() {
                 {description}
               </p>
               <button className="border-[.1rem] mt-7 mb-8 rounded-lg text-[#03B58B] border-[#012831] w-2/5 font-poppins text-[.8rem] font-medium px-2 py-2">
-                View All
+                <Link className="w-full h-full block" to={destination}>
+                  View All
+                </Link>
               </button>
             </div>
           </div>

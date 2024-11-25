@@ -9,10 +9,13 @@ import { useParams } from "react-router-dom";
 import Loader from "../Loader.jsx";
 import SrchDestinationCountry from "../SerchDestinationCountry/SrchDestinationCountry.jsx";
 import { useSearch } from "../../../context/SearchContext";
+import FilterBox from "../FilterBox/FilterBox.jsx";
 
 function StateDestinationPage() {
-  const { continent,country,state } = useParams();
-  
+  const { continent, country, state } = useParams();
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => setShowModal(!showModal);
+
   const { filterProp } = useSearch();
 
   const { data, loading, error } = useFetch(
@@ -102,8 +105,15 @@ function StateDestinationPage() {
   return (
     <div className="w-full h-full ">
       <SrchDestinationCountry />
-      <SubNavCountry />
-      <CountryPakages data={filteredPackages} error={error} continent={continent} country={country} state={state} />
+      <SubNavCountry  toggleModal={toggleModal} />
+      <FilterBox showModal={showModal} onClose={toggleModal} />
+      <CountryPakages
+        data={filteredPackages}
+        error={error}
+        continent={continent}
+        country={country}
+        state={state}
+      />
       <StealDealPakage />
       <PopulerActivity />
     </div>

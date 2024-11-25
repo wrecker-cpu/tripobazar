@@ -9,6 +9,7 @@ export const Destination = {
         { name: "Rajasthan" },
         { name: "Uttarakhand" },
         { name: "Sikkim" },
+        { name: "Kashmir" },
         { name: "North Kerala" },
         { name: "Dholavira" },
       ],
@@ -30,7 +31,7 @@ export const Destination = {
       destinations: [{ name: "Georgia" }],
     },
     {
-      region: "Middle East",
+      region: "MiddleEast",
       destinations: [{ name: "Saudi Arabia" }],
     },
   ],

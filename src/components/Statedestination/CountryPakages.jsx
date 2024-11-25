@@ -12,8 +12,7 @@ import img6 from "../../assets/CountryDestination/sm-img-6.svg";
 import { Link } from "react-router-dom";
 
 function CountryPakages({ data, error, state, country, continent }) {
-  const [showModal, setShowModal] = useState(false);
-  const toggleModal = () => setShowModal(!showModal);
+  
 
   const images = [img1, img2, img3, img4, img5, img6]; // Array of image sources
 
@@ -34,12 +33,7 @@ function CountryPakages({ data, error, state, country, continent }) {
       {/* First Part - Existing Component */}
 
       <div className="w-auto md:block hidden text-center">
-        <div
-          className="cursor-pointer  sticky md:top-[20%] top-[29%] "
-          onClick={toggleModal}
-        >
-          <FilterSvg />
-        </div>
+       
       </div>
       {/* Second Part - Cards */}
       <div className="w-[85%]sm:w-[90%] lg:w-[95%]   grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -97,7 +91,7 @@ function CountryPakages({ data, error, state, country, continent }) {
         ))}
       </div>
 
-      <FilterBox showModal={showModal} onClose={toggleModal} />
+      
     </div>
   );
 }

@@ -31,7 +31,7 @@ export const Destination = {
       destinations: [{ name: "Georgia" }],
     },
     {
-      region: "Middle East",
+      region: "MiddleEast",
       destinations: [{ name: "Saudi Arabia" }],
     },
   ],

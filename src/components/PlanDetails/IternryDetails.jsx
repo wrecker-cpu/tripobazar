@@ -156,12 +156,12 @@ function IternryDetails({ data }) {
                           </p>
                           <div className="flex gap-1 mt-1">
                             {[...Array(5)].map((_, i) => {
-                              if (i < Math.floor(hdetail.Rating)) {
+                              if (i < Math.floor(hdetail.hotelRating)) {
                                 // Full stars
                                 return (
                                   <MdStar key={i} className="text-yellow-400" />
                                 );
-                              } else if (i < hdetail.Rating) {
+                              } else if (i < hdetail.hotelRating) {
                                 // Half star
                                 return (
                                   <MdStarHalf
@@ -183,7 +183,7 @@ function IternryDetails({ data }) {
                           <p className=" mt-1 ">
                             Total Price:{" "}
                             <span className=" font-medium text-green-700 ">
-                              Rs 20000+
+                              Rs {hdetail.hotelPrice}+
                             </span>
                           </p>
                         </div>

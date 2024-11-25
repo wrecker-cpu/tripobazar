@@ -39,7 +39,7 @@ function CrousalSection({ selectedDestination }) {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="relative w-[90%] flex flex-col items-center md:items-start mx-auto z-10">
+      <div className="relative w-[90%] flex flex-col items-center md:items-start mx-auto z-0">
         <h3 className="text-2xl em:text-4xl vem:text-5xl md:text-7xl font-bold">
           It’s time for{" "}
           <span className="text-med-green">

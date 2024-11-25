@@ -627,7 +627,6 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
           {/* Terms and Conditions */}
           <section className="mb-8">
             <h2 className="text-2xl font-bold mb-4">Terms and Conditions</h2>
-
             <textarea
               name="termsAndConditions"
               value={data.termsAndConditions}

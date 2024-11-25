@@ -9,6 +9,7 @@ export const Destination = {
         { name: "Rajasthan" },
         { name: "Uttarakhand" },
         { name: "Sikkim" },
+        { name: "Kashmir" },
         { name: "North Kerala" },
         { name: "Dholavira" },
       ],

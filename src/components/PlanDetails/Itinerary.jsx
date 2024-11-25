@@ -8,7 +8,7 @@ const Itinerary = ({ data }) => {
         <div className="text-center">
           <h3 className="text-med-green  text-start font-bold text-lg md:text-2xl mt-2">
             Here’s Your Itinerary:
-            <span className="text-black font-bold text-lg md:text-2xl mt-2">
+            <span className="text-black font-bold ml-2 text-lg md:text-2xl mt-2">
               Trip to {data?.title} All Inclusive Deal Seasonal Special Offer
             </span>{" "}
           </h3>
@@ -26,7 +26,7 @@ const Itinerary = ({ data }) => {
             <img
               src={data?.MainPhotos[0]}
               alt="Main Destination photo 1"
-              className="rounded-lg  object-cover  w-full h-[250px] md:h-[300px]"
+              className="rounded-lg  object-cover  w-full h-[250px] md:h-[400px]"
             />
           </div>
 
@@ -39,7 +39,7 @@ const Itinerary = ({ data }) => {
                   key={idx}
                   src={item}
                   alt={`${idx + 1} image`}
-                  className="rounded-lg  object-cover w-full h-[120px] md:h-[140px]"
+                  className="rounded-lg  object-cover w-full h-[120px] md:h-[192px]"
                 />
               );
             })}

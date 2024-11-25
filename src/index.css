@@ -3,7 +3,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.customfradiant{
+  background: linear-gradient(225.47deg, rgba(0, 181, 138, 0.7) 0%, rgba(39, 191, 234, 0.62) 100%);
 
+}
 .custom-radio {
   appearance: none;
   width: 20px; /* Increased size */

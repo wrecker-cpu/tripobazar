@@ -1,15 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
+import { useWishlist } from "../../../context/WishListContext";
 const CardSection = ({ data, error }) => {
   const { continent, country } = useParams();
-
-  const [liked, setLiked] = useState(Array(8).fill(false)); // Initial state for heart toggle
-
-  const toggleHeart = (index) => {
-    setLiked(liked.map((item, i) => (i === index ? !item : item)));
-  };
   const navigate = useNavigate();
+
+  const [liked, setLiked] = useState(Array(data?.length || 0).fill([])); // Initial state for heart toggle
+  const { addStateToWishlist, userDetails } = useWishlist();
+
+  useEffect(() => {
+    if (!data || !userDetails?.WishListStates) return;
+
+    const wishlistStateIds = userDetails.WishListStates.map((wishlist) =>
+      typeof wishlist === "object" ? wishlist._id : wishlist
+    );
+
+    const initialLikedState = data?.States?.filter(
+      (state) => wishlistStateIds.includes(state._id) // Check if the state's ID is in the wishlist
+    ).map((country) => country._id);
+
+    setLiked(initialLikedState || []);
+  }, [data, userDetails?.WishListStates]);
+
+  const toggleHeart = (event, id) => {
+    event.stopPropagation();
+
+    setLiked((prevLiked) => {
+      if (prevLiked.includes(id)) {
+        return prevLiked.filter((likedId) => likedId !== id);
+      } else {
+        return [...prevLiked, id];
+      }
+    });
+
+    addStateToWishlist(id);
+  };
 
   if (error) {
     return (
@@ -24,6 +50,7 @@ const CardSection = ({ data, error }) => {
     );
   }
 
+  console.log(liked);
 
   return (
     <section className="relative  bg-cover bg-opacity-0 px-5 p-11">
@@ -57,10 +84,10 @@ const CardSection = ({ data, error }) => {
 
               {/* Heart icon */}
               <button
-                className={`absolute top-2 right-2 text-white  p-1 rounded-full ${
-                  liked[index] ? "text-pink-500" : ""
+                className={`absolute top-2 right-2   p-1 rounded-full ${
+                  liked.includes(card._id) ? "text-pink-500" : "text-white"
                 }`}
-                onClick={() => toggleHeart(index)}
+                onClick={(e) => toggleHeart(e, card._id)}
               >
                 <FaHeart />
               </button>

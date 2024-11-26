@@ -9,7 +9,7 @@ function SubNavTravelTips({ descriptionRefs, sections }) {
   };
 
   return (
-    <nav className="bg-white sticky top-0 z-30 shadow-inner">
+    <nav className="bg-white sticky top-[73px] z-30 shadow-inner">
       <div className="max-w-7xl mx-auto px-4  md:py-4">
         <ul className="hidden md:flex flex-row whitespace-nowrap  items-center justify-center text-[.7rem] md:text-sm uppercase leading-6 font-normal  md:space-x-8">
           {sections.map((item, idx) => (

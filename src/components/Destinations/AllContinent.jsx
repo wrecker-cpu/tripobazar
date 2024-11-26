@@ -9,14 +9,44 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import SearchDestinationPage from "../SearchDestination/SearchDestinationPage";
+import { useWishlist } from "../../../context/WishListContext";
 function AllContinent({ data, loading }) {
-  const [liked, setLiked] = useState(Array(8).fill(false)); // Initial state for heart toggle
+  const [liked, setLiked] = useState(Array(data?.length || 0).fill([])); // Initial state for heart toggle
   const carouselRef = useRef(null); // Reference for the carousel container
   const navigate = useNavigate();
+  const { addCountryToWishlist, userDetails } = useWishlist();
 
-  const toggleHeart = (index) => {
-    setLiked(liked.map((item, i) => (i === index ? !item : item)));
+  useEffect(() => {
+    if (!data || !userDetails?.WishListCountries) return;
+
+    const wishlistCountryIds = userDetails.WishListCountries.map((wishlist) =>
+      typeof wishlist === "object" ? wishlist._id : wishlist
+    );
+
+    const initialLikedState = data?.flatMap(
+      (item) =>
+        item?.Countries?.filter((country) =>
+          wishlistCountryIds.includes(country._id)
+        ).map((country) => country._id) // Store matching IDs
+    );
+
+    setLiked(initialLikedState || []);
+  }, [data, userDetails?.WishListCountries]);
+
+  const toggleHeart = (event, id) => {
+    event.stopPropagation();
+
+    setLiked((prevLiked) => {
+      if (prevLiked.includes(id)) {
+        return prevLiked.filter((likedId) => likedId !== id);
+      } else {
+        return [...prevLiked, id];
+      }
+    });
+
+    addCountryToWishlist(id);
   };
+
   const scrollLeft = () => {
     if (carouselRef.current) {
       console.log("Before scroll left: ", carouselRef.current.scrollLeft);
@@ -33,7 +63,7 @@ function AllContinent({ data, loading }) {
     }
   };
 
-  if (loading === true) {
+  if ((loading === true, !data)) {
     return <Loader />;
   }
 
@@ -129,9 +159,11 @@ function AllContinent({ data, loading }) {
                       {/* Heart icon */}
                       <button
                         className={`absolute top-2 right-2 text-2xl sm:text-3xl p-1 rounded-full ${
-                          liked[index] ? "text-pink-500" : "text-white"
+                          liked.includes(card._id)
+                            ? "text-pink-500"
+                            : "text-white"
                         }`}
-                        onClick={() => toggleHeart(index)}
+                        onClick={(e) => toggleHeart(e, card._id)}
                       >
                         <FaHeart />
                       </button>

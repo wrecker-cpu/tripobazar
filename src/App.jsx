@@ -26,6 +26,7 @@ import StateDestinationPage from "./components/Statedestination/StateDestination
 import { SearchProvider } from "../context/SearchContext";
 import PlanDetails from "./components/PlanDetails/PlanDetails";
 import MyProfile from "./components/MyProfile/MyProfile";
+import { WishlistProvider } from "../context/WishListContext";
 
 function App() {
   const location = useLocation(); // Get the current route
@@ -65,7 +66,7 @@ function App() {
             element={<PlanDetails />}
           />
           <Route path="/adminpanel/*" element={<AdminPanel />} />
-          <Route path="/myprofile" element={<MyProfile/>} />
+          <Route path="/myprofile" element={<MyProfile />} />
         </Route>
       </Routes>
       {/* Conditionally show the Footer based on the current route */}
@@ -76,11 +77,13 @@ function App() {
 
 function AppWithRouter() {
   return (
-    <SearchProvider>
-      <Router>
-        <App />
-      </Router>
-    </SearchProvider>
+    <WishlistProvider>
+      <SearchProvider>
+        <Router>
+          <App />
+        </Router>
+      </SearchProvider>
+    </WishlistProvider>
   );
 }
 

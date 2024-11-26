@@ -23,15 +23,12 @@ const Navbar = () => {
   const downRef = useRef([]);
   const navigate = useNavigate();
   const toggleDestinations = (index) => {
-   console.log("this is called")
+    console.log("this is called");
     setOpenDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
-  useEffect(() => {
-    console.log("Updated openDropdownIndex:", openDropdownIndex);
-  }, [openDropdownIndex]);
-  
-  
+  useEffect(() => {}, [openDropdownIndex]);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -68,11 +65,13 @@ const Navbar = () => {
       setUserData(JSON.parse(data));
     }
   }, []);
-useEffect(() => {
+  useEffect(() => {
     const handleClickOutside = (e) => {
       if (
         downRef.current &&
-        !Object.values(downRef.current).some((ref) => ref && ref.contains(e.target))
+        !Object.values(downRef.current).some(
+          (ref) => ref && ref.contains(e.target)
+        )
       ) {
         setOpenDropdownIndex(null); // Close any open dropdown
       }
@@ -84,7 +83,6 @@ useEffect(() => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
 
   return (
     <div className="sticky top-0 z-100  max-w-[1920px] mx-auto">
@@ -125,7 +123,8 @@ useEffect(() => {
                 <div
                   ref={(el) => (downRef.current["dest"] = el)}
                   style={{
-                    visibility: openDropdownIndex === "dest" ? "visible" : "hidden",
+                    visibility:
+                      openDropdownIndex === "dest" ? "visible" : "hidden",
                   }}
                   className={`absolute z-20 w-max transition-opacity ease-in-out duration-300 left-0 mt-2 bg-white shadow-md border rounded-md ${
                     openDropdownIndex === "dest"

@@ -59,7 +59,7 @@ function App() {
             path="/destination/:continent/:country/:state"
             element={<StateDestinationPage />}
           />
-                <Route
+          <Route
             path="/destination/:continent/:country/:state/:id"
             element={<PlanDetails />}
           />

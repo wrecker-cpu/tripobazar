@@ -32,6 +32,7 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(`Changing ${name} to ${value}`);
     setData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -135,9 +136,6 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
     try {
       await addNew(data);
       setIsAddingPackage(false);
-      //   setSelectedId(null);
-      //   setEditPackage(false);
-      //   setHotelDetails(null);
       console.log(data);
       setData({
         title: "",
@@ -151,16 +149,8 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
         conditionOfTravel: "",
         thingsToMaintain: "",
         hotels: [],
-        policies: {
-          childPolicies: "",
-          cancelPolicy: "",
-        },
-        termsAndConditions: [
-          {
-            inclusions: "",
-            exclusions: "",
-          },
-        ],
+        policies: "",
+        termsAndConditions: "",
       });
     } catch (error) {
       console.log(error);
@@ -630,7 +620,11 @@ const AddPackage = ({ addNew, setIsAddingPackage }) => {
             <textarea
               name="termsAndConditions"
               value={data.termsAndConditions}
-              ref={(el) => textareasRef.current.push(el)}
+              ref={(el) => {
+                if (el && !textareasRef.current.includes(el)) {
+                  textareasRef.current.push(el);
+                }
+              }}
               onChange={handleChange}
               className="text-gray-700 whitespace-pre-line w-full"
             />

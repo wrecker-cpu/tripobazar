@@ -25,6 +25,7 @@ import CountryDestinationPage from "./components/CountryDestination/CountryDesti
 import StateDestinationPage from "./components/Statedestination/StateDestinationPage";
 import { SearchProvider } from "../context/SearchContext";
 import PlanDetails from "./components/PlanDetails/PlanDetails";
+import MyProfile from "./components/MyProfile/MyProfile";
 
 function App() {
   const location = useLocation(); // Get the current route
@@ -35,7 +36,7 @@ function App() {
   const shouldShowFooter = !hideFooterOnRoutes.includes(location.pathname);
 
   return (
-    <div className="bg-[#F8F8F8] ">
+    <div className="bg-[#F8F8F8] font-poppins">
       {shouldShowNavbar && <Navbar />}
       {/* Always show Navbar */}
       <Routes>
@@ -64,6 +65,7 @@ function App() {
             element={<PlanDetails />}
           />
           <Route path="/adminpanel/*" element={<AdminPanel />} />
+          <Route path="/myprofile" element={<MyProfile/>} />
         </Route>
       </Routes>
       {/* Conditionally show the Footer based on the current route */}

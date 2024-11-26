@@ -87,8 +87,8 @@ useEffect(() => {
 
 
   return (
-    <div className="relative  max-w-[1920px] mx-auto">
-      <div className="z-20  sticky top-0  border-b bg-white mx-auto">
+    <div className="sticky top-0 z-100  max-w-[1920px] mx-auto">
+      <div className="z-30    border-b bg-white mx-auto">
         <nav
           className={`bg-white flex items-center justify-between py-4  relative w-[90%] emd:w-[95%] xlg:w-[90%] mx-auto`}
         >

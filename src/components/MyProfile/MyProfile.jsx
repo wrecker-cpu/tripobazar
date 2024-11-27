@@ -1,114 +1,169 @@
-import React, { useRef,useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useWishlist } from "../../../context/WishListContext";
+import Loader from "../Loader";
+import EditButtonSvg from "../../../svgs/EditButton/index";
+import axios from "axios";
+import { RxCross2 } from "react-icons/rx";
+import DatePicker from "react-datepicker";
+import { jwtDecode } from "jwt-decode";
+import { IoIosArrowDown } from "react-icons/io";
+import AddTravellers from "./AddTravellers";
+
 function MyProfile() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [travelers, setTravelers] = useState([]);
-  const [profileFields, setProfileFields] = useState({
-    name: "",
-    date: "",
-    gender: "",
-    maritalStatus: "",
-    address: "",
-    pincode: "",
-  });
-  
-  
-  const totalFields = 6; // Total fields in the profile section
-const filledFields = Object.values(profileFields).filter((value) => value.trim() !== "").length; // Count of filled fields
-const profileCompletion = Math.round((filledFields / totalFields) * 100); // Calculate percentage
-
-const handleInputChange = (e) => {
-  setProfileFields({ ...profileFields, [e.target.name]: e.target.value });
-};
-
-  
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    countryCode: "+91",
-    dateOfBirth: "",
-    passportNumber: "",
-    passportCountry: "",
-    passportExpiry: "",
-  });
-
-  // Refs for scrollable sections
+  const { userDetails, isLoading } = useWishlist();
+  const [editUser, setEditUser] = useState(false);
   const profileRef = useRef(null);
   const loginDetailsRef = useRef(null);
   const savedTravelersRef = useRef(null);
+  const [extraTravellers, setExtraTravellers] = useState(
+    userDetails?.ExtraTravellers || []
+  );
+  const [profileFields, setProfileFields] = useState({
+    FullName: userDetails?.FullName || "",
+    DateOfBirth: userDetails?.DateOfBirth || "",
+    Gender: userDetails?.Gender || "",
+    MaritalStatus: userDetails?.MaritalStatus || "",
+    Address: userDetails?.Address || "",
+    PinCode: userDetails?.PinCode || "",
+    Email: userDetails?.Email || "",
+  });
+
+  useEffect(() => {
+    if (userDetails) {
+      setProfileFields({
+        FullName: userDetails.FullName || "",
+        DateOfBirth: userDetails.DateOfBirth || "",
+        Gender: userDetails.Gender || "",
+        MaritalStatus: userDetails.MaritalStatus || "",
+        Address: userDetails.Address || "",
+        PinCode: userDetails.PinCode || "",
+        Email: userDetails?.Email || "",
+      });
+      setExtraTravellers(userDetails.ExtraTravellers || []); // Set ExtraTravellers state
+    }
+  }, [userDetails]);
+
+  const filledFields = Object.values(profileFields).filter((value) => {
+    // Check if the value is a string and not empty after trimming
+    if (typeof value === "string") {
+      return value.trim() !== "";
+    }
+    // If it's not a string (like a Date), check if it's truthy (not null, undefined, etc.)
+    return value != null;
+  }).length; // Count of filled fields
+
+  const totalFields = Object.keys(profileFields).length; // Total number of fields
+  const profileCompletion = Math.round((filledFields / totalFields) * 100); // Calculate percentage
+
+  const handleInputChange = (value, fieldName) => {
+    setProfileFields((prevFields) => ({
+      ...prevFields,
+      [fieldName]: value,
+    }));
+  };
+
+  const updateUser = async (updateData) => {
+    try {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      if (!userInfo) {
+        return;
+      }
+
+      const decodedToken = jwtDecode(userInfo.token);
+      const userId = decodedToken.id;
+
+      const response = await axios.put(
+        `https://tripobazar-backend.vercel.app/api/users/${userId}`,
+        updateData,
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("User updated successfully");
+      }
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
+  };
+
+  const handleSubmit = () => {
+    const profileUpdateData = {
+      FullName: profileFields.FullName,
+      DateOfBirth: profileFields.DateOfBirth,
+      Gender: profileFields.Gender,
+      MaritalStatus: profileFields.MaritalStatus,
+      Address: profileFields.Address,
+      PinCode: profileFields.PinCode,
+    };
+    updateUser(profileUpdateData);
+  };
+
+  const navItems = [
+    {
+      id: "profile",
+      label: "Profile",
+      ref: profileRef,
+    },
+    {
+      id: "loginDetails",
+      label: "Login Details",
+      ref: loginDetailsRef,
+    },
+    {
+      id: "savedTravelers",
+      label: "Saved Travelers",
+      ref: savedTravelersRef,
+    },
+  ];
 
   const handleScrollTo = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({ ...formData, [name]: value });
-  // };
-
-  const handleSaveTraveler = () => {
-    setTravelers([...travelers, formData]);
-    setIsModalOpen(false);
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      countryCode: "+91",
-      dateOfBirth: "",
-      passportNumber: "",
-      passportCountry: "",
-      passportExpiry: "",
-    });
-  };
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
-    <div className="md:flex p-0 m-0 h-auto w-full bg-tranparent">
+    <div className="md:flex max-w-[1920px] mx-auto p-0 m-0 h-auto w-full bg-tranparent">
       {/* Left Sidebar */}
-      <div className="md:w-[20%]  sticky top-0 shadow-sm md:shadow-none h-full md:mx-8 md:mt-6  z-10 md:block w-full md:rounded-xl bg-white p-4 ">
+      <div className="md:w-[20%]  md:sticky top-[78px] shadow-sm md:shadow-none h-full md:mx-8 md:mt-6  z-10 md:block w-full md:rounded-xl bg-white p-4 ">
+        <div className="p-[5%] mb-3 text-center w-[103px] h-[103px] flex items-center justify-center font-semibold text-white rounded-[10px] customfradiant text-3xl">
+          {profileFields?.FullName
+            ? profileFields.FullName.split(" ")
+                .slice(0, 2)
+                .map((word) => word[0].toUpperCase())
+                .join("")
+            : "NN"}
+        </div>
 
-      <div
-  className="
-    p-[5%] mb-3 text-center  font-semibold text-white rounded-[10px] customfradiant
-    lg:w-[9vw] lg:h-[12vh] lg:text-3xl
-    md:w-[8vw] md:h-[10vh] md:text-2xl
-    sm:w-[12vw] sm:h-[8vh] sm:text-xl
-    w-[20vw] h-[8vh] text-xl
-  "
->
-  DP
-</div>
-
-         
-      <h3 className="font-semibold mb-0">Desai Priyansh</h3>
-      <p className="text-[.7rem] text-[#0028319E] mb-6 ">priyansh@gmail.com</p>
-        <ul className="md:space-y-4  flex md:block justify-evenly  w-full text-[.8rem]">
-          <li
-            onClick={() => handleScrollTo(profileRef)}
-            className="cursor-pointer text-gray-700 flex items-center"
-          >
-            <span className="w-4 h-4 border-[.5px] flex items-center justify-center border-[#03B58B]  rounded-full mr-3">
-            <span className="md:w-2 md:h-2 w-1 h-1    bg-[#03B58B] rounded-full "></span></span>
-            Profile 
-            <span className="hidden md:flex   font-bold text-2xl pl-[42%]">→</span>
-          </li>
-          <li
-            onClick={() => handleScrollTo(loginDetailsRef)}
-            className="cursor-pointer text-gray-700 flex items-center"
-          >
-             <span className="w-4 h-4 border-[.5px] flex items-center justify-center border-[#03B58B]  rounded-full mr-3">
-             <span className="w-1 h-1 bg-[#03B58B] rounded-full "></span></span>
-            Login Details
-            <span className="hidden md:flex   font-bold text-2xl pl-[19%]">→</span>
-          </li>
-          <li
-            onClick={() => handleScrollTo(savedTravelersRef)}
-            className="cursor-pointer text-gray-700 flex items-center"
-          >
-    <span className="w-4 h-4 border-[.5px] flex items-center justify-center border-[#03B58B]  rounded-full mr-3">
-    <span className="w-1 h-1    bg-[#03B58B] rounded-full "></span></span>
-            Saved Travelers
-            <span className="hidden md:flex   font-bold text-2xl pl-[8%]">→</span>
-          </li>
+        <h3 className="font-semibold mb-0">
+          {profileFields.FullName || "No Name"}
+        </h3>
+        <p className="text-[.7rem] text-[#0028319E] mb-6 ">
+          {profileFields.Email || "Email"}
+        </p>
+        <ul className=" flex flex-wrap md:flex-col gap-4 md:gap-0 w-full text-[.8rem]">
+          {navItems.map(({ id, label, ref }) => (
+            <li
+              key={id}
+              onClick={() => handleScrollTo(ref)}
+              className="cursor-pointer text-gray-700 mb-2 justify-between flex items-center"
+            >
+              <span className="flex  items-center">
+                <span className="w-4 h-4 border-[.5px] flex items-center justify-center border-[#03B58B] rounded-full mr-3">
+                  <span className="w-1 h-1 bg-[#03B58B] rounded-full"></span>
+                </span>
+                {label}
+              </span>
+              <span className="hidden md:flex font-bold text-2xl ">→</span>
+            </li>
+          ))}
         </ul>
       </div>
 
@@ -117,239 +172,250 @@ const handleInputChange = (e) => {
         {/* Profile Section */}
 
         <div ref={profileRef}>
-       
-{/* Progress Bar */}
-{/* Progress Bar */}
-<div className="md:mt-3 mb-16"> 
-  <p className=" text-sm  text-start text-gray-600">Your Profile is incomplete</p>
-  <p className=" text-sm  text-right text-gray-600">{profileCompletion}% </p>
-  <div className="relative w-full  bg-gray-200 h-[3px] rounded-md">
-    <div
-      className="absolute top-0 left-0 bg-[#00B58AB2] h-[3px] rounded-md"
-      style={{ width: `${profileCompletion}%` }}
-    ></div>
-  </div>
- 
-</div>
+          <div className="md:mt-3 mb-16">
+            <p className=" text-sm  text-start text-gray-600">
+              Your Profile is incomplete
+            </p>
+            <p className=" text-sm  text-right text-gray-600">
+              {profileCompletion}%{" "}
+            </p>
+            <div className="relative w-full  bg-gray-200 h-[3px] rounded-md">
+              <div
+                className="absolute top-0 left-0 bg-[#00B58AB2] h-[3px] rounded-md"
+                style={{ width: `${profileCompletion}%` }}
+              ></div>
+            </div>
+          </div>
 
+          <div className="flex justify-between items-end">
+            <div>
+              <h3 className="text-xl font-bold">Profile</h3>
+              <p className="text-[#0028319E] text-sm font-[400] mt-2">
+                User Details
+              </p>
+            </div>
+            <div
+              onClick={() => {
+                setEditUser((prev) => !prev);
+              }}
+            >
+              {!editUser ? (
+                <EditButtonSvg />
+              ) : (
+                <div className="flex items-center  gap-4">
+                  <button
+                    onClick={handleSubmit}
+                    className="px-4 py-[10px] text-lg text-white bg-med-green mt-[5px] rounded-lg"
+                  >
+                    Save
+                  </button>
 
-
-
-          <h3 className="text-xl font-bold">Profile</h3>
-          <p className="text-[#0028319E] text-sm font-[400] mt-2">User Details</p>
+                  <div className="flex items-center justify-center ">
+                    <RxCross2 className="text-red-600 w-[50px] ml-[5px] mt-[5px] h-[50px] p-2 border rounded-full border-red-600" />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
           {/* inputs */}
-          <div className="grid grid-cols-2 gap-4 mt-4 text-sm">
-            <input type="text" placeholder="Name"  name="name"
-             className="border p-2 rounded-md"  onChange={handleInputChange} />
-            <input type="date"   name="date" className="border 
-            p-2 rounded-md"  onChange={handleInputChange} />
-            <select className="border p-2 rounded-md"  
-            onChange={handleInputChange}   name="gender">
-              <option className="text-gray-400">Gender</option>
-              <option>Male</option>
-              <option>Female</option>
-            </select>
-            <select className="border p-2 rounded-md "
-             onChange={handleInputChange}   name="maritalStatus">
-              <option>Marital Status</option>
-              <option>Single</option>
-              <option>Married</option>
-            </select>
-            <input type="text" placeholder="Address"   name="address"
-            className="border p-2 rounded-md"  onChange={handleInputChange} />
-            <input type="text" placeholder="Pincode"   name="picode"
-             className="border p-2 rounded-md"  onChange={handleInputChange} />
+          <div className="grid grid-cols-1 esm:grid-cols-2 md:grid-cols-3 gap-4 mt-4 text-sm">
+            <input
+              type="text"
+              placeholder="FullName"
+              name="FullName"
+              disabled={!editUser}
+              value={profileFields.FullName}
+              className="border p-2 rounded-md"
+              onChange={(e) => {
+                handleInputChange(e.target.value, "FullName");
+              }}
+            />
+            <div className="w-full">
+              <DatePicker
+                selected={profileFields.DateOfBirth}
+                name="DateOfBirth"
+                onChange={(e) => handleInputChange(e, "DateOfBirth")}
+                disabled={!editUser}
+                wrapperClassName="w-full" // Ensure the wrapper is full width
+                className="border p-2 w-full rounded-md" // DatePicker input field
+                placeholderText="2004-03-02"
+                dateFormat="yyyy-MM-dd"
+              />
+            </div>
+
+            <div className="relative">
+              <select
+                className="border appearance-none p-2 rounded-md w-full "
+                value={profileFields.Gender}
+                disabled={!editUser}
+                onChange={(e) => {
+                  handleInputChange(e.target.value, "Gender");
+                }}
+                name="Gender"
+              >
+                <option className="text-gray-400">Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Non-Binary</option>
+              </select>
+              <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
+                <IoIosArrowDown />
+              </div>
+            </div>
+
+            <div className="relative">
+              <select
+                className="border appearance-none p-2 w-full rounded-md "
+                disabled={!editUser}
+                value={profileFields.MaritalStatus}
+                onChange={(e) => {
+                  handleInputChange(e.target.value, "MaritalStatus");
+                }}
+                name="MaritalStatus"
+              >
+                <option>Marital Status</option>
+                <option>Single</option>
+                <option>Married</option>
+              </select>
+              <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
+                <IoIosArrowDown />
+              </div>
+            </div>
+            <input
+              type="text"
+              placeholder="Address"
+              disabled={!editUser}
+              name="Address"
+              value={profileFields.Address}
+              className="border p-2 rounded-md"
+              onChange={(e) => {
+                handleInputChange(e.target.value, "Address");
+              }}
+            />
+            <input
+              type="text"
+              placeholder="Pincode"
+              disabled={!editUser}
+              name="PinCode"
+              value={profileFields.PinCode}
+              className="border p-2 rounded-md"
+              onChange={(e) => {
+                handleInputChange(e.target.value, "PinCode");
+              }}
+            />
           </div>
         </div>
 
         {/* Login Details Section */}
-        <div  ref={loginDetailsRef}>
+        <div ref={loginDetailsRef}>
           <h3 className="text-xl font-bold">Login Details</h3>
 
-          <div className="grid gride-cols-1  md:grid-cols-3 text-sm gap-4 mt-4">
-            <div className="flex items-center">
-              <select className="border p-2 rounded-l-md">
-                <option className="hover:bg-green-100">+91</option>
-                <option className="hover:bg-green-100">+1</option>
-                <option className="hover:bg-green-100">+44</option>
-              </select>
+          <div className="grid gride-cols-1  md:grid-cols-2 lg:grid-cols-3 text-sm gap-4 mt-4">
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <select className="border appearance-none p-2 rounded-l-md">
+                  <option className="hover:bg-green-100">+91</option>
+                  <option className="hover:bg-green-100">+1</option>
+                  <option className="hover:bg-green-100">+44</option>
+                </select>
+              </div>
               <input
                 type="text"
                 placeholder="Phone Number"
                 className="border p-2 flex-1 rounded-r-md"
               />
             </div>
-            <input type="email" placeholder="Email" className="border p-2 rounded-md" />
-            <div className="relative ">
+            <input
+              type="email"
+              placeholder="Email"
+              className="border p-2 rounded-md"
+            />
+            <div className="relative col-auto md:col-span-2 lg:col-span-1">
               <input
                 type="password"
                 placeholder="Password"
                 className="border p-2 w-full rounded-md"
               />
               <span className="absolute right-3 top-3 cursor-pointer">👁️</span>
-
             </div>
-
           </div>
           <div className="flex justify-end">
-  <label className="text-sm text-[#00B58A] cursor-pointer">
-    Change Password?
-  </label>
-</div>
-
+            <label className="text-sm text-[#00B58A] cursor-pointer">
+              Change Password?
+            </label>
+          </div>
         </div>
 
         {/* Saved Travelers Section */}
         <div ref={savedTravelersRef}>
           <div className="flex justify-between items-center">
-            <h3 className="text-xl font-bold">Saved Travelers</h3>
+            <h3 className="text-base em:text-xl font-bold">Saved Travelers</h3>
             <button
               onClick={() => setIsModalOpen(true)}
-              className=" text-[#03B58B] border-black border-[1.3px] hover:bg-[#03B58B] hover:border-none hover:text-white px-1 md:px-4 py-2 rounded-md"
+              className="text-sm md:text-base  text-[#03B58B] border-black border-[1.3px] hover:bg-[#03B58B] hover:border-med-green hover:text-white px-1 md:px-4 py-2 rounded-md"
             >
               + Add Traveler
             </button>
           </div>
           <ul className="mt-6 space-y-4">
-            <th
-             
-                className="flex justify-between text-sm  text-[#0028319E] font-normal bg-white p-4  rounded-md">
-              
-                <p>Name </p>
-                <p>Age</p>
-                <p>Gender</p>
-                <p>Contact Dteails</p>
-
-                {/* for empty space */}
-                <p></p>
-              </th>
-            {travelers.map((traveler, index) => (
-              <li
-                key={index}
-                className="flex justify-between bg-white p-4  rounded-md"
-              >
-                <p>{traveler.name}</p>
-                <p>{traveler.email}</p>
-                <p>{traveler.phone}</p>
-                <button className="text-[#00B58A] bg-none text-end text-sm">View Details</button>
-              </li>
-
-            ))}
+            {extraTravellers.length > 0 ? (
+              extraTravellers.map((traveler, index) => (
+                <li
+                  key={index}
+                  className=" border-b flex justify-between gap-4  bg-white p-4 rounded-md"
+                >
+                  <div className="grid grid-cols-1 em:grid-cols-2 sm:grid-cols-3 w-full lg:grid-cols-4">
+                    <div>
+                      <label className="text-sm text-[#0028319E] font-normal bg-white rounded-md">
+                        Name
+                      </label>
+                      <p>{traveler.TravellersName}</p>
+                    </div>
+                    <div>
+                      <label className="text-sm text-[#0028319E] font-normal bg-white rounded-md">
+                        Age
+                      </label>
+                      <p>{traveler.TravellersAge}</p> {/* Corrected typo */}
+                    </div>
+                    <div>
+                      <label className="text-sm text-[#0028319E] font-normal bg-white rounded-md">
+                        Gender
+                      </label>
+                      <p>{traveler.TravellersGender || "NN"}</p>{" "}
+                      {/* Corrected typo */}
+                    </div>
+                    <div className="lg:block hidden">
+                      <label className="text-sm text-[#0028319E] font-normal bg-white rounded-md">
+                        Number
+                      </label>
+                      <p>{traveler.TravellersNumber}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-end whitespace-nowrap">
+                    <button className="text-[#00B58A] bg-none text-end text-sm">
+                      View Details
+                    </button>
+                  </div>
+                </li>
+              ))
+            ) : (
+              <p>No Travellers. Add Travellers.</p>
+            )}
           </ul>
         </div>
       </div>
 
       {/* Modal for Add Traveler */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-transparent  text-black 
-        backdrop-blur-sm z-100 bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white px-3 overflow-y-auto py-6  md:py-6 lg:p-9 rounded-lg h-auto md:h-auto w-[87%] sm:w-[70%] md:w-[60%] lg:w-[50%] shadow-lg relative">
-            <div className="flex justify-between items-center">
-              <h3 className="text-xl font-bold">Traveler’s Info</h3>
-              <button
-               
-                className="text-red-500 font-semibold"
-              >
-                Remove
-              </button>
-            </div>
-            <p className="text-gray-500 text-sm mt-4">User Details</p>
-            <div className="grid md:grid-cols-2 grid-cols-1 text-sm gap-4 mt-4">
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                placeholder="Name"
-                className="border p-2 rounded-md"
-              />
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="Email"
-                className="border p-2 rounded-md"
-              />
-              <div className="flex justify-center items-center">
-                <select
-                  name="countryCode"
-                  value={formData.countryCode}
-                  onChange={handleInputChange}
-                  className="border p-2 rounded-l-md"
-                >
-                  <option value="+91">+91</option>
-                  <option value="+1">+1</option>
-                  <option value="+44">+44</option>
-                </select>
-                <input
-                  type="text"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  placeholder="Phone Number"
-                  className="border p-2 flex-1 rounded-r-md"
-                />
-              </div>
-              <input
-                type="date"
-                name="dateOfBirth"
-                value={formData.dateOfBirth}
-                onChange={handleInputChange}
-                className="border p-2 rounded-md"
-              />
-            </div>
-
-            <p className="text-gray-500 text-sm mt-6">Passport Details</p>
-            <div className="grid text-sm md:grid-cols-2 grid-cols-1 gap-4 mt-4">
-              <input
-                type="text"
-                name="passportNumber"
-                value={formData.passportNumber}
-                onChange={handleInputChange}
-                placeholder="Passport Number"
-                className="border p-2 rounded-md"
-              />
-              <select
-                name="passportCountry"
-                value={formData.passportCountry}
-                onChange={handleInputChange}
-                className="border p-2 rounded-md"
-              >
-                <option value="">Issuing Country</option>
-                <option value="India">India</option>
-                <option value="USA">USA</option>
-                <option value="UK">UK</option>
-              </select>
-              <input
-                type="date"
-                name="passportExpiry"
-                value={formData.passportExpiry}
-                onChange={handleInputChange}
-                className="border p-2 rounded-md"
-              />
-            </div>
-
-            <div className="mt-6 flex justify-end">
-            <button
-                onClick={handleSaveTraveler} 
-                className=" text-red-600 px-6 mr-4 py-2 rounded-md"
-              >
-         cancle
-              </button>
-              <button
-                onClick={handleSaveTraveler}
-                className="bg-green-500 text-white px-6 py-2 rounded-md"
-              >
-                Save
-              </button>
-            </div>
-          </div>
-        </div>
+        <AddTravellers
+          userDetails={userDetails}
+          updateUser={updateUser}
+          setIsModalOpen={setIsModalOpen}
+          setExtraTravellers={setExtraTravellers}
+        />
       )}
     </div>
   );
- 
 }
 
-export default MyProfile
+export default MyProfile;

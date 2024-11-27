@@ -9,7 +9,7 @@ const LargeDeviceSidebar = ({ isSidebarOpen, closeSidebar }) => {
   const menuItems = [
     {
       title: "My Profile",
-      link: "",
+      link: "/myprofile",
       subItems: ["Sub-item 1", "Sub-item 2", "Sub-item 3"],
     },
     {

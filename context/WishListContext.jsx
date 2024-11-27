@@ -1,6 +1,6 @@
-import { jwtDecode } from "jwt-decode";
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const WishlistContext = createContext();
 
@@ -16,21 +16,25 @@ export const WishlistProvider = ({ children }) => {
     status: true, // Default as true
     Address: "",
     MaritalStatus: "",
+    Gender: "",
     PinCode: "",
     WishListCountries: [],
     WishListStates: [],
+    ExtraTravellers: [],
   });
+
+  const [isLoading, setIsLoading] = useState(false); // Loader state
 
   useEffect(() => {
     const verifyUser = async () => {
+      setIsLoading(true); // Show loader
       try {
-        // Retrieve user info from localStorage
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
         if (!userInfo) {
+          setIsLoading(false);
           return;
         }
 
-        // Decode the token to extract user ID
         const decodedToken = jwtDecode(userInfo.token);
         if (decodedToken && decodedToken.id) {
           const userId = decodedToken.id;
@@ -38,35 +42,37 @@ export const WishlistProvider = ({ children }) => {
             `https://tripobazar-backend.vercel.app/api/users/data/${userId}`,
             {
               headers: {
-                Authorization: `Bearer ${userInfo.token}`, // Pass token in headers if needed
+                Authorization: `Bearer ${userInfo.token}`,
               },
             }
           );
 
-          if (response.status !== 200) {
-            throw new Error("Failed to fetch user details");
+          if (response.status === 200) {
+            const userData = response.data.data;
+
+            setUserDetails({
+              _id: userData._id || "",
+              Email: userData.Email || "",
+              Password: userData.Password || "",
+              isAdmin: userData.isAdmin || false,
+              FullName: userData.FullName || "",
+              MobileNumber: userData.MobileNumber || "",
+              DateOfBirth: userData.DateOfBirth || "",
+              status: userData.status || true,
+              Address: userData.Address || "",
+              Gender: userData.Gender || "",
+              MaritalStatus: userData.MaritalStatus || "",
+              PinCode: userData.PinCode || "",
+              WishListCountries: userData.WishListCountries || [],
+              WishListStates: userData.WishListStates || [],
+              ExtraTravellers: userData.ExtraTravellers || [],
+            });
           }
-
-          const userData = response.data.data;
-
-          setUserDetails({
-            _id: userData._id || "",
-            Email: userData.Email || "",
-            Password: userData.Password || "",
-            isAdmin: userData.isAdmin || false,
-            FullName: userData.FullName || "",
-            MobileNumber: userData.MobileNumber || "",
-            DateOfBirth: userData.DateOfBirth || "",
-            status: userData.status || true,
-            Address: userData.Address || "",
-            MaritalStatus: userData.MaritalStatus || "",
-            PinCode: userData.PinCode || "",
-            WishListCountries: userData.WishListCountries || [],
-            WishListStates: userData.WishListStates || [],
-          });
         }
       } catch (error) {
         console.error("Error verifying user:", error);
+      } finally {
+        setIsLoading(false); // Hide loader
       }
     };
 
@@ -74,10 +80,11 @@ export const WishlistProvider = ({ children }) => {
   }, []);
 
   const updateUserWishlist = async (updatedCountries, updatedStates) => {
+    setIsLoading(true); // Show loader
     try {
-      // Retrieve user info from localStorage
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
       if (!userInfo) {
+        setIsLoading(false);
         return;
       }
 
@@ -92,7 +99,7 @@ export const WishlistProvider = ({ children }) => {
         },
         {
           headers: {
-            Authorization: `Bearer ${userInfo.token}`, // Pass token in headers if needed
+            Authorization: `Bearer ${userInfo.token}`,
           },
         }
       );
@@ -106,17 +113,17 @@ export const WishlistProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Error updating wishlist:", error);
+    } finally {
+      setIsLoading(false); // Hide loader
     }
   };
 
-  // Function to add a country to the wishlist
   const addCountryToWishlist = (countryId) => {
     const isCountryInWishlist = userDetails.WishListCountries.some(
       (wishlist) => {
         if (typeof wishlist === "object" && wishlist._id) {
           return wishlist._id === countryId;
         }
-
         return wishlist === countryId;
       }
     );
@@ -142,7 +149,6 @@ export const WishlistProvider = ({ children }) => {
       if (typeof wishlist === "object" && wishlist._id) {
         return wishlist._id === stateId;
       }
-
       return wishlist === stateId;
     });
 
@@ -150,7 +156,6 @@ export const WishlistProvider = ({ children }) => {
       const updatedStates = [...userDetails.WishListStates, stateId];
       updateUserWishlist(userDetails.WishListCountries, updatedStates);
     } else {
-      // Remove the state from the wishlist
       const updatedStates = userDetails.WishListStates.filter(
         (wishlistState) => {
           if (typeof wishlistState === "object" && wishlistState._id) {
@@ -163,8 +168,6 @@ export const WishlistProvider = ({ children }) => {
     }
   };
 
-  //   console.log(userDetails);
-
   return (
     <WishlistContext.Provider
       value={{
@@ -172,6 +175,7 @@ export const WishlistProvider = ({ children }) => {
         setUserDetails,
         addCountryToWishlist,
         addStateToWishlist,
+        isLoading, // Expose loader state
       }}
     >
       {children}
@@ -179,7 +183,6 @@ export const WishlistProvider = ({ children }) => {
   );
 };
 
-// Use Wishlist Hook
 export const useWishlist = () => {
   return useContext(WishlistContext);
 };

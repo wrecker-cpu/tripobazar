@@ -144,10 +144,14 @@ const Navbar = () => {
                               key={destIdx}
                               onClick={() => {
                                 setOpenDropdownIndex(null);
-                                let navigatePath =
-                                  region.region === "India"
-                                    ? `/destination/asia/${region.region}/${destination.name}`
-                                    : `/destination/${region.region}/${destination.name}`;
+                                let navigatePath;
+                                if (region.region === "India") {
+                                  navigatePath = `/destination/asia/${region.region}/${destination.name}`;
+                                } else if (region.region === "Australia") {
+                                  navigatePath = `/destination/ViewAll-Australia/${region.region}/${destination.name}`;
+                                } else {
+                                  navigatePath = `/destination/${region.region}/${destination.name}`;
+                                }
 
                                 navigate(navigatePath);
                               }}

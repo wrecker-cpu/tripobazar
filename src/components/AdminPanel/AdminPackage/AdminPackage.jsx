@@ -5,11 +5,13 @@ import useFetch from "../../../../hooks/useFetch";
 import EditPackage from "./EditPackage";
 import AddPackage from "./AddPackage";
 import Loader from "../../Loader";
+import ConfirmationModal from "../../ConfirmationModal";
 
 export default function AdminPackage() {
   const [selectedId, setSelectedId] = useState();
   const [isAddingPackage, setIsAddingPackage] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [modal, setModal] = useState(null);
 
   // Filter the data based on user input
 
@@ -30,6 +32,16 @@ export default function AdminPackage() {
   const filteredData = allStateData.filter((item) =>
     item?.title?.toLowerCase().includes(searchInput.toLowerCase())
   );
+  const handleDelete = (id,name) => {
+    setModal({
+      message: `Are you sure you want to delete this ${name}?`,
+      onConfirm: () => {
+        deleteState(id); // Perform delete operation
+        setModal(null); // Close modal
+      },
+      onCancel: () => setModal(null), // Close modal
+    });
+  };
 
   if (allpackage || loading) {
     return <Loader />;
@@ -37,6 +49,13 @@ export default function AdminPackage() {
 
   return (
     <>
+      {modal && (
+        <ConfirmationModal
+          message={modal.message}
+          onConfirm={modal.onConfirm}
+          onCancel={modal.onCancel}
+        />
+      )}
       {!selectedId ? (
         <div>
           {/* Button to show AddPackage form */}
@@ -88,9 +107,7 @@ export default function AdminPackage() {
                           className="w-10 h-5 cursor-pointer object-cover rounded ml-4"
                         />
                         <button
-                          onDoubleClick={() => {
-                            deleteById(item._id);
-                          }}
+                          onClick={() => handleDelete(item._id,item.title)}
                           className="text-red-600"
                         >
                           Delete

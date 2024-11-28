@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LocationModal from "../LocationModal";
 import Spinner from "../../../../utils/Spinner";
 import Loader from "../../Loader";
+import ConfirmationModal from "../../ConfirmationModal";
 
 export default function ViewAndAddAllState({
   addNew,
@@ -17,6 +18,7 @@ export default function ViewAndAddAllState({
     Packages: [],
   });
   const [loading, setLoading] = useState(false); // Loading state to track the process
+  const [modal, setModal] = useState(null);
 
   const closeStateModal = () => {
     setShowStateModal(false);
@@ -40,12 +42,30 @@ export default function ViewAndAddAllState({
     }
   };
 
+  const handleDelete = (id,name) => {
+    setModal({
+      message: `Are you sure you want to delete this ${name}?`,
+      onConfirm: () => {
+        deleteState(id); // Perform delete operation
+        setModal(null); // Close modal
+      },
+      onCancel: () => setModal(null), // Close modal
+    });
+  };
+
   if (loading === true) {
     return <Loader/>;
   }
 
   return (
     <>
+    {modal && (
+        <ConfirmationModal
+          message={modal.message}
+          onConfirm={modal.onConfirm}
+          onCancel={modal.onCancel}
+        />
+      )}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-med-green font-bold text-xl">Add New State</h3>
@@ -89,9 +109,7 @@ export default function ViewAndAddAllState({
                   className="w-10 h-5 cursor-pointer object-cover rounded ml-4"
                 />
                 <button
-                  onDoubleClick={() => {
-                    deleteState(item._id);
-                  }}
+                  onClick={() => handleDelete(item._id,item.StateName)}
                   className="text-red-600"
                 >
                   Delete

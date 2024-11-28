@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 import LocationModal from "./LocationModal";
 import Loader from "../Loader";
+import ConfirmationModal from "../ConfirmationModal";
 
 function AdminContinent() {
   const baseUrl = "https://tripobazar-backend.vercel.app/api/continent";
@@ -29,14 +30,11 @@ function AdminContinent() {
   });
   const [editingUserId, setEditingUserId] = useState(null);
   const [editedDetails, setEditedDetails] = useState({});
+  const [modal, setModal] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [showContinentModal, setShowContinentModal] = useState(false);
   const navigate = useNavigate();
-
-  const deleteContinent = (id) => {
-    deleteById(id);
-  };
 
   const startEditing = (user) => {
     setEditingUserId(user._id);
@@ -121,11 +119,31 @@ function AdminContinent() {
     }
   };
 
+  const handleDelete = (id,name) => {
+    setModal({
+      message: `Are you sure you want to delete this continent ${name}?`,
+      onConfirm: () => {
+        deleteById(id); // Perform delete operation
+        setModal(null); // Close modal
+      },
+      onCancel: () => setModal(null), // Close modal
+    });
+  };
+
   if (loading === true) {
     return <Loader/>;
   }
 
   return (
+
+    <>
+    {modal && (
+      <ConfirmationModal
+        message={modal.message}
+        onConfirm={modal.onConfirm}
+        onCancel={modal.onCancel}
+      />
+    )}
     <div className="mr-1 p-6">
       <div className="mb-6">
         <div className="flex items-center justify-between mb-6">
@@ -321,7 +339,7 @@ function AdminContinent() {
                       </button>
                       <button
                         className="text-red-400 px-3 py-1 rounded"
-                        onClick={() => deleteContinent(item._id)}
+                        onClick={() => handleDelete(item._id,item.ContinentName)}
                       >
                         Delete
                       </button>
@@ -341,6 +359,7 @@ function AdminContinent() {
         />
       )}
     </div>
+    </>
   );
 }
 

@@ -11,6 +11,7 @@ import AdminCountry from "./AdminCountry";
 import AdminState from "./AdminState/AdminState";
 import AdminPackage from "./AdminPackage/AdminPackage";
 import Loader from "../Loader";
+import AdminHotel from "./AdminHotel/AdminHotel";
 
 
 function AdminPanel() {
@@ -58,7 +59,7 @@ function AdminPanel() {
           <Route path="country" element={<AdminCountry />} />
           <Route path="state" element={<AdminState />} />
           <Route path="package" element={<AdminPackage />} />
-
+          <Route path="hotels" element={<AdminHotel />} />
           {/* Add more routes as needed */}
         </Routes>
       </div>

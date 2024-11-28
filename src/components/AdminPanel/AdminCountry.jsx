@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import useApiData from "../../../hooks/useApiData";
-import Spinner from "../../../utils/Spinner";
+
 import ImageModal from "../../../utils/ImageModal";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 
 import LocationModal from "./LocationModal";
 import Loader from "../Loader";
+import ConfirmationModal from "../ConfirmationModal";
 
 function AdminCountry() {
   const baseUrl = "https://tripobazar-backend.vercel.app/api/country";
@@ -33,11 +34,10 @@ function AdminCountry() {
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [showCountryModal, setShowCountryModal] = useState(false);
+  const [modal, setModal] = useState(null);
   const navigate = useNavigate();
 
-  const deleteCountry = (id) => {
-    deleteById(id);
-  };
+  
 
   const startEditing = (user) => {
     setEditingUserId(user._id);
@@ -123,11 +123,31 @@ function AdminCountry() {
     }
   };
 
+  const handleDelete = (id,name) => {
+    setModal({
+      message: `Are you sure you want to delete this country ${name}?`,
+      onConfirm: () => {
+        deleteById(id); // Perform delete operation
+        setModal(null); // Close modal
+      },
+      onCancel: () => setModal(null), // Close modal
+    });
+  };
+
   if (loading === true) {
     return <Loader/>;
   }
 
   return (
+   <>
+    {modal && (
+      <ConfirmationModal
+        message={modal.message}
+        onConfirm={modal.onConfirm}
+        onCancel={modal.onCancel}
+      />
+    )}
+   
     <div className="mr-1 p-6">
       <div className="mb-6">
         <div className="flex items-center justify-between mb-6">
@@ -317,7 +337,7 @@ function AdminCountry() {
                       </button>
                       <button
                         className="text-red-400 px-3 py-1 rounded"
-                        onClick={() => deleteCountry(item._id)}
+                        onClick={() => handleDelete(item._id,item.CountryName)}
                       >
                         Delete
                       </button>
@@ -337,6 +357,7 @@ function AdminCountry() {
         />
       )}
     </div>
+    </>
   );
 }
 

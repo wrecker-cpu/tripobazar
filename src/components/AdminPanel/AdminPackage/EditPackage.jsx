@@ -8,6 +8,9 @@ export default function EditPackage({
   setSelectedId,
   setEditPackage,
 }) {
+  const { data: hotelData, loading } = useFetch(
+    `https://tripobazar-backend.vercel.app/api/hotel`
+  );
   const [data, setData] = useState(
     initialData || {
       title: "",
@@ -31,12 +34,15 @@ export default function EditPackage({
     useState("");
   const [selectedHotelIdForNewHotel, setSelectedHotelIdForNewHotel] =
     useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  const filteredHotels = hotelData?.filter((hotel) =>
+    hotel.hotelName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   const packageData = ["Food", "Hotel", "Car", "Explore", "Travel", "Visa"];
   const textareasRef = useRef([]);
-
-  const { data: hotelData, loading } = useFetch(
-    `https://tripobazar-backend.vercel.app/api/hotel`
-  );
 
   const isLoading = !hotelData || hotelData.length === 0;
 
@@ -146,7 +152,7 @@ export default function EditPackage({
       await updateById(id, data);
       setSelectedId(null);
       setEditPackage(false);
-      setHotelDetails(null);
+
       setData({
         title: "",
         description: "",
@@ -533,7 +539,6 @@ export default function EditPackage({
               <ul>
                 {hotel?.hotelDetails?.length > 0 ? (
                   hotel.hotelDetails.map((detailId, hotelDetailIndex) => {
-                    // Find the hotel object by its ID from hotelData
                     const hotelObj = hotelData?.find(
                       (hotel) => hotel._id === detailId
                     );
@@ -544,7 +549,6 @@ export default function EditPackage({
                         className="bg-blue-100 text-blue-800 p-2 rounded-md mb-2"
                       >
                         {hotelObj?.hotelName || ` ${detailId.hotelName}`}{" "}
-                        {/* Display hotel name */}
                         <button
                           className="text-red-500 ml-2"
                           onClick={() =>
@@ -561,24 +565,59 @@ export default function EditPackage({
                 )}
               </ul>
 
-              <div className="flex items-center gap-2">
-                <select
-                  onChange={(e) => setSelectedHotelIdForDetails(e.target.value)} // Use the new state
-                  value={selectedHotelIdForDetails} // Use the new state
-                  className="border p-2 rounded"
-                >
-                  <option value="">Select a Hotel</option>
-                  {hotelData?.map((hotelOption) => (
-                    <option key={hotelOption._id} value={hotelOption._id}>
-                      {hotelOption.hotelName}
-                    </option>
-                  ))}
-                </select>
+              <div className="flex flex-col gap-2">
+                {/* Custom Searchable Dropdown */}
+                <div className="relative w-full">
+                  <input
+                    type="text"
+                    placeholder="Search and select a hotel"
+                    className="border p-2 w-full rounded"
+                    value={searchTerm} // Search input state
+                    onChange={(e) => {
+                      setSearchTerm(e.target.value);
+                      setDropdownVisible(true);
+                    }} // Update search term
+                  />
+                  {dropdownVisible && searchTerm && (
+                    <ul className="absolute bg-white border rounded mt-2 w-full max-h-40 overflow-y-auto z-10">
+                      {hotelData
+                        ?.filter((hotelOption) =>
+                          hotelOption.hotelName
+                            .toLowerCase()
+                            .includes(searchTerm.toLowerCase())
+                        )
+                        .map((filteredHotel) => (
+                          <li
+                            key={filteredHotel._id}
+                            onClick={() => {
+                              setSelectedHotelIdForDetails(filteredHotel._id);
+                              setSearchTerm(filteredHotel.hotelName);
+                              setDropdownVisible(false);
+                            }}
+                            className="p-2 hover:bg-gray-100 cursor-pointer"
+                          >
+                            {filteredHotel.hotelName}
+                          </li>
+                        ))}
+                      {hotelData?.filter((hotelOption) =>
+                        hotelOption.hotelName
+                          .toLowerCase()
+                          .includes(searchTerm.toLowerCase())
+                      ).length === 0 && (
+                        <li className="p-2 text-gray-500">No results found</li>
+                      )}
+                    </ul>
+                  )}
+                </div>
+
+                {/* Add Detail Button */}
                 <button
-                  onClick={() =>
-                    addHotelDetail(hotel._id, selectedHotelIdForDetails)
-                  }
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                  onClick={() => {
+                    addHotelDetail(hotel._id, selectedHotelIdForDetails);
+                    setSearchTerm("");
+                  }}
+                  className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+                  disabled={!selectedHotelIdForDetails} // Disable button if no hotel is selected
                 >
                   Add Detail
                 </button>
@@ -596,23 +635,37 @@ export default function EditPackage({
               className="border p-2 w-full mb-2"
             />
 
-            <select
-              value={selectedHotelIdForNewHotel} // Use the new state
-              onChange={(e) => setSelectedHotelIdForNewHotel(e.target.value)} // Use the new state
-              className="border p-2 w-full mb-2"
-            >
-              <option value="">Select hotel to add details</option>
-              {hotelData?.map((hotel) => (
-                <option key={hotel._id} value={hotel._id}>
-                  {hotel.hotelName}
-                </option>
-              ))}
-            </select>
+            <div className="relative w-full mb-2">
+              <input
+                type="text"
+                value={searchQuery}
+                onFocus={() => setDropdownVisible(true)}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search and select a hotel"
+                className="border p-2 rounded w-full"
+              />
+              {dropdownVisible && searchQuery && filteredHotels?.length > 0 && (
+                <ul className="absolute bg-white border rounded w-full max-h-40 overflow-y-auto mt-1 z-10">
+                  {filteredHotels.map((hotel) => (
+                    <li
+                      key={hotel._id}
+                      onClick={() => {
+                        setSelectedHotelIdForNewHotel(hotel._id);
+                        setSearchQuery(hotel.hotelName);
+                        setDropdownVisible(false);
+                      }}
+                      className="p-2 hover:bg-gray-200 cursor-pointer"
+                    >
+                      {hotel.hotelName}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
 
             <button
               onClick={addNewHotel}
               className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-2"
-              disabled={isLoading} // Disable button if loading
             >
               Add Hotel
             </button>

@@ -28,15 +28,20 @@ function Footer() {
         </div>
 
         {/* Links Section */}
-        <ul className="flex text-[.8rem] flex-wrap md:grid text-left md:grid-cols-2  md:gap-y-2 md:gap-x-12 gap-4 justify-center mb-8 md:text-base  md:text-start  md:mb-0">
+        <ul
+          role="list"
+          className="flex text-[.8rem] flex-wrap md:grid text-left md:grid-cols-2  md:gap-y-2 md:gap-x-12 gap-4 justify-center mb-8 md:text-base  md:text-start  md:mb-0"
+        >
           {data.map((item, idx) => (
-            <TransitionLink
-              to={item.link}
-              key={idx}
-              className="text-gray-700 cursor-pointer hover:text-black py-1"
-            >
-              {item.name}
-            </TransitionLink>
+            <li key={idx} role="listitem">
+              <TransitionLink
+                to={item.link}
+                className="text-gray-700 cursor-pointer hover:text-black py-1"
+                aria-label={item.name} // Optional: Adds a more descriptive label for screen readers
+              >
+                {item.name}
+              </TransitionLink>
+            </li>
           ))}
         </ul>
 

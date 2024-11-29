@@ -18,6 +18,7 @@ export const WishlistProvider = ({ children }) => {
     MaritalStatus: "",
     Gender: "",
     PinCode: "",
+    Coupons:[],
     WishListCountries: [],
     WishListStates: [],
     ExtraTravellers: [],
@@ -25,58 +26,59 @@ export const WishlistProvider = ({ children }) => {
 
   const [isLoading, setIsLoading] = useState(false); // Loader state
 
-  useEffect(() => {
-    const verifyUser = async () => {
-      setIsLoading(true); // Show loader
-      try {
-        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        if (!userInfo) {
-          setIsLoading(false);
-          return;
-        }
-
-        const decodedToken = jwtDecode(userInfo.token);
-        if (decodedToken && decodedToken.id) {
-          const userId = decodedToken.id;
-          const response = await axios.get(
-            `https://tripobazar-backend.vercel.app/api/users/data/${userId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${userInfo.token}`,
-              },
-            }
-          );
-
-          if (response.status === 200) {
-            const userData = response.data.data;
-
-            setUserDetails({
-              _id: userData._id || "",
-              Email: userData.Email || "",
-              Password: userData.Password || "",
-              isAdmin: userData.isAdmin || false,
-              FullName: userData.FullName || "",
-              MobileNumber: userData.MobileNumber || "",
-              DateOfBirth: userData.DateOfBirth || "",
-              status: userData.status || true,
-              Address: userData.Address || "",
-              Gender: userData.Gender || "",
-              MaritalStatus: userData.MaritalStatus || "",
-              PinCode: userData.PinCode || "",
-              WishListCountries: userData.WishListCountries || [],
-              WishListStates: userData.WishListStates || [],
-              ExtraTravellers: userData.ExtraTravellers || [],
-            });
-          }
-        }
-      } catch (error) {
-        console.error("Error verifying user:", error);
-      } finally {
-        setIsLoading(false); // Hide loader
+  const verifyUser = async () => {
+    setIsLoading(true);
+    try {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      if (!userInfo) {
+        setIsLoading(false);
+        return;
       }
-    };
 
-    verifyUser();
+      const decodedToken = jwtDecode(userInfo.token);
+      if (decodedToken && decodedToken.id) {
+        const userId = decodedToken.id;
+        const response = await axios.get(
+          `https://tripobazar-backend.vercel.app/api/users/data/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${userInfo.token}`,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          const userData = response.data.data;
+          setUserDetails({
+            _id: userData._id || "",
+            Email: userData.Email || "",
+            Password: userData.Password || "",
+            isAdmin: userData.isAdmin || false,
+            FullName: userData.FullName || "",
+            MobileNumber: userData.MobileNumber || "",
+            DateOfBirth: userData.DateOfBirth || "",
+            status: userData.status || true,
+            Address: userData.Address || "",
+            Gender: userData.Gender || "",
+            MaritalStatus: userData.MaritalStatus || "",
+            PinCode: userData.PinCode || "",
+            Coupons:userData.Coupons||[],
+            WishListCountries: userData.WishListCountries || [],
+            WishListStates: userData.WishListStates || [],
+            ExtraTravellers: userData.ExtraTravellers || [],
+          
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Error verifying user:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    verifyUser(); // Initially verify user when the app starts
   }, []);
 
   const updateUserWishlist = async (updatedCountries, updatedStates) => {
@@ -176,6 +178,7 @@ export const WishlistProvider = ({ children }) => {
         addCountryToWishlist,
         addStateToWishlist,
         isLoading, // Expose loader state
+        verifyUser
       }}
     >
       {children}

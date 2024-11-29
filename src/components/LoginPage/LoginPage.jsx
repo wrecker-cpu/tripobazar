@@ -3,11 +3,12 @@ import LeftArrowSvg from "../../../svgs/LeftArrowSvg";
 import CompanyLogo from "../../../svgs/CompanyLogo";
 import InputFieldsLogin from "./InputFieldsLogin";
 import { Link, useNavigate } from "react-router-dom";
-import Spinner from "../../../utils/Spinner";
 import axios from "axios";
 import Loader from "../Loader";
+import { useWishlist } from "../../../context/WishListContext";
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const { verifyUser } = useWishlist();
   const [options, setOptions] = useState("mobilenumber");
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ export default function LoginPage() {
         userData
       );
       setLoader(false);
+
       const userInfo = {
         userId: response.data.data.user._id,
         email: response.data.data.user.Email,
@@ -56,6 +58,7 @@ export default function LoginPage() {
         token: response.data.token,
       };
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      verifyUser();
       navigate("/");
     } catch (error) {
       setLoader(false);
@@ -94,8 +97,9 @@ export default function LoginPage() {
       </div>
       {loader && (
         <div className="fixed bg-transparent backdrop-blur-sm opacity-100 w-full h-screen top-0 left-0">
-        {/* <Spinner /> */}<Loader/>
-      </div>
+          {/* <Spinner /> */}
+          <Loader />
+        </div>
       )}
     </div>
   );

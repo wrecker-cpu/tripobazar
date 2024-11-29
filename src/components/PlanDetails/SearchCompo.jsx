@@ -30,8 +30,6 @@ function SearchCompo({ data }) {
   const endDate = new Date(startDate);
   endDate.setDate(startDate.getDate() + numberOfDays);
 
-  console.log(endDate);
-
   return (
     <div className="max-w-[1720px] font-poppins w-[90%] mx-auto h-auto p-4 py-10 bg-white   relative z-10">
       {/* Starting Location and Destination Inputs */}

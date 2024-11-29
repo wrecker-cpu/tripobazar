@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { socialMediaData } from "../../../utils/SocialMediaData";
 import TransitionLink from "../../../utils/TransitionLink";
 import CompanyLogo from "../../../svgs/CompanyLogo";
+import { useNavigate } from "react-router-dom";
 
 const LargeDeviceSidebar = ({ isSidebarOpen, closeSidebar }) => {
   const [activeItem, setActiveItem] = useState(null);
+  const navigate=useNavigate();
 
   const menuItems = [
     {
@@ -42,8 +44,8 @@ const LargeDeviceSidebar = ({ isSidebarOpen, closeSidebar }) => {
 
   const handleLogout = () => {
     localStorage.clear(); // Clears all data from localStorage
-    setUserData(null);
-    toggleMenu(); // Closes the menu
+    closeSidebar(); // Closes the menu
+    navigate("/");
   };
 
   useEffect(() => {

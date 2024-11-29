@@ -1,15 +1,49 @@
 import React, { useState } from "react";
 import { MdStar, MdStarHalf, MdStarOutline } from "react-icons/md";
 import { useSearch } from "../../../context/SearchContext";
+import { useWishlist } from "../../../context/WishListContext";
+import { IoIosArrowDown } from "react-icons/io";
+import CouponSvg from "../../../svgs/CouponSvg";
 
 function IternryDetails({ data }) {
   const [activeTab, setActiveTab] = useState("Plan Details");
-  const [isCouponApplied, setIsCouponApplied] = useState(true);
+  const [isCouponApplied, setIsCouponApplied] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedCoupon, setSelectedCoupon] = useState({
+    id: "",
+    discountPercentage: 0,
+    maxDiscount: 0,
+  });
   const { searchData } = useSearch();
+  const { userDetails } = useWishlist();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleCoupon = (coupon) => {
+    setIsCouponApplied((prev) => !prev);
+    setSelectedCoupon(
+      (prevSelected) =>
+        prevSelected.id === coupon.id
+          ? { id: "", discountPercentage: 0, maxDiscount: 0 } // Reset if already selected
+          : {
+              id: coupon._id,
+              discountPercentage: Number(coupon.discountPercentage),
+              maxDiscount: Number(coupon.maxDiscount),
+            } // Set new coupon
+    );
+  };
+  const calculateDiscountedPrice = () => {
+    if (!selectedCoupon.id) return data.price * searchData.guests; // No coupon applied
+
+    const totalCost = data.price * searchData.guests;
+    const discount = (totalCost * selectedCoupon.discountPercentage) / 100;
+
+    // Apply the smaller value between the calculated discount and maxDiscount
+    const finalDiscount = Math.min(discount, selectedCoupon.maxDiscount);
+
+    return totalCost - finalDiscount; // Return the discounted price
   };
 
   return (
@@ -218,101 +252,121 @@ function IternryDetails({ data }) {
       </div>
 
       {/* Right Side */}
-      <div className="w-full  lg:w-1/3 bg-gray-50 p-4 space-y-4">
+      <div className="w-full  lg:w-1/3  p-4 space-y-4">
         {/* Payment Details */}
-        <div className="border p-4 relative text-sm sm:text-base">
-          <p className="absolute top-0 right-0 bg-green-500 text-white px-2 rounded-l-md">
-            25% OFF
+        <div className="border p-6 rounded-3xl relative text-sm sm:text-base">
+          <p
+            className={`absolute top-0 right-0 ${
+              selectedCoupon.id ? "opacity-100" : "opacity-0"
+            } bg-green-500 text-white px-4 py-3 rounded-bl-lg rounded-tr-lg`}
+          >
+            {userDetails?.Coupons.map((item) =>
+              item._id === selectedCoupon.id ? item.discountPercentage : ""
+            )}
+            % OFF
           </p>
-          <p className="font-semibold pt-2">Payment Details</p>
+          <p className="font-semibold text-lg mt-7">Payment Details</p>
           <p className="line-through text-gray-400">
             {data?.price ? data.price * searchData.guests * 1.25 : "N/A"}
           </p>
-          <p className="text-[#2C9C48]">
-            ₹ {data?.price ? data.price * searchData.guests : "N/A"}/-
+          <p className="text-med-green font-semibold">
+            {data?.price
+              ? searchData.guests >= 1
+                ? `₹ ${calculateDiscountedPrice()} /- for ${
+                    searchData.guests
+                  } person${searchData.guests > 1 ? "s" : ""}`
+                : `₹ ${data.price} /- per person`
+              : "N/A"}
           </p>
-          <p className="border text-blue-500 flex py-1 text-[.7rem] mt-2">
-            <span className="text-3xl">🎉</span> No Additional or Hidden
+
+          <p className="border rounded-xl mb-3 text-blue-500 flex justify-center items-center gap-4 py-1 text-[.7rem] mt-2">
+            <span className="text-2xl">🎉</span> No Additional or Hidden
             Costs!!!
           </p>
-          <p className="mt-2 cursor-pointer font-semibold gap-2 flex items-start">
-            Total Payable:<br></br> ₹ {data?.price * searchData.guests}{" "}
-            <span className="mt-[3px] text-sm">▼</span>
+          <div className="border-b mb-3 border-[#A4B6B9] w-full"></div>
+          <p className="mb-3 cursor-pointer font-semibold gap-2 flex items-start justify-between">
+            Total Payable: ₹ {calculateDiscountedPrice()}
+            <span className="mt-[3px] text-lg">
+              <IoIosArrowDown />
+            </span>
           </p>
-          <button className="bg-[#03B58B] text-sm text-white w-full mt-2 py-2 rounded">
+          <button className="bg-[#03B58B] text-lg text-white w-full  py-4 rounded-xl">
             Confirm and Book
           </button>
         </div>
 
         {/* Discount Section */}
-        <div className="bg-[#EDF7F9] border-gray-400 rounded-md border-[.5px] w-full py-4 px-2 ">
-          <div className="flex flex-col  border-gray-400 rounded-md border-[.6px] px-1 sm:flex-row items-center gap-2 mb-4">
+        <div className="bg-[#EDF7F9] rounded-md border-[.5px] w-full p-6 ">
+          <div className="flex flex-col  border-gray-400 rounded-xl border-[.6px] px-4 py-3 sm:flex-row items-center gap-2 mb-4">
             <input
               type="text"
               placeholder="Have a Coupon?"
-              className="flex-1 w-full text-[.7rem] bg-transparent  px-0  rounded"
+              className="flex-1 w-full text-base bg-transparent   rounded"
             />
             <button
-              className="text-green-500  px-0 text-sm py-1 rounded"
-              onClick={() => setIsCouponApplied(false)}
+              className={`text-green-500 ${
+                selectedCoupon ? "text-opacity-65" : "text-opacity-100"
+              } px-0 text-base py-1 rounded`}
+              disabled={selectedCoupon}
             >
-              {isCouponApplied ? "Applyy" : "Apply"}
+              {selectedCoupon ? "Applied" : "Apply"}
             </button>
           </div>
           <p className="text-center text-gray-500">OR</p>
           <div>
-            <div className="flex items-center bg-white mt-4 hover:border-[#03B58B] border-[3px] p-2 rounded-md">
-              <img src="/logo.jpg" alt="Logo" className="w-6 h-6 mr-2" />
-              <div>
-                <p className="font-bold text-sm">EGYPT25SPECIAL</p>
-                <p className="text-xs text-gray-500">
-                  Get 25% OFF on all Egypt trips
-                </p>
-
-                <button
-                  className={`text-green-500  text-sm flex-1 px-4 py-1 rounded ${
-                    isCouponApplied ? "hidden" : ""
-                  }`}
-                  onClick={() => setIsCouponApplied(true)}
-                >
-                  Apply
-                </button>
-                {isCouponApplied && (
-                  <button
-                    className="text-red-500  text-sm px-4 flex-1 py-1 rounded"
-                    onClick={() => setIsCouponApplied(false)}
+            {userDetails?.Coupons ? (
+              userDetails.Coupons.map((item) => {
+                return (
+                  <div
+                    key={item._id}
+                    onClick={() => handleCoupon(item)}
+                    className={`flex items-start cursor-pointer gap-3 bg-white mt-4 
+                      ${
+                        selectedCoupon.id === item._id
+                          ? "border-med-green"
+                          : "border-white"
+                      } 
+                      ${
+                        selectedCoupon.id !== null &&
+                        selectedCoupon.id !== item._id
+                          ? "hover:border-[#e5e7eb]"
+                          : "hover:border-[#03B58B]"
+                      } 
+                      border-[3px] p-2 rounded-md`}
                   >
-                    Remove
-                  </button>
-                )}
-              </div>
-            </div>
-            <div className="flex items-center bg-white mt-4 hover:border-[#03B58B] border-[3px] p-2 rounded-md">
-              <img src="/logo.jpg" alt="Logo" className="w-6 h-6 mr-2" />
-              <div>
-                <p className="font-bold text-sm">TRIPPO3000</p>
-                <p className="text-xs text-gray-500">
-                  Sign up and get a flat ₹ 3000 OFF
-                </p>
+                    <CouponSvg />
+                    <div className="w-full">
+                      <p className="font-bold text-sm">{item.couponCode}</p>
+                      <p className="text-xs mb-3 text-gray-500">
+                        {item.couponDescription}
+                      </p>
 
-                <button
-                  className={`text-green-500  text-sm flex-1 px-4 py-1 rounded ${
-                    isCouponApplied ? "hidden" : ""
-                  }`}
-                  onClick={() => setIsCouponApplied(true)}
-                >
-                  Apply
-                </button>
-                {isCouponApplied && (
-                  <button
-                    className="text-red-500  text-sm px-4 flex-1 py-1 rounded"
-                    onClick={() => setIsCouponApplied(false)}
-                  >
-                    Remove
-                  </button>
-                )}
-              </div>
-            </div>
+                      <div className="flex justify-between">
+                        <p className={`text-green-500  text-sm  rounded `}>
+                          {selectedCoupon.id === item._id
+                            ? "Applied!"
+                            : "Apply"}
+                        </p>
+                        {selectedCoupon.id === item._id && (
+                          <button
+                            className="text-red-500  text-sm  rounded"
+                            onClick={(e) => {
+                              e.stopPropagation(); // Prevent parent onClick
+                              handleCoupon(item._id);
+                            }}
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <p>No Coupons Available</p>
+            )}
+
             <div className="flex gap-2 mt-4"></div>
           </div>
         </div>

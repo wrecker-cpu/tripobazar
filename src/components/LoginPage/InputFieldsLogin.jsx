@@ -1,9 +1,10 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import PasswordSvg from "../../../svgs/PasswordSvg";
 import IndianFlag from "../../../svgs/IndianFlag/index";
 import { Link } from "react-router-dom";
 import UserSvg from "../../../svgs/UserSvg";
 import GoogleWrapper from "../../../utils/GoogleWrapper";
+
 
 export default function InputFieldsLogin({
   showPassword,
@@ -14,11 +15,8 @@ export default function InputFieldsLogin({
   handleChange,
   handleSubmit,
 }) {
- 
-  useEffect(() => {
-    console.log(options);
-    console.log(details);
-  }, [options, details]);
+  useEffect(() => {}, [options, details]);
+  
 
   return (
     <div>
@@ -126,7 +124,6 @@ export default function InputFieldsLogin({
           </Link>
         </p>
       </div>
-      
     </div>
   );
 }

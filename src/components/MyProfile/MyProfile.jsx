@@ -30,7 +30,7 @@ function MyProfile() {
   });
 
   useEffect(() => {
-    if (userDetails) {
+    if (!isLoading && userDetails && userDetails._id) {
       setProfileFields({
         FullName: userDetails.FullName || "",
         DateOfBirth: userDetails.DateOfBirth || "",

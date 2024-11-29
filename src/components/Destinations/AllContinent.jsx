@@ -49,17 +49,13 @@ function AllContinent({ data, loading }) {
 
   const scrollLeft = () => {
     if (carouselRef.current) {
-      console.log("Before scroll left: ", carouselRef.current.scrollLeft);
       carouselRef.current.scrollLeft -= 250; // Scroll left by 250px
-      console.log("After scroll left: ", carouselRef.current.scrollLeft);
     }
   };
 
   const scrollRight = () => {
     if (carouselRef.current) {
-      console.log("Before scroll right: ", carouselRef.current.scrollLeft);
       carouselRef.current.scrollLeft += 250; // Scroll right by 250px
-      console.log("After scroll right: ", carouselRef.current.scrollLeft);
     }
   };
 
@@ -153,7 +149,7 @@ function AllContinent({ data, loading }) {
 
                       {/* Top left tag */}
                       <p className="absolute top-0 text-base left-0 bg-green-500 text-white px-3 py-2 rounded-br-md">
-                        ₹ {card.States[0]?.Packages[0]?.price} onwards
+                        ₹ {card?.States[0]?.Packages[0]?.price} onwards
                       </p>
 
                       {/* Heart icon */}

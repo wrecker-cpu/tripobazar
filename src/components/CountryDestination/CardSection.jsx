@@ -50,8 +50,6 @@ const CardSection = ({ data, error }) => {
     );
   }
 
-  console.log(liked);
-
   return (
     <section className="relative  bg-cover bg-opacity-0 px-5 p-11">
       {/* Background image with low opacity */}
@@ -79,7 +77,7 @@ const CardSection = ({ data, error }) => {
 
               {/* Top left tag */}
               <p className="absolute top-0 left-0 bg-green-500 text-white px-3 py-2 rounded-br-md">
-                ₹ 73,650 onwards
+                ₹ {card.Packages[0]?.price} onwards
               </p>
 
               {/* Heart icon */}

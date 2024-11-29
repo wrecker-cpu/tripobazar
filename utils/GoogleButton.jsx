@@ -2,10 +2,11 @@ import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useWishlist } from "../context/WishListContext";
 
 export default function GoogleButton() {
-
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+  const { verifyUser } = useWishlist();
 
   const googleRespone = async (authResult) => {
     try {
@@ -21,7 +22,8 @@ export default function GoogleButton() {
           token: response.data.token,
         };
         localStorage.setItem("userInfo", JSON.stringify(userInfo));
-        navigate("/")
+        verifyUser();
+        navigate("/");
         console.log("User Data:", response.data);
       } else if (response.data && response.data.message) {
         console.warn("Message from backend:", response.data.message);

@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /login
+Disallow: /signup
+Disallow: /createprofile
+Disallow: /adminpanel
+Disallow: /myprofile
+
+
+Allow: /
+
+Sitemap: https://tripobazar.vercel.app/sitemap.xml

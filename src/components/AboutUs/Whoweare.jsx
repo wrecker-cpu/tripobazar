@@ -11,7 +11,7 @@ export default function Whoweare({WhoWeAreRef}) {
         <h1 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold">
           Welcome to
         </h1>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#03B58B]">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-med-green">
           Trippo Bazaar
         </h1>
         <p className="text-black mt-4 text-sm sm:text-base lg:text-lg">
@@ -24,10 +24,10 @@ export default function Whoweare({WhoWeAreRef}) {
           personalized masterpiece.
         </p>
         <div className="mt-4 flex flex-wrap gap-4">
-          <button className="bg-[#03B58B] text-white hover:text-[#03B58B] hover:bg-white px-4 py-2 rounded shadow">
+          <button className="bg-med-green text-white hover:text-med-green hover:bg-white px-4 py-2 rounded shadow">
             Explore Plans
           </button>
-          <button className="border border-[#03B58B] text-[#03B58B] hover:text-white hover:bg-[#03B58B] px-4 py-2 rounded shadow">
+          <button className="border border-med-green text-med-green hover:text-white hover:bg-med-green px-4 py-2 rounded shadow">
             Our Policy
           </button>
         </div>

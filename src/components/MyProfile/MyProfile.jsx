@@ -156,8 +156,8 @@ function MyProfile() {
               className="cursor-pointer text-gray-700 mb-2 justify-between flex items-center"
             >
               <span className="flex  items-center">
-                <span className="w-4 h-4 border-[.5px] flex items-center justify-center border-[#03B58B] rounded-full mr-3">
-                  <span className="w-1 h-1 bg-[#03B58B] rounded-full"></span>
+                <span className="w-4 h-4 border-[.5px] flex items-center justify-center border-med-green rounded-full mr-3">
+                  <span className="w-1 h-1 bg-med-green rounded-full"></span>
                 </span>
                 {label}
               </span>
@@ -352,7 +352,7 @@ function MyProfile() {
             <h3 className="text-base em:text-xl font-bold">Saved Travelers</h3>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="text-sm md:text-base  text-[#03B58B] border-black border-[1.3px] hover:bg-[#03B58B] hover:border-med-green hover:text-white px-1 md:px-4 py-2 rounded-md"
+              className="text-sm md:text-base  text-med-green border-black border-[1.3px] hover:bg-med-green hover:border-med-green hover:text-white px-1 md:px-4 py-2 rounded-md"
             >
               + Add Traveler
             </button>

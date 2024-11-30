@@ -25,7 +25,7 @@ export default function CareersPage() {
               empower you to shape the future of the travel industry.
             </p>
             <div className="flex flex-col md:flex-row items-center w-full md:max-w-xl mb-10 md:mb-28 gap-4 mt-4">
-              <div className="border border-[#03B58B] relative w-full md:w-auto rounded-md flex-1 outline-none">
+              <div className="border border-med-green relative w-full md:w-auto rounded-md flex-1 outline-none">
                 <input
                   type="text"
                   placeholder="Search jobs"
@@ -35,7 +35,7 @@ export default function CareersPage() {
                   <BiSearch />
                 </div>
               </div>
-              <button className="bg-[#03B58B] w-full ml-1 md:w-auto text-white py-3 px-7 rounded-md">
+              <button className="bg-med-green w-full ml-1 md:w-auto text-white py-3 px-7 rounded-md">
                 Search
               </button>
             </div>

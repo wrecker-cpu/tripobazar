@@ -47,12 +47,14 @@ export default function CoursalSection() {
         </div>
         <div className="w-full flex justify-center my-12 gap-4 relative z-10">
           <button
+            aria-label="Scroll left"
             onClick={() => handleScroll("left")}
             className="w-10 h-10 opacity-70 hover:opacity-90 bg-white rounded-full flex items-center justify-center"
           >
             <BsArrowLeft />
           </button>
           <button
+            aria-label="Scroll right"
             onClick={() => handleScroll("right")}
             className="w-10 h-10 opacity-70 hover:opacity-90 bg-white rounded-full flex items-center justify-center"
           >

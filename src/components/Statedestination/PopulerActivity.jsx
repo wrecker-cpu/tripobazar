@@ -25,7 +25,7 @@ export default function PopulerActivity() {
         {/* Right Side Image Div */}
 
         <div className="w-full md:w-[50%] h-full bg-white p-8 flex flex-col justify-center">
-          <h4 className="text-[#03B58B] font-medium">POPULAR ACTIVITIES </h4>
+          <h4 className="text-med-green font-medium">POPULAR ACTIVITIES </h4>
           <h2 className="text-[40px] esm:text-[50px] em:text-[65px] md:text-[7vw] exl:text-[100px] exl:leading-[120px] font-extrabold leading-[50px] em:leading-[70px] md:leading-[8vw] md:mt-11 mb-8 em:mb-14">
             CRUISE AT <br></br> NILE RIVER
           </h2>
@@ -39,10 +39,10 @@ export default function PopulerActivity() {
 
           {/* Search Bar */}
           <div className="flex flex-col md:flex-row items-center w-full md:max-w-xl mb-10 md:mb-28 gap-4 mt-4">
-            <button className="bg-[#03B58B] hover:bg-white hover:border hover:border-[#03B58B] hover:text-[#03B58B] w-full ml-1 md:w-auto text-white py-2 px-6 rounded-md">
+            <button className="bg-med-green hover:bg-white hover:border hover:border-med-green hover:text-med-green w-full ml-1 md:w-auto text-white py-2 px-6 rounded-md">
               Customize Plan
             </button>
-            <button className="border border-[#03B58B] w-full ml-1 md:w-auto text-[#03B58B] hover:text-white hover:bg-[#03B58B] py-2 px-6 rounded-md">
+            <button className="border border-med-green w-full ml-1 md:w-auto text-med-green hover:text-white hover:bg-med-green py-2 px-6 rounded-md">
               Know More
             </button>
           </div>

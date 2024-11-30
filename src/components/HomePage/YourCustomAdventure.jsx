@@ -40,9 +40,9 @@ export default function YourCustomAdventure() {
             <input
               type="text"
               placeholder="Search destinations..."
-              className="border-2 border-[#03B58B] w-full md:w-auto rounded-l-md py-2 px-4 flex-1 outline-none"
+              className="border-2 border-med-green w-full md:w-auto rounded-l-md py-2 px-4 flex-1 outline-none"
             />
-            <button className="bg-[#03B58B] w-full ml-1 md:w-auto text-white py-2 px-6 rounded-md">
+            <button className="bg-med-green w-full ml-1 md:w-auto text-white py-2 px-6 rounded-md">
               Search
             </button>
           </div>
@@ -57,18 +57,25 @@ export default function YourCustomAdventure() {
           </div>
           <div className="hidden md:flex flex-row gap-10 py-4 justify-between items-center w-[56%]">
             <div className="w-auto flex gap-2 justify-start">
-              {" "}
-              <button onClick={handlePrev} className="  transform text-2xl  ">
+              <button
+                aria-label="Previous item"
+                onClick={handlePrev}
+                className="transform text-2xl"
+              >
                 <BsArrowLeft />
               </button>
-              <button onClick={handleNext} className=" transform text-2xl  ">
+              <button
+                aria-label="Next item"
+                onClick={handleNext}
+                className="transform text-2xl"
+              >
                 <BsArrowRight />
               </button>
             </div>
             <div className="h-[2px] w-full bg-gray-200">
               <div
                 style={{ width: `${progressWidth}%` }}
-                className="h-full  bg-zinc-900"
+                className="h-full bg-zinc-900"
               ></div>
             </div>
           </div>

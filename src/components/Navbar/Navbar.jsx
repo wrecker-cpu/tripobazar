@@ -94,7 +94,7 @@ const Navbar = () => {
             {userData === null ? (
               <Link
                 to={"/login"}
-                className="border-[.1rem] rounded-lg text-[#03B58B] border-[#012831] font-poppins text-[.8rem] font-medium px-2 py-2"
+                className="border-[.1rem] rounded-lg text-[#02896F] border-[#012831] font-poppins text-[.8rem] font-medium px-2 py-2"
               >
                 Login/Sign Up
               </Link>
@@ -102,7 +102,7 @@ const Navbar = () => {
               <Link className="">
                 <button
                   onClick={toggleSidebar}
-                  className="border-[.1rem] flex justify-center items-center gap-2 rounded-lg tracking-wider text-[#03B58B] border-[#012831] font-poppins text-[.8rem] font-medium px-8 py-2"
+                  className="border-[.1rem] flex justify-center items-center gap-2 rounded-lg tracking-wider text-med-green border-[#012831] font-poppins text-[.8rem] font-medium px-8 py-2"
                 >
                   <MenuSvg />
                   Menu
@@ -241,8 +241,11 @@ const Navbar = () => {
 
             {/* Search Icon */}
             <div className="relative">
-              <Link to={"/searchpage"}>
-                <button className="text-sm border-[1px] border-[#012831] rounded-full p-2">
+              <Link to={"/searchpage"} aria-label="Go to search page">
+                <button
+                  aria-label="Search"
+                  className="text-sm border-[1px] border-[#012831] rounded-full p-2"
+                >
                   <FaSearch />
                 </button>
               </Link>
@@ -256,7 +259,7 @@ const Navbar = () => {
             </div>
 
             {/* Book a Trip Button */}
-            <button className="bg-[#03B58B] text-white px-4 h-9 rounded-md">
+            <button className="bg-med-green text-white px-4 h-9 rounded-md">
               Book a Trip
             </button>
           </div>
@@ -265,7 +268,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Toggle Button (Hamburger Icon) */}
           <button
-            className="emd:hidden text-[#03B58B] mt-2"
+            className="emd:hidden text-med-green mt-2"
             onClick={toggleMenu}
           >
             <HamburgerSvg />

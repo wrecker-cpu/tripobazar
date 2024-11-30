@@ -49,14 +49,14 @@ function Footer() {
         <div className="flex flex-col w-full max-w-sm md:w-[25%] gap-0 md:gap-2 text-sm text-center md:text-start">
           {/* Contact Information */}
           <div className="mb-8">
-            <h4 className="text-[#03B58B] mb-3 font-semibold">Contact Us</h4>
+            <h4 className="text-med-green mb-3 font-semibold">Contact Us</h4>
             <p className="mb-1">contact@trippobazzar.com</p>
             <p>+91 9999999999 | +91 88888888888</p>
           </div>
 
           {/* Subscribe Section */}
           <div className="mb-2">
-            <h4 className="text-[#03B58B] mr-1 font-semibold">
+            <h4 className="text-med-green mr-1 font-semibold">
               Subscribe
               <span className="text-gray-700"> to get exclusive deals</span>
             </h4>
@@ -67,9 +67,9 @@ function Footer() {
             <input
               type="text"
               placeholder="Enter your email"
-              className="p-2 w-full border border-[#03B58B] rounded-md outline-none text-black h-8"
+              className="p-2 w-full border border-med-green rounded-md outline-none text-black h-8"
             />
-            <button className="bg-[#03B58B] text-[0.9rem] px-4 w-full emd:w-auto text-white flex-shrink-0 rounded-md h-8">
+            <button className="bg-med-green text-[0.9rem] px-4 w-full emd:w-auto text-white flex-shrink-0 rounded-md h-8">
               Get Deals
             </button>
           </div>

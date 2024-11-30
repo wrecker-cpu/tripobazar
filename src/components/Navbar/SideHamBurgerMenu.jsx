@@ -86,6 +86,7 @@ export default function SideHamBurgerMenu({
               <img
                 src="https://trippobazaar.com/wp-content/uploads/2024/07/trippo_logo.png"
                 alt="Logo"
+                aria-label="Logo"
                 className="h-11 cursor-pointer"
                 onClick={toggleMenu}
               />
@@ -93,13 +94,13 @@ export default function SideHamBurgerMenu({
             {userData ? (
               <button
                 onClick={handleLogout}
-                className="border-[.1rem] rounded-lg text-[#03B58B] border-[#012831] font-poppins text-[1rem] font-medium px-4 py-2"
+                className="border-[.1rem] rounded-lg text-med-green border-[#012831] font-poppins text-[1rem] font-medium px-4 py-2"
               >
                 LogOut
               </button>
             ) : (
               <Link to="/login">
-                <button className="border-[.1rem] rounded-lg text-[#03B58B] border-[#012831] font-poppins text-[1rem] font-medium px-4 py-2">
+                <button className="border-[.1rem] rounded-lg text-med-green border-[#012831] font-poppins text-[1rem] font-medium px-4 py-2">
                   Login
                 </button>
               </Link>
@@ -132,12 +133,14 @@ export default function SideHamBurgerMenu({
           {/* Footer Section */}
           <div className="flex justify-start gap-3 py-4 px-3">
             <Link to={"/searchpage"}>
-              <button className="text-sm border-[1px] border-[#012831] rounded-full py-2 px-[10px]">
+              <button 
+              aria-label="Search"
+              className="text-sm border-[1px] border-[#012831] rounded-full py-2 px-[10px]">
                 <FaSearch />
               </button>
             </Link>
             <Link to={"/contactus"}>
-              <button className="bg-[#03B58B] text-white px-4 h-9 rounded-md">
+              <button className="bg-med-green text-white px-4 h-9 rounded-md">
                 Contact Us
               </button>
             </Link>

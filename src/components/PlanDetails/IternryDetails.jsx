@@ -321,7 +321,7 @@ function IternryDetails({ data }) {
                                     onClick={() => {
                                       handleApplyClick(hdetail);
                                     }}
-                                    className="bg-[#03B58B] text-[.8rem] text-white w-full mt-2 py-2 rounded"
+                                    className="bg-med-green text-[.8rem] text-white w-full mt-2 py-2 rounded"
                                   >
                                     Apply
                                   </button>
@@ -443,7 +443,7 @@ function IternryDetails({ data }) {
               <IoIosArrowDown />
             </span>
           </p>
-          <button className="bg-[#03B58B] text-lg text-white w-full  py-4 rounded-xl">
+          <button className="bg-med-green text-lg text-white w-full  py-4 rounded-xl">
             Confirm and Book
           </button>
         </div>
@@ -483,7 +483,7 @@ function IternryDetails({ data }) {
                         selectedCoupon.id !== null &&
                         selectedCoupon.id !== item._id
                           ? "hover:border-[#e5e7eb]"
-                          : "hover:border-[#03B58B]"
+                          : "hover:border-med-green"
                       } 
                       border-[3px] p-2 rounded-xl`}
                   >

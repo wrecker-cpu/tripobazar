@@ -113,7 +113,7 @@ function PopulerPackages() {
                 </div>
   
                 {/* Book Now Button */}
-                <button className="w-[80%] sm:w-[70%] mb-4 sm:mb-[5%] bg-[#03B58B] text-white py-2 rounded-md hover:bg-green-600">
+                <button className="w-[80%] sm:w-[70%] mb-4 sm:mb-[5%] bg-med-green text-white py-2 rounded-md hover:bg-green-600">
                   Book Now
                 </button>
               </div>
@@ -127,7 +127,7 @@ function PopulerPackages() {
                 <p className="font-semibold text-base xlg:text-lg tracking-wide mt-2">
                   {description}
                 </p>
-                <button className="border-[.1rem] mt-7 mb-8 rounded-lg text-[#03B58B] border-[#012831] w-2/5 font-poppins text-[.8rem] font-medium px-2 py-2">
+                <button className="border-[.1rem] mt-7 mb-8 rounded-lg text-med-green border-[#012831] w-2/5 font-poppins text-[.8rem] font-medium px-2 py-2">
                   View All Plans
                 </button>
               </div>

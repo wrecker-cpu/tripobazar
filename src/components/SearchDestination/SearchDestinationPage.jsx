@@ -199,7 +199,7 @@ export default function SearchDestinationPage() {
             {/* Search Button */}
             <button
               onClick={handleSearch}
-              className="flex w-full text-center text-lg h-11 items-center justify-center font-medium px-4 py-2 bg-[#03B58B] text-white rounded-md"
+              className="flex w-full text-center text-lg h-11 items-center justify-center font-medium px-4 py-2 bg-med-green text-white rounded-md"
             >
               <p>Search Packages</p>
             </button>

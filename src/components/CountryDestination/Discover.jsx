@@ -20,7 +20,7 @@ function Discover({ data }) {
             generations.
           </p>
           <div className="mt-4 flex flex-wrap gap-4">
-            <button className="bg-[#03B58B] text-white hover:text-[#03B58B] hover:bg-white px-4 py-2 rounded shadow">
+            <button className="bg-med-green text-white hover:text-med-green hover:bg-white px-4 py-2 rounded shadow">
               Customize Plan
             </button>
           </div>

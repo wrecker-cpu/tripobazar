@@ -89,7 +89,7 @@ function CountryPakages({ data, error, state, country, continent }) {
               to={`/destination/${continent}/${country}/${state}/${item._id}`}
             >
               {" "}
-              <button className="w-[80%] sm:w-[70%] mb-4 sm:mb-[9%] bg-[#03B58B] text-white py-2 rounded-md ">
+              <button className="w-[80%] sm:w-[70%] mb-4 sm:mb-[9%] bg-med-green text-white py-2 rounded-md ">
                 Book Now
               </button>
             </Link>

@@ -97,12 +97,12 @@ export default function PopularPackages() {
 
             {/* Location and Price Info */}
             <div className=" mt-5">
-              <h3 className="text-3xl md:text-5xl mb-4 md:mb-8 mt-16 font-bold">
+              <p className="text-3xl md:text-5xl mb-4 md:mb-8 mt-16 font-bold">
                 {location}
                 <span className="text-gray-600 text-base md:text-xl font-medium">
                   ,{country}
                 </span>
-              </h3>
+              </p>
               <div className="flex flex-row justify-center gap-4 mb-2 ew:mb-4 md:mb-10 max-w-lg mx-auto">
                 <p className="text-gray-600 text-sm md:text-lg whitespace-nowrap rounded-lg bg-[#f8f8f8] font-medium p-4 ">
                   8 Days 7 Nights
@@ -120,7 +120,7 @@ export default function PopularPackages() {
               {/* Included Icons */}
 
               {/* Book Now Button */}
-              <button className="mt-4 px-4 py-2 bg-[#03B58B] text-white rounded-md font-medium">
+              <button className="mt-4 px-4 py-2 bg-med-green text-white rounded-md font-medium">
                 Book Now
               </button>
             </div>
@@ -134,7 +134,7 @@ export default function PopularPackages() {
               <p className="font-semibold text-base xlg:text-lg tracking-wide mt-2">
                 {description}
               </p>
-              <button className="border-[.1rem] mt-7 mb-8 rounded-lg text-[#03B58B] border-[#012831] w-2/5 font-poppins text-[.8rem] font-medium px-2 py-2">
+              <button className="border-[.1rem] mt-7 mb-8 rounded-lg text-med-green border-[#012831] w-2/5 font-poppins text-[.8rem] font-medium px-2 py-2">
                 <Link className="w-full h-full block" to={destination}>
                   View All
                 </Link>
@@ -147,10 +147,18 @@ export default function PopularPackages() {
         <div className="flex flex-row gap-10 py-4 justify-between items-center w-[98%] md:w-[56%]">
           <div className="w-auto flex gap-2 justify-start">
             {" "}
-            <button onClick={handlePrev} className="  transform text-2xl  ">
+            <button
+              aria-label="Previous"
+              onClick={handlePrev}
+              className="  transform text-2xl  "
+            >
               <BsArrowLeft />
             </button>
-            <button onClick={handleNext} className=" transform text-2xl  ">
+            <button
+              aria-label="Next"
+              onClick={handleNext}
+              className=" transform text-2xl  "
+            >
               <BsArrowRight />
             </button>
           </div>

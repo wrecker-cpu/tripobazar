@@ -9,12 +9,18 @@ import img3 from "../../assets/CountryDestination/sm-imgthree.svg";
 import img4 from "../../assets/CountryDestination/sm-img-4.svg";
 import img5 from "../../assets/CountryDestination/sm-img-5.svg";
 import img6 from "../../assets/CountryDestination/sm-img-6.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function CountryPakages({ data, error, state, country, continent }) {
+  const navigate=useNavigate();
   
 
   const images = [img1, img2, img3, img4, img5, img6]; // Array of image sources
+
+  const handleClick=(id)=>{
+    navigate(`/destination/${continent}/${country}/${state}/${id}`)
+  }
+
 
   if (error) {
     return (
@@ -41,7 +47,8 @@ function CountryPakages({ data, error, state, country, continent }) {
         {data?.map((item, index) => (
           <div
             key={index}
-            className="bg-white  border text-center rounded-lg shadow-lg  hover:shadow-lime-500"
+            onClick={()=>handleClick(item._id)}
+            className="bg-white  border text-center cursor-pointer rounded-lg shadow-lg  hover:shadow-lime-500"
           >
             {/* Card Image */}
             <div className="relative w-full h-28 sm:h-48 mb-2">
@@ -83,7 +90,7 @@ function CountryPakages({ data, error, state, country, continent }) {
               to={`/destination/${continent}/${country}/${state}/${item._id}`}
             >
               {" "}
-              <button className="w-[80%] sm:w-[70%] mb-4 sm:mb-[9%] bg-[#03B58B] text-white py-2 rounded-md hover:bg-green-600">
+              <button className="w-[80%] sm:w-[70%] mb-4 sm:mb-[9%] bg-[#03B58B] text-white py-2 rounded-md ">
                 Book Now
               </button>
             </Link>

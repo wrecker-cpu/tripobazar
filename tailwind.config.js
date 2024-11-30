@@ -36,7 +36,7 @@ export default {
         100: "100", // Add a custom high z-index value
       },
       backgroundImage: {
-        "login-image": "url('/loginpageimage.png')",
+        "login-image": "url('/loginpageimage.webp')",
         "search-image": "url('/searchPage.png')",
       },
       fontFamily: {

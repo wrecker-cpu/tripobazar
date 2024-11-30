@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import adventureImage from "../../assets/home/trekking.jpg";
+import adventureImage from "../../assets/home/trekking.webp";
 
 export default function YourCustomAdventure() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,9 +48,11 @@ export default function YourCustomAdventure() {
           </div>
           <div className="mb-20">
             <p className="text-6xl font-extrabold flex items-center space-x-1">
-              <span className="relative -top-1">{currentIndex+1}</span>
+              <span className="relative -top-1">{currentIndex + 1}</span>
               <span className="text-3xl font-medium relative top-1">/</span>
-              <span className="relative top-2 text-4xl font-medium">{carouselItems}</span>
+              <span className="relative top-2 text-4xl font-medium">
+                {carouselItems}
+              </span>
             </p>
           </div>
           <div className="hidden md:flex flex-row gap-10 py-4 justify-between items-center w-[56%]">
@@ -77,7 +79,6 @@ export default function YourCustomAdventure() {
             src={adventureImage}
             alt="Adventure"
             className="w-full h-full object-cover  md:rounded-bl-[30%]"
-            
           />
         </div>
       </div>

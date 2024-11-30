@@ -1,6 +1,6 @@
 import React from "react";
 import BreadCrumbsLink from "../../../utils/BreadCrumbsLink";
-import image from "../../../src/assets/TravelTips/img1.jpg";
+import image from "../../../src/assets/TravelTips/img1.webp";
 import { IoSearch } from "react-icons/io5";
 import FilterSvg from "../../../svgs/FilterSvg";
 function TravelTipsTitle() {
@@ -27,7 +27,9 @@ function TravelTipsTitle() {
                 <div className="md:w-auto w-full flex cursor-pointer justify-end">
                   <FilterSvg />
                 </div>
-                <button className="bg-med-green text-white px-5 py-3 rounded-lg">Search</button>
+                <button className="bg-med-green text-white px-5 py-3 rounded-lg">
+                  Search
+                </button>
               </div>
             </div>
           </div>

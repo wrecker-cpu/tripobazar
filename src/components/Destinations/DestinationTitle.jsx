@@ -1,6 +1,6 @@
 import React from "react";
 import BreadCrumbsLink from "../../../utils/BreadCrumbsLink";
-import image from "../../assets/destination/map.png";
+import image from "../../assets/destination/map.webp";
 
 export default function DestinationTitle() {
   return (

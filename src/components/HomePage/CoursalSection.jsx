@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import YellowCircularDisc from "../../../svgs/Home/YellowCircularDisc/index";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import elephant from "/Elephant.png?url";
-import ocean from "/Ocean.png?url";
-import couples from "/Couples.png?url";
-import explorer from "/Explorer.png?url";
+import elephant from "/Elephant.webp?url";
+import ocean from "/Ocean.webp?url";
+import couples from "/Couples.webp?url";
+import explorer from "/Explorer.webp?url";
 
 export default function CoursalSection() {
   const destinations = [

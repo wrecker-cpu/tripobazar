@@ -52,8 +52,6 @@ const CardSection = ({ data, error }) => {
 
   return (
     <section className="relative  bg-cover bg-opacity-0 px-5 p-11">
-      {/* Background image with low opacity */}
-      <div className="absolute inset-0 bg-[url('src/assets/africa-bg-2.png')] bg-cover opacity-30"></div>
       <div className="grid grid-cols-1 sm:grid-cols-2 w-[90%] mx-auto lg:grid-cols-4 gap-8">
         {data?.States?.map((card, index) => {
           return (

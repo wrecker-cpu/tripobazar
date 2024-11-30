@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import BreadCrumbsLink from "../../../utils/BreadCrumbsLink";
-import clip from "../../assets/clipimage.png";
+import clip from "../../assets/aboutus/clipimage.webp";
 import ContactUsSocialLinks from "./ContactUsSocialLinks";
 import ContactUsInputFields from "./ContactUsInputFields";
 

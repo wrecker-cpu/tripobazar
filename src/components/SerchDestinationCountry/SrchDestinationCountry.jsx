@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FilterSvg from "../../../svgs/FilterSvg/index";
 import DatePicker from "react-datepicker";
-import image from "../../assets/africa-bg.jpg";
+import image from "../../assets/africa-bg.webp";
 import BreadCrumbsLink from "../../../utils/BreadCrumbsLink";
 import FilterBox from "../FilterBox/FilterBox";
 import { useNavigate, useParams } from "react-router-dom";

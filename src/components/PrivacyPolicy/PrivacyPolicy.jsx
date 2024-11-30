@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../../assets/aboutus/advenPic.jpg";
+import image from "../../assets/aboutus/advenPic.webp";
 import { PRIVACYPOLICYDATA } from "./PrivacyPolicyJsonData";
 import BreadCrumbsLink from "../../../utils/BreadCrumbsLink";
 

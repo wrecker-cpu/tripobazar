@@ -1,7 +1,7 @@
 import React from "react";
 import BreadCrumbsLink from "../../../utils/BreadCrumbsLink";
 import { BiSearch } from "react-icons/bi";
-import image from "../../assets/careerman.png";
+import image from "../../assets/careerman.webp";
 import { MdEmail } from "react-icons/md";
 import people from "../../assets/peopleCareers.png";
 

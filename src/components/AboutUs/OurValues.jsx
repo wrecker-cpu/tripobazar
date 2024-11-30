@@ -1,5 +1,5 @@
 import React from "react";
-import bgimage from "../../assets/aboutus/OurValues.jpg";
+import bgimage from "../../assets/aboutus/OurValues.webp";
 import ExcelenceSvg from "../../../svgs/ExcelenceSvg";
 import discoverOne from "../../assets/home/Discover-1.svg";
 import EmpowermentSvg from "../../../svgs/EmpowermentSvg";

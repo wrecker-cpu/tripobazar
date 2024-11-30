@@ -1,5 +1,5 @@
 import React from "react";
-import clip from "../../assets/clipimage.png";
+import clip from "../../assets/aboutus/clipimage.webp";
 import ContactUsSocialLinks from "../ContactUs/ContactUsSocialLinks";
 import { socialMediaData } from "../../../utils/SocialMediaData";
 

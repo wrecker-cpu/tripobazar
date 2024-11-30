@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../../assets/aboutus/bg-about.jpg";
+import image from "../../assets/aboutus/bg-about.webp";
 
 import BreadCrumbsLink from "../../../utils/BreadCrumbsLink";
 

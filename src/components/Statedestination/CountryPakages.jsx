@@ -1,26 +1,30 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import FilterBox from "../FilterBox/FilterBox";
-import FilterSvg from "../../../svgs/FilterSvg";
+import React from "react";
+import FirstSvgWhatIncluded from "../../../svgs/WhatsIncluded/FirstSvgWhatIncluded/index";
+import SecondSvgWhatIncluded from "../../../svgs/WhatsIncluded/SecondSvgWhatIncluded/index";
+import ThirdSvgWhatIncluded from "../../../svgs/WhatsIncluded/ThirdSvgWhatIncluded/index";
+import FourthSvgWhatIncluded from "../../../svgs/WhatsIncluded/FourthSvgWhatIncluded/index";
+import FifthSvgWhatIncluded from "../../../svgs/WhatsIncluded/FifthSvgWhatIncluded/index";
+import SixthSvgWhatIncluded from "../../../svgs/WhatsIncluded/SixthSvgWhatIncluded/index";
 
-import img1 from "../../assets/CountryDestination/sm-imgone.svg";
-import img2 from "../../assets/CountryDestination/sm-imgtwo.svg";
-import img3 from "../../assets/CountryDestination/sm-imgthree.svg";
-import img4 from "../../assets/CountryDestination/sm-img-4.svg";
-import img5 from "../../assets/CountryDestination/sm-img-5.svg";
-import img6 from "../../assets/CountryDestination/sm-img-6.svg";
 import { Link, useNavigate } from "react-router-dom";
 
 function CountryPakages({ data, error, state, country, continent }) {
-  const navigate=useNavigate();
-  
+  const navigate = useNavigate();
 
-  const images = [img1, img2, img3, img4, img5, img6]; // Array of image sources
 
-  const handleClick=(id)=>{
-    navigate(`/destination/${continent}/${country}/${state}/${id}`)
-  }
 
+  const svgComponents = [
+    FirstSvgWhatIncluded,
+    SecondSvgWhatIncluded,
+    ThirdSvgWhatIncluded,
+    FourthSvgWhatIncluded,
+    FifthSvgWhatIncluded,
+    SixthSvgWhatIncluded,
+  ];
+
+  const handleClick = (id) => {
+    navigate(`/destination/${continent}/${country}/${state}/${id}`);
+  };
 
   if (error) {
     return (
@@ -38,16 +42,14 @@ function CountryPakages({ data, error, state, country, continent }) {
     <div className="w-full flex gap-4 bg-transparent p-4">
       {/* First Part - Existing Component */}
 
-      <div className="w-auto md:block hidden text-center">
-       
-      </div>
+      <div className="w-auto md:block hidden text-center"></div>
       {/* Second Part - Cards */}
       <div className="w-[85%]sm:w-[90%] lg:w-[95%]   grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {/* Card template */}
         {data?.map((item, index) => (
           <div
             key={index}
-            onClick={()=>handleClick(item._id)}
+            onClick={() => handleClick(item._id)}
             className="bg-white  border text-center cursor-pointer rounded-lg shadow-lg  hover:shadow-lime-500"
           >
             {/* Card Image */}
@@ -76,13 +78,10 @@ function CountryPakages({ data, error, state, country, continent }) {
             </p>
             {/* Small Logo Images */}
             <div className="flex flex-wrap justify-center gap-2 mb-2 mx-auto">
-              {images.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`Icon ${index + 1}`}
-                  className="w-6 sm:w-8 h-6 sm:h-8"
-                />
+              {svgComponents.map((SvgComponent, index) => (
+                <div key={index} className="w-6 sm:w-8 h-6 sm:h-8">
+                  <SvgComponent />
+                </div>
               ))}
             </div>
             {/* Book Now Button */}
@@ -97,8 +96,6 @@ function CountryPakages({ data, error, state, country, continent }) {
           </div>
         ))}
       </div>
-
-      
     </div>
   );
 }

@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import eygpt from "../../assets/home/eygpt.webp";
 import newyork from "../../assets/home/newyorkk.webp";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-
-import img1 from "../../assets/CountryDestination/sm-imgone.svg";
-import img2 from "../../assets/CountryDestination/sm-imgtwo.svg";
-import img3 from "../../assets/CountryDestination/sm-imgthree.svg";
-import img4 from "../../assets/CountryDestination/sm-img-4.svg";
-import img5 from "../../assets/CountryDestination/sm-img-5.svg";
-import img6 from "../../assets/CountryDestination/sm-img-6.svg";
+import FirstSvgWhatIncluded from "../../../svgs/WhatsIncluded/FirstSvgWhatIncluded/index";
+import SecondSvgWhatIncluded from "../../../svgs/WhatsIncluded/SecondSvgWhatIncluded/index";
+import ThirdSvgWhatIncluded from "../../../svgs/WhatsIncluded/ThirdSvgWhatIncluded/index";
+import FourthSvgWhatIncluded from "../../../svgs/WhatsIncluded/FourthSvgWhatIncluded/index";
+import FifthSvgWhatIncluded from "../../../svgs/WhatsIncluded/FifthSvgWhatIncluded/index";
+import SixthSvgWhatIncluded from "../../../svgs/WhatsIncluded/SixthSvgWhatIncluded/index";
 import YutubeSvg from "../../../svgs/Yutubelogo/index";
 
 export default function StealDealPakage() {
@@ -25,7 +24,7 @@ export default function StealDealPakage() {
 
   const carouselItems = [
     {
-      image:eygpt,
+      image: eygpt,
       location: "Egypt All Inclusive Deal",
       country: "",
       price: "₹ 48,999",
@@ -39,6 +38,15 @@ export default function StealDealPakage() {
       price: "$ 2,199",
       description: "Get EXTRA 10% OFF USING CODE TRIPPO10",
     },
+  ];
+
+  const svgComponents = [
+    FirstSvgWhatIncluded,
+    SecondSvgWhatIncluded,
+    ThirdSvgWhatIncluded,
+    FourthSvgWhatIncluded,
+    FifthSvgWhatIncluded,
+    SixthSvgWhatIncluded,
   ];
   const progressWidth = ((currentIndex + 1) / carouselItems.length) * 100;
   const { image, location, country, price, description } =
@@ -110,13 +118,10 @@ export default function StealDealPakage() {
               <p className="mt-2 mb-2 font-semibold">What’s included?</p>
 
               <div className="flex flex-wrap justify-center gap-2 mb-2 mx-auto">
-                {[img1, img2, img3, img4, img5, img6].map((img, idx) => (
-                  <img
-                    key={idx}
-                    src={img}
-                    alt={`Icon ${idx + 1}`}
-                    className="w-6 sm:w-8 h-6 sm:h-8"
-                  />
+                {svgComponents.map((SvgComponent, index) => (
+                  <div key={index} className="w-6 sm:w-8 h-6 sm:h-8">
+                    <SvgComponent />
+                  </div>
                 ))}
               </div>
 

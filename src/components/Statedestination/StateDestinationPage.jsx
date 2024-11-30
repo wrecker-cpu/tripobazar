@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import BreadCrumbsLink from "../../../utils/BreadCrumbsLink.jsx";
+import React, { useState } from "react";
 import SubNavCountry from "./SubNavCountry.jsx";
 import CountryPakages from "./CountryPakages.jsx";
 import StealDealPakage from "./StealDealPakage.jsx";
@@ -103,9 +102,9 @@ function StateDestinationPage() {
   const filteredPackages = filterPackages();
 
   return (
-    <div className="w-full h-full ">
+    <div className=" mx-auto max-w-[1920px] h-full ">
       <SrchDestinationCountry />
-      <SubNavCountry  toggleModal={toggleModal} />
+      <SubNavCountry toggleModal={toggleModal} />
       <FilterBox showModal={showModal} onClose={toggleModal} />
       <CountryPakages
         data={filteredPackages}

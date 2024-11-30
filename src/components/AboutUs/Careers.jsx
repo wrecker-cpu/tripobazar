@@ -1,6 +1,6 @@
 import React from "react";
-import image1 from "../../assets/aboutus/career1.png";
-import image2 from "../../assets/aboutus/career2.png";
+import image1 from "../../assets/aboutus/career1.webp";
+import image2 from "../../assets/aboutus/career2.webp";
 
 function Careers({ CareersRef }) {
   return (

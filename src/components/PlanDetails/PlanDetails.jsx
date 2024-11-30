@@ -22,7 +22,7 @@ function PlanDetails() {
   }
 
   return (
-    <div className="max-w-[1920] font-poppins  mx-auto bg-white">
+    <div className="max-w-[1920px] font-poppins  mx-auto bg-white">
       <div className="w-[90%] relative z-10 mx-auto py-2">
         <BreadCrumbsLink />
       </div>

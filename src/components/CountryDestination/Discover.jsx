@@ -1,6 +1,6 @@
 import React from "react";
-import image1 from "../../assets/aboutus/image1over.jpg";
-import image2 from "../../assets/aboutus/image2over.jpg";
+import image1 from "../../assets/aboutus/image1over.webp";
+import image2 from "../../assets/aboutus/image2over.webp";
 function Discover({ data }) {
   return (
     <div>

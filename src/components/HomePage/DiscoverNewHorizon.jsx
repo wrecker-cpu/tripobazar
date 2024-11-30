@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import dalLek from "/bg-home.jpg?url";
+import dalLek from "/bg-home.webp?url";
 import discoverOne from "../../assets/home/Discover-1.svg";
 import FilterSvg from "../../../svgs/FilterSvg/index";
 import DatePicker from "react-datepicker";

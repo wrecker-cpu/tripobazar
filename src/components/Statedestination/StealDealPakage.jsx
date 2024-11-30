@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
-import newyork from "../../assets/home/newyorkk.jpg";
+import eygpt from "../../assets/home/eygpt.webp";
+import newyork from "../../assets/home/newyorkk.webp";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 import img1 from "../../assets/CountryDestination/sm-imgone.svg";
@@ -25,8 +25,7 @@ export default function StealDealPakage() {
 
   const carouselItems = [
     {
-      image:
-        "https://d3hne3c382ip58.cloudfront.net/files/uploads/bookmundi/resized/cmsfeatured/summer-in-egypt-1682660289-785X440.jpg?width=384&quality=undefined",
+      image:eygpt,
       location: "Egypt All Inclusive Deal",
       country: "",
       price: "₹ 48,999",

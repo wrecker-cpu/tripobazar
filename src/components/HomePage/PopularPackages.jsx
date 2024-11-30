@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import dubai from "../../assets/home/dubai.png";
-import newyork from "../../assets/home/newyorkk.jpg";
-import vietnam from "../../assets/home/vietnam.jpg";
-import singapore from "../../assets/home/Singapore.jpg";
-import Australia from "../../assets/home/australia.jpg";
+import dubai from "../../assets/home/dubai.webp";
+import newyork from "../../assets/home/newyorkk.webp";
+import vietnam from "../../assets/home/vietnam.webp";
+import singapore from "../../assets/home/Singapore.webp";
+import Australia from "../../assets/home/australia.webp";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 

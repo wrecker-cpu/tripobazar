@@ -105,7 +105,9 @@ export default function SideHamBurgerMenu({
                 </button>
               </Link>
             )}
-            <button className="text-xl" onClick={toggleMenu}>
+            <button
+            aria-label="Close RightSideBar"
+            className="text-xl" onClick={toggleMenu}>
               <IoCloseOutline className="w-8 h-8 text-gray-500" />
             </button>
           </div>

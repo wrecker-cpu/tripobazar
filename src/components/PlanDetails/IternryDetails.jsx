@@ -4,11 +4,16 @@ import { useSearch } from "../../../context/SearchContext";
 import { useWishlist } from "../../../context/WishListContext";
 import { IoIosArrowDown } from "react-icons/io";
 import CouponSvg from "../../../svgs/CouponSvg";
+import CarouselImageModal from "../../../utils/CarosalImageModal";
 
 function IternryDetails({ data }) {
   const [activeTab, setActiveTab] = useState("Plan Details");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [fadeState, setFadeState] = useState("fadeIn");
+  const [imgmodal, setImgModal] = useState({
+    isOpen: false,
+    img: [],
+  });
   const [selectedHotel, setSelectedHotel] = useState([]);
   const [customizeHotel, setCustomizeHotel] = useState({
     rooms: 1,
@@ -148,6 +153,13 @@ function IternryDetails({ data }) {
     return totalCost - discount;
   };
 
+  const openModal = (images) => {
+    setImgModal((prev) => ({ ...prev, isOpen: true, img: images }));
+  };
+  const closeModal = () => {
+    setImgModal((prev) => ({ ...prev, isOpen: false, img: [] }));
+  };
+
   const handleDropdownClick = (e) => {
     e.stopPropagation();
   };
@@ -224,18 +236,19 @@ function IternryDetails({ data }) {
                         <div
                           key={hdetail._id}
                           onClick={() => handleHotelArray(hotel, hdetail)}
-                          className={`w-full flex flex-col sm:flex-row items-center border-2 rounded-3xl hover:border-med-green ${
-                            selectedHotel.some(
-                              (item) => item._id === hdetail._id
-                            )
-                              ? "border-med-green"
-                              : ""
-                          } cursor-pointer p-2 space-y-2 sm:space-y-0`}
+                          className={`w-auto flex flex-col active:scale-[0.98] transition-transform ease-in-out duration-300 sm:flex-row mb-4 items-center border-2 rounded-3xl 
+    cursor-pointer p-2 space-y-2 sm:space-y-0 
+    ${
+      selectedHotel.some((item) => item._id === hdetail._id)
+        ? "border-med-green"
+        : "border-gray-200 hover:border-gray-300"
+    }`}
                         >
                           {/* Content */}
 
                           <img
-                            src="/src/assets/oneContinent.png"
+                            src={hdetail.hotelPhotoUrl[0]}
+                            onClick={() => openModal(hdetail.hotelPhotoUrl)}
                             alt="Hotel"
                             className="w-[30%] h-[30%] rounded-3xl sm:mr-4"
                           />
@@ -524,6 +537,13 @@ function IternryDetails({ data }) {
           </div>
         </div>
       </div>
+
+      {imgmodal.isOpen && (
+        <CarouselImageModal
+          images={imgmodal.img}
+          handleCloseModal={closeModal}
+        />
+      )}
     </div>
   );
 }

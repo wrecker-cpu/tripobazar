@@ -136,8 +136,9 @@ function MyProfile() {
         <div className="p-[5%] mb-3 text-center w-[103px] h-[103px] flex items-center justify-center font-semibold text-white rounded-[10px] customfradiant text-3xl">
           {profileFields?.FullName
             ? profileFields.FullName.split(" ")
+                .filter((word) => word) // Ensure word is not an empty string or undefined
                 .slice(0, 2)
-                .map((word) => word[0].toUpperCase())
+                .map((word) => word[0]?.toUpperCase()) // Check if word[0] exists
                 .join("")
             : "NN"}
         </div>

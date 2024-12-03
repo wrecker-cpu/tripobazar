@@ -34,7 +34,7 @@ export default function AdminHotel() {
     setModal({
       message: `Are you sure you want to delete this ${name}?`,
       onConfirm: () => {
-        deleteState(id); // Perform delete operation
+        deleteById(id); // Perform delete operation
         setModal(null); // Close modal
       },
       onCancel: () => setModal(null), // Close modal
@@ -82,7 +82,7 @@ export default function AdminHotel() {
             <AddHotel setIsAddingPackage={setIsAddingPackage} addNew={addNew} />
           ) : (
             <div>
-              {filteredData?.map((item, idx) => (
+              {filteredData?.reverse()?.map((item, idx) => (
                 <div key={idx}>
                   <ul className="flex flex-col">
                     <li className="relative flex items-center justify-between mb-3 text-med-green rounded-lg overflow-hidden transition-colors ease-in-out duration-300 bg-white p-4">

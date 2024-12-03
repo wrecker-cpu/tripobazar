@@ -71,7 +71,28 @@ export default function AddHotel({ setIsAddingPackage, addNew }) {
 
         {/* Main Photos */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Hotel Photos</h2>
+          <div className="flex items-center mb-4  gap-4">
+            <h2 className="text-2xl font-bold ">Hotel Photos</h2>
+            <button
+              type="button"
+              onClick={() => {
+                setData((prevData) => ({
+                  ...prevData,
+                  hotelPhotoUrl: [
+                    ...prevData.hotelPhotoUrl,
+                    "", // Add five empty photo inputs
+                    "",
+                    "",
+                    "",
+                    "",
+                  ],
+                }));
+              }}
+              className="bg-green-500 text-white px-4 py-2 rounded-lg"
+            >
+              Add 5 Photos
+            </button>
+          </div>
           {data?.hotelPhotoUrl?.map((photo, index) => (
             <div key={index} className="flex items-center mb-4">
               <input

@@ -37,7 +37,7 @@ function App() {
   const shouldShowFooter = !hideFooterOnRoutes.includes(location.pathname);
 
   return (
-    <div className="bg-[#F8F8F8] font-poppins">
+    <div className="bg-[#F8F8F8] ">
       {shouldShowNavbar && <Navbar />}
       {/* Always show Navbar */}
       <Routes>

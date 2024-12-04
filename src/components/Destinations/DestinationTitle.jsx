@@ -14,7 +14,7 @@ export default function DestinationTitle() {
             <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-[4rem] mb-2 md:mb-1 font-extrabold">
               DESTINATIONS
             </h1>
-            <p className="text-[.7rem] em:text-sm sm:text-base md:text-lg font-light ">
+            <p className="text-sm sm:text-base md:text-lg font-light ">
               Discover your dream destination! Simply hover over the world map
               to select a region and explore alluring travel destinations.
             </p>

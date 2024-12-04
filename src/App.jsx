@@ -44,7 +44,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route element={<ProtectedRoute />}>
+        {/* <Route element={<ProtectedRoute />}> */}
           <Route path="/createprofile" element={<CreateProfile />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/aboutus/privacy-policy" element={<PrivacyPolicy />} />
@@ -67,7 +67,7 @@ function App() {
           />
           <Route path="/adminpanel/*" element={<AdminPanel />} />
           <Route path="/myprofile" element={<MyProfile />} />
-        </Route>
+        {/* </Route> */}
       </Routes>
       {/* Conditionally show the Footer based on the current route */}
       {shouldShowFooter && <Footer />}

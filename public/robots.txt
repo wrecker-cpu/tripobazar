@@ -7,5 +7,7 @@ Disallow: /myprofile
 
 
 Allow: /
+Allow: /destination/*
+Allow:/destination/:continent/:country/:state
 
 Sitemap: https://tripobazar.vercel.app/sitemap.xml

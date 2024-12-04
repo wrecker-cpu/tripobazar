@@ -11,10 +11,10 @@ export default function DestinationTitle() {
         </div>
         <section className="relative flex flex-row justify-between w-full h-56 md:h-96 sm:h-80 bg-[#012831]">
           <div className="flex flex-col justify-center items-start md:max-w-md h-full text-white px-4 sm:px-9">
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-[4rem]  font-extrabold">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-[4rem] mb-2 md:mb-1 font-extrabold">
               DESTINATIONS
             </h1>
-            <p className="text-[.7rem] em:text-sm sm:text-base md:text-lg font-light mt-2 md:mt-1">
+            <p className="text-[.7rem] em:text-sm sm:text-base md:text-lg font-light ">
               Discover your dream destination! Simply hover over the world map
               to select a region and explore alluring travel destinations.
             </p>

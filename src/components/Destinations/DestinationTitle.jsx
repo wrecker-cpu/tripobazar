@@ -24,6 +24,9 @@ export default function DestinationTitle() {
               src={image}
               alt="wth"
               className="object-contain w-full h-full"
+              loading="eager" // Ensures immediate loading
+              decoding="async" // Optimizes rendering
+              fetchpriority="high"
             />
           </div>
         </section>

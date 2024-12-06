@@ -231,7 +231,7 @@ function IternryDetails({ data }) {
                     <h4 className="font-semibold mb-2 text-sm sm:text-base">
                       {hotel.location}
                     </h4>
-                    {hotel.hotelDetails.map((hdetail) => {
+                    {hotel?.hotelDetails.map((hdetail) => {
                       return (
                         <div
                           key={hdetail._id}
@@ -247,11 +247,18 @@ function IternryDetails({ data }) {
                           {/* Content */}
 
                           <img
-                            src={hdetail.hotelPhotoUrl[0]}
-                            onClick={() => openModal(hdetail.hotelPhotoUrl)}
+                            src={
+                              hdetail?.hotelPhotoUrl?.[0] ||
+                              ""
+                            } 
+                            onClick={() =>
+                              hdetail?.hotelPhotoUrl &&
+                              openModal(hdetail.hotelPhotoUrl)
+                            } 
                             alt="Hotel"
                             className="w-[30%] h-[30%] rounded-3xl sm:mr-4"
                           />
+
                           <div className="flex-1">
                             <p className="font-semibold text-sm sm:text-base">
                               {hdetail.hotelName}

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { Route, Routes, useParams } from "react-router-dom";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 import DestinationTitle from "./DestinationTitle";
 import SubNavsDestination from "./SubNavsDestination";
-
 import AllContinent from "./AllContinent";
 import OneContinent from "./OneContinent/OneContinent";
 import useFetch from "../../../hooks/useFetch";

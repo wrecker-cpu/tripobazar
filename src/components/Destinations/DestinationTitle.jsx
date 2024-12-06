@@ -5,7 +5,7 @@ import image from "../../assets/destination/map.webp";
 export default function DestinationTitle() {
   return (
     <div className="relative z-10">
-      <div className="bg-white">
+      <div >
         <div className="w-[90%] mx-auto  py-2">
           <BreadCrumbsLink />
         </div>
@@ -24,9 +24,7 @@ export default function DestinationTitle() {
               src={image}
               alt="wth"
               className="object-contain w-full h-full"
-              loading="eager" // Ensures immediate loading
-              decoding="async" // Optimizes rendering
-              fetchpriority="high"
+            
             />
           </div>
         </section>

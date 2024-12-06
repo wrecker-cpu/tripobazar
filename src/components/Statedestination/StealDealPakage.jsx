@@ -97,12 +97,12 @@ export default function StealDealPakage() {
 
             {/* Location and Price Info */}
             <div className="mt-5">
-              <h3 className="text-3xl md:text-5xl mb-4 md:mb-5 mt-7 font-bold">
+              <p className="text-3xl md:text-5xl mb-4 md:mb-5 mt-7 font-bold">
                 {location}
                 <span className="text-gray-600 text-base md:text-xl font-medium">
                   ,{country}
                 </span>
-              </h3>
+              </p>
               <div className="flex flex-row justify-center gap-4 mb-2 ew:mb-4 md:mb-3 max-w-lg mx-auto">
                 <p className="text-gray-600 text-sm md:text-lg whitespace-nowrap rounded-lg bg-[#f8f8f8] font-medium p-4">
                   8 Days 7 Nights

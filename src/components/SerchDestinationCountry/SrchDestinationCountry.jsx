@@ -86,7 +86,7 @@ function SrchDestinationCountry() {
         </div>
       )}
       <div className="w-full h-full relative">
-        <img src={image} className="w-full  h-full object-contain" />
+        <img src={image} alt="main-Picture" className="w-full  h-full object-contain" />
 
         <div className="absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <div className="w-full flex items-center justify-center">

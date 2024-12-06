@@ -86,7 +86,13 @@ function SrchDestinationCountry() {
         </div>
       )}
       <div className="w-full h-full relative">
-        <img src={image} alt="main-Picture" className="w-full  h-full object-contain" />
+        <img
+          src={image}
+          alt="main-Picture"
+          className="w-full h-full object-contain"
+          loading="eager" // Forces immediate loading
+          fetchpriority="high" // Prioritizes this image
+        />
 
         <div className="absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <div className="w-full flex items-center justify-center">
@@ -131,7 +137,7 @@ function SrchDestinationCountry() {
                 </div>
                 {(searchData.destination || filteredDestinations.length > 0) &&
                   dropdownVisible && (
-                    <ul className="mt-4 absolute bg-[#f8f8f8] rounded-md p-4 w-full z-20">
+                    <ul className="mt-4 absolute bg-[#f8f8f8] rounded-md p-4 min-h-[10px] w-full z-20">
                       {filteredDestinations.map((destination, index) => (
                         <li
                           key={index}

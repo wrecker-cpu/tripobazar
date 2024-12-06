@@ -112,12 +112,14 @@ function AllContinent({ data, loading }) {
                 <div className="flex items-center mb-3 mt-6 sm:mt-1 space-x-2 z-20 relative">
                   <button
                     onClick={scrollLeft}
+                    aria-label="Scroll left in featured Continent carousel"
                     className="p-2 text-white bg-black bg-opacity-50 rounded hover:bg-opacity-70"
                   >
                     <FaChevronLeft />
                   </button>
                   <button
                     onClick={scrollRight}
+                    aria-label="Scroll right in featured Continent carousel"
                     className="p-2 text-white bg-black bg-opacity-50 rounded hover:bg-opacity-70"
                   >
                     <FaChevronRight />
@@ -160,6 +162,7 @@ function AllContinent({ data, loading }) {
                             : "text-white"
                         }`}
                         onClick={(e) => toggleHeart(e, card._id)}
+                        aria-label="Wishlist icon"
                       >
                         <FaHeart />
                       </button>

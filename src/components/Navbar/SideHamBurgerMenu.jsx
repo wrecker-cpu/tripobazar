@@ -6,6 +6,7 @@ import { Destination } from "./DestinationAccordionData";
 
 import MultiDesitinationDropdown from "./MultiDesitinationDropdown";
 import MultilevelDropDown from "./MultiLevelDropDown";
+import HomeLogoSvg from "../../../svgs/HomeLogo";
 
 export default function SideHamBurgerMenu({
   toggleMenu,
@@ -82,14 +83,8 @@ export default function SideHamBurgerMenu({
         <div className="w-[98%] mx-auto h-full flex flex-col">
           {/* Header Section */}
           <div className="flex justify-between mt-5 px-3 items-center">
-            <Link to={"/"}>
-              <img
-                src="https://trippobazaar.com/wp-content/uploads/2024/07/trippo_logo.png"
-                alt="Logo"
-                aria-label="Logo"
-                className="h-11 cursor-pointer"
-                onClick={toggleMenu}
-              />
+            <Link to={"/"} aria-label="Redirects to Homepage">
+              <HomeLogoSvg />
             </Link>
             {userData ? (
               <button
@@ -106,8 +101,10 @@ export default function SideHamBurgerMenu({
               </Link>
             )}
             <button
-            aria-label="Close RightSideBar"
-            className="text-xl" onClick={toggleMenu}>
+              aria-label="Close RightSideBar"
+              className="text-xl"
+              onClick={toggleMenu}
+            >
               <IoCloseOutline className="w-8 h-8 text-gray-500" />
             </button>
           </div>
@@ -133,14 +130,16 @@ export default function SideHamBurgerMenu({
           </div>
 
           {/* Footer Section */}
-          <div className="flex justify-start gap-3 py-4 px-3">
-            <Link to={"/searchpage"}>
-              <button 
-              aria-label="Search"
-              className="text-sm border-[1px] border-[#012831] rounded-full py-2 px-[10px]">
-                <FaSearch />
+          <div className="flex items-center justify-start gap-3 py-4 px-3">
+            <Link to="/searchpage">
+              <button
+                aria-label="Search"
+                className="w-12 h-12 border-[1px] border-[#012831] rounded-full flex justify-center items-center"
+              >
+                <FaSearch className="text-base" />
               </button>
             </Link>
+
             <Link to={"/contactus"}>
               <button className="bg-med-green text-white px-4 h-9 rounded-md">
                 Contact Us

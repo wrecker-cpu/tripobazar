@@ -1,6 +1,5 @@
 // src/components/Navbar.jsx
 
-import Logo from "../../assets/Logo.svg";
 import { useEffect, useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa"; // Importing icons
 import HamburgerSvg from "../../../svgs/HamburgerSvg";
@@ -13,6 +12,7 @@ import MenuSvg from "../../../svgs/MenuSvg";
 
 import TransitionLink from "../../../utils/TransitionLink";
 import { Destination, NavbarData } from "./DestinationAccordionData";
+import HomeLogoSvg from "../../../svgs/HomeLogo";
 
 const Navbar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -109,17 +109,18 @@ const Navbar = () => {
                 </button>
               </Link>
             )}
-            <div className="flex flex-row whitespace-nowrap justify-between gap-6">
+            <div className="flex flex-row whitespace-nowrap items-center justify-between gap-6">
               <div className="relative">
                 <button className="flex text-sm uppercase justify-center items-center">
-                  <TransitionLink to="/destination">
+                  <TransitionLink to="/destination" className="px-2 py-2">
                     Destinations
                   </TransitionLink>
                   <IoIosArrowDown
                     onClick={() => toggleDestinations("dest")}
-                    className="w-5 pl-1 text-med-green h-5"
+                    className="w-5 h-5 ml-2 text-med-green"
                   />
                 </button>
+
                 <div
                   ref={(el) => (downRef.current["dest"] = el)}
                   style={{
@@ -174,7 +175,7 @@ const Navbar = () => {
                     className="flex text-sm uppercase justify-center items-center"
                   >
                     {item.title}
-                    <IoIosArrowDown className="w-5 pl-1 text-med-green h-5" />
+                    <IoIosArrowDown className="w-5 h-5 ml-2 text-med-green " />
                   </button>
                   <div
                     ref={(el) => (downRef.current[idx] = el)}
@@ -206,14 +207,10 @@ const Navbar = () => {
           </div>
 
           {/* Center - Logo (always centered) */}
-          <TransitionLink to={"/"}>
+          <TransitionLink to={"/"} aria-label="Go to homepage">
             {" "}
             <div className="flex-grow flex justify-start md:justify-end emd:justify-center">
-              <img
-                src={Logo}
-                alt="Logo"
-                className="h-11 pr-0 md:pr-10 emd:pr-0 cursor-pointer"
-              />
+              <HomeLogoSvg />
             </div>
           </TransitionLink>
 
@@ -227,13 +224,12 @@ const Navbar = () => {
             </TransitionLink>
             <TransitionLink
               to={"/traveltips"}
-
               className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "
             >
               TRAVEL TIPS
             </TransitionLink>
             <a
-              href="/offers" 
+              href="/offers"
               className="font-poppins text-[.8rem] font-normal relative inline-block transition duration-300 ease-in-out hover:text-green-500 "
             >
               OFFERS
@@ -270,6 +266,7 @@ const Navbar = () => {
           <button
             className="emd:hidden text-med-green mt-2"
             onClick={toggleMenu}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             <HamburgerSvg />
           </button>

@@ -49,17 +49,17 @@ function Footer() {
         <div className="flex flex-col w-full max-w-sm md:w-[25%] gap-0 md:gap-2 text-sm text-center md:text-start">
           {/* Contact Information */}
           <div className="mb-8">
-            <h4 className="text-med-green mb-3 font-semibold">Contact Us</h4>
+            <p className="text-med-green mb-3 font-semibold">Contact Us</p>
             <p className="mb-1">contact@trippobazzar.com</p>
             <p>+91 9999999999 | +91 88888888888</p>
           </div>
 
           {/* Subscribe Section */}
           <div className="mb-2">
-            <h4 className="text-med-green mr-1 font-semibold">
+            <p className="text-med-green mr-1 font-semibold">
               Subscribe
               <span className="text-gray-700"> to get exclusive deals</span>
-            </h4>
+            </p>
           </div>
 
           {/* Search Bar and Button */}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import dalLek from "/bg-home.webp?url";
+import dalLekFull from "/bg-home.webp?url";
+import dalLekSmall from "/bg-home-small.webp?url";
 import discoverOne from "../../assets/home/Discover-1.svg";
 import FilterSvg from "../../../svgs/FilterSvg/index";
 import DatePicker from "react-datepicker";
@@ -97,11 +98,20 @@ export default function DiscoverNewHorizon() {
   return (
     <section className="relative">
       <div className="w-full h-[50vh] sm:h-full md:h-[600px] sticky z-10 top-0 md:relative">
-        <img
+        {/* <img
           className="w-full h-full object-cover"
           src={dalLek}
           alt="Background"
-        />
+        /> */}
+         <img
+    className="w-full h-full object-cover"
+    srcSet={` 
+      ${dalLekSmall} 480w, 
+      ${dalLekFull} 1980w
+    `}
+    src={dalLekFull}  // Fallback if srcSet is not supported
+    alt="Background"
+  />
         <div className="absolute bottom-80 md:left-10 lg:left-[4.2rem] hidden md:flex items-center">
           <img src={discoverOne} alt="Logo" className="h-5 mr-2" />
         </div>

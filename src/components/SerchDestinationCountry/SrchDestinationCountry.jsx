@@ -89,9 +89,12 @@ function SrchDestinationCountry() {
         <img
           src={image}
           alt="main-Picture"
-          className="w-full h-full object-contain"
-          loading="eager" // Forces immediate loading
-          fetchpriority="high" // Prioritizes this image
+          className="w-full h-auto object-contain"
+          loading="eager"
+          fetchpriority="high"
+          width="1920" // Specify width
+          height="1080" // Specify height
+          style={{ objectFit: "contain" }} // Make sure the image scales to fit while maintaining aspect ratio
         />
 
         <div className="absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">

@@ -13,14 +13,14 @@ function SubNavofViewall() {
       <div className="max-w-7xl mx-auto px-0 em:px-4 py-4">
         <ul className="flex  flex-row items-start overflow-x-scroll md:items-center scrollbar-hide px-4 sm:justify-center text-[.7rem] em:text-sm uppercase leading-6 font-normal  gap-8">
           {sections.map((item, idx) => (
-            <button
+            <li
               key={idx}
-              className={`text-gray-500 em:py-0 py-2   em:border-b-0 ${
+              className={`text-gray-500 em:py-0 py-2 cursor-pointer em:border-b-0 ${
                 idx === sections.length - 1 ? "border-b-0" : "border-b-0"
               }  em:w-auto  w-full whitespace-nowrap hover:text-med-green`}
             >
               {item}
-            </button>
+            </li>
           ))}
         </ul>
       </div>

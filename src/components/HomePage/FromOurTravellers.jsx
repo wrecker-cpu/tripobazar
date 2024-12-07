@@ -38,7 +38,7 @@ export default function FromOurTravellers() {
                     <FaStar key={i} className="text-blue-500" />
                   ))}
                 </div>
-                <p className="text-gray-700 text-center text-[.7rem] font-normal mb-4">
+                <p className="text-gray-700 text-center text-[12px] sm:text-[.7rem] font-normal mb-4">
                   {review.text}
                 </p>
               </div>

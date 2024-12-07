@@ -24,7 +24,7 @@ function SubNavbar({ sections }) {
         <p className="pb-2 italic underline font-medium em:hidden block">
           Sub Menus
         </p>
-        <ul className="flex flex-col em:flex-row items-start  em:items-center justify-center text-[.7rem] em:text-sm uppercase leading-6 font-normal  em:space-x-8">
+        <ul className="flex flex-col em:flex-row items-start  em:items-center justify-center text-[12px] sm:text-[.7rem] em:text-sm uppercase leading-6 font-normal  em:space-x-8">
           {sections.map((item, idx) => (
             <button
               key={idx}

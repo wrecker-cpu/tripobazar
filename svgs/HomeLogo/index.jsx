@@ -3,8 +3,8 @@ import React from "react";
 export default function HomeLogoSvg() {
   return (
     <svg
-      width="90"
-      height="68"
+      width="70"
+      height="48"
       viewBox="0 0 90 68"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

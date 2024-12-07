@@ -207,11 +207,12 @@ const Navbar = () => {
           </div>
 
           {/* Center - Logo (always centered) */}
-          <TransitionLink to={"/"} aria-label="Go to homepage">
-            {" "}
-            <div className="flex-grow flex justify-start md:justify-end emd:justify-center">
-              <HomeLogoSvg />
-            </div>
+          <TransitionLink
+            to="/"
+            aria-label="Go to homepage"
+            className="flex-grow flex justify-start md:justify-end emd:justify-center"
+          >
+            <HomeLogoSvg />
           </TransitionLink>
 
           {/* Right Side - Nav Links and Search Bar (visible on medium and larger screens) */}
@@ -264,7 +265,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Toggle Button (Hamburger Icon) */}
           <button
-            className="emd:hidden text-med-green mt-2"
+            className="emd:hidden text-med-green mt-2 p-4"
             onClick={toggleMenu}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >

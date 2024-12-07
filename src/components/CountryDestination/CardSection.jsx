@@ -84,6 +84,7 @@ const CardSection = ({ data, error }) => {
                   liked.includes(card._id) ? "text-pink-500" : "text-white"
                 }`}
                 onClick={(e) => toggleHeart(e, card._id)}
+                aria-label="Wishlist The State"
               >
                 <FaHeart />
               </button>

@@ -19,14 +19,14 @@ function SubNavbar({ sections }) {
   };
 
   return (
-    <nav className="bg-white sticky top-[74px] z-10 shadow-inner mb-8">
+    <nav className="bg-white sticky top-[80px] z-10 shadow-inner mb-8">
       <div className="max-w-7xl mx-auto px-4 py-4">
         <p className="pb-2 italic underline font-medium em:hidden block">
           Sub Menus
         </p>
-        <ul className="flex flex-col em:flex-row items-start  em:items-center justify-center text-[.7rem] em:text-sm uppercase leading-6 font-normal  em:space-x-8">
+        <ul className="flex flex-col em:flex-row items-start  em:items-center justify-center text-[12px] sm:text-[.7rem] em:text-sm uppercase leading-6 font-normal  em:space-x-8">
           {sections.map((item, idx) => (
-            <button
+            <li
               key={idx}
               onClick={() => {
                 handleScrollTo(item.ref);
@@ -36,7 +36,7 @@ function SubNavbar({ sections }) {
               }  em:w-auto  w-full hover:text-black`}
             >
               {item.label}
-            </button>
+            </li>
           ))}
         </ul>
       </div>

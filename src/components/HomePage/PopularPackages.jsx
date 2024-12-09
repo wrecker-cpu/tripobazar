@@ -126,19 +126,22 @@ export default function PopularPackages() {
             </div>
 
             {/* Additional Info Section */}
-            <div className="absolute rounded-b-lg md:rounded-br-lg md:rounded-b-none bottom-0 left-0 w-full  mt-4  border-t border-gray-200 bg-[#EDF7F9]">
-              <p className="mt-8 px-2 text-sm md:text-base xlg:text-lg tracking-wide">
+            <div className="absolute rounded-b-lg md:rounded-br-lg md:rounded-b-none bottom-0 left-0 w-full mt-4 border-t border-gray-200 bg-[#EDF7F9]">
+              <p className="mt-8 px-4 text-sm md:text-base xlg:text-lg tracking-wide">
                 Our travel plans include all facilities as per your custom
                 requirements.
               </p>
-              <p className="font-semibold text-base xlg:text-lg tracking-wide mt-2">
+              <p className="font-semibold text-base xlg:text-lg tracking-wide mt-4 px-4">
                 {description}
               </p>
-              <button className="border-[.1rem] mt-7 mb-8 rounded-lg text-med-green border-[#012831] w-2/5 font-poppins text-[.8rem] font-medium px-2 py-2">
-                <Link className="w-full h-full block" to={destination}>
+              <div className="flex justify-center mt-4">
+                <Link
+                  to={destination}
+                  className="w-3/5 px-4 py-3 text-[.9rem] font-medium font-poppins rounded-lg border border-[#012831] text-med-green text-center"
+                >
                   View All
                 </Link>
-              </button>
+              </div>
             </div>
           </div>
         </div>

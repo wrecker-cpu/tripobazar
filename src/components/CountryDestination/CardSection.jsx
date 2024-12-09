@@ -3,6 +3,7 @@ import { FaHeart } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { useWishlist } from "../../../context/WishListContext";
 const CardSection = ({ data, error }) => {
+  
   const { continent, country } = useParams();
   const navigate = useNavigate();
 

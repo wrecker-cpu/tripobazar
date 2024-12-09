@@ -8,6 +8,8 @@ import DatePicker from "react-datepicker";
 import { jwtDecode } from "jwt-decode";
 import { IoIosArrowDown } from "react-icons/io";
 import AddTravellers from "./AddTravellers";
+import LikedCounty from "./LikedCounty";
+import Coupns from "./Coupns";
 
 function MyProfile() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,6 +18,8 @@ function MyProfile() {
   const profileRef = useRef(null);
   const loginDetailsRef = useRef(null);
   const savedTravelersRef = useRef(null);
+  const mycoupnsRef = useRef(null);
+  const bucketlistRef = useRef(null)
   const [extraTravellers, setExtraTravellers] = useState(
     userDetails?.ExtraTravellers || []
   );
@@ -119,6 +123,16 @@ function MyProfile() {
       label: "Saved Travelers",
       ref: savedTravelersRef,
     },
+    {
+      id: "myCoupons",
+      label: "My Coupons",
+      ref:mycoupnsRef,
+    },
+    {
+      id: "bucketlist",
+      label: "Bucket List",
+      ref:bucketlistRef,
+    },
   ];
 
   const handleScrollTo = (ref) => {
@@ -132,7 +146,7 @@ function MyProfile() {
   return (
     <div className="md:flex max-w-[1920px] mx-auto p-0 m-0 h-auto w-full bg-tranparent">
       {/* Left Sidebar */}
-      <div className="md:w-[20%]  md:sticky top-[78px] shadow-sm md:shadow-none h-full md:mx-8 md:mt-6  z-10 md:block w-full md:rounded-xl bg-white p-4 ">
+      <div className="md:w-[20%]  md:sticky top-[8px] shadow-sm md:shadow-none h-full md:mx-8 md:mt-6  z-10 md:block w-full md:rounded-xl bg-white p-4 ">
         <div className="p-[5%] mb-3 text-center w-[103px] h-[103px] flex items-center justify-center font-semibold text-white rounded-[10px] customfradiant text-3xl">
           {profileFields?.FullName
             ? profileFields.FullName.split(" ")
@@ -169,6 +183,7 @@ function MyProfile() {
       </div>
 
       {/* Right Content */}
+      <div>
       <div className="flex-1 p-6  md:mt-6 md:rounded-l-xl bg-white  h-aouto  space-y-12">
         {/* Profile Section */}
 
@@ -415,7 +430,15 @@ function MyProfile() {
           setExtraTravellers={setExtraTravellers}
         />
       )}
+      <Coupns ref={mycoupnsRef} />
+<LikedCounty ref={bucketlistRef}/>
     </div>
+    </div>
+
+
+
+
+
   );
 }
 

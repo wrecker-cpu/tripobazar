@@ -1,6 +1,7 @@
 import React from "react";
 import BreadCrumbsLink from "../../../utils/BreadCrumbsLink";
-import image from "../../../src/assets/TravelTips/img1.webp";
+import largeImage from "../../../src/assets/TravelTips/img1.webp";
+import smallImage from "../../../src/assets/TravelTips/img1-small.webp";
 import { IoSearch } from "react-icons/io5";
 import FilterSvg from "../../../svgs/FilterSvg";
 function TravelTipsTitle() {
@@ -12,7 +13,16 @@ function TravelTipsTitle() {
       <section className="">
         <div className="h-[90%] relative">
           {/* Image */}
-          <img src={image} alt="wth" className="object-contain w-full h-full" />
+
+          <picture>
+            <source media="(max-width: 768px)" srcSet={smallImage} />
+            <source media="(min-width: 769px)" srcSet={largeImage} />
+            <img
+              src={largeImage}
+              alt="Background"
+              className="w-full h-full object-contain"
+            />
+          </picture>
 
           {/* Search Bar */}
           <div className="absolute top-10 left-0 w-full flex justify-center ">

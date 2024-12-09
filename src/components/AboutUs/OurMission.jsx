@@ -10,9 +10,9 @@ function OurMission({OurMissionRef}) {
           className=" lg:max-w-lg h-full w-[90%] mx-auto md:w-1/2 mb-10 md:mb-0 flex flex-col justify-center 
           text-center md:text-left"
         >
-          <h3 className="text-2xl md:text-[40px]  emd:text-[60px] font-bold leading-[58px] md:mb-6 mmd:mb-9">
+          <p className="text-2xl md:text-[40px]  emd:text-[60px] font-bold leading-[58px] md:mb-6 mmd:mb-9">
             Our Mission
-          </h3>
+          </p>
           <p className="text-gray-700 font-normal emd:leading-9 text-sm md:text-base emd:text-lg">
             We are on a mission to enrich your life through transformative
             travel experiences. Our commitment is to empower you with

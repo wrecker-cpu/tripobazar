@@ -146,17 +146,18 @@ export const WishlistProvider = ({ children }) => {
     }
   };
 
-  const addStateToWishlist = (stateId) => {
+  const addStateToWishlist = async (stateId) => {
     const isStateInWishlist = userDetails.WishListStates.some((wishlist) => {
       if (typeof wishlist === "object" && wishlist._id) {
         return wishlist._id === stateId;
       }
       return wishlist === stateId;
     });
-
+  
     if (!isStateInWishlist) {
       const updatedStates = [...userDetails.WishListStates, stateId];
-      updateUserWishlist(userDetails.WishListCountries, updatedStates);
+      // Wait for the wishlist update operation to complete
+      await updateUserWishlist(userDetails.WishListCountries, updatedStates);
     } else {
       const updatedStates = userDetails.WishListStates.filter(
         (wishlistState) => {
@@ -166,9 +167,11 @@ export const WishlistProvider = ({ children }) => {
           return wishlistState !== stateId;
         }
       );
-      updateUserWishlist(userDetails.WishListCountries, updatedStates);
+      // Wait for the wishlist update operation to complete
+      await updateUserWishlist(userDetails.WishListCountries, updatedStates);
     }
   };
+  
 
   return (
     <WishlistContext.Provider

@@ -3,12 +3,11 @@ import { FaHeart } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { useWishlist } from "../../../context/WishListContext";
 const CardSection = ({ data, error }) => {
-  
   const { continent, country } = useParams();
   const navigate = useNavigate();
 
   const [liked, setLiked] = useState(Array(data?.length || 0).fill([])); // Initial state for heart toggle
-  const { addStateToWishlist, userDetails } = useWishlist();
+  const { addStateToWishlist, userDetails, verifyUser } = useWishlist();
 
   useEffect(() => {
     if (!data || !userDetails?.WishListStates) return;
@@ -36,6 +35,8 @@ const CardSection = ({ data, error }) => {
     });
 
     addStateToWishlist(id);
+
+    verifyUser();
   };
 
   if (error) {

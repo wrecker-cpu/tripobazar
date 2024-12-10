@@ -14,7 +14,7 @@ function AllContinent({ data, loading }) {
   const [liked, setLiked] = useState(Array(data?.length || 0).fill([])); // Initial state for heart toggle
   const carouselRef = useRef(null); // Reference for the carousel container
   const navigate = useNavigate();
-  const { addCountryToWishlist, userDetails } = useWishlist();
+  const { addCountryToWishlist, userDetails, verifyUser } = useWishlist();
 
   useEffect(() => {
     if (!data || !userDetails?.WishListCountries) return;
@@ -45,6 +45,8 @@ function AllContinent({ data, loading }) {
     });
 
     addCountryToWishlist(id);
+
+    verifyUser();
   };
 
   const scrollLeft = () => {

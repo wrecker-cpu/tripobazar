@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+
 import SearchCompo from "./SearchCompo";
 import Itinerary from "./Itinerary";
 import SubNavPlanDetail from "./SubNavPlanDetail";
@@ -8,8 +9,13 @@ import BreadCrumbsLink from "../../../utils/BreadCrumbsLink";
 import useFetch from "../../../hooks/useFetch";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader";
-
+import Policies from "./Policies";
+import TrmsConditions from "./TrmsConditions";
+const sections = ["ITINERARY DETAILS","TERMS & CONDITIONS"];
 function PlanDetails() {
+ 
+  const [activeSection, setActiveSection] = useState("ITINERARY DETAILS"); // Default active section
+
   const { id } = useParams();
 
   const { data, loading } = useFetch(
@@ -28,8 +34,32 @@ function PlanDetails() {
       </div>
       <SearchCompo data={data}/>
       <Itinerary data={data} />
-      <SubNavPlanDetail />
-      <IternryDetails data={data} />
+  
+      {/* <SubNavPlanDetail /> */}
+      <nav className="bg-white  mb-2 sticky z-10 top-[80px]">
+      <div className="max-w-7xl mx-auto px-0 em:px-4 py-4">
+        <ul className="flex  flex-row items-start overflow-x-scroll md:items-center scrollbar-hide px-4 sm:justify-center text-[.7rem] em:text-sm uppercase leading-6 font-normal  gap-8">
+          {sections.map((item, idx) => (
+            <button
+            key={idx}
+            className={`text-gray-500 em:py-0 py-2 whitespace-nowrap hover:text-med-green ${
+              activeSection === item
+                ? "text-med-green border-b-2 border-med-green"
+                : "text-gray-500"
+            }`}
+            onClick={() => setActiveSection(item)} // Update active section on click
+          >
+              {item}
+            </button>
+          ))}
+        </ul>
+      </div>
+    </nav>
+
+        {activeSection === "ITINERARY DETAILS" && (<IternryDetails data={data} />     )}
+   
+        {activeSection === "TERMS & CONDITIONS" && ( <TrmsConditions/>     )}
+
       <FromOurTravellers />
     </div>
   );

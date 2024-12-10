@@ -1,5 +1,5 @@
 import React from "react";
-const sections = ["ITINERARY DETAILS", "POLICIES"];
+const sections = ["ITINERARY DETAILS", "POLICIES","TERMS & CONDITIONS"];
 function SubNavPlanDetail() {
   return (
     <nav className="bg-white  mb-2 sticky z-10 top-[80px]">

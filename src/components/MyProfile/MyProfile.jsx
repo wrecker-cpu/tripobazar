@@ -400,7 +400,7 @@ function MyProfile() {
                 </li>
               ))
             ) : (
-              <p>No Travellers. Add Travellers.</p>
+              <li>No Travellers. Add Travellers.</li>
             )}
           </ul>
         </div>

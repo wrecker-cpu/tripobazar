@@ -13,7 +13,7 @@ function SubNavTravelTips({ descriptionRefs, sections }) {
       <div className="max-w-7xl mx-auto px-4  md:py-4">
         <ul className="hidden md:flex flex-row whitespace-nowrap  items-center justify-center text-[.7rem] md:text-sm uppercase leading-6 font-normal  md:space-x-8">
           {sections.map((item, idx) => (
-            <button
+            <li
               onClick={() => handleScrollToSection(idx)}
               key={idx}
               className={`text-gray-500 py-0  md:border-b-0 ${
@@ -21,7 +21,7 @@ function SubNavTravelTips({ descriptionRefs, sections }) {
               }  w-auto   hover:text-med-green`}
             >
               {item}
-            </button>
+            </li>
           ))}
         </ul>
       </div>

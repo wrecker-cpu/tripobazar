@@ -11,8 +11,10 @@ function SearchCompo({ data }) {
   const { searchData, setSearchData } = useSearch();
 
   const [isEditingDates, setIsEditingDates] = useState(false);
+  const [isEditingGuests, setIsEditingGuests] = useState(false);
 
   const toggleDateEdit = () => setIsEditingDates(!isEditingDates);
+  const toggleGuestEdit = () => setIsEditingGuests(!isEditingGuests);
 
   const updateSearchData = (field, value) => {
     setSearchData((prev) => ({ ...prev, [field]: value }));
@@ -134,16 +136,39 @@ function SearchCompo({ data }) {
           <p className="text-gray-500 font-medium tracking-wider mb-1">
             Guests
           </p>
-
-          <div className="flex items-center gap-3">
-            <FaUser className="text-med-green mb-1 text-xl" />
-            <p className="text-lg">{searchData.guests || 1} guests</p>
+          <div
+            className={`flex items-center ${
+              isEditingGuests ? "gap-0" : "gap-3"
+            }`}
+          >
+            {isEditingGuests ? (
+              <input
+                type="number"
+                min="1"
+                className="w-20 text-lg border rounded px-2"
+                value={searchData.guests || 1}
+                onChange={(e) =>
+                  updateSearchData("guests", parseInt(e.target.value, 10))
+                }
+              />
+            ) : (
+              <>
+                <FaUser className="text-med-green mb-1 text-xl" />
+                <p className="text-lg">{searchData.guests || 1} guests</p>
+              </>
+            )}
           </div>
         </div>
 
         {/* Search Button */}
         <div className="flex items-center justify-end">
-          <div className="cursor-pointer" onClick={toggleDateEdit}>
+          <div
+            className="cursor-pointer"
+            onClick={() => {
+              toggleGuestEdit();
+              toggleDateEdit();
+            }}
+          >
             <EditButtonSvg />
           </div>
         </div>

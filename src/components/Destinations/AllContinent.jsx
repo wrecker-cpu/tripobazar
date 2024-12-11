@@ -12,6 +12,7 @@ import SearchDestinationPage from "../SearchDestination/SearchDestinationPage";
 import { useWishlist } from "../../../context/WishListContext";
 function AllContinent({ data, loading }) {
   const [liked, setLiked] = useState(Array(data?.length || 0).fill([])); // Initial state for heart toggle
+  const scrollContainerRef = useRef([]);
   const carouselRef = useRef(null); // Reference for the carousel container
   const navigate = useNavigate();
   const { addCountryToWishlist, userDetails, verifyUser } = useWishlist();
@@ -61,6 +62,18 @@ function AllContinent({ data, loading }) {
     }
   };
 
+  const handleScrollTo = (index) => {
+    if (scrollContainerRef.current[index]) {
+      const element = scrollContainerRef.current[index];
+      const offset = 100; // Adjust this value to scroll a bit up (in pixels)
+
+      window.scrollTo({
+        top: element.offsetTop - offset,
+        behavior: "smooth",
+      });
+    }
+  };
+
   if ((loading === true, !data)) {
     return <Loader />;
   }
@@ -72,6 +85,7 @@ function AllContinent({ data, loading }) {
         {data?.map((item, idx) => (
           <section
             key={idx}
+            ref={(el) => (scrollContainerRef.current[idx] = el)} // Assign ref
             className="relative h-auto w-full overflow-hidden max-w-full"
           >
             {/* Background Image with dark overlay */}
@@ -86,10 +100,11 @@ function AllContinent({ data, loading }) {
 
             <div className="flex h-[820px] items-start relative z-0">
               {/* Dots */}
-              <div className="h-full w-[1px] flex flex-col justify-center items-center gap-[85px] bg-white absolute left-5 sm:left-10 md:left-20 z-20">
+              <div className="h-full w-[1px] cursor-pointer flex flex-col justify-center items-center gap-[85px] bg-white absolute left-5 sm:left-10 md:left-20 z-20">
                 {[...Array(6)].map((_, index) => (
                   <div
                     key={index}
+                    onClick={() => handleScrollTo(index)}
                     className="w-5 h-5 flex items-center justify-center border border-white rounded-full"
                   >
                     <div
@@ -129,53 +144,55 @@ function AllContinent({ data, loading }) {
                 </div>
 
                 {/* Carousel Section */}
-                <div
-                  ref={carouselRef}
-                  className="flex overflow-x-auto space-x-4 mt-10 sm:mt-16 md:mt-20 scrollbar-hide scroll-snap-x-mandatory"
-                  style={{ scrollSnapType: "x mandatory", width: "100%" }}
-                >
-                  {item?.Countries?.map((card, index) => (
-                    <div
-                      key={`${index}-1`} // Unique key for the first instance
-                      onClick={() =>
-                        navigate(
-                          `/destination/${item.ContinentName}/${card.CountryName}`
-                        )
-                      }
-                      className="relative h-[260px]  w-[350px] rounded-lg overflow-hidden shadow-lg flex-shrink-0 scroll-snap-align-start cursor-pointer"
-                    >
-                      {/* Image */}
-                      <img
-                        src={card.CountryPhotoUrl}
-                        alt={`Photo of ${card.CountryName}`}
-                        className="w-full h-[70%] md:h-[80%] object-cover"
-                      />
-
-                      {/* Top left tag */}
-                      <p className="absolute top-0 text-base left-0 bg-green-500 text-white px-3 py-2 rounded-br-md">
-                        ₹ {card?.States[0]?.Packages[0]?.price} onwards
-                      </p>
-
-                      {/* Heart icon */}
-                      <button
-                        className={`absolute top-2 right-2 text-2xl sm:text-3xl p-1 rounded-full ${
-                          liked.includes(card._id)
-                            ? "text-pink-500"
-                            : "text-white"
-                        }`}
-                        onClick={(e) => toggleHeart(e, card._id)}
-                        aria-label="Wishlist icon"
+                <div >
+                  <div
+                    ref={carouselRef}
+                    className="flex overflow-x-auto space-x-4 mt-10 sm:mt-16 md:mt-20 scrollbar-hide scroll-snap-x-mandatory"
+                    style={{ scrollSnapType: "x mandatory", width: "100%" }}
+                  >
+                    {item?.Countries?.map((card, index) => (
+                      <div
+                        key={`${index}-1`} // Unique key for the first instance
+                        onClick={() =>
+                          navigate(
+                            `/destination/${item.ContinentName}/${card.CountryName}`
+                          )
+                        }
+                        className="relative h-[260px]  w-[350px] rounded-lg overflow-hidden shadow-lg flex-shrink-0 scroll-snap-align-start cursor-pointer"
                       >
-                        <FaHeart />
-                      </button>
+                        {/* Image */}
+                        <img
+                          src={card.CountryPhotoUrl}
+                          alt={`Photo of ${card.CountryName}`}
+                          className="w-full h-[70%] md:h-[80%] object-cover"
+                        />
 
-                      {/* Bottom div */}
-                      <div className="bg-white h-[24%] rounded-b-lg md:h-[20%] text-lg sm:text-xl md:text-2xl text-black w-full px-3 py-2 flex justify-between items-center">
-                        <p>{card.CountryName}</p>
-                        <FaArrowRight className="text-md sm:text-lg" />
+                        {/* Top left tag */}
+                        <p className="absolute top-0 text-base left-0 bg-green-500 text-white px-3 py-2 rounded-br-md">
+                          ₹ {card?.States[0]?.Packages[0]?.price} onwards
+                        </p>
+
+                        {/* Heart icon */}
+                        <button
+                          className={`absolute top-2 right-2 text-2xl sm:text-3xl p-1 rounded-full ${
+                            liked.includes(card._id)
+                              ? "text-pink-500"
+                              : "text-white"
+                          }`}
+                          onClick={(e) => toggleHeart(e, card._id)}
+                          aria-label="Wishlist icon"
+                        >
+                          <FaHeart />
+                        </button>
+
+                        {/* Bottom div */}
+                        <div className="bg-white h-[24%] rounded-b-lg md:h-[20%] text-lg sm:text-xl md:text-2xl text-black w-full px-3 py-2 flex justify-between items-center">
+                          <p>{card.CountryName}</p>
+                          <FaArrowRight className="text-md sm:text-lg" />
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

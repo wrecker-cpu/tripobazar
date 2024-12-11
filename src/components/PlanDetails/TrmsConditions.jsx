@@ -1,34 +1,47 @@
-import React from 'react'
+import React from "react";
 
-function TrmsConditions() {
+function TrmsConditions({ data }) {
+  // Split the data by newlines
+  const content = data.split("\n");
+
+  if (
+    !data ||
+    content.length === 0 ||
+    content.every((line) => line.trim() === "")
+  ) {
+    return (
+      <div className="w-full h-auto px-7 py-4">
+        <p className="text-gray-500">No Terms and Condition Stated.</p>
+      </div>
+    );
+  }
+
   return (
-    <div className='w-full h-auto px-7 py-4'>
-     <p className='text-[#03B58B] font-semibold'>Travel Policy</p>
-    <p className='font-semibold'>1. Acceptance of Terms</p> <br></br>
-    <p className='mb-6 font-normal'>By using our website or mobile application, you acknowledge that you have read, 
-        understood, and agree to be bound by these terms and conditions.
-         If you do not agree with any part of these terms, please do not use our services.</p>
-         
+    <div className="w-full h-auto px-7 py-4">
+      {content.map((line, index) => {
+        // Trim leading and trailing spaces and check if the line contains '**' at both ends
+        const trimmedLine = line.trim();
 
-         <p className='font-semibold'>2. Booking Policy</p> <br></br>
-         <p className='mb-6 font-normal'>
-          <span className='font-semibold'> a.</span>  Booking Confirmation: All bookings are subject to availability and confirmation. Upon successful payment, you will receive a confirmation email with details of your reservation. Please review the details carefully and contact us immediately if any discrepancies are found.
-<br></br> <br></br>
-<span className='font-semibold'> b.</span>  Payment: We accept various payment methods, including credit cards and other secure payment gateways. Payments are processed securely, and your financial information is handled with the utmost confidentiality.
-<br></br> <br></br>
-<span className='font-semibold'> c.</span> Cancellation and Refund: Cancellation policies vary by service provider.
- Please review the specific cancellation policy associated with your booking. Refund eligibility 
-is determined based on the terms and conditions of the service provider.</p>
-<br></br>
+        if (trimmedLine.startsWith("**") && trimmedLine.endsWith("**")) {
+          return (
+            <h2 key={index} className="text-green-500 text-2xl font-bold">
+              {trimmedLine.slice(2, -2).trim()}{" "}
+            </h2>
+          );
+        }
 
-<p className='font-semibold'>3. User Responsibilities</p> <br></br>
-<p className='mb-6 font-normal'>
-          <span className='font-semibold'> a.</span>  Accurate Information: Users are responsible for providing accurate and complete information during the booking process. Any inaccuracies may result in the cancellation of your reservation.
-<br></br> <br></br>
-
-<span className='font-semibold'> b.</span> Account Security: Users are responsible for maintaining the confidentiality of their account information, including passwords. Any unauthorized use of your account should be reported immediately.</p>
+        // For normal lines, render them as paragraphs and add line breaks
+        return (
+          <p
+            key={index}
+            className={`${index !== content.length - 1 ? "mb-4" : ""}`}
+          >
+            {trimmedLine}
+          </p>
+        );
+      })}
     </div>
-  )
+  );
 }
 
-export default TrmsConditions
+export default TrmsConditions;

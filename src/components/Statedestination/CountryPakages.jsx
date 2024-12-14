@@ -59,7 +59,7 @@ function CountryPakages({ data, error, state, country, continent }) {
                 alt="Card Image"
                 className="w-full h-full object-cover rounded-t-lg"
               />
-              <p className="absolute text-xs sm:text-sm top-0 left-0 bg-[#2C9C48] text-white px-2 py-1 rounded">
+              <p className="absolute text-xs sm:text-base top-0 left-0 bg-[#2C9C48] text-white px-5 py-3 rounded">
                 Seasonal Offer
               </p>
             </div>

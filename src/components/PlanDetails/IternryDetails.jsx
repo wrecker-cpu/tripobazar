@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { MdStar, MdStarHalf, MdStarOutline } from "react-icons/md";
 import { useSearch } from "../../../context/SearchContext";
 import { useWishlist } from "../../../context/WishListContext";
 import { IoIosArrowDown } from "react-icons/io";
 import CouponSvg from "../../../svgs/CouponSvg";
-import CarouselImageModal from "../../../utils/CarosalImageModal";
 import Policies from "./Policies";
 import HotelsPlan from "./HotelsPlan";
+import CarosalImageModal from "../../../utils/CarosalImageModal";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function IternryDetails({ data }) {
+  const { id: pkdid } = useParams();
+  const { searchData } = useSearch();
+  const { userDetails } = useWishlist();
   const [activeTab, setActiveTab] = useState("Plan Details");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [fadeState, setFadeState] = useState("fadeIn");
@@ -29,8 +33,13 @@ function IternryDetails({ data }) {
     discountPercentage: 0,
     maxDiscount: 0,
   });
-  const { searchData } = useSearch();
-  const { userDetails } = useWishlist();
+  const [bookData, setBookData] = useState({
+    selectedHotels: [],
+    Pack_id: pkdid,
+    guests: searchData.guests,
+    coupon: "",
+    BookingAmount: "",
+  });
 
   const toggleDropdown = (id) => {
     if (selectedHotel.length > 0) {
@@ -199,6 +208,52 @@ function IternryDetails({ data }) {
     return totalCost - discount;
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Prepare the data for API call
+      const requestData = {
+        selectedHotels: [...selectedHotel],
+        Pack_id: pkdid,
+        guests: searchData.guests,
+        coupon: selectedCoupon,
+      };
+      console.log("this is requestdata", requestData);
+
+      // Make the API call to verify the amount
+      const response = await axios.post(
+        "https://tripobazar-backend.vercel.app/api/package/verifyAmount",
+        requestData
+      );
+
+      // Extract total price from response
+      const { totalPrice } = response.data;
+
+      console.log("Verified Total Price:", totalPrice);
+
+      // Update the bookData state with the verified total price
+      setBookData((prev) => ({
+        ...prev,
+        selectedHotels: [...prev.selectedHotels, ...selectedHotel],
+        guests: searchData.guests,
+        coupon: selectedCoupon,
+        BookingAmount: totalPrice, // Store the verified total price in the state
+      }));
+
+      // Handle successful verification (e.g., proceed to payment)
+    } catch (error) {
+      console.error("Error verifying amount:", error.message);
+
+      // Handle error response
+      if (error.response) {
+        console.error("Server Error:", error.response.data.message);
+      } else {
+        console.error("Unexpected Error:", error.message);
+      }
+    }
+  };
+
   const openModal = (images) => {
     setImgModal((prev) => ({ ...prev, isOpen: true, img: images }));
   };
@@ -212,14 +267,12 @@ function IternryDetails({ data }) {
 
   useEffect(() => {}, [customizeHotel]);
 
-  console.log(selectedHotel);
-
   return (
-    <div className="w-[90%] mx-auto bg-white flex flex-col lg:flex-row font-poppins">
+    <div className="w-full md:w-[90%] mx-auto bg-white flex flex-col lg:flex-row font-poppins">
       {/* Left Side */}
-      <div className="w-full lg:w-4/5 p-4">
+      <div className="w-full lg:w-4/5 p-4 ">
         {/* Navigation */}
-        <nav className="flex w-full gap-10 border-[.5px] rounded-lg pl-[28%] py-4  pb-2 mb-4 text-center text-sm sm:text-base">
+        <nav className="flex w-full gap-4 em:gap-10 border-[.5px] px-4 em:px-0 scrollbar-hide overflow-x-auto rounded-lg justify-start em:justify-center py-4 whitespace-nowrap  mb-4 text-center text-sm sm:text-base">
           {["Plan Details", "Hotel", "SightSeeing", "Policies"].map(
             (tab, tabIdx) => (
               <li
@@ -248,22 +301,26 @@ function IternryDetails({ data }) {
                   className="border-[.5px] px-4 py-4 rounded-lg"
                   key={dayIdx} // Use a unique field or fallback to the index
                 >
-                  <h3 className="text-lg leading-3 font-bold">
+                  <h3 className="text-base md:text-lg leading-6 md:leading-3 font-bold">
                     {day.dayTitle}
                   </h3>
                   <div className="border-t mt-3 mb-4"></div>
-                  <div className="grid grid-cols-2 sm:grid-cols-6 mb-4 gap-2">
-                    {day?.photos?.map((img, photoidx) => (
-                      <img
-                        key={`${img}-${photoidx}`} // Combine img and index for uniqueness
-                        src="/src/assets/oneContinent.png"
-                        alt={`Day ${dayIdx + 1} img ${photoidx + 1}`}
-                        className="rounded-md w-full"
-                      />
-                    ))}
+                  <div>
+                    {/* Grid for sm and above */}
+                    <div className="grid grid-cols-2 sm:grid-cols-6 mb-4 gap-2">
+                      {day?.photos?.map((img, photoidx) => (
+                        <img
+                          key={`${img}-${photoidx}`} // Combine img and index for uniqueness
+                          src="/src/assets/oneContinent.png"
+                          alt={`Day ${dayIdx + 1} img ${photoidx + 1}`}
+                          className="rounded-md w-full"
+                        />
+                      ))}
+                    </div>
                   </div>
+
                   {day?.dayDetails?.split("\n").map((line, idx) => (
-                    <span key={idx}>
+                    <span className="sm:text-base text-sm " key={idx}>
                       {line}
                       <br />
                     </span>
@@ -343,18 +400,21 @@ function IternryDetails({ data }) {
               <IoIosArrowDown />
             </span>
           </p>
-          <button className="bg-med-green text-lg text-white w-full  py-4 rounded-xl">
+          <button
+            onClick={handleSubmit}
+            className="bg-med-green text-lg text-white w-full  py-4 rounded-xl"
+          >
             Confirm and Book
           </button>
         </div>
 
         {/* Discount Section */}
         <div className="bg-[#EDF7F9] rounded-3xl border-[.5px] w-full p-6 ">
-          <div className="flex flex-col  border-gray-400 rounded-xl border-[.6px] px-4 py-3 sm:flex-row items-center gap-2 mb-4">
+          <div className="flex flex-col border-gray-400 rounded-xl border-[.6px] px-4 py-3 sm:flex-row items-center gap-0 sm:gap-2 mb-4">
             <input
               type="text"
               placeholder="Have a Coupon?"
-              className="flex-1 w-full text-base bg-transparent   rounded"
+              className="flex-1 w-full text-base bg-transparent rounded text-center sm:text-left"
             />
             <button
               className={`text-green-500 ${
@@ -365,6 +425,7 @@ function IternryDetails({ data }) {
               {selectedCoupon.id ? "Applied" : "Apply"}
             </button>
           </div>
+
           <p className="text-center text-gray-500">OR</p>
           <div>
             {userDetails?.Coupons ? (
@@ -426,7 +487,7 @@ function IternryDetails({ data }) {
       </div>
 
       {imgmodal.isOpen && (
-        <CarouselImageModal
+        <CarosalImageModal
           images={imgmodal.img}
           handleCloseModal={closeModal}
         />

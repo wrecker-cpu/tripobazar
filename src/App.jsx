@@ -90,98 +90,98 @@ function App() {
             </Suspense>
           }
         />
-        {/* <Route element={<ProtectedRoute />}> */}
-        <Route path="/createprofile" element={<CreateProfile />} />
-        <Route path="/aboutus" element={<AboutUs />} />
-        <Route
-          path="/aboutus/privacy-policy"
-          element={
-            <Suspense fallback={<Loader />}>
-              <PrivacyPolicy />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/contactus"
-          element={
-            <Suspense fallback={<Loader />}>
-              <ContactUs />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/searchpage"
-          element={
-            <Suspense fallback={<Loader />}>
-              <SearchDestinationPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/aboutus/careers"
-          element={
-            <Suspense fallback={<Loader />}>
-              <CareersPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/destination/*"
-          element={
-            <Suspense fallback={<Loader />}>
-              <DestinationPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/traveltips"
-          element={
-            <Suspense fallback={<Loader />}>
-              <TravelTips />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/destination/:continent/:country"
-          element={
-            <Suspense fallback={<Loader />}>
-              <CountryDestinationPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/destination/:continent/:country/:state"
-          element={
-            <Suspense fallback={<Loader />}>
-              <StateDestinationPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/destination/:continent/:country/:state/:id"
-          element={
-            <Suspense fallback={<Loader />}>
-              <PlanDetails />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/adminpanel/*"
-          element={
-            <Suspense fallback={<Loader />}>
-              <AdminPanel />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/myprofile"
-          element={
-            <Suspense fallback={<Loader />}>
-              <MyProfile />
-            </Suspense>
-          }
-        />
-        {/* </Route> */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/createprofile" element={<CreateProfile />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route
+            path="/aboutus/privacy-policy"
+            element={
+              <Suspense fallback={<Loader />}>
+                <PrivacyPolicy />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/contactus"
+            element={
+              <Suspense fallback={<Loader />}>
+                <ContactUs />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/searchpage"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SearchDestinationPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/aboutus/careers"
+            element={
+              <Suspense fallback={<Loader />}>
+                <CareersPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/destination/*"
+            element={
+              <Suspense fallback={<Loader />}>
+                <DestinationPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/traveltips"
+            element={
+              <Suspense fallback={<Loader />}>
+                <TravelTips />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/destination/:continent/:country"
+            element={
+              <Suspense fallback={<Loader />}>
+                <CountryDestinationPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/destination/:continent/:country/:state"
+            element={
+              <Suspense fallback={<Loader />}>
+                <StateDestinationPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/destination/:continent/:country/:state/:id"
+            element={
+              <Suspense fallback={<Loader />}>
+                <PlanDetails />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/adminpanel/*"
+            element={
+              <Suspense fallback={<Loader />}>
+                <AdminPanel />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/myprofile"
+            element={
+              <Suspense fallback={<Loader />}>
+                <MyProfile />
+              </Suspense>
+            }
+          />
+        </Route>
       </Routes>
       {/* Conditionally show the Footer based on the current route */}
       {shouldShowFooter && <Footer />}

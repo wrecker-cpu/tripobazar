@@ -1,7 +1,9 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 
 export default function FromOurTravellers() {
+  const {id}=useParams();
   const reviews = [
     {
       text: "I couldn’t recommend Trippobazaar more highly - we had the most amazing holiday. Every detail had been thought about and they were on hand to answer any questions straight away. Very personal service.",
@@ -17,7 +19,7 @@ export default function FromOurTravellers() {
     },
   ];
   return (
-    <section className="w-full md:w-[60%] mb-20 h-auto   mx-auto mt-8 p-4 bg-transparent ">
+    <section className={`w-full md:w-[60%] ${id?"mb-0 pb-20":"mb-20 pb-0"}  h-auto   mx-auto mt-8 p-4 bg-transparent `}>
       <h3 className="text-med-green text-center text-2xl font-semibold mb-8">
         From Our Travellers
       </h3>

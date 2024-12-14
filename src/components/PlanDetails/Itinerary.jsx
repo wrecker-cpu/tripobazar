@@ -3,7 +3,7 @@ import React from "react";
 const Itinerary = ({ data }) => {
   return (
     <div className="bg-[#f8f8f8] ">
-      <section className="w-[90%] mx-auto px-4 py-8">
+      <section className="w-full md:w-[90%] mx-auto px-4 py-8">
         {/* Title Section */}
         <div className="text-center">
           <h3 className="text-med-green  text-start font-bold text-lg md:text-2xl mt-2">

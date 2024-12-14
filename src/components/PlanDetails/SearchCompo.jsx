@@ -33,33 +33,35 @@ function SearchCompo({ data }) {
   endDate.setDate(startDate.getDate() + numberOfDays);
 
   return (
-    <div className="max-w-[1720px] font-poppins w-[90%] mx-auto h-auto p-4 py-10 bg-white   relative z-10">
+    <div className="max-w-[1720px] font-poppins w-full em:w-[90%] mx-auto h-auto p-4 py-10 bg-white   relative z-10">
       {/* Starting Location and Destination Inputs */}
 
       <div className="flex flex-wrap flex-row items-start md:items-end justify-start sm:justify-center lg:justify-between gap-10 lg:gap-4">
         {/* From */}
         <div className="relative w-auto">
-          <p className="text-gray-500 font-medium tracking-wider mb-2">From</p>
+          <p className="text-gray-500 md:text-base text-sm font-medium tracking-wider mb-2">
+            From
+          </p>
           <div className="flex items-center gap-3">
-            <FaLocationDot className="text-med-green mb-1 text-xl" />
-            <p className="text-lg">New Delhi</p>
+            <FaLocationDot className="text-med-green mb-1 text-base md:text-xl" />
+            <p className="text-base md:text-lg">New Delhi</p>
           </div>
         </div>
 
         {/* Destination */}
         <div className="relative w-auto">
-          <p className="text-gray-500 font-medium tracking-wider mb-2">
+          <p className="text-gray-500 text-sm md:text-base font-medium tracking-wider mb-2">
             Destination
           </p>
           <div className="flex items-center gap-3">
-            <FaLocationDot className="text-med-green mb-1 text-xl" />
-            <p className="text-lg">Leh-Ladakh</p>
+            <FaLocationDot className="text-med-green mb-1 text-base md:text-xl" />
+            <p className="text-base md:text-lg">Leh-Ladakh</p>
           </div>
         </div>
 
         {/*Start Date*/}
         <div className="flex flex-col">
-          <p className="text-gray-500 font-medium tracking-wider mb-1">
+          <p className="text-gray-500 text-sm md:text-base font-medium tracking-wider mb-1">
             Start Date
           </p>
           <div
@@ -70,7 +72,7 @@ function SearchCompo({ data }) {
             {isEditingDates ? (
               <DatePicker
                 selected={new Date(searchData.startDate)}
-                className="w-36 text-lg"
+                className="w-36 text-base md:text-lg"
                 onChange={(date) =>
                   updateSearchData("startDate", date.toISOString())
                 }
@@ -78,10 +80,10 @@ function SearchCompo({ data }) {
               />
             ) : (
               <>
-                <div className="mb-1">
+                <div className="mb-1 text-base md:text-xl">
                   <CalenderSvg />
                 </div>
-                <p className="text-lg">
+                <p className="text-base md:text-lg">
                   {new Intl.DateTimeFormat("en-US", {
                     weekday: "short",
                     day: "2-digit",
@@ -96,7 +98,7 @@ function SearchCompo({ data }) {
 
         {/* End Date */}
         <div className="flex flex-col">
-          <p className="text-gray-500 font-medium tracking-wider mb-1">
+          <p className="text-gray-500 text-sm md:text-base font-medium tracking-wider mb-1">
             End Date
           </p>
           <div
@@ -107,7 +109,7 @@ function SearchCompo({ data }) {
             {isEditingDates ? (
               <DatePicker
                 selected={new Date(searchData.endDate)}
-                className="w-36 text-lg outline-1"
+                className="w-36 text-base md:text-lg outline-1"
                 onChange={(date) =>
                   updateSearchData("endDate", date.toISOString())
                 }
@@ -115,10 +117,10 @@ function SearchCompo({ data }) {
               />
             ) : (
               <>
-                <div className="mb-1">
+                <div className="mb-1 text-base md:text-xl">
                   <CalenderSvg />
                 </div>
-                <p className="text-lg">
+                <p className="text-base md:text-lg">
                   {new Intl.DateTimeFormat("en-US", {
                     weekday: "short",
                     day: "2-digit",
@@ -133,7 +135,7 @@ function SearchCompo({ data }) {
 
         {/* Guests */}
         <div className="flex flex-col">
-          <p className="text-gray-500 font-medium tracking-wider mb-1">
+          <p className="text-gray-500 text-sm md:text-base font-medium tracking-wider mb-1">
             Guests
           </p>
           <div
@@ -145,7 +147,7 @@ function SearchCompo({ data }) {
               <input
                 type="number"
                 min="1"
-                className="w-20 text-lg border rounded px-2"
+                className="w-20 text-base md:text-lg border rounded px-2"
                 value={searchData.guests || 1}
                 onChange={(e) =>
                   updateSearchData("guests", parseInt(e.target.value, 10))
@@ -153,8 +155,10 @@ function SearchCompo({ data }) {
               />
             ) : (
               <>
-                <FaUser className="text-med-green mb-1 text-xl" />
-                <p className="text-lg">{searchData.guests || 1} guests</p>
+                <FaUser className="text-med-green mb-1 text-base md:text-xl" />
+                <p className="text-base md:text-lg">
+                  {searchData.guests || 1} guests
+                </p>
               </>
             )}
           </div>

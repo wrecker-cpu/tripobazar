@@ -19,9 +19,6 @@ function PlanDetails() {
     `https://tripobazar-backend.vercel.app/api/package/${id}`
   );
 
-  
-  
-
   if (loading) {
     return <Loader />;
   }

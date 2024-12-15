@@ -208,6 +208,38 @@ function IternryDetails({ data }) {
     return totalCost - discount;
   };
 
+  const openModal = (images) => {
+    setImgModal((prev) => ({ ...prev, isOpen: true, img: images }));
+  };
+  const closeModal = () => {
+    setImgModal((prev) => ({ ...prev, isOpen: false, img: [] }));
+  };
+
+  const handleDropdownClick = (e) => {
+    e.stopPropagation();
+  };
+
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      // Check if the script is already loaded
+      if (document.querySelector(`script[src="${src}"]`)) {
+        resolve(true); // Resolve immediately if script is already loaded
+        return;
+      }
+
+      // Dynamically load the script
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -223,12 +255,14 @@ function IternryDetails({ data }) {
 
       // Make the API call to verify the amount
       const response = await axios.post(
-        "https://tripobazar-backend.vercel.app/api/package/verifyAmount",
+        "http://localhost:4000/api/package/verifyAmount",
         requestData
       );
 
+      console.log(response.data);
       // Extract total price from response
       const { totalPrice } = response.data;
+      const { order } = response.data;
 
       console.log("Verified Total Price:", totalPrice);
 
@@ -241,7 +275,61 @@ function IternryDetails({ data }) {
         BookingAmount: totalPrice, // Store the verified total price in the state
       }));
 
-      // Handle successful verification (e.g., proceed to payment)
+      const success = await loadScript(
+        "https://checkout.razorpay.com/v1/checkout.js"
+      );
+      if (!success) {
+        console.error("Failed to load Razorpay script");
+        return;
+      }
+
+      const rzp = new window.Razorpay({
+        key: import.meta.env.VITE_RAZOR_KEY_ID,
+        amount: totalPrice * 100,
+        order_id: order.id,
+        handler: async (response) => {
+          const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+            response;
+
+          const details = {
+            order_id: razorpay_order_id,
+            payment_id: razorpay_payment_id,
+            signature: razorpay_signature,
+          };
+
+          try {
+            const paymentResponse = await axios.post(
+              "http://localhost:4000/api/package/verifyPayment",
+              details
+            );
+
+            if (paymentResponse.status === 200) {
+              console.log(
+                "Payment verified successfully",
+                paymentResponse.data.message
+              );
+              // Handle success, maybe update the UI or navigate to another page
+            }
+          } catch (error) {
+            if (error.response) {
+              console.error(
+                "Payment verification failed:",
+                error.response.data.message
+              );
+            } else {
+              console.error(
+                "An error occurred during payment verification",
+                error.message
+              );
+            }
+          }
+        },
+        theme: {
+          color: "#F37254",
+        },
+      });
+
+      rzp.open();
     } catch (error) {
       console.error("Error verifying amount:", error.message);
 
@@ -252,17 +340,6 @@ function IternryDetails({ data }) {
         console.error("Unexpected Error:", error.message);
       }
     }
-  };
-
-  const openModal = (images) => {
-    setImgModal((prev) => ({ ...prev, isOpen: true, img: images }));
-  };
-  const closeModal = () => {
-    setImgModal((prev) => ({ ...prev, isOpen: false, img: [] }));
-  };
-
-  const handleDropdownClick = (e) => {
-    e.stopPropagation();
   };
 
   useEffect(() => {}, [customizeHotel]);

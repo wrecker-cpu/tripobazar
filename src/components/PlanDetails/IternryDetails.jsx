@@ -284,7 +284,7 @@ function IternryDetails({ data }) {
       }
 
       const rzp = new window.Razorpay({
-        key: import.meta.env.VITE_RAZOR_KEY_ID,
+        key: import.meta.env.RAZOR_KEY_ID,
         amount: totalPrice * 100,
         order_id: order.id,
         handler: async (response) => {

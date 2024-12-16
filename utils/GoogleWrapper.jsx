@@ -4,7 +4,7 @@ import GoogleButton from "./GoogleButton";
 
 export default function GoogleWrapper() {
   return (
-    <GoogleOAuthProvider clientId="979524085481-6dcc56di2c2jhno3jekcttaembj5tom2.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId={import.meta.env.GOOGLE_CLIENT_ID}>
       <GoogleButton />
     </GoogleOAuthProvider>
   );
